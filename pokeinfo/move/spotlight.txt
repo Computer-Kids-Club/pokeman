@@ -1,0 +1,1 @@
+{"name": "spotlight", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "The user shines a spotlight on the target so that only the target will be attacked during the turn.", "prob": ""}

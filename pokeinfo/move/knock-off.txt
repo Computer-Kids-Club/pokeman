@@ -1,0 +1,1 @@
+{"name": "knock-off", "type": "dark", "cat": "physical", "power": "65", "acc": "100", "pp": "20", "effect": "Removes opponent's held item for the rest of the battle.", "prob": "-"}

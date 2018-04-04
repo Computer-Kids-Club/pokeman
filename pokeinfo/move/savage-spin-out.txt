@@ -1,0 +1,1 @@
+{"name": "savage-spin-out", "type": "bug", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Bug type Z-Move.", "prob": ""}

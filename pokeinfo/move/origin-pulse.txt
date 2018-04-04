@@ -1,0 +1,1 @@
+{"name": "origin-pulse", "type": "water", "cat": "special", "power": "110", "acc": "85", "pp": "10", "effect": "Hits all adjacent opponents.", "prob": "-"}

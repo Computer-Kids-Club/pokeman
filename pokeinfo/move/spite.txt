@@ -1,0 +1,1 @@
+{"name": "spite", "type": "ghost", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "The opponent's last move loses 2-5 PP.", "prob": "-"}

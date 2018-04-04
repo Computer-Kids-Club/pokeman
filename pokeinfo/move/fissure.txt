@@ -1,0 +1,1 @@
+{"name": "fissure", "type": "ground", "cat": "physical", "power": "-", "acc": "-", "pp": "5", "effect": "One-Hit-KO, if it hits.", "prob": "-"}

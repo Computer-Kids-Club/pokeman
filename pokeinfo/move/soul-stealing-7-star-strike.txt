@@ -1,0 +1,1 @@
+{"name": "soul-stealing-7-star-strike", "type": "ghost", "cat": "physical", "power": "195", "acc": "-", "pp": "1", "effect": "Marshadow-exclusive Z-Move.", "prob": ""}

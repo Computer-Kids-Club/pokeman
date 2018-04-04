@@ -1,0 +1,1 @@
+{"name": "magic-room", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Suppresses the effects of held items for five turns.", "prob": "-"}

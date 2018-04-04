@@ -1,0 +1,1 @@
+{"name": "double-hit", "type": "normal", "cat": "physical", "power": "35", "acc": "90", "pp": "10", "effect": "Hits twice in one turn.", "prob": "-"}

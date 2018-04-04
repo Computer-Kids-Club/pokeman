@@ -1,0 +1,1 @@
+{"name": "night-shade", "type": "ghost", "cat": "special", "power": "-", "acc": "100", "pp": "15", "effect": "Inflicts damage equal to user's level.", "prob": "-"}

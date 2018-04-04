@@ -1,0 +1,1 @@
+{"name": "spider-web", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Opponent cannot escape/switch.", "prob": "-"}

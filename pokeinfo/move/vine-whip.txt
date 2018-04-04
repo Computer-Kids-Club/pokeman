@@ -1,0 +1,1 @@
+{"name": "vine-whip", "type": "grass", "cat": "physical", "power": "45", "acc": "100", "pp": "25", "effect": "", "prob": "-"}

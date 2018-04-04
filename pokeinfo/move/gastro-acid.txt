@@ -1,0 +1,1 @@
+{"name": "gastro-acid", "type": "poison", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "Cancels out the effect of the opponent's Ability.", "prob": "-"}

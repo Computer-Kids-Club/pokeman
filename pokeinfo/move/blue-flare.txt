@@ -1,0 +1,1 @@
+{"name": "blue-flare", "type": "fire", "cat": "special", "power": "130", "acc": "85", "pp": "5", "effect": "May burn opponent.", "prob": "20"}

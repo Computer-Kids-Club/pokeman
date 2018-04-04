@@ -1,0 +1,1 @@
+{"name": "cotton-spore", "type": "grass", "cat": "status", "power": "-", "acc": "100", "pp": "40", "effect": "Sharply lowers opponent's Speed.", "prob": "-"}

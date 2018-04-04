@@ -1,0 +1,1 @@
+{"name": "smart-strike", "type": "steel", "cat": "physical", "power": "70", "acc": "-", "pp": "10", "effect": "The user stabs the target with a sharp horn. This attack never misses.", "prob": ""}

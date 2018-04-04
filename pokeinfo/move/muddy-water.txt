@@ -1,0 +1,1 @@
+{"name": "muddy-water", "type": "water", "cat": "special", "power": "90", "acc": "85", "pp": "10", "effect": "May lower opponent's Accuracy.", "prob": "30"}

@@ -1,0 +1,1 @@
+{"name": "ice-burn", "type": "ice", "cat": "special", "power": "140", "acc": "90", "pp": "5", "effect": "Charges on first turn, attacks on second. May burn opponent.", "prob": "30"}

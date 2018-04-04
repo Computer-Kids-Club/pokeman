@@ -1,0 +1,1 @@
+{"name": "ice-hammer", "type": "ice", "cat": "physical", "power": "100", "acc": "90", "pp": "10", "effect": "The user swings and hits with its strong, heavy fist. It lowers the user\u2019s Speed, however.", "prob": ""}

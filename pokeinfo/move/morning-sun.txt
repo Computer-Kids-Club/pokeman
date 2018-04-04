@@ -1,0 +1,1 @@
+{"name": "morning-sun", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "User recovers HP. Amount varies with the weather.", "prob": "-"}

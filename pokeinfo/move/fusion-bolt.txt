@@ -1,0 +1,1 @@
+{"name": "fusion-bolt", "type": "electric", "cat": "physical", "power": "100", "acc": "100", "pp": "5", "effect": "Power increases if Fusion Flare is used in the same turn.", "prob": "-"}

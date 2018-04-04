@@ -1,0 +1,1 @@
+{"name": "toxic", "type": "poison", "cat": "status", "power": "-", "acc": "90", "pp": "10", "effect": "Badly poisons opponent.", "prob": "-"}

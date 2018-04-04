@@ -1,0 +1,1 @@
+{"name": "corkscrew-crash", "type": "steel", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Steel type Z-Move.", "prob": ""}

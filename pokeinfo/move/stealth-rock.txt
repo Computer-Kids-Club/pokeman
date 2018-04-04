@@ -1,0 +1,1 @@
+{"name": "stealth-rock", "type": "rock", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Damages opponent switching into battle.", "prob": "-"}

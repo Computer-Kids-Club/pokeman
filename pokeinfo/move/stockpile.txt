@@ -1,0 +1,1 @@
+{"name": "stockpile", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Stores energy for use with Spit Up and Swallow.", "prob": "-"}

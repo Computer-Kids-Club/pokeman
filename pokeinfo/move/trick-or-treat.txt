@@ -1,0 +1,1 @@
+{"name": "trick-or-treat", "type": "ghost", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Adds Ghost type to opponent.", "prob": "-"}

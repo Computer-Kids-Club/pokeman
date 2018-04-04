@@ -1,0 +1,1 @@
+{"name": "v-create", "type": "fire", "cat": "physical", "power": "180", "acc": "95", "pp": "5", "effect": "Lowers user's Defense, Special Defense and Speed.", "prob": "100"}

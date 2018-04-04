@@ -1,0 +1,1 @@
+{"name": "megahorn", "type": "bug", "cat": "physical", "power": "120", "acc": "85", "pp": "10", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "scald", "type": "water", "cat": "special", "power": "80", "acc": "100", "pp": "15", "effect": "May burn opponent.", "prob": "30"}

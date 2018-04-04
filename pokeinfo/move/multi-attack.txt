@@ -1,0 +1,1 @@
+{"name": "multi-attack", "type": "normal", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "Type matches user's current type.", "prob": ""}

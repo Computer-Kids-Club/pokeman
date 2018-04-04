@@ -1,0 +1,1 @@
+{"name": "mind-reader", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "User's next attack is guaranteed to hit.", "prob": "-"}

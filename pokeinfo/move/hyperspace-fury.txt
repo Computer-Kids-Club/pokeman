@@ -1,0 +1,1 @@
+{"name": "hyperspace-fury", "type": "dark", "cat": "physical", "power": "100", "acc": "error", "pp": "5", "effect": "Lowers user's Defense. Can strike through Protect/Detect.", "prob": "-"}

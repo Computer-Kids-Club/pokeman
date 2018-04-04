@@ -1,0 +1,1 @@
+{"name": "celebrate", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "The Pok\u00e9mon congratulates you on your special day. No battle effect.", "prob": "-"}

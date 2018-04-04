@@ -1,0 +1,1 @@
+{"name": "flash-cannon", "type": "steel", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "May lower opponent's Special Defense.", "prob": "10"}

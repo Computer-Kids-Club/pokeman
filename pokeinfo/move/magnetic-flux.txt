@@ -1,0 +1,1 @@
+{"name": "magnetic-flux", "type": "electric", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises Defense and Sp. Defense of Plus/Minus Pok\u00e9mon.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "acid-downpour", "type": "poison", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Poison type Z-Move.", "prob": ""}

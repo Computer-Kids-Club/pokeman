@@ -1,0 +1,1 @@
+{"name": "wood-hammer", "type": "grass", "cat": "physical", "power": "120", "acc": "100", "pp": "15", "effect": "User receives recoil damage.", "prob": "-"}

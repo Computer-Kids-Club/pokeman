@@ -1,0 +1,1 @@
+{"name": "hold-back", "type": "normal", "cat": "physical", "power": "40", "acc": "100", "pp": "40", "effect": "Always leaves opponent with at least 1 HP.", "prob": "-"}

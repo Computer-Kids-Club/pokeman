@@ -1,0 +1,1 @@
+{"name": "gyro-ball", "type": "steel", "cat": "physical", "power": "-", "acc": "100", "pp": "5", "effect": "The slower the user, the stronger the attack.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "psychic-terrain", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Prevents priority moves from being used for 5 turns.", "prob": "-"}

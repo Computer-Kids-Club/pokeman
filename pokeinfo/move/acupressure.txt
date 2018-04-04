@@ -1,0 +1,1 @@
+{"name": "acupressure", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Sharply raises a random stat.", "prob": "-"}

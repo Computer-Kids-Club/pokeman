@@ -1,0 +1,1 @@
+{"name": "roost", "type": "flying", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User recovers half of its max HP and loses the Flying type temporarily.", "prob": "-"}

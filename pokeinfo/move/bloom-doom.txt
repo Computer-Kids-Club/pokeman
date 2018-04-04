@@ -1,0 +1,1 @@
+{"name": "bloom-doom", "type": "grass", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Grass type Z-Move.", "prob": ""}

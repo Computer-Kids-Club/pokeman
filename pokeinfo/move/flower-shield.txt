@@ -1,0 +1,1 @@
+{"name": "flower-shield", "type": "fairy", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Sharply raises Defense of all Grass-type Pok\u00e9mon on the field.", "prob": "-"}

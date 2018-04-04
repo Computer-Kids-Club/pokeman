@@ -1,0 +1,1 @@
+{"name": "darkest-lariat", "type": "dark", "cat": "physical", "power": "85", "acc": "100", "pp": "10", "effect": "Ignores opponent's stat changes.", "prob": ""}

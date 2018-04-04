@@ -1,0 +1,1 @@
+{"name": "searing-sunraze-smash", "type": "steel", "cat": "physical", "power": "200", "acc": "-", "pp": "1", "effect": "Solgaleo-exclusive Z-Move.", "prob": ""}

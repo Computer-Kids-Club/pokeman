@@ -1,0 +1,1 @@
+{"name": "volt-tackle", "type": "electric", "cat": "physical", "power": "120", "acc": "100", "pp": "15", "effect": "User receives recoil damage. May paralyze opponent.", "prob": "10"}

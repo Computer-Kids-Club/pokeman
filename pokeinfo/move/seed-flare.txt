@@ -1,0 +1,1 @@
+{"name": "seed-flare", "type": "grass", "cat": "special", "power": "120", "acc": "85", "pp": "5", "effect": "May lower opponent's Special Defense.", "prob": "40"}

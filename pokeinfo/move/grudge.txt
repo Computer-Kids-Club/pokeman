@@ -1,0 +1,1 @@
+{"name": "grudge", "type": "ghost", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "If the users faints after using this move, the PP for the opponent's last move is depleted.", "prob": "-"}

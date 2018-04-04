@@ -1,0 +1,1 @@
+{"name": "ember", "type": "fire", "cat": "special", "power": "40", "acc": "100", "pp": "25", "effect": "May burn opponent.", "prob": "10"}

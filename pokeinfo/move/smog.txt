@@ -1,0 +1,1 @@
+{"name": "smog", "type": "poison", "cat": "special", "power": "30", "acc": "70", "pp": "20", "effect": "May poison opponent.", "prob": "40"}

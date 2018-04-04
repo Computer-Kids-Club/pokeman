@@ -1,0 +1,1 @@
+{"name": "yawn", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Puts opponent to sleep in the next turn.", "prob": "-"}

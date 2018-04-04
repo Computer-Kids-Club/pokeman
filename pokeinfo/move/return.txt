@@ -1,0 +1,1 @@
+{"name": "return", "type": "normal", "cat": "physical", "power": "-", "acc": "100", "pp": "20", "effect": "Power increases with user's Happiness.", "prob": "-"}

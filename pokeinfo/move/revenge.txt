@@ -1,0 +1,1 @@
+{"name": "revenge", "type": "fighting", "cat": "physical", "power": "60", "acc": "100", "pp": "10", "effect": "Power increases if user was hit first.", "prob": "-"}

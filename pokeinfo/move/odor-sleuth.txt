@@ -1,0 +1,1 @@
+{"name": "odor-sleuth", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.", "prob": "-"}

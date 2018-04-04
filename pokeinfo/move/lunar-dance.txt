@@ -1,0 +1,1 @@
+{"name": "lunar-dance", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The user faints but the next Pok\u00e9mon released is fully healed.", "prob": "-"}

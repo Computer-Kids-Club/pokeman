@@ -1,0 +1,1 @@
+{"name": "dragon-dance", "type": "dragon", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Attack and Speed.", "prob": "-"}

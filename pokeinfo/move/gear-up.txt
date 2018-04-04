@@ -1,0 +1,1 @@
+{"name": "gear-up", "type": "steel", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "The user engages its gears to raise the Attack and Sp. Atk stats of ally Pok\u00e9mon with the Plus or Minus Ability.", "prob": ""}

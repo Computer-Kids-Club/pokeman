@@ -1,0 +1,1 @@
+{"name": "freeze-shock", "type": "ice", "cat": "physical", "power": "140", "acc": "90", "pp": "5", "effect": "Charges on first turn, attacks on second. May paralyze opponent.", "prob": "30"}

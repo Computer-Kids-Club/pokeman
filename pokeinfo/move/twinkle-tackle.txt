@@ -1,0 +1,1 @@
+{"name": "twinkle-tackle", "type": "fairy", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Fairy type Z-Move.", "prob": ""}

@@ -1,0 +1,1 @@
+{"name": "curse", "type": "ghost", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Ghosts lose 50% of max HP and curse the opponent; Non-Ghosts raise Attack, Defense and lower Speed.", "prob": "-"}

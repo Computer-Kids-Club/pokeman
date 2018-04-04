@@ -1,0 +1,1 @@
+{"name": "miracle-eye", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "Resets opponent's Evasiveness, removes Dark's Psychic immunity.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "quiver-dance", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Special Attack, Special Defense and Speed.", "prob": "-"}

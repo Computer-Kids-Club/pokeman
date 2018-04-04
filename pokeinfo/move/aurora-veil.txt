@@ -1,0 +1,1 @@
+{"name": "aurora-veil", "type": "ice", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Halves damage from Physical and Special attacks for five turns.", "prob": ""}

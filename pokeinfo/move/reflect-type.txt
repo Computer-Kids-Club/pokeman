@@ -1,0 +1,1 @@
+{"name": "reflect-type", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "User becomes the target's type.", "prob": "-"}

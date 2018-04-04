@@ -1,0 +1,1 @@
+{"name": "water-sport", "type": "water", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Weakens the power of Fire-type moves.", "prob": "-"}

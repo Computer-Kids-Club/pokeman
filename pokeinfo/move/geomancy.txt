@@ -1,0 +1,1 @@
+{"name": "geomancy", "type": "fairy", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Charges on first turn, sharply raises user's Sp. Attack, Sp. Defense and Speed on the second.", "prob": "-"}

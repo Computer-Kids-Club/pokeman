@@ -1,0 +1,1 @@
+{"name": "circle-throw", "type": "fighting", "cat": "physical", "power": "60", "acc": "90", "pp": "10", "effect": "In battles, the opponent switches. In the wild, the Pok\u00e9mon runs.", "prob": "-"}

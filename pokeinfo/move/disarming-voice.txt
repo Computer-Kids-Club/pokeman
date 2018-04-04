@@ -1,0 +1,1 @@
+{"name": "disarming-voice", "type": "fairy", "cat": "special", "power": "40", "acc": "error", "pp": "15", "effect": "Ignores Accuracy and Evasiveness.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "revelation-dance", "type": "normal", "cat": "special", "power": "90", "acc": "100", "pp": "15", "effect": "Type changes based on Oricorio's form.", "prob": ""}

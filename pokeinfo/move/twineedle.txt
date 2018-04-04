@@ -1,0 +1,1 @@
+{"name": "twineedle", "type": "bug", "cat": "physical", "power": "25", "acc": "100", "pp": "20", "effect": "Hits twice in one turn. May poison opponent.", "prob": "20"}

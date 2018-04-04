@@ -1,0 +1,1 @@
+{"name": "icicle-crash", "type": "ice", "cat": "physical", "power": "85", "acc": "90", "pp": "10", "effect": "May cause flinching.", "prob": "30"}

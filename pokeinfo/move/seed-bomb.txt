@@ -1,0 +1,1 @@
+{"name": "seed-bomb", "type": "grass", "cat": "physical", "power": "80", "acc": "100", "pp": "15", "effect": "", "prob": "-"}

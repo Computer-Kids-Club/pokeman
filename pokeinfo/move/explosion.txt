@@ -1,0 +1,1 @@
+{"name": "explosion", "type": "normal", "cat": "physical", "power": "250", "acc": "100", "pp": "5", "effect": "User faints.", "prob": "-"}

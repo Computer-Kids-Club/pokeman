@@ -1,0 +1,1 @@
+{"name": "magic-coat", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Reflects moves that cause status conditions back to the attacker.", "prob": "-"}

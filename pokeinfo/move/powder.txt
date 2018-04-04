@@ -1,0 +1,1 @@
+{"name": "powder", "type": "bug", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Damages Pok\u00e9mon using Fire type moves.", "prob": "-"}

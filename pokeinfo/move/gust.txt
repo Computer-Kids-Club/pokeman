@@ -1,0 +1,1 @@
+{"name": "gust", "type": "flying", "cat": "special", "power": "40", "acc": "100", "pp": "35", "effect": "Hits Pok\u00e9mon using Fly/Bounce with double power.", "prob": "-"}

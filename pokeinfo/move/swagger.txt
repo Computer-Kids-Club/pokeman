@@ -1,0 +1,1 @@
+{"name": "swagger", "type": "normal", "cat": "status", "power": "-", "acc": "85", "pp": "15", "effect": "Opponent becomes confused, but its Attack is sharply raised.", "prob": "-"}

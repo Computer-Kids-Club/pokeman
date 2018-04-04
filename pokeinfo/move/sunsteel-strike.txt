@@ -1,0 +1,1 @@
+{"name": "sunsteel-strike", "type": "steel", "cat": "physical", "power": "100", "acc": "100", "pp": "5", "effect": "Ignores the target's ability.", "prob": ""}

@@ -1,0 +1,1 @@
+{"name": "guardian-of-alola", "type": "fairy", "cat": "special", "power": "-", "acc": "-", "pp": "1", "effect": "Tapu-exclusive Z-move. Cuts opponent's HP by 75%.", "prob": ""}

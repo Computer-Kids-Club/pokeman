@@ -1,0 +1,1 @@
+{"name": "freeze-dry", "type": "ice", "cat": "special", "power": "70", "acc": "100", "pp": "20", "effect": "May freeze opponent. Super-effective against Water types.", "prob": "-"}

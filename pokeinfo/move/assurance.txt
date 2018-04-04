@@ -1,0 +1,1 @@
+{"name": "assurance", "type": "dark", "cat": "physical", "power": "60", "acc": "100", "pp": "10", "effect": "Power doubles if opponent already took damage in the same turn.", "prob": "-"}

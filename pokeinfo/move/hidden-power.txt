@@ -1,0 +1,1 @@
+{"name": "hidden-power", "type": "normal", "cat": "special", "power": "60", "acc": "100", "pp": "15", "effect": "Type and power depends on user's IVs.", "prob": "-"}

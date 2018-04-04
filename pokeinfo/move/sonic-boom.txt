@@ -1,0 +1,1 @@
+{"name": "sonic-boom", "type": "normal", "cat": "special", "power": "-", "acc": "90", "pp": "20", "effect": "Always inflicts 20 HP.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "zen-headbutt", "type": "psychic", "cat": "physical", "power": "80", "acc": "90", "pp": "15", "effect": "May cause flinching.", "prob": "20"}

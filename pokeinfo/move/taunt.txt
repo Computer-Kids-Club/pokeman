@@ -1,0 +1,1 @@
+{"name": "taunt", "type": "dark", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Opponent can only use moves that attack.", "prob": "-"}

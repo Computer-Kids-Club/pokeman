@@ -1,0 +1,1 @@
+{"name": "dark-pulse", "type": "dark", "cat": "special", "power": "80", "acc": "100", "pp": "15", "effect": "May cause flinching.", "prob": "20"}

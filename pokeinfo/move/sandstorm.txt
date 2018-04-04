@@ -1,0 +1,1 @@
+{"name": "sandstorm", "type": "rock", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Creates a sandstorm for 5 turns.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "never-ending-nightmare", "type": "ghost", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Ghost type Z-Move.", "prob": ""}

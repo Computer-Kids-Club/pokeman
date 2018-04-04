@@ -1,0 +1,1 @@
+{"name": "shore-up", "type": "ground", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The user regains up to half of its max HP. It restores more HP in a sandstorm.", "prob": ""}

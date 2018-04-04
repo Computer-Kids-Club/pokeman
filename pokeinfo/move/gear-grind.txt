@@ -1,0 +1,1 @@
+{"name": "gear-grind", "type": "steel", "cat": "physical", "power": "50", "acc": "85", "pp": "15", "effect": "Hits twice in one turn.", "prob": "-"}

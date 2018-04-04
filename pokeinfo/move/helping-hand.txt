@@ -1,0 +1,1 @@
+{"name": "helping-hand", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "In Double Battles, boosts the power of the partner's move.", "prob": "-"}

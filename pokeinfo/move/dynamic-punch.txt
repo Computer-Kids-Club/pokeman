@@ -1,0 +1,1 @@
+{"name": "dynamic-punch", "type": "fighting", "cat": "physical", "power": "100", "acc": "50", "pp": "5", "effect": "Confuses opponent.", "prob": "100"}

@@ -1,0 +1,1 @@
+{"name": "kings-shield", "type": "steel", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Protects against attacks, and lowers opponent's Attack on contact.", "prob": "-"}

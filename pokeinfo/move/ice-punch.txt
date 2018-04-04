@@ -1,0 +1,1 @@
+{"name": "ice-punch", "type": "ice", "cat": "physical", "power": "75", "acc": "100", "pp": "15", "effect": "May freeze opponent.", "prob": "10"}

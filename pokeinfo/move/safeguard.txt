@@ -1,0 +1,1 @@
+{"name": "safeguard", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "25", "effect": "The user's party is protected from status conditions.", "prob": "-"}

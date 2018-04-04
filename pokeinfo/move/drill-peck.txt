@@ -1,0 +1,1 @@
+{"name": "drill-peck", "type": "flying", "cat": "physical", "power": "80", "acc": "100", "pp": "20", "effect": "", "prob": "-"}

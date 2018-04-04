@@ -1,0 +1,1 @@
+{"name": "mist-ball", "type": "psychic", "cat": "special", "power": "70", "acc": "100", "pp": "5", "effect": "May lower opponent's Special Attack.", "prob": "50"}

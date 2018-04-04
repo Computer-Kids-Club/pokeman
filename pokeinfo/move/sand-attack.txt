@@ -1,0 +1,1 @@
+{"name": "sand-attack", "type": "ground", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Lowers opponent's Accuracy.", "prob": "-"}

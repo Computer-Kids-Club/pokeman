@@ -1,0 +1,1 @@
+{"name": "aura-sphere", "type": "fighting", "cat": "special", "power": "80", "acc": "error", "pp": "20", "effect": "Ignores Accuracy and Evasiveness.", "prob": "-"}

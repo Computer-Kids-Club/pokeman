@@ -1,0 +1,1 @@
+{"name": "shattered-psyche", "type": "psychic", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Psychic type Z-Move.", "prob": ""}

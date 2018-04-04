@@ -1,0 +1,1 @@
+{"name": "slam", "type": "normal", "cat": "physical", "power": "80", "acc": "75", "pp": "20", "effect": "", "prob": "-"}

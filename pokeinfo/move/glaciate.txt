@@ -1,0 +1,1 @@
+{"name": "glaciate", "type": "ice", "cat": "special", "power": "65", "acc": "95", "pp": "10", "effect": "Lowers opponent's Speed.", "prob": "100"}

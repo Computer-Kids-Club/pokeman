@@ -1,0 +1,1 @@
+{"name": "thunder-wave", "type": "electric", "cat": "status", "power": "-", "acc": "90", "pp": "20", "effect": "Paralyzes opponent.", "prob": "100"}

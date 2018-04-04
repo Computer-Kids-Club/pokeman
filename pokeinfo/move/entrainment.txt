@@ -1,0 +1,1 @@
+{"name": "entrainment", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Makes target's ability same as user's.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "belly-drum", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User loses 50% of its max HP, but Attack raises to maximum.", "prob": "-"}

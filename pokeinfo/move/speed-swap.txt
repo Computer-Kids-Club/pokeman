@@ -1,0 +1,1 @@
+{"name": "speed-swap", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The user exchanges Speed stats with the target.", "prob": ""}

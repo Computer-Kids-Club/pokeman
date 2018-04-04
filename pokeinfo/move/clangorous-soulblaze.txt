@@ -1,0 +1,1 @@
+{"name": "clangorous-soulblaze", "type": "dragon", "cat": "special", "power": "185", "acc": "-", "pp": "1", "effect": "Kommo-o exclusive Z-Move.", "prob": ""}

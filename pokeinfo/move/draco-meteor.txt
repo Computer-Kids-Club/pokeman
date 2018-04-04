@@ -1,0 +1,1 @@
+{"name": "draco-meteor", "type": "dragon", "cat": "special", "power": "130", "acc": "90", "pp": "5", "effect": "Sharply lowers user's Special Attack.", "prob": "-"}

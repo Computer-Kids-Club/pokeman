@@ -1,0 +1,1 @@
+{"name": "stored-power", "type": "psychic", "cat": "special", "power": "20", "acc": "100", "pp": "10", "effect": "Power increases when user's stats have been raised.", "prob": "-"}

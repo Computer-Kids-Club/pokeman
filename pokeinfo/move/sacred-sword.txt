@@ -1,0 +1,1 @@
+{"name": "sacred-sword", "type": "fighting", "cat": "physical", "power": "90", "acc": "100", "pp": "20", "effect": "Ignores opponent's stat changes.", "prob": "-"}

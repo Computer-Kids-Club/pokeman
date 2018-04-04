@@ -1,0 +1,1 @@
+{"name": "self-destruct", "type": "normal", "cat": "physical", "power": "200", "acc": "100", "pp": "5", "effect": "User faints.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "dual-chop", "type": "dragon", "cat": "physical", "power": "40", "acc": "90", "pp": "15", "effect": "Hits twice in one turn.", "prob": "-"}

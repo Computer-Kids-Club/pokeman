@@ -1,0 +1,1 @@
+{"name": "heavy-slam", "type": "steel", "cat": "physical", "power": "-", "acc": "100", "pp": "10", "effect": "The heavier the user, the stronger the attack.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "twister", "type": "dragon", "cat": "special", "power": "40", "acc": "100", "pp": "20", "effect": "May cause flinching. Hits Pok\u00e9mon using Fly/Bounce with double power.", "prob": "20"}

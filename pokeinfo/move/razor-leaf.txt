@@ -1,0 +1,1 @@
+{"name": "razor-leaf", "type": "grass", "cat": "physical", "power": "55", "acc": "95", "pp": "25", "effect": "High critical hit ratio.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "venom-drench", "type": "poison", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Lowers poisoned opponent's Special Attack and Speed.", "prob": "-"}

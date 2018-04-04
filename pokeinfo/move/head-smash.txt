@@ -1,0 +1,1 @@
+{"name": "head-smash", "type": "rock", "cat": "physical", "power": "150", "acc": "80", "pp": "5", "effect": "User receives recoil damage.", "prob": "-"}

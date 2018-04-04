@@ -1,0 +1,1 @@
+{"name": "water-gun", "type": "water", "cat": "special", "power": "40", "acc": "100", "pp": "25", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "mud-sport", "type": "ground", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Weakens the power of Electric-type moves.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "belch", "type": "poison", "cat": "special", "power": "120", "acc": "90", "pp": "10", "effect": "User must have consumed a Berry.", "prob": "-"}

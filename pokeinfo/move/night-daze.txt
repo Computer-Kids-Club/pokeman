@@ -1,0 +1,1 @@
+{"name": "night-daze", "type": "dark", "cat": "special", "power": "85", "acc": "95", "pp": "10", "effect": "May lower opponent's Accuracy.", "prob": "40"}

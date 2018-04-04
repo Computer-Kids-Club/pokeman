@@ -1,0 +1,1 @@
+{"name": "confusion", "type": "psychic", "cat": "special", "power": "50", "acc": "100", "pp": "25", "effect": "May confuse opponent.", "prob": "10"}

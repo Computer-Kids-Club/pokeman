@@ -1,0 +1,1 @@
+{"name": "acrobatics", "type": "flying", "cat": "physical", "power": "55", "acc": "100", "pp": "15", "effect": "Stronger when the user does not have a held item.", "prob": "-"}

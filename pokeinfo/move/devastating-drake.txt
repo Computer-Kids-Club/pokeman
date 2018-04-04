@@ -1,0 +1,1 @@
+{"name": "devastating-drake", "type": "dragon", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Dragon type Z-Move.", "prob": ""}

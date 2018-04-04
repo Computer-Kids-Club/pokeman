@@ -1,0 +1,1 @@
+{"name": "fusion-flare", "type": "fire", "cat": "special", "power": "100", "acc": "100", "pp": "5", "effect": "Power increases if Fusion Bolt is used in the same turn.", "prob": "-"}

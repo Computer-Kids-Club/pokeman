@@ -1,0 +1,1 @@
+{"name": "sludge-bomb", "type": "poison", "cat": "special", "power": "90", "acc": "100", "pp": "10", "effect": "May poison opponent.", "prob": "30"}

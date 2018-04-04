@@ -1,0 +1,1 @@
+{"name": "plasma-fists", "type": "electric", "cat": "physical", "power": "100", "acc": "100", "pp": "15", "effect": "Changes Normal-type moves to Electric-type moves.", "prob": ""}

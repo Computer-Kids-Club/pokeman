@@ -1,0 +1,1 @@
+{"name": "worry-seed", "type": "grass", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "Changes the opponent's Ability to Insomnia.", "prob": "-"}

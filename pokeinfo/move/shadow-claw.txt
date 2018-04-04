@@ -1,0 +1,1 @@
+{"name": "shadow-claw", "type": "ghost", "cat": "physical", "power": "70", "acc": "100", "pp": "15", "effect": "High critical hit ratio.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "kinesis", "type": "psychic", "cat": "status", "power": "-", "acc": "80", "pp": "15", "effect": "Lowers opponent's Accuracy.", "prob": "-"}

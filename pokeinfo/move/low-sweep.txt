@@ -1,0 +1,1 @@
+{"name": "low-sweep", "type": "fighting", "cat": "physical", "power": "65", "acc": "100", "pp": "20", "effect": "Lowers opponent's Speed.", "prob": "100"}

@@ -1,0 +1,1 @@
+{"name": "encore", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "5", "effect": "Forces opponent to keep using its last move for 3 turns.", "prob": "-"}

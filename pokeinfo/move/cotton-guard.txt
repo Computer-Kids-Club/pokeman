@@ -1,0 +1,1 @@
+{"name": "cotton-guard", "type": "grass", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Drastically raises user's Defense.", "prob": "-"}

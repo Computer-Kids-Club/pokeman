@@ -1,0 +1,1 @@
+{"name": "bulk-up", "type": "fighting", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Attack and Defense.", "prob": "-"}

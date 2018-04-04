@@ -1,0 +1,1 @@
+{"name": "thousand-arrows", "type": "ground", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "Makes Flying-type Pok\u00e9mon vulnerable to Ground moves.", "prob": "-"}

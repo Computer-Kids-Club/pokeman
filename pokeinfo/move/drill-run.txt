@@ -1,0 +1,1 @@
+{"name": "drill-run", "type": "ground", "cat": "physical", "power": "80", "acc": "95", "pp": "10", "effect": "High critical hit ratio.", "prob": "-"}

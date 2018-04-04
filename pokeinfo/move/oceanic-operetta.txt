@@ -1,0 +1,1 @@
+{"name": "oceanic-operetta", "type": "water", "cat": "special", "power": "195", "acc": "-", "pp": "1", "effect": "Primarina-exclusive Z-Move.", "prob": ""}

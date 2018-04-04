@@ -1,0 +1,1 @@
+{"name": "uproar", "type": "normal", "cat": "special", "power": "90", "acc": "100", "pp": "10", "effect": "User attacks for 3 turns and prevents sleep.", "prob": "-"}

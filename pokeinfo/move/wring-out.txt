@@ -1,0 +1,1 @@
+{"name": "wring-out", "type": "normal", "cat": "special", "power": "-", "acc": "100", "pp": "5", "effect": "The higher the opponent's HP, the higher the damage.", "prob": "-"}

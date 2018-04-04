@@ -1,0 +1,1 @@
+{"name": "endure", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Always left with at least 1 HP, but may fail if used consecutively.", "prob": "-"}

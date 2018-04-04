@@ -1,0 +1,1 @@
+{"name": "work-up", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Raises user's Attack and Special Attack.", "prob": "-"}

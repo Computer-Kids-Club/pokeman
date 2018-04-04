@@ -1,0 +1,1 @@
+{"name": "nightmare", "type": "ghost", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "The sleeping opponent loses 25% of its max HP each turn.", "prob": "-"}

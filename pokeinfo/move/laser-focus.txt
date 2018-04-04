@@ -1,0 +1,1 @@
+{"name": "laser-focus", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "User's next attack is guaranteed to result in a critical hit.", "prob": ""}

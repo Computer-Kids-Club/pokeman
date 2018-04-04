@@ -1,0 +1,1 @@
+{"name": "water-spout", "type": "water", "cat": "special", "power": "150", "acc": "100", "pp": "5", "effect": "The higher the user's HP, the higher the damage caused.", "prob": "-"}

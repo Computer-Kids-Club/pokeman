@@ -1,0 +1,1 @@
+{"name": "embargo", "type": "dark", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Opponent cannot use items.", "prob": "-"}

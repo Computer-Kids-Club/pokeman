@@ -1,0 +1,1 @@
+{"name": "play-rough", "type": "fairy", "cat": "physical", "power": "90", "acc": "90", "pp": "10", "effect": "May lower opponent's Attack.", "prob": "10"}

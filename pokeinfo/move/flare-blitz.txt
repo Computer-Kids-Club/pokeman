@@ -1,0 +1,1 @@
+{"name": "flare-blitz", "type": "fire", "cat": "physical", "power": "120", "acc": "100", "pp": "15", "effect": "User receives recoil damage. May burn opponent.", "prob": "10"}

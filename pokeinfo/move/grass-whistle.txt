@@ -1,0 +1,1 @@
+{"name": "grass-whistle", "type": "grass", "cat": "status", "power": "-", "acc": "55", "pp": "15", "effect": "Puts opponent to sleep.", "prob": "-"}

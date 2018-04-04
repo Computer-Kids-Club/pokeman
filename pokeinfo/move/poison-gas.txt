@@ -1,0 +1,1 @@
+{"name": "poison-gas", "type": "poison", "cat": "status", "power": "-", "acc": "90", "pp": "40", "effect": "Poisons opponent.", "prob": "-"}

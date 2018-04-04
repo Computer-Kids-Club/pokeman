@@ -1,0 +1,1 @@
+{"name": "fly", "type": "flying", "cat": "physical", "power": "90", "acc": "95", "pp": "15", "effect": "Flies up on first turn, attacks on second turn.", "prob": "-"}

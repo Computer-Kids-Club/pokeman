@@ -1,0 +1,1 @@
+{"name": "metal-burst", "type": "steel", "cat": "physical", "power": "-", "acc": "100", "pp": "10", "effect": "Deals damage equal to 1.5x opponent's attack.", "prob": "-"}

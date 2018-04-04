@@ -1,0 +1,1 @@
+{"name": "judgment", "type": "normal", "cat": "special", "power": "100", "acc": "100", "pp": "10", "effect": "Type depends on the Arceus Plate being held.", "prob": "-"}

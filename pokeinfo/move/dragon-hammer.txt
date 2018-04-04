@@ -1,0 +1,1 @@
+{"name": "dragon-hammer", "type": "dragon", "cat": "physical", "power": "90", "acc": "100", "pp": "15", "effect": "The user uses its body like a hammer to attack the target and inflict damage.", "prob": ""}

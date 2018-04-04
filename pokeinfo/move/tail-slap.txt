@@ -1,0 +1,1 @@
+{"name": "tail-slap", "type": "normal", "cat": "physical", "power": "25", "acc": "85", "pp": "10", "effect": "Hits 2-5 times in one turn.", "prob": "-"}

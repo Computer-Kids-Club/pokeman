@@ -1,0 +1,1 @@
+{"name": "low-kick", "type": "fighting", "cat": "physical", "power": "-", "acc": "100", "pp": "20", "effect": "The heavier the opponent, the stronger the attack.", "prob": "-"}

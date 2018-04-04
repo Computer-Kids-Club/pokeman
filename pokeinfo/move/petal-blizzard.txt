@@ -1,0 +1,1 @@
+{"name": "petal-blizzard", "type": "grass", "cat": "physical", "power": "90", "acc": "100", "pp": "15", "effect": "Hits all adjacent Pok\u00e9mon.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "dive", "type": "water", "cat": "physical", "power": "80", "acc": "100", "pp": "10", "effect": "Dives underwater on first turn, attacks on second turn.", "prob": "-"}

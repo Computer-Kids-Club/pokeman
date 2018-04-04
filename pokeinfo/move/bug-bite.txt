@@ -1,0 +1,1 @@
+{"name": "bug-bite", "type": "bug", "cat": "physical", "power": "60", "acc": "100", "pp": "20", "effect": "Receives the effect from the opponent's held berry.", "prob": "-"}

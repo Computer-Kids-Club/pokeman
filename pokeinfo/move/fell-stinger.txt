@@ -1,0 +1,1 @@
+{"name": "fell-stinger", "type": "bug", "cat": "physical", "power": "50", "acc": "100", "pp": "25", "effect": "Sharply raises user's Attack if target is KO'd.", "prob": "-"}

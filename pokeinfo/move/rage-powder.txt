@@ -1,0 +1,1 @@
+{"name": "rage-powder", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Forces attacks to hit user, not team-mates.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "bolt-strike", "type": "electric", "cat": "physical", "power": "130", "acc": "85", "pp": "5", "effect": "May paralyze opponent.", "prob": "20"}

@@ -1,0 +1,1 @@
+{"name": "pulverizing-pancake", "type": "normal", "cat": "physical", "power": "210", "acc": "-", "pp": "1", "effect": "Snorlax-exclusive Normal type Z-Move.", "prob": ""}

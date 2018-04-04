@@ -1,0 +1,1 @@
+{"name": "psycho-shift", "type": "psychic", "cat": "status", "power": "-", "acc": "90", "pp": "10", "effect": "Gives the opponent the user's status condition, if it hits.", "prob": "-"}

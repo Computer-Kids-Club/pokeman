@@ -1,0 +1,1 @@
+{"name": "flatter", "type": "dark", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Confuses opponent, but raises its Special Attack by two stages.", "prob": "-"}

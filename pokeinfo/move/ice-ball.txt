@@ -1,0 +1,1 @@
+{"name": "ice-ball", "type": "ice", "cat": "physical", "power": "30", "acc": "90", "pp": "20", "effect": "Doubles in power each turn for 5 turns.", "prob": "-"}

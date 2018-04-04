@@ -1,0 +1,1 @@
+{"name": "rock-polish", "type": "rock", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Sharply raises user's Speed.", "prob": "-"}

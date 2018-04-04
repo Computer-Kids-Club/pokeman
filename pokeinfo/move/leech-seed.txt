@@ -1,0 +1,1 @@
+{"name": "leech-seed", "type": "grass", "cat": "status", "power": "-", "acc": "90", "pp": "10", "effect": "User steals HP from opponent each turn.", "prob": "-"}

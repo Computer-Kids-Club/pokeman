@@ -1,0 +1,1 @@
+{"name": "rapid-spin", "type": "normal", "cat": "physical", "power": "20", "acc": "100", "pp": "40", "effect": "Removes effects of trap moves.", "prob": "-"}

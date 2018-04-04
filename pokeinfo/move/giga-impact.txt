@@ -1,0 +1,1 @@
+{"name": "giga-impact", "type": "normal", "cat": "physical", "power": "150", "acc": "90", "pp": "5", "effect": "User must recharge next turn.", "prob": "-"}

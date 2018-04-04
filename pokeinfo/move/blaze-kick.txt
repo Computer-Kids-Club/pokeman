@@ -1,0 +1,1 @@
+{"name": "blaze-kick", "type": "fire", "cat": "physical", "power": "85", "acc": "90", "pp": "10", "effect": "High critical hit ratio. May burn opponent.", "prob": "10"}

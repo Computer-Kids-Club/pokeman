@@ -1,0 +1,1 @@
+{"name": "dark-void", "type": "dark", "cat": "status", "power": "-", "acc": "50", "pp": "10", "effect": "Puts all adjacent opponents to sleep.", "prob": "-"}

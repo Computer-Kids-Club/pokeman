@@ -1,0 +1,1 @@
+{"name": "super-fang", "type": "normal", "cat": "physical", "power": "-", "acc": "90", "pp": "10", "effect": "Always takes off half of the opponent's HP.", "prob": "-"}

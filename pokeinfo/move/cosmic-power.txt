@@ -1,0 +1,1 @@
+{"name": "cosmic-power", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Defense and Special Defense.", "prob": "-"}

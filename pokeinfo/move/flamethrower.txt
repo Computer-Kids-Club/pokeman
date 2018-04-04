@@ -1,0 +1,1 @@
+{"name": "flamethrower", "type": "fire", "cat": "special", "power": "90", "acc": "100", "pp": "15", "effect": "May burn opponent.", "prob": "10"}

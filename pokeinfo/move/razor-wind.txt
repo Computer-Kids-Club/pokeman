@@ -1,0 +1,1 @@
+{"name": "razor-wind", "type": "normal", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "Charges on first turn, attacks on second. High critical hit ratio.", "prob": "-"}

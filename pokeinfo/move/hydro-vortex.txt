@@ -1,0 +1,1 @@
+{"name": "hydro-vortex", "type": "water", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Water type Z-Move.", "prob": ""}

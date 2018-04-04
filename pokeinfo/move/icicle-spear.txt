@@ -1,0 +1,1 @@
+{"name": "icicle-spear", "type": "ice", "cat": "physical", "power": "25", "acc": "100", "pp": "30", "effect": "Hits 2-5 times in one turn.", "prob": "-"}

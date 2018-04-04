@@ -1,0 +1,1 @@
+{"name": "mat-block", "type": "fighting", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Protects teammates from damaging moves.", "prob": "-"}

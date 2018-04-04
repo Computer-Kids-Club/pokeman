@@ -1,0 +1,1 @@
+{"name": "discharge", "type": "electric", "cat": "special", "power": "80", "acc": "100", "pp": "15", "effect": "May paralyze opponent.", "prob": "30"}

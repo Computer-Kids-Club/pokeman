@@ -1,0 +1,1 @@
+{"name": "swallow", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The more times the user has performed Stockpile, the more HP is recovered.", "prob": "-"}

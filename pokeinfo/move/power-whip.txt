@@ -1,0 +1,1 @@
+{"name": "power-whip", "type": "grass", "cat": "physical", "power": "120", "acc": "85", "pp": "10", "effect": "", "prob": "-"}

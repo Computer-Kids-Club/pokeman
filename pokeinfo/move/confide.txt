@@ -1,0 +1,1 @@
+{"name": "confide", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Lowers opponent's Special Attack.", "prob": "-"}

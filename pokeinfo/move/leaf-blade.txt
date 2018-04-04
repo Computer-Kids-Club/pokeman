@@ -1,0 +1,1 @@
+{"name": "leaf-blade", "type": "grass", "cat": "physical", "power": "90", "acc": "100", "pp": "15", "effect": "High critical hit ratio.", "prob": "-"}

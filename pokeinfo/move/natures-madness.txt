@@ -1,0 +1,1 @@
+{"name": "natures-madness", "type": "fairy", "cat": "special", "power": "-", "acc": "90", "pp": "10", "effect": "Halves the foe's HP.", "prob": ""}

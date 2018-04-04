@@ -1,0 +1,1 @@
+{"name": "mega-kick", "type": "normal", "cat": "physical", "power": "120", "acc": "75", "pp": "5", "effect": "", "prob": "-"}

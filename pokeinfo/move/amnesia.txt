@@ -1,0 +1,1 @@
+{"name": "amnesia", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Sharply raises user's Special Defense.", "prob": "-"}

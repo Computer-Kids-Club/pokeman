@@ -1,0 +1,1 @@
+{"name": "crush-grip", "type": "normal", "cat": "physical", "power": "-", "acc": "100", "pp": "5", "effect": "More powerful when opponent has higher HP.", "prob": "-"}

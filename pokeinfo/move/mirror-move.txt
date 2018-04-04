@@ -1,0 +1,1 @@
+{"name": "mirror-move", "type": "flying", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "User performs the opponent's last move.", "prob": "-"}

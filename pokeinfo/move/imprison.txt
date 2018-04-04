@@ -1,0 +1,1 @@
+{"name": "imprison", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Opponent is unable to use moves that the user also knows.", "prob": "-"}

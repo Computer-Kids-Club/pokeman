@@ -1,0 +1,1 @@
+{"name": "meteor-mash", "type": "steel", "cat": "physical", "power": "90", "acc": "90", "pp": "10", "effect": "May raise user's Attack.", "prob": "20"}

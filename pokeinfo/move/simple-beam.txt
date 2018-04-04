@@ -1,0 +1,1 @@
+{"name": "simple-beam", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Changes target's ability to Simple.", "prob": "-"}

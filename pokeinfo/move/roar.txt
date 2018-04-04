@@ -1,0 +1,1 @@
+{"name": "roar", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "In battles, the opponent switches. In the wild, the Pok\u00e9mon runs.", "prob": "-"}

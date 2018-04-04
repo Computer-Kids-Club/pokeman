@@ -1,0 +1,1 @@
+{"name": "inferno", "type": "fire", "cat": "special", "power": "100", "acc": "50", "pp": "5", "effect": "Burns opponent.", "prob": "100"}

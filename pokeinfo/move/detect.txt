@@ -1,0 +1,1 @@
+{"name": "detect", "type": "fighting", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Opponent's attack doesn't affect you, but may fail if used often.", "prob": "-"}

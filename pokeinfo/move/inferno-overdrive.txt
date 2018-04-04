@@ -1,0 +1,1 @@
+{"name": "inferno-overdrive", "type": "fire", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Fire type Z-Move.", "prob": ""}

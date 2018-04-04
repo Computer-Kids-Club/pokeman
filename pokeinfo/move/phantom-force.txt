@@ -1,0 +1,1 @@
+{"name": "phantom-force", "type": "ghost", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "Disappears on first turn, attacks on second. Can strike through Protect/Detect.", "prob": "-"}

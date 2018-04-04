@@ -1,0 +1,1 @@
+{"name": "thunder-shock", "type": "electric", "cat": "special", "power": "40", "acc": "100", "pp": "30", "effect": "May paralyze opponent.", "prob": "10"}

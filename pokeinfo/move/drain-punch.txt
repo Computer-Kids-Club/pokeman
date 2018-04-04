@@ -1,0 +1,1 @@
+{"name": "drain-punch", "type": "fighting", "cat": "physical", "power": "75", "acc": "100", "pp": "10", "effect": "User recovers half the HP inflicted on opponent.", "prob": "-"}

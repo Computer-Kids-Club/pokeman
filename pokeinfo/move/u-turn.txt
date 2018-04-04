@@ -1,0 +1,1 @@
+{"name": "u-turn", "type": "bug", "cat": "physical", "power": "70", "acc": "100", "pp": "20", "effect": "User switches out immediately after attacking.", "prob": "-"}

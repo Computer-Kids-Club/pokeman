@@ -1,0 +1,1 @@
+{"name": "power-swap", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User and opponent swap Attack and Special Attack.", "prob": "-"}

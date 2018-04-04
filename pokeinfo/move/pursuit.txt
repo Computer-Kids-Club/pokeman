@@ -1,0 +1,1 @@
+{"name": "pursuit", "type": "dark", "cat": "physical", "power": "40", "acc": "100", "pp": "20", "effect": "Double power if the opponent is switching out.", "prob": "-"}

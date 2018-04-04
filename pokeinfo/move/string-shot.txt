@@ -1,0 +1,1 @@
+{"name": "string-shot", "type": "bug", "cat": "status", "power": "-", "acc": "95", "pp": "40", "effect": "Sharply lowers opponent's Speed.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "acid", "type": "poison", "cat": "special", "power": "40", "acc": "100", "pp": "30", "effect": "May lower opponent's Special Defense.", "prob": "10"}

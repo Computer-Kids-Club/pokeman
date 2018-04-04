@@ -1,0 +1,1 @@
+{"name": "swords-dance", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Sharply raises user's Attack.", "prob": "-"}

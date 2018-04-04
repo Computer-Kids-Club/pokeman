@@ -1,0 +1,1 @@
+{"name": "flying-press", "type": "fighting", "cat": "physical", "power": "100", "acc": "95", "pp": "10", "effect": "Deals Fighting and Flying type damage.", "prob": "-"}

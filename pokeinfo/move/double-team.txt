@@ -1,0 +1,1 @@
+{"name": "double-team", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Raises user's Evasiveness.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "flame-wheel", "type": "fire", "cat": "physical", "power": "60", "acc": "100", "pp": "25", "effect": "May burn opponent.", "prob": "10"}

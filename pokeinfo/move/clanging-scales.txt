@@ -1,0 +1,1 @@
+{"name": "clanging-scales", "type": "dragon", "cat": "special", "power": "110", "acc": "100", "pp": "5", "effect": "Lowers user's Defense.", "prob": ""}

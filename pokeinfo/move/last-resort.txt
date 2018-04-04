@@ -1,0 +1,1 @@
+{"name": "last-resort", "type": "normal", "cat": "physical", "power": "140", "acc": "100", "pp": "5", "effect": "Can only be used after all other moves are used.", "prob": "-"}

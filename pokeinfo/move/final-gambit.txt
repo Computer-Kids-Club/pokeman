@@ -1,0 +1,1 @@
+{"name": "final-gambit", "type": "fighting", "cat": "special", "power": "-", "acc": "100", "pp": "5", "effect": "Inflicts damage equal to the user's remaining HP. User faints.", "prob": "-"}

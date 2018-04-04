@@ -1,0 +1,1 @@
+{"name": "block", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Opponent cannot flee or switch.", "prob": "-"}

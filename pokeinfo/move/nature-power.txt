@@ -1,0 +1,1 @@
+{"name": "nature-power", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Uses a certain move based on the current terrain.", "prob": "-"}

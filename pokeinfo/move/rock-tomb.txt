@@ -1,0 +1,1 @@
+{"name": "rock-tomb", "type": "rock", "cat": "physical", "power": "60", "acc": "95", "pp": "15", "effect": "Lowers opponent's Speed.", "prob": "100"}

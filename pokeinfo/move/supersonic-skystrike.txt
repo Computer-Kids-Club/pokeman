@@ -1,0 +1,1 @@
+{"name": "supersonic-skystrike", "type": "flying", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Flying type Z-Move.", "prob": ""}

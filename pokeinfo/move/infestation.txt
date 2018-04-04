@@ -1,0 +1,1 @@
+{"name": "infestation", "type": "bug", "cat": "special", "power": "20", "acc": "100", "pp": "20", "effect": "Traps opponent, damaging them for 4-5 turns.", "prob": "-"}

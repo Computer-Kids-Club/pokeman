@@ -1,0 +1,1 @@
+{"name": "mist", "type": "ice", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "User's stats cannot be changed for a period of time.", "prob": "-"}

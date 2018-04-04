@@ -1,0 +1,1 @@
+{"name": "flame-charge", "type": "fire", "cat": "physical", "power": "50", "acc": "100", "pp": "20", "effect": "Raises user's Speed.", "prob": "100"}

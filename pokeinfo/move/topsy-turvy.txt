@@ -1,0 +1,1 @@
+{"name": "topsy-turvy", "type": "dark", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Reverses stat changes of opponent.", "prob": "-"}

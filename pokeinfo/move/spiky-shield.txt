@@ -1,0 +1,1 @@
+{"name": "spiky-shield", "type": "grass", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Protects user and inflicts damage on contact moves.", "prob": "-"}

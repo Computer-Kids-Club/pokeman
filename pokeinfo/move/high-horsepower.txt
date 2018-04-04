@@ -1,0 +1,1 @@
+{"name": "high-horsepower", "type": "ground", "cat": "physical", "power": "95", "acc": "95", "pp": "10", "effect": "The user fiercely attacks the target using its entire body.", "prob": ""}

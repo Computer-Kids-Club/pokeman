@@ -1,0 +1,1 @@
+{"name": "destiny-bond", "type": "ghost", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "If the user faints, the opponent also faints.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "struggle-bug", "type": "bug", "cat": "special", "power": "50", "acc": "100", "pp": "20", "effect": "Lowers opponent's Special Attack.", "prob": "100"}

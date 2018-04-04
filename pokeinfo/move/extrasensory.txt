@@ -1,0 +1,1 @@
+{"name": "extrasensory", "type": "psychic", "cat": "special", "power": "80", "acc": "100", "pp": "20", "effect": "May cause flinching.", "prob": "10"}

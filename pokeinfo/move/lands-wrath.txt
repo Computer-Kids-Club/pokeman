@@ -1,0 +1,1 @@
+{"name": "lands-wrath", "type": "ground", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "", "prob": "-"}

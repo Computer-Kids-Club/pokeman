@@ -1,0 +1,1 @@
+{"name": "present", "type": "normal", "cat": "physical", "power": "-", "acc": "90", "pp": "15", "effect": "Either deals damage or heals.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "acid-spray", "type": "poison", "cat": "special", "power": "40", "acc": "100", "pp": "20", "effect": "Sharply lowers opponent's Special Defense.", "prob": "100"}

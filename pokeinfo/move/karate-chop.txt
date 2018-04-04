@@ -1,0 +1,1 @@
+{"name": "karate-chop", "type": "fighting", "cat": "physical", "power": "50", "acc": "100", "pp": "25", "effect": "High critical hit ratio.", "prob": "-"}

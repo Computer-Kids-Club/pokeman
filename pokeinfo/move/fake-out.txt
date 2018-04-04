@@ -1,0 +1,1 @@
+{"name": "fake-out", "type": "normal", "cat": "physical", "power": "40", "acc": "100", "pp": "10", "effect": "User attacks first, foe flinches. Only usable on first turn.", "prob": "100"}

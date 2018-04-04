@@ -1,0 +1,1 @@
+{"name": "after-you", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Gives target priority in the next turn.", "prob": "-"}

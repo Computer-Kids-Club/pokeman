@@ -1,0 +1,1 @@
+{"name": "endeavor", "type": "normal", "cat": "physical", "power": "-", "acc": "100", "pp": "5", "effect": "Reduces opponent's HP to same as user's.", "prob": "-"}

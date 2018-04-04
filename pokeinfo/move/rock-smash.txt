@@ -1,0 +1,1 @@
+{"name": "rock-smash", "type": "fighting", "cat": "physical", "power": "40", "acc": "100", "pp": "15", "effect": "May lower opponent's Defense.", "prob": "50"}

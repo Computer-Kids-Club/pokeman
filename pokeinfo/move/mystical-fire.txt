@@ -1,0 +1,1 @@
+{"name": "mystical-fire", "type": "fire", "cat": "special", "power": "75", "acc": "100", "pp": "10", "effect": "Lowers opponent's Special Attack.", "prob": "100"}

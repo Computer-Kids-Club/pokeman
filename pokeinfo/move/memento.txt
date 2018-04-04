@@ -1,0 +1,1 @@
+{"name": "memento", "type": "dark", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "User faints, sharply lowers opponent's Attack and Special Attack.", "prob": "-"}

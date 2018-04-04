@@ -1,0 +1,1 @@
+{"name": "bonemerang", "type": "ground", "cat": "physical", "power": "50", "acc": "90", "pp": "10", "effect": "Hits twice in one turn.", "prob": "-"}

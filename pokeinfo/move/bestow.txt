@@ -1,0 +1,1 @@
+{"name": "bestow", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Gives the user's held item to the target.", "prob": "-"}

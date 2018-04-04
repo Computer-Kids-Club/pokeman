@@ -1,0 +1,1 @@
+{"name": "stoked-sparksurfer", "type": "electric", "cat": "special", "power": "175", "acc": "-", "pp": "1", "effect": "Raichu-exclusive Electric type Z-Move.", "prob": ""}

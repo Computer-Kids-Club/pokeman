@@ -1,0 +1,1 @@
+{"name": "boomburst", "type": "normal", "cat": "special", "power": "140", "acc": "100", "pp": "10", "effect": "Hits all adjacent Pok\u00e9mon.", "prob": "-"}

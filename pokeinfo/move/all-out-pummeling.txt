@@ -1,0 +1,1 @@
+{"name": "all-out-pummeling", "type": "fighting", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Fighting type Z-Move.", "prob": ""}

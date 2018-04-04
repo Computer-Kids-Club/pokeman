@@ -1,0 +1,1 @@
+{"name": "coil", "type": "poison", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Attack, Defense and Accuracy.", "prob": "-"}

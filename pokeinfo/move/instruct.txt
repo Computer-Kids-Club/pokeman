@@ -1,0 +1,1 @@
+{"name": "instruct", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Allows an ally to use a move instead.", "prob": ""}

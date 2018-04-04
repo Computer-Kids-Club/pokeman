@@ -1,0 +1,1 @@
+{"name": "refresh", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Cures paralysis, poison, and burns.", "prob": "-"}

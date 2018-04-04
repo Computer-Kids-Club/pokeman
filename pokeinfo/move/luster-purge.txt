@@ -1,0 +1,1 @@
+{"name": "luster-purge", "type": "psychic", "cat": "special", "power": "70", "acc": "100", "pp": "5", "effect": "May lower opponent's Special Defense.", "prob": "50"}

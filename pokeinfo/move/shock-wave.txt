@@ -1,0 +1,1 @@
+{"name": "shock-wave", "type": "electric", "cat": "special", "power": "60", "acc": "error", "pp": "20", "effect": "Ignores Accuracy and Evasiveness.", "prob": "-"}

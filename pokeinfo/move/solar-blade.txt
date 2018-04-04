@@ -1,0 +1,1 @@
+{"name": "solar-blade", "type": "grass", "cat": "physical", "power": "125", "acc": "100", "pp": "10", "effect": "Charges on first turn, attacks on second.", "prob": ""}

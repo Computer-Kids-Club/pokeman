@@ -1,0 +1,1 @@
+{"name": "sludge", "type": "poison", "cat": "special", "power": "65", "acc": "100", "pp": "20", "effect": "May poison opponent.", "prob": "30"}

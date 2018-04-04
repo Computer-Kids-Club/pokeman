@@ -1,0 +1,1 @@
+{"name": "dazzling-gleam", "type": "fairy", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "Hits all adjacent opponents.", "prob": "-"}

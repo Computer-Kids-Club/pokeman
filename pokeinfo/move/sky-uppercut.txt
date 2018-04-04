@@ -1,0 +1,1 @@
+{"name": "sky-uppercut", "type": "fighting", "cat": "physical", "power": "85", "acc": "90", "pp": "15", "effect": "Hits the opponent, even during Fly.", "prob": "-"}

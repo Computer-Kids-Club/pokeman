@@ -1,0 +1,1 @@
+{"name": "splash", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "Doesn't do ANYTHING.", "prob": "-"}

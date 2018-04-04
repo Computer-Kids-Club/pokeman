@@ -1,0 +1,1 @@
+{"name": "ion-deluge", "type": "electric", "cat": "status", "power": "-", "acc": "-", "pp": "25", "effect": "Changes Normal-type moves to Electric-type.", "prob": "-"}
