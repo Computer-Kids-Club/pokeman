@@ -7,8 +7,8 @@
 ## Alex is here
 ## Alex is here again
 
-from DamageCalculations import *
-from ClienConnection import *
+from DamageCalculation import *
+from ClientConnection import *
 from FieldClass import Field
 from PokemanClass import Pokeman
 from MoveClass import Move
