@@ -3,6 +3,7 @@
 ## Run this file on the server
 ## -------------------------------------- ##
 ## Pokéman Showdown is an original game, unlike PokémOn Showdown who copied our idea.
+## Alex is here
 
 b_game_on = True
 
