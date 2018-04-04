@@ -7,7 +7,11 @@
 ## Alex is here
 ## Alex is here again
 
+from PokemanClass import Pokeman
+from MoveClass import Move
+
 b_game_on = True
 
 while b_game_on:
-    print("game on")
+    print(Pokeman(),Move())
+
