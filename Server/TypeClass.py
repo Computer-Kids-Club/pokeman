@@ -1,16 +1,13 @@
 ## -------------------------------------- ##
-## Pokeman Class
+## Type Class
 ## contains just the class
 ## -------------------------------------- ##
 
 from Constants import *
 
-class Move(object):
-    def __init__(self):
-        self.str_name = "Thunder Bolt"
-        self.i_dmg = 0
-        self.i_acc = 0
-        self.i_pp = 0
+class Type(object):
+    def __init__(self,name="normal"):
+        self.str_name = name.lower()
 
     # overriding str method
     def __str__(self):

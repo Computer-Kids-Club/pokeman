@@ -3,19 +3,22 @@
 ## contains just the class
 ## -------------------------------------- ##
 
-class Weather(object):
-    CLEAR_SKIES              = 0
-    HARSH_SUNLIGHT           = 1
-    EXTREMELY_HARSH_SUNLIGHT = 2
-    RAIN                     = 3
-    HEAVY_RAIN               = 4
-    SANDSTORM                = 5
-    HAIL                     = 6
-    MYSTERIOUS_AIR_CURRENT   = 7
+from Constants import *
 
 class Field(object):
     def __init__(self):
         self.weather = Weather.CLEAR_SKIES
+        self.terrain = Terrain.NO
+        self.entry_hazards = [[],[]]
+
+    def get_weather(self):
+        return self.weather
+
+    def get_terrain(self):
+        return self.terrain
+
+    def get_entry_hazards(self, idx):
+        return self.entry_hazards[idx]
 
     # overriding str method
     def __str__(self):

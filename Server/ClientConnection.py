@@ -3,6 +3,8 @@
 ## connects clients
 ## -------------------------------------- ##
 
+from Constants import *
+
 l_clients = []
 
 class Client(object):
