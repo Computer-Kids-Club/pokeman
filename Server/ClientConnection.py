@@ -1,4 +1,6 @@
 
+l_clients = []
+
 class Client(object):
-    def __init(self):
+    def __init__(self):
         pass
