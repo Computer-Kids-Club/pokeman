@@ -4,10 +4,15 @@
 ## -------------------------------------- ##
 
 from Constants import *
+from FieldClass import Field
+from ClientConnection import Client
 
 class Battle(object):
     def __init__(self):
-        pass
+
+        self.field = Field()
+
+        self.players = [Client(),Client()]
 
     def run(self):
         Log.info("battle running")
