@@ -6,7 +6,7 @@
 from Constants import *
 from datetime import datetime
 import logging
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',level=logging.DEBUG)
 
 b_logging = True
 
@@ -21,7 +21,7 @@ class Log(object):
 
         #print(str_message)
 
-        logging.debug(str(datetime.now())+': '+str_message)
+        logging.debug(str_message)
 
         #log_file = open('log.txt','w')
 
@@ -29,12 +29,14 @@ class Log(object):
 
         #log_file.close()
 
+    @staticmethod
     def info(str_message):
         if not b_logging:
             return
-        logging.info(str(datetime.now())+': '+str_message)
+        logging.info(str_message)
 
+    @staticmethod
     def warning(str_message):
         if not b_logging:
             return
-        logging.warning(str(datetime.now())+': '+str_message)
+        logging.warning(str_message)
