@@ -1,0 +1,1 @@
+{"name": "venoshock", "type": "poison", "cat": "special", "power": "65", "acc": "100", "pp": "10", "effect": "Inflicts double damage if the target is poisoned.", "prob": "-"}

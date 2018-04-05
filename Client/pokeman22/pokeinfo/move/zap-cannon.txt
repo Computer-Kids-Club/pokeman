@@ -1,0 +1,1 @@
+{"name": "zap-cannon", "type": "electric", "cat": "special", "power": "120", "acc": "50", "pp": "5", "effect": "Paralyzes opponent.", "prob": "100"}

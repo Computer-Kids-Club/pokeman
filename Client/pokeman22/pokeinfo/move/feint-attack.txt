@@ -1,0 +1,1 @@
+{"name": "feint-attack", "type": "dark", "cat": "physical", "power": "60", "acc": "error", "pp": "20", "effect": "Ignores Accuracy and Evasiveness.", "prob": "-"}

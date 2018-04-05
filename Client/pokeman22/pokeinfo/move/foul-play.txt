@@ -1,0 +1,1 @@
+{"name": "foul-play", "type": "dark", "cat": "physical", "power": "95", "acc": "100", "pp": "15", "effect": "Uses the opponent's Attack stat.", "prob": "-"}

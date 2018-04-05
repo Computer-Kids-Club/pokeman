@@ -1,0 +1,1 @@
+{"name": "vacuum-wave", "type": "fighting", "cat": "special", "power": "40", "acc": "100", "pp": "30", "effect": "User attacks first.", "prob": "-"}

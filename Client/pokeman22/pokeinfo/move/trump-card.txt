@@ -1,0 +1,1 @@
+{"name": "trump-card", "type": "normal", "cat": "special", "power": "-", "acc": "error", "pp": "5", "effect": "The lower the PP, the higher the power.", "prob": "-"}

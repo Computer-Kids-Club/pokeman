@@ -1,0 +1,1 @@
+{"name": "recover", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User recovers half its max HP.", "prob": "-"}

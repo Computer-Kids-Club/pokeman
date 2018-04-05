@@ -1,0 +1,1 @@
+{"name": "subzero-slammer", "type": "ice", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Ice type Z-Move.", "prob": ""}

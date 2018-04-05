@@ -1,0 +1,1 @@
+{"name": "hex", "type": "ghost", "cat": "special", "power": "65", "acc": "100", "pp": "10", "effect": "Inflicts more damage if the target has a status condition.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "reflect", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Halves damage from Physical attacks for 5 turns.", "prob": "-"}

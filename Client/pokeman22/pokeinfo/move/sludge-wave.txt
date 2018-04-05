@@ -1,0 +1,1 @@
+{"name": "sludge-wave", "type": "poison", "cat": "special", "power": "95", "acc": "100", "pp": "10", "effect": "May poison opponent.", "prob": "10"}

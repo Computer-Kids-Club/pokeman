@@ -1,0 +1,1 @@
+{"name": "tail-glow", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Drastically raises user's Special Attack.", "prob": "-"}

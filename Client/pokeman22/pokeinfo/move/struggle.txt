@@ -1,0 +1,1 @@
+{"name": "struggle", "type": "normal", "cat": "physical", "power": "50", "acc": "100", "pp": "-", "effect": "Only usable when all PP are gone. Hurts the user.", "prob": "-"}

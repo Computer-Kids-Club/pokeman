@@ -1,0 +1,1 @@
+{"name": "hydro-pump", "type": "water", "cat": "special", "power": "110", "acc": "80", "pp": "5", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "needle-arm", "type": "grass", "cat": "physical", "power": "60", "acc": "100", "pp": "15", "effect": "May cause flinching.", "prob": "30"}

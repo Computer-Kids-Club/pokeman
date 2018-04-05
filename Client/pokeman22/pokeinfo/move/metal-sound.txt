@@ -1,0 +1,1 @@
+{"name": "metal-sound", "type": "steel", "cat": "status", "power": "-", "acc": "85", "pp": "40", "effect": "Sharply lowers opponent's Special Defense.", "prob": "-"}

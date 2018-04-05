@@ -1,0 +1,1 @@
+{"name": "pluck", "type": "flying", "cat": "physical", "power": "60", "acc": "100", "pp": "20", "effect": "If the opponent is holding a berry, its effect is stolen by user.", "prob": "-"}

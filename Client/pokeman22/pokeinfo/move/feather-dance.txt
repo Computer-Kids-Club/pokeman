@@ -1,0 +1,1 @@
+{"name": "feather-dance", "type": "flying", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Sharply lowers opponent's Attack.", "prob": "-"}

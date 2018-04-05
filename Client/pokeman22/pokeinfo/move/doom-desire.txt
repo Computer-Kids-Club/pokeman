@@ -1,0 +1,1 @@
+{"name": "doom-desire", "type": "steel", "cat": "special", "power": "140", "acc": "100", "pp": "5", "effect": "Damage occurs 2 turns later.", "prob": "-"}

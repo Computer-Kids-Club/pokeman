@@ -1,0 +1,1 @@
+{"name": "substitute", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Uses HP to creates a decoy that takes hits.", "prob": "-"}

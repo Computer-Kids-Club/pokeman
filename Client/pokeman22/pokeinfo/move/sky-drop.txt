@@ -1,0 +1,1 @@
+{"name": "sky-drop", "type": "flying", "cat": "physical", "power": "60", "acc": "100", "pp": "10", "effect": "Takes opponent into the air on first turn, drops them on second turn.", "prob": "-"}

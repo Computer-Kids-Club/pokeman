@@ -1,0 +1,1 @@
+{"name": "electric-terrain", "type": "electric", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Prevents all Pok\u00e9mon from falling asleep for 5 turns.", "prob": "-"}

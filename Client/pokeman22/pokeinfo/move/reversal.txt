@@ -1,0 +1,1 @@
+{"name": "reversal", "type": "fighting", "cat": "physical", "power": "-", "acc": "100", "pp": "15", "effect": "The lower the user's HP, the higher the power.", "prob": "-"}

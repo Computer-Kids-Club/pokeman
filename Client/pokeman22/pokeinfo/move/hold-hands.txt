@@ -1,0 +1,1 @@
+{"name": "hold-hands", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "Makes the user and an ally very happy.", "prob": "-"}

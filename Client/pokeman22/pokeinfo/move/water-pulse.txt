@@ -1,0 +1,1 @@
+{"name": "water-pulse", "type": "water", "cat": "special", "power": "60", "acc": "100", "pp": "20", "effect": "May confuse opponent.", "prob": "20"}

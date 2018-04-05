@@ -1,0 +1,1 @@
+{"name": "bounce", "type": "flying", "cat": "physical", "power": "85", "acc": "85", "pp": "5", "effect": "Springs up on first turn, attacks on second. May paralyze opponent.", "prob": "30"}

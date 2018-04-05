@@ -1,0 +1,1 @@
+{"name": "slash", "type": "normal", "cat": "physical", "power": "70", "acc": "100", "pp": "20", "effect": "High critical hit ratio.", "prob": "-"}

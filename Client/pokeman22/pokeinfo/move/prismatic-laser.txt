@@ -1,0 +1,1 @@
+{"name": "prismatic-laser", "type": "psychic", "cat": "special", "power": "160", "acc": "100", "pp": "10", "effect": "The user shoots powerful lasers using the power of a prism. The user can\u2019t move on the next turn.", "prob": ""}

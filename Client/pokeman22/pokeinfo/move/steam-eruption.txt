@@ -1,0 +1,1 @@
+{"name": "steam-eruption", "type": "water", "cat": "special", "power": "110", "acc": "95", "pp": "5", "effect": "May burn opponent.", "prob": "30"}

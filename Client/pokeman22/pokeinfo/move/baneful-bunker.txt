@@ -1,0 +1,1 @@
+{"name": "baneful-bunker", "type": "poison", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "In addition to protecting the user from attacks, this move also poisons any attacker that makes direct contact.", "prob": ""}

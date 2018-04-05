@@ -1,0 +1,1 @@
+{"name": "poison-powder", "type": "poison", "cat": "status", "power": "-", "acc": "75", "pp": "35", "effect": "Poisons opponent.", "prob": "-"}

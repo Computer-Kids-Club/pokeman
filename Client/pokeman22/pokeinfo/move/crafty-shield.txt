@@ -1,0 +1,1 @@
+{"name": "crafty-shield", "type": "fairy", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Protects the Pok\u00e9mon from status moves.", "prob": "-"}

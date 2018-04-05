@@ -1,0 +1,1 @@
+{"name": "fire-lash", "type": "fire", "cat": "physical", "power": "80", "acc": "100", "pp": "15", "effect": "The user strikes the target with a burning lash. This also lowers the target\u2019s Defense stat.", "prob": ""}

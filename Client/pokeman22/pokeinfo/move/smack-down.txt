@@ -1,0 +1,1 @@
+{"name": "smack-down", "type": "rock", "cat": "physical", "power": "50", "acc": "100", "pp": "15", "effect": "Makes Flying-type Pok\u00e9mon vulnerable to Ground moves.", "prob": "-"}

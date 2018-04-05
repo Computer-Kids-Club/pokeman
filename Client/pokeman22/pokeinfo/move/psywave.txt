@@ -1,0 +1,1 @@
+{"name": "psywave", "type": "psychic", "cat": "special", "power": "-", "acc": "80", "pp": "15", "effect": "Inflicts damage 50-150% of user's level.", "prob": "-"}

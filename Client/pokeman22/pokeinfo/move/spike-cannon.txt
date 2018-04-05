@@ -1,0 +1,1 @@
+{"name": "spike-cannon", "type": "normal", "cat": "physical", "power": "20", "acc": "100", "pp": "15", "effect": "Hits 2-5 times in one turn.", "prob": "-"}

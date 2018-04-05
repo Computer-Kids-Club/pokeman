@@ -1,0 +1,1 @@
+{"name": "iron-defense", "type": "steel", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Sharply raises user's Defense.", "prob": "-"}

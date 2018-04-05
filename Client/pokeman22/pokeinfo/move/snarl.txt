@@ -1,0 +1,1 @@
+{"name": "snarl", "type": "dark", "cat": "special", "power": "55", "acc": "95", "pp": "15", "effect": "Lowers opponent's Special Attack.", "prob": "100"}

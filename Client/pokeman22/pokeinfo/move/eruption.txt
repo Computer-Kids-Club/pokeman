@@ -1,0 +1,1 @@
+{"name": "eruption", "type": "fire", "cat": "special", "power": "150", "acc": "100", "pp": "5", "effect": "Stronger when the user's HP is higher.", "prob": "-"}

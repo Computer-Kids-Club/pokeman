@@ -1,0 +1,1 @@
+{"name": "pay-day", "type": "normal", "cat": "physical", "power": "40", "acc": "100", "pp": "20", "effect": "A small amount of money is gained after the battle resolves.", "prob": "-"}

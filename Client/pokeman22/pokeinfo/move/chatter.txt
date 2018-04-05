@@ -1,0 +1,1 @@
+{"name": "chatter", "type": "flying", "cat": "special", "power": "65", "acc": "100", "pp": "20", "effect": "Confuses opponent.", "prob": "100"}

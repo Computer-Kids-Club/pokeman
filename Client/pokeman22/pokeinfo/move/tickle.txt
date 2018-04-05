@@ -1,0 +1,1 @@
+{"name": "tickle", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Lowers opponent's Attack and Defense.", "prob": "-"}

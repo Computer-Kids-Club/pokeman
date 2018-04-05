@@ -1,0 +1,1 @@
+{"name": "menacing-moonraze-maelstrom", "type": "ghost", "cat": "special", "power": "200", "acc": "-", "pp": "1", "effect": "Lunala-exclusive Z-Move.", "prob": ""}

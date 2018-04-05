@@ -1,0 +1,1 @@
+{"name": "blizzard", "type": "ice", "cat": "special", "power": "110", "acc": "70", "pp": "5", "effect": "May freeze opponent.", "prob": "10"}

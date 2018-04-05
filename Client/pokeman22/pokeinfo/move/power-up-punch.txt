@@ -1,0 +1,1 @@
+{"name": "power-up-punch", "type": "fighting", "cat": "physical", "power": "40", "acc": "100", "pp": "10", "effect": "Raises Attack.", "prob": "100"}

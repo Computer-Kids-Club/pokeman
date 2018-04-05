@@ -1,0 +1,1 @@
+{"name": "anchor-shot", "type": "steel", "cat": "physical", "power": "80", "acc": "100", "pp": "20", "effect": "The user entangles the target with its anchor chain while attacking. The target becomes unable to flee.", "prob": ""}

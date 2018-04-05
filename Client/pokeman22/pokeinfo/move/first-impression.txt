@@ -1,0 +1,1 @@
+{"name": "first-impression", "type": "bug", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "Although this move has great power, it only works the first turn the user is in battle.", "prob": ""}

@@ -1,0 +1,1 @@
+{"name": "poison-tail", "type": "poison", "cat": "physical", "power": "50", "acc": "100", "pp": "25", "effect": "High critical hit ratio. May poison opponent.", "prob": "10"}

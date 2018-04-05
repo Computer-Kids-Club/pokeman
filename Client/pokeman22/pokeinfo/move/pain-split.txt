@@ -1,0 +1,1 @@
+{"name": "pain-split", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "The user's and opponent's HP becomes the average of both.", "prob": "-"}

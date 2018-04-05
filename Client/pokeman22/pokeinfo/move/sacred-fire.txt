@@ -1,0 +1,1 @@
+{"name": "sacred-fire", "type": "fire", "cat": "physical", "power": "100", "acc": "95", "pp": "5", "effect": "May burn opponent.", "prob": "50"}

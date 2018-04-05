@@ -1,0 +1,1 @@
+{"name": "stomping-tantrum", "type": "ground", "cat": "physical", "power": "75", "acc": "100", "pp": "10", "effect": "Driven by frustration, the user attacks the target. If the user\u2019s previous move has failed, the power of this move doubles.", "prob": ""}

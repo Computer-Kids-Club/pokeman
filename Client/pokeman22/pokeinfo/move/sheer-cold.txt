@@ -1,0 +1,1 @@
+{"name": "sheer-cold", "type": "ice", "cat": "special", "power": "-", "acc": "-", "pp": "5", "effect": "One-Hit-KO, if it hits.", "prob": "-"}

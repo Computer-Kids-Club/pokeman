@@ -1,0 +1,1 @@
+{"name": "comet-punch", "type": "normal", "cat": "physical", "power": "18", "acc": "85", "pp": "15", "effect": "Hits 2-5 times in one turn.", "prob": "-"}

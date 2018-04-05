@@ -1,0 +1,1 @@
+{"name": "recycle", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User's used hold item is restored.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "dragon-pulse", "type": "dragon", "cat": "special", "power": "85", "acc": "100", "pp": "10", "effect": "", "prob": "-"}

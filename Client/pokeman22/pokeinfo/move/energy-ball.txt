@@ -1,0 +1,1 @@
+{"name": "energy-ball", "type": "grass", "cat": "special", "power": "90", "acc": "100", "pp": "10", "effect": "May lower opponent's Special Defense.", "prob": "10"}

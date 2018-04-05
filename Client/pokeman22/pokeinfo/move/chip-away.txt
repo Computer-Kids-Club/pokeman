@@ -1,0 +1,1 @@
+{"name": "chip-away", "type": "normal", "cat": "physical", "power": "70", "acc": "100", "pp": "20", "effect": "Ignores opponent's stat changes.", "prob": "-"}

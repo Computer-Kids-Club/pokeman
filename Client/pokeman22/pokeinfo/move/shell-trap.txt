@@ -1,0 +1,1 @@
+{"name": "shell-trap", "type": "fire", "cat": "special", "power": "150", "acc": "100", "pp": "5", "effect": "Deals more damage to opponent if hit by a Physical move.", "prob": ""}

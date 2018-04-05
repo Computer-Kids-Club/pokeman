@@ -1,0 +1,1 @@
+{"name": "photon-geyser", "type": "psychic", "cat": "special", "power": "100", "acc": "100", "pp": "5", "effect": "Uses Attack or Special Attack stat, whichever is higher.", "prob": ""}

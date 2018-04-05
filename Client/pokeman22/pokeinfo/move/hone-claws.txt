@@ -1,0 +1,1 @@
+{"name": "hone-claws", "type": "dark", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Raises user's Attack and Accuracy.", "prob": "-"}

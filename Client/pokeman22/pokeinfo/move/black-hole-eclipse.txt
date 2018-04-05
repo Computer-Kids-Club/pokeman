@@ -1,0 +1,1 @@
+{"name": "black-hole-eclipse", "type": "dark", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Dark type Z-Move.", "prob": ""}

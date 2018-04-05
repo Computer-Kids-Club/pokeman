@@ -1,0 +1,1 @@
+{"name": "hammer-arm", "type": "fighting", "cat": "physical", "power": "100", "acc": "90", "pp": "10", "effect": "Lowers user's Speed.", "prob": "-"}

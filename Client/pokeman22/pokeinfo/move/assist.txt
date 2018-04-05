@@ -1,0 +1,1 @@
+{"name": "assist", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "In a Double Battle, user randomly attacks with a partner's move.", "prob": "-"}

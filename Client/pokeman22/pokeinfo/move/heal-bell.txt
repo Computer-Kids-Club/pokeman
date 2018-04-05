@@ -1,0 +1,1 @@
+{"name": "heal-bell", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Heals the user's party's status conditions.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "gravity", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Prevents moves like Fly and Bounce and the Ability Levitate for 5 turns.", "prob": "-"}

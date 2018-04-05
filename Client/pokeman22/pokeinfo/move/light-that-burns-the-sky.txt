@@ -1,0 +1,1 @@
+{"name": "light-that-burns-the-sky", "type": "psychic", "cat": "special", "power": "200", "acc": "-", "pp": "1", "effect": "Ignores target's ability. Inflicts damage based on the user's Attack or Special Attack, whichever is higher.", "prob": ""}

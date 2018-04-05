@@ -1,0 +1,1 @@
+{"name": "poison-fang", "type": "poison", "cat": "physical", "power": "50", "acc": "100", "pp": "15", "effect": "May badly poison opponent.", "prob": "50"}

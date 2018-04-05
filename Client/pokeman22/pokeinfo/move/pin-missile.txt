@@ -1,0 +1,1 @@
+{"name": "pin-missile", "type": "bug", "cat": "physical", "power": "25", "acc": "95", "pp": "20", "effect": "Hits 2-5 times in one turn.", "prob": "-"}

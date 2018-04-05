@@ -1,0 +1,1 @@
+{"name": "payback", "type": "dark", "cat": "physical", "power": "50", "acc": "100", "pp": "10", "effect": "Power doubles if the user was attacked first.", "prob": "-"}

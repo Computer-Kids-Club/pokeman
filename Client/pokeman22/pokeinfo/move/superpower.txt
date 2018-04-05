@@ -1,0 +1,1 @@
+{"name": "superpower", "type": "fighting", "cat": "physical", "power": "120", "acc": "100", "pp": "5", "effect": "Lowers user's Attack and Defense.", "prob": "-"}

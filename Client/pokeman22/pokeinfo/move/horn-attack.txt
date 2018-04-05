@@ -1,0 +1,1 @@
+{"name": "horn-attack", "type": "normal", "cat": "physical", "power": "65", "acc": "100", "pp": "25", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "dragon-rush", "type": "dragon", "cat": "physical", "power": "100", "acc": "75", "pp": "10", "effect": "May cause flinching.", "prob": "20"}

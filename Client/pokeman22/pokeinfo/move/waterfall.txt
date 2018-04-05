@@ -1,0 +1,1 @@
+{"name": "waterfall", "type": "water", "cat": "physical", "power": "80", "acc": "100", "pp": "15", "effect": "May cause flinching.", "prob": "20"}

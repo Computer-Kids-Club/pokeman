@@ -1,0 +1,1 @@
+{"name": "sunny-day", "type": "fire", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Makes it sunny for 5 turns.", "prob": "-"}

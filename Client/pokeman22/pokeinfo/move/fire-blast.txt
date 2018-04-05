@@ -1,0 +1,1 @@
+{"name": "fire-blast", "type": "fire", "cat": "special", "power": "110", "acc": "85", "pp": "5", "effect": "May burn opponent.", "prob": "10"}

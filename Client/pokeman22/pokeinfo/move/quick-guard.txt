@@ -1,0 +1,1 @@
+{"name": "quick-guard", "type": "fighting", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Fast moves won't damage the user or its teammates.", "prob": "-"}

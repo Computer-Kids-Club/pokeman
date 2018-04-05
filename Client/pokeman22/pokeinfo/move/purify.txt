@@ -1,0 +1,1 @@
+{"name": "purify", "type": "poison", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "The user heals the target\u2019s status condition. If the move succeeds, it also restores the user\u2019s own HP.", "prob": ""}

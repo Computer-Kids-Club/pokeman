@@ -1,0 +1,1 @@
+{"name": "fairy-wind", "type": "fairy", "cat": "special", "power": "40", "acc": "100", "pp": "30", "effect": "", "prob": "-"}

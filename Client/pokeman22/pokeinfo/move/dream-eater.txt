@@ -1,0 +1,1 @@
+{"name": "dream-eater", "type": "psychic", "cat": "special", "power": "100", "acc": "100", "pp": "15", "effect": "User recovers half the HP inflicted on a sleeping opponent.", "prob": "-"}

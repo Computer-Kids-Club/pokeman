@@ -1,0 +1,1 @@
+{"name": "genesis-supernova", "type": "psychic", "cat": "special", "power": "185", "acc": "-", "pp": "1", "effect": "Mew-exclusive Z-Move.", "prob": ""}

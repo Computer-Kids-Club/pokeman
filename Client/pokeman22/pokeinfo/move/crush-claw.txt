@@ -1,0 +1,1 @@
+{"name": "crush-claw", "type": "normal", "cat": "physical", "power": "75", "acc": "95", "pp": "10", "effect": "May lower opponent's Defense.", "prob": "50"}

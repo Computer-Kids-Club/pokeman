@@ -1,0 +1,1 @@
+{"name": "sinister-arrow-raid", "type": "ghost", "cat": "physical", "power": "180", "acc": "-", "pp": "1", "effect": "Decidueye-exclusive Z-Move.", "prob": ""}

@@ -1,0 +1,1 @@
+{"name": "strength-sap", "type": "grass", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "The user restores its HP by the same amount as the target\u2019s Attack stat. It also lowers the target\u2019s Attack stat.", "prob": ""}

@@ -1,0 +1,1 @@
+{"name": "happy-hour", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Doubles prize money from trainer battles.", "prob": "-"}

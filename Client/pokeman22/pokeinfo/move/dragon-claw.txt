@@ -1,0 +1,1 @@
+{"name": "dragon-claw", "type": "dragon", "cat": "physical", "power": "80", "acc": "100", "pp": "15", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "burn-up", "type": "fire", "cat": "special", "power": "130", "acc": "100", "pp": "5", "effect": "To inflict massive damage, the user burns itself out. After using this move, the user will no longer be Fire type.", "prob": ""}

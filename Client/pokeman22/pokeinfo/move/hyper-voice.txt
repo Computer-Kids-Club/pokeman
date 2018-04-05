@@ -1,0 +1,1 @@
+{"name": "hyper-voice", "type": "normal", "cat": "special", "power": "90", "acc": "100", "pp": "10", "effect": "", "prob": "-"}

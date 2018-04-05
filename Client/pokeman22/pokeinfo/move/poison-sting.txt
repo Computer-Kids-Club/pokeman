@@ -1,0 +1,1 @@
+{"name": "poison-sting", "type": "poison", "cat": "physical", "power": "15", "acc": "100", "pp": "35", "effect": "May poison the opponent.", "prob": "30"}

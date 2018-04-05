@@ -1,0 +1,1 @@
+{"name": "thunder-fang", "type": "electric", "cat": "physical", "power": "65", "acc": "95", "pp": "15", "effect": "May cause flinching and/or paralyze opponent.", "prob": "10"}

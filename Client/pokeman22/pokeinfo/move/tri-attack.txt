@@ -1,0 +1,1 @@
+{"name": "tri-attack", "type": "normal", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "May paralyze, burn or freeze opponent.", "prob": "20"}

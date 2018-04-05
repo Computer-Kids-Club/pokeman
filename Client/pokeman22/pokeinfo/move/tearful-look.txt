@@ -1,0 +1,1 @@
+{"name": "tearful-look", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "The user gets teary eyed to make the target lose its combative spirit. This lowers the target\u2019s Attack and Sp. Atk stats.", "prob": ""}

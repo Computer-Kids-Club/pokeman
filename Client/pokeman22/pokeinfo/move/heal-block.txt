@@ -1,0 +1,1 @@
+{"name": "heal-block", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Prevents the opponent from restoring HP for 5 turns.", "prob": "-"}

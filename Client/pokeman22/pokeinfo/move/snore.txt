@@ -1,0 +1,1 @@
+{"name": "snore", "type": "normal", "cat": "special", "power": "50", "acc": "100", "pp": "15", "effect": "Can only be used if asleep. May cause flinching.", "prob": "30"}

@@ -1,0 +1,1 @@
+{"name": "lucky-chant", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Opponent cannot land critical hits for 5 turns.", "prob": "-"}

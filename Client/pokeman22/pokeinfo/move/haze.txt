@@ -1,0 +1,1 @@
+{"name": "haze", "type": "ice", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Resets all stat changes.", "prob": "-"}

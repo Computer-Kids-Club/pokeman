@@ -1,0 +1,1 @@
+{"name": "dig", "type": "ground", "cat": "physical", "power": "80", "acc": "100", "pp": "10", "effect": "Digs underground on first turn, attacks on second. Can also escape from caves.", "prob": "-"}

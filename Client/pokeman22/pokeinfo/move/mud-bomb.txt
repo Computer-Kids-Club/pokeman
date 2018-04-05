@@ -1,0 +1,1 @@
+{"name": "mud-bomb", "type": "ground", "cat": "special", "power": "65", "acc": "85", "pp": "10", "effect": "May lower opponent's Accuracy.", "prob": "30"}

@@ -1,0 +1,1 @@
+{"name": "continental-crush", "type": "rock", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Rock type Z-Move.", "prob": ""}

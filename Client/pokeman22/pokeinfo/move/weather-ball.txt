@@ -1,0 +1,1 @@
+{"name": "weather-ball", "type": "normal", "cat": "special", "power": "50", "acc": "100", "pp": "10", "effect": "Move's power and type changes with the weather.", "prob": "-"}

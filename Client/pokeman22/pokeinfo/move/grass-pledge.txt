@@ -1,0 +1,1 @@
+{"name": "grass-pledge", "type": "grass", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "Added effects appear if preceded by Water Pledge or succeeded by Fire Pledge.", "prob": "-"}

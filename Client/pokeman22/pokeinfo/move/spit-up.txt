@@ -1,0 +1,1 @@
+{"name": "spit-up", "type": "normal", "cat": "special", "power": "-", "acc": "100", "pp": "10", "effect": "Power depends on how many times the user performed Stockpile.", "prob": "-"}

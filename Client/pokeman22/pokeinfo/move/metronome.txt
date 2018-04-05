@@ -1,0 +1,1 @@
+{"name": "metronome", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User performs any move in the game at random.", "prob": "-"}

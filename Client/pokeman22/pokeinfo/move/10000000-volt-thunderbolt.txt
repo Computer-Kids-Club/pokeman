@@ -1,0 +1,1 @@
+{"name": "10000000-volt-thunderbolt", "type": "electric", "cat": "special", "power": "195", "acc": "-", "pp": "1", "effect": "Pikachu-exclusive Z-Move.", "prob": ""}

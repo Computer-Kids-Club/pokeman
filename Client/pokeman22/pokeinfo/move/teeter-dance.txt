@@ -1,0 +1,1 @@
+{"name": "teeter-dance", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Confuses all Pok\u00e9mon.", "prob": "-"}

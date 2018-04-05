@@ -1,0 +1,1 @@
+{"name": "attract", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "If opponent is the opposite gender, it's less likely to attack.", "prob": "-"}

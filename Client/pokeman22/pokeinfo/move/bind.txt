@@ -1,0 +1,1 @@
+{"name": "bind", "type": "normal", "cat": "physical", "power": "15", "acc": "85", "pp": "20", "effect": "Traps opponent, damaging them for 4-5 turns.", "prob": "-"}

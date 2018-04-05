@@ -1,0 +1,1 @@
+{"name": "brutal-swing", "type": "dark", "cat": "physical", "power": "60", "acc": "100", "pp": "20", "effect": "The user swings its body around violently to inflict damage on everything in its vicinity.", "prob": ""}

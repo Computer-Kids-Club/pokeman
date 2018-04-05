@@ -1,0 +1,1 @@
+{"name": "protect", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User is not affected by opponent's move.", "prob": "-"}

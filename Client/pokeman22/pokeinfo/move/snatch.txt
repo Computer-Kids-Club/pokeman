@@ -1,0 +1,1 @@
+{"name": "snatch", "type": "dark", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Steals the effects of the opponent's next move.", "prob": "-"}

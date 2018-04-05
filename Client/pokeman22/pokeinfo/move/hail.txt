@@ -1,0 +1,1 @@
+{"name": "hail", "type": "ice", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Non-Ice types are damaged for 5 turns.", "prob": "-"}

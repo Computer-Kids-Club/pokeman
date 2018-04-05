@@ -1,0 +1,1 @@
+{"name": "aqua-ring", "type": "water", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Restores a little HP each turn.", "prob": "-"}

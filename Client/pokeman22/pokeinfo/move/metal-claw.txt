@@ -1,0 +1,1 @@
+{"name": "metal-claw", "type": "steel", "cat": "physical", "power": "50", "acc": "95", "pp": "35", "effect": "May raise user's Attack.", "prob": "10"}

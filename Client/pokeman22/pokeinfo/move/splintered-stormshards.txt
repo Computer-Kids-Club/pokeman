@@ -1,0 +1,1 @@
+{"name": "splintered-stormshards", "type": "rock", "cat": "physical", "power": "190", "acc": "-", "pp": "1", "effect": "Lycanroc-exclusive Z-Move.", "prob": ""}

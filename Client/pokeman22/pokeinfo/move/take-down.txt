@@ -1,0 +1,1 @@
+{"name": "take-down", "type": "normal", "cat": "physical", "power": "90", "acc": "85", "pp": "20", "effect": "User receives recoil damage.", "prob": "-"}

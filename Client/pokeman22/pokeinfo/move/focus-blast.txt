@@ -1,0 +1,1 @@
+{"name": "focus-blast", "type": "fighting", "cat": "special", "power": "120", "acc": "70", "pp": "5", "effect": "May lower opponent's Special Defense.", "prob": "10"}

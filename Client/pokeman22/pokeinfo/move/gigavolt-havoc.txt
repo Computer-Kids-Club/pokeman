@@ -1,0 +1,1 @@
+{"name": "gigavolt-havoc", "type": "electric", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Electric type Z-Move.", "prob": ""}

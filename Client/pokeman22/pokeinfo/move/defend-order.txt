@@ -1,0 +1,1 @@
+{"name": "defend-order", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Raises user's Defense and Special Defense.", "prob": "-"}

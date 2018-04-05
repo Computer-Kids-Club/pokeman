@@ -1,0 +1,1 @@
+{"name": "magnitude", "type": "ground", "cat": "physical", "power": "-", "acc": "100", "pp": "30", "effect": "Hits with random power.", "prob": "-"}

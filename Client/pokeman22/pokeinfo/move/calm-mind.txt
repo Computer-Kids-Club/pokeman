@@ -1,0 +1,1 @@
+{"name": "calm-mind", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Special Attack and Special Defense.", "prob": "-"}

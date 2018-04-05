@@ -1,0 +1,1 @@
+{"name": "quash", "type": "dark", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Makes the target act last this turn.", "prob": "-"}

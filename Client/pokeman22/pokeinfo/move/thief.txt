@@ -1,0 +1,1 @@
+{"name": "thief", "type": "dark", "cat": "physical", "power": "60", "acc": "100", "pp": "25", "effect": "Also steals opponent's held item.", "prob": "-"}

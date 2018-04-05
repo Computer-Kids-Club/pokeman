@@ -1,0 +1,1 @@
+{"name": "sticky-web", "type": "bug", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Lowers opponent's Speed when switching into battle.", "prob": "-"}

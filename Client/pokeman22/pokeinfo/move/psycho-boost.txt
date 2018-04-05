@@ -1,0 +1,1 @@
+{"name": "psycho-boost", "type": "psychic", "cat": "special", "power": "140", "acc": "90", "pp": "5", "effect": "Sharply lowers user's Special Attack.", "prob": "-"}

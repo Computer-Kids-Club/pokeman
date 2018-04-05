@@ -1,0 +1,1 @@
+{"name": "conversion-2", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "User changes type to become resistant to opponent's last move.", "prob": "-"}

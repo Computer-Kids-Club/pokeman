@@ -1,0 +1,1 @@
+{"name": "gunk-shot", "type": "poison", "cat": "physical", "power": "120", "acc": "80", "pp": "5", "effect": "May poison opponent.", "prob": "30"}

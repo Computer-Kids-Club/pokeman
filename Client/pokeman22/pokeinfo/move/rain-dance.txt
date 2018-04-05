@@ -1,0 +1,1 @@
+{"name": "rain-dance", "type": "water", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Makes it rain for 5 turns.", "prob": "-"}

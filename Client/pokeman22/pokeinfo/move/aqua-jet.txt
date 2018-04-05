@@ -1,0 +1,1 @@
+{"name": "aqua-jet", "type": "water", "cat": "physical", "power": "40", "acc": "100", "pp": "20", "effect": "User attacks first.", "prob": "-"}

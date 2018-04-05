@@ -1,0 +1,1 @@
+{"name": "zing-zap", "type": "electric", "cat": "physical", "power": "80", "acc": "100", "pp": "10", "effect": "A strong electric blast crashes down on the target, giving it an electric shock. This may also make the target flinch.", "prob": ""}

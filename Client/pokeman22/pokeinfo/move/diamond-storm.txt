@@ -1,0 +1,1 @@
+{"name": "diamond-storm", "type": "rock", "cat": "physical", "power": "100", "acc": "95", "pp": "5", "effect": "May raise user's Defense", "prob": "50"}

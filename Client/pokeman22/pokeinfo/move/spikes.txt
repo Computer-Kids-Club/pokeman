@@ -1,0 +1,1 @@
+{"name": "spikes", "type": "ground", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Hurts opponents when they switch into battle.", "prob": "-"}

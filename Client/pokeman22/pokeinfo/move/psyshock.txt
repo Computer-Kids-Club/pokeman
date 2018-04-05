@@ -1,0 +1,1 @@
+{"name": "psyshock", "type": "psychic", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "Inflicts damage based on the target's Defense, not Special Defense.", "prob": "-"}

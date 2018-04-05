@@ -1,0 +1,1 @@
+{"name": "clear-smog", "type": "poison", "cat": "special", "power": "50", "acc": "-", "pp": "15", "effect": "Removes all of the target's stat changes.", "prob": "-"}

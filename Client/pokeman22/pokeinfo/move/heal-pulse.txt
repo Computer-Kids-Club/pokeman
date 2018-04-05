@@ -1,0 +1,1 @@
+{"name": "heal-pulse", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Restores half the target's max HP.", "prob": "-"}

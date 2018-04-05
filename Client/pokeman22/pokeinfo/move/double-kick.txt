@@ -1,0 +1,1 @@
+{"name": "double-kick", "type": "fighting", "cat": "physical", "power": "30", "acc": "100", "pp": "30", "effect": "Hits twice in one turn.", "prob": "-"}

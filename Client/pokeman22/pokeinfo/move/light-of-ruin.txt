@@ -1,0 +1,1 @@
+{"name": "light-of-ruin", "type": "fairy", "cat": "special", "power": "140", "acc": "90", "pp": "5", "effect": "User receives recoil damage.", "prob": "-"}

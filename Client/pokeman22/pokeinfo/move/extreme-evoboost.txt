@@ -1,0 +1,1 @@
+{"name": "extreme-evoboost", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "1", "effect": "Eevee-exclusive Z-Move. Sharply raises all stats.", "prob": ""}

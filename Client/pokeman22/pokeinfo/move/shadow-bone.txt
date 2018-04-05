@@ -1,0 +1,1 @@
+{"name": "shadow-bone", "type": "ghost", "cat": "physical", "power": "85", "acc": "100", "pp": "10", "effect": "The user attacks by beating the target with a bone that contains a spirit. This may also lower the target\u2019s Defense stat.", "prob": ""}

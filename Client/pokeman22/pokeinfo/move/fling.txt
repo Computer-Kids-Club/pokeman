@@ -1,0 +1,1 @@
+{"name": "fling", "type": "dark", "cat": "physical", "power": "-", "acc": "100", "pp": "10", "effect": "Power depends on held item.", "prob": "-"}

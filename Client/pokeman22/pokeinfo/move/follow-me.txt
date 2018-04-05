@@ -1,0 +1,1 @@
+{"name": "follow-me", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "In Double Battle, the user takes all the attacks.", "prob": "-"}

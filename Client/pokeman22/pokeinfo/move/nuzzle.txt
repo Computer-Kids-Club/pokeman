@@ -1,0 +1,1 @@
+{"name": "nuzzle", "type": "electric", "cat": "physical", "power": "20", "acc": "100", "pp": "20", "effect": "Paralyzes opponent.", "prob": "100"}

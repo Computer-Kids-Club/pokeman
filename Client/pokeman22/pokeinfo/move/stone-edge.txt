@@ -1,0 +1,1 @@
+{"name": "stone-edge", "type": "rock", "cat": "physical", "power": "100", "acc": "80", "pp": "5", "effect": "High critical hit ratio.", "prob": "-"}

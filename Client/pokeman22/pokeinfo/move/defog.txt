@@ -1,0 +1,1 @@
+{"name": "defog", "type": "flying", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Lowers opponent's Evasiveness and clears fog.", "prob": "-"}

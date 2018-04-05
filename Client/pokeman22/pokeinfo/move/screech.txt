@@ -1,0 +1,1 @@
+{"name": "screech", "type": "normal", "cat": "status", "power": "-", "acc": "85", "pp": "40", "effect": "Sharply lowers opponent's Defense.", "prob": "-"}

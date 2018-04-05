@@ -1,0 +1,1 @@
+{"name": "heart-swap", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Stat changes are swapped with the opponent.", "prob": "-"}

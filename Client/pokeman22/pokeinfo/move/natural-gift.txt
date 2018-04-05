@@ -1,0 +1,1 @@
+{"name": "natural-gift", "type": "normal", "cat": "physical", "power": "-", "acc": "100", "pp": "15", "effect": "Power and type depend on the user's held berry.", "prob": "-"}

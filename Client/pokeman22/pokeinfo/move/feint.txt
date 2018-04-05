@@ -1,0 +1,1 @@
+{"name": "feint", "type": "normal", "cat": "physical", "power": "30", "acc": "100", "pp": "10", "effect": "Only hits if opponent uses Protect or Detect in the same turn.", "prob": "-"}

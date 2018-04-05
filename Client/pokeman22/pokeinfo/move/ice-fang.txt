@@ -1,0 +1,1 @@
+{"name": "ice-fang", "type": "ice", "cat": "physical", "power": "65", "acc": "95", "pp": "15", "effect": "May cause flinching and/or freeze opponent.", "prob": "10"}

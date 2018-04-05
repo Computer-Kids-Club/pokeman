@@ -1,0 +1,1 @@
+{"name": "silver-wind", "type": "bug", "cat": "special", "power": "60", "acc": "100", "pp": "5", "effect": "May raise all stats of user at once.", "prob": "10"}

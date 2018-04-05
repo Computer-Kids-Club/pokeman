@@ -1,0 +1,1 @@
+{"name": "bide", "type": "normal", "cat": "physical", "power": "-", "acc": "-", "pp": "10", "effect": "User takes damage for two turns then strikes back double.", "prob": "-"}

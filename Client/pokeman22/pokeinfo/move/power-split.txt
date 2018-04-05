@@ -1,0 +1,1 @@
+{"name": "power-split", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Averages Attack and Special Attack with the target.", "prob": "-"}

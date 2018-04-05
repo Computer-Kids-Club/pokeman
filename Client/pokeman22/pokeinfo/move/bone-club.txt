@@ -1,0 +1,1 @@
+{"name": "bone-club", "type": "ground", "cat": "physical", "power": "65", "acc": "85", "pp": "20", "effect": "May cause flinching.", "prob": "10"}

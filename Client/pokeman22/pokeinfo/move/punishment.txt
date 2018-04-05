@@ -1,0 +1,1 @@
+{"name": "punishment", "type": "dark", "cat": "physical", "power": "-", "acc": "100", "pp": "5", "effect": "Power increases when opponent's stats have been raised.", "prob": "-"}

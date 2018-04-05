@@ -1,0 +1,1 @@
+{"name": "sketch", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "1", "effect": "Permanently copies the opponent's last move.", "prob": "-"}

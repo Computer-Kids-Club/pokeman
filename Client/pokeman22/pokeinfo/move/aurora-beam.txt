@@ -1,0 +1,1 @@
+{"name": "aurora-beam", "type": "ice", "cat": "special", "power": "65", "acc": "100", "pp": "20", "effect": "May lower opponent's Attack.", "prob": "10"}

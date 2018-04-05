@@ -1,0 +1,1 @@
+{"name": "shell-smash", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Sharply raises user's Attack, Special Attack and Speed but lowers Defense and Special Defense.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "rest", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User sleeps for 2 turns, but user is fully healed.", "prob": "-"}

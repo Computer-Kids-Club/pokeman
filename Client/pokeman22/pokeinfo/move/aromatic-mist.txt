@@ -1,0 +1,1 @@
+{"name": "aromatic-mist", "type": "fairy", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises Special Defense of allies.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "air-cutter", "type": "flying", "cat": "special", "power": "60", "acc": "95", "pp": "25", "effect": "High critical hit ratio.", "prob": "-"}

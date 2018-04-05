@@ -1,0 +1,1 @@
+{"name": "leech-life", "type": "bug", "cat": "physical", "power": "80", "acc": "100", "pp": "10", "effect": "User recovers half the HP inflicted on opponent.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "camouflage", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Changes user's type according to the location.", "prob": "-"}

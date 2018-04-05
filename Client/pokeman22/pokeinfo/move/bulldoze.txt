@@ -1,0 +1,1 @@
+{"name": "bulldoze", "type": "ground", "cat": "physical", "power": "60", "acc": "100", "pp": "20", "effect": "Lowers opponent's Speed.", "prob": "100"}

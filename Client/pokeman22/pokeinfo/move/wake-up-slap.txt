@@ -1,0 +1,1 @@
+{"name": "wake-up-slap", "type": "fighting", "cat": "physical", "power": "70", "acc": "100", "pp": "10", "effect": "Power doubles if opponent is asleep, but wakes it up.", "prob": "-"}

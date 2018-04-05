@@ -1,0 +1,1 @@
+{"name": "cut", "type": "normal", "cat": "physical", "power": "50", "acc": "95", "pp": "30", "effect": "", "prob": "-"}

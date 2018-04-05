@@ -1,0 +1,1 @@
+{"name": "aerial-ace", "type": "flying", "cat": "physical", "power": "60", "acc": "error", "pp": "20", "effect": "Ignores Accuracy and Evasiveness.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "fire-spin", "type": "fire", "cat": "special", "power": "35", "acc": "85", "pp": "15", "effect": "Traps opponent, damaging them for 4-5 turns.", "prob": "-"}

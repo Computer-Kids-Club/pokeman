@@ -1,0 +1,1 @@
+{"name": "trop-kick", "type": "grass", "cat": "physical", "power": "70", "acc": "100", "pp": "15", "effect": "Lowers opponent's Attack.", "prob": ""}

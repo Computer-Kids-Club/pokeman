@@ -1,0 +1,1 @@
+{"name": "smokescreen", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Lowers opponent's Accuracy.", "prob": "-"}

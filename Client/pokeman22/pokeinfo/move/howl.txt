@@ -1,0 +1,1 @@
+{"name": "howl", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "40", "effect": "Raises user's Attack.", "prob": "-"}

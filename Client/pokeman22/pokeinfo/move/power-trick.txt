@@ -1,0 +1,1 @@
+{"name": "power-trick", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User's own Attack and Defense switch.", "prob": "-"}

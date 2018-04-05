@@ -1,0 +1,1 @@
+{"name": "power-trip", "type": "dark", "cat": "physical", "power": "20", "acc": "100", "pp": "10", "effect": "The user boasts its strength and attacks the target. The more the user\u2019s stats are raised, the greater the move\u2019s power.", "prob": ""}

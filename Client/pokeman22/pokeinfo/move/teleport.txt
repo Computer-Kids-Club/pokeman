@@ -1,0 +1,1 @@
+{"name": "teleport", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Allows user to flee wild battles; also warps player to last Pok\u00e9Center.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "scratch", "type": "normal", "cat": "physical", "power": "40", "acc": "100", "pp": "35", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "heat-wave", "type": "fire", "cat": "special", "power": "95", "acc": "90", "pp": "10", "effect": "May burn opponent.", "prob": "10"}

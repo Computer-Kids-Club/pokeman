@@ -1,0 +1,1 @@
+{"name": "vital-throw", "type": "fighting", "cat": "physical", "power": "70", "acc": "error", "pp": "10", "effect": "User attacks last, but ignores Accuracy and Evasiveness.", "prob": "-"}

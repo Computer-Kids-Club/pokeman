@@ -1,0 +1,1 @@
+{"name": "petal-dance", "type": "grass", "cat": "special", "power": "120", "acc": "100", "pp": "10", "effect": "User attacks for 2-3 turns but then becomes confused.", "prob": "-"}

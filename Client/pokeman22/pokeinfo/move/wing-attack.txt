@@ -1,0 +1,1 @@
+{"name": "wing-attack", "type": "flying", "cat": "physical", "power": "60", "acc": "100", "pp": "35", "effect": "", "prob": "-"}

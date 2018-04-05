@@ -1,0 +1,1 @@
+{"name": "spectral-thief", "type": "ghost", "cat": "physical", "power": "90", "acc": "100", "pp": "10", "effect": "The user hides in the target\u2019s shadow, steals the target\u2019s stat boosts, and then attacks.", "prob": ""}

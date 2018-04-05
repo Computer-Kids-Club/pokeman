@@ -1,0 +1,1 @@
+{"name": "psychic-fangs", "type": "psychic", "cat": "physical", "power": "85", "acc": "100", "pp": "10", "effect": "The user bites the target with its psychic capabilities. This can also destroy Light Screen and Reflect.", "prob": ""}

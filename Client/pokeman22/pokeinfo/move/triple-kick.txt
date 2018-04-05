@@ -1,0 +1,1 @@
+{"name": "triple-kick", "type": "fighting", "cat": "physical", "power": "10", "acc": "90", "pp": "10", "effect": "Hits thrice in one turn at increasing power.", "prob": "-"}

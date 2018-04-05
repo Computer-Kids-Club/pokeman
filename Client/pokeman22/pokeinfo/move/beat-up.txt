@@ -1,0 +1,1 @@
+{"name": "beat-up", "type": "dark", "cat": "physical", "power": "-", "acc": "100", "pp": "30", "effect": "Each Pok\u00e9mon in your party attacks.", "prob": "-"}

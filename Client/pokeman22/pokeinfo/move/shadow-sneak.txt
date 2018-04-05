@@ -1,0 +1,1 @@
+{"name": "shadow-sneak", "type": "ghost", "cat": "physical", "power": "40", "acc": "100", "pp": "30", "effect": "User attacks first.", "prob": "-"}

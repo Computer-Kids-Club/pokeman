@@ -1,0 +1,1 @@
+{"name": "noble-roar", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "30", "effect": "Lowers opponent's Attack and Special Attack.", "prob": "-"}

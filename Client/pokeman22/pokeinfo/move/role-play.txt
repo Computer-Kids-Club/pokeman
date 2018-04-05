@@ -1,0 +1,1 @@
+{"name": "role-play", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "User copies the opponent's Ability.", "prob": "-"}

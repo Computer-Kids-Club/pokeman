@@ -1,0 +1,1 @@
+{"name": "precipice-blades", "type": "ground", "cat": "physical", "power": "120", "acc": "85", "pp": "10", "effect": "Hits all adjacent opponents.", "prob": "-"}

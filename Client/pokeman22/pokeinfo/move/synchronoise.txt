@@ -1,0 +1,1 @@
+{"name": "synchronoise", "type": "psychic", "cat": "special", "power": "120", "acc": "100", "pp": "15", "effect": "Hits any Pok\u00e9mon that shares a type with the user.", "prob": "-"}

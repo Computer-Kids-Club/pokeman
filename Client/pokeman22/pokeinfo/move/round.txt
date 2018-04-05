@@ -1,0 +1,1 @@
+{"name": "round", "type": "normal", "cat": "special", "power": "60", "acc": "100", "pp": "15", "effect": "Power increases if teammates use it in the same turn.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "sweet-kiss", "type": "fairy", "cat": "status", "power": "-", "acc": "75", "pp": "10", "effect": "Confuses opponent.", "prob": "-"}

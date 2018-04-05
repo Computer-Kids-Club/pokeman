@@ -1,0 +1,1 @@
+{"name": "frustration", "type": "normal", "cat": "physical", "power": "-", "acc": "100", "pp": "20", "effect": "Power decreases with higher Happiness.", "prob": "-"}

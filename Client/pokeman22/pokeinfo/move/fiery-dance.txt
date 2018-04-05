@@ -1,0 +1,1 @@
+{"name": "fiery-dance", "type": "fire", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "May raise user's Special Attack.", "prob": "50"}

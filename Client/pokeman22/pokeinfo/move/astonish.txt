@@ -1,0 +1,1 @@
+{"name": "astonish", "type": "ghost", "cat": "physical", "power": "30", "acc": "100", "pp": "15", "effect": "May cause flinching.", "prob": "30"}

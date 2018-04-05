@@ -1,0 +1,1 @@
+{"name": "spirit-shackle", "type": "ghost", "cat": "physical", "power": "80", "acc": "100", "pp": "10", "effect": "Prevents the opponent switching out.", "prob": ""}

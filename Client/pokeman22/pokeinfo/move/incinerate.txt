@@ -1,0 +1,1 @@
+{"name": "incinerate", "type": "fire", "cat": "special", "power": "60", "acc": "100", "pp": "15", "effect": "Destroys the target's held berry.", "prob": "-"}

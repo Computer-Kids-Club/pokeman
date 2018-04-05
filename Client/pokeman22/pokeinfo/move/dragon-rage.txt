@@ -1,0 +1,1 @@
+{"name": "dragon-rage", "type": "dragon", "cat": "special", "power": "-", "acc": "100", "pp": "10", "effect": "Always inflicts 40 HP.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "skull-bash", "type": "normal", "cat": "physical", "power": "130", "acc": "100", "pp": "10", "effect": "Raises Defense on first turn, attacks on second.", "prob": "100"}

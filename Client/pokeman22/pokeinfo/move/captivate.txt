@@ -1,0 +1,1 @@
+{"name": "captivate", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Sharply lowers opponent's Special Attack if opposite gender.", "prob": "-"}

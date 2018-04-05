@@ -1,0 +1,1 @@
+{"name": "oblivion-wing", "type": "flying", "cat": "special", "power": "80", "acc": "100", "pp": "10", "effect": "User recovers most of the HP inflicted on opponent.", "prob": "-"}

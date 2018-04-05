@@ -1,0 +1,1 @@
+{"name": "scary-face", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "Sharply lowers opponent's Speed.", "prob": "-"}

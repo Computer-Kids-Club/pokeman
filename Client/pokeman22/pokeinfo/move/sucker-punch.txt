@@ -1,0 +1,1 @@
+{"name": "sucker-punch", "type": "dark", "cat": "physical", "power": "70", "acc": "100", "pp": "5", "effect": "User attacks first, but only works if opponent is readying an attack.", "prob": "-"}

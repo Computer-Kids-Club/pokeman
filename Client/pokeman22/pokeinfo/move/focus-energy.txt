@@ -1,0 +1,1 @@
+{"name": "focus-energy", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Increases critical hit ratio.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "disable", "type": "normal", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Opponent can't use its last attack for a few turns.", "prob": "-"}

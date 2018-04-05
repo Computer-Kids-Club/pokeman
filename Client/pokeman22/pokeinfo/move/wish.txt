@@ -1,0 +1,1 @@
+{"name": "wish", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The user recovers HP in the following turn.", "prob": "-"}

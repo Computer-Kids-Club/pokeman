@@ -1,0 +1,1 @@
+{"name": "perish-song", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Any Pok\u00e9mon in play when this attack is used faints in 3 turns.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "supersonic", "type": "normal", "cat": "status", "power": "-", "acc": "55", "pp": "20", "effect": "Confuses opponent.", "prob": "-"}

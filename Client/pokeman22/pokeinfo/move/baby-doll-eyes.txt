@@ -1,0 +1,1 @@
+{"name": "baby-doll-eyes", "type": "fairy", "cat": "status", "power": "-", "acc": "100", "pp": "30", "effect": "Always goes first. Lowers the target's attack.", "prob": "-"}

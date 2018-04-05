@@ -1,0 +1,1 @@
+{"name": "barrier", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Sharply raises user's Defense.", "prob": "-"}

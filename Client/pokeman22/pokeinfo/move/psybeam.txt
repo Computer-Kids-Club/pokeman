@@ -1,0 +1,1 @@
+{"name": "psybeam", "type": "psychic", "cat": "special", "power": "65", "acc": "100", "pp": "20", "effect": "May confuse opponent.", "prob": "10"}

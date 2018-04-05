@@ -1,0 +1,1 @@
+{"name": "malicious-moonsault", "type": "dark", "cat": "physical", "power": "180", "acc": "-", "pp": "1", "effect": "Incineroar-exclusive Z-Move.", "prob": ""}

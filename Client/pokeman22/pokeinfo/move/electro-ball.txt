@@ -1,0 +1,1 @@
+{"name": "electro-ball", "type": "electric", "cat": "special", "power": "-", "acc": "100", "pp": "10", "effect": "The faster the user, the stronger the attack.", "prob": "-"}

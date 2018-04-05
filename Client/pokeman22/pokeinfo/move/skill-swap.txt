@@ -1,0 +1,1 @@
+{"name": "skill-swap", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "The user swaps Abilities with the opponent.", "prob": "-"}

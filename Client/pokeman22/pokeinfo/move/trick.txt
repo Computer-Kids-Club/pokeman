@@ -1,0 +1,1 @@
+{"name": "trick", "type": "psychic", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "Swaps held items with the opponent.", "prob": "-"}

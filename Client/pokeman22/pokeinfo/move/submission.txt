@@ -1,0 +1,1 @@
+{"name": "submission", "type": "fighting", "cat": "physical", "power": "80", "acc": "80", "pp": "20", "effect": "User receives recoil damage.", "prob": "-"}

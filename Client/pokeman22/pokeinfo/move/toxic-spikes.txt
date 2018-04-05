@@ -1,0 +1,1 @@
+{"name": "toxic-spikes", "type": "poison", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Poisons opponents when they switch into battle.", "prob": "-"}

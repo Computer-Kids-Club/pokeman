@@ -1,0 +1,1 @@
+{"name": "lovely-kiss", "type": "normal", "cat": "status", "power": "-", "acc": "75", "pp": "10", "effect": "Puts opponent to sleep.", "prob": "-"}

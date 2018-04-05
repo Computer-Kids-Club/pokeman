@@ -1,0 +1,1 @@
+{"name": "bubble", "type": "water", "cat": "special", "power": "40", "acc": "100", "pp": "30", "effect": "May lower opponent's Speed.", "prob": "10"}

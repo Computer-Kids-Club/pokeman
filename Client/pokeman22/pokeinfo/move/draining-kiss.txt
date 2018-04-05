@@ -1,0 +1,1 @@
+{"name": "draining-kiss", "type": "fairy", "cat": "special", "power": "50", "acc": "100", "pp": "10", "effect": "User recovers most the HP inflicted on opponent.", "prob": "-"}

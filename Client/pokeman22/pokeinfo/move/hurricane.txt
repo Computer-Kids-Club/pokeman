@@ -1,0 +1,1 @@
+{"name": "hurricane", "type": "flying", "cat": "special", "power": "110", "acc": "70", "pp": "10", "effect": "May confuse opponent.", "prob": "30"}

@@ -1,0 +1,1 @@
+{"name": "lets-snuggle-forever", "type": "fairy", "cat": "physical", "power": "190", "acc": "-", "pp": "1", "effect": "Mimikyu-exclusive Z-Move.", "prob": ""}

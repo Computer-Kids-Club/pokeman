@@ -1,0 +1,1 @@
+{"name": "steamroller", "type": "bug", "cat": "physical", "power": "65", "acc": "100", "pp": "20", "effect": "May cause flinching.", "prob": "30"}

@@ -1,0 +1,1 @@
+{"name": "steel-wing", "type": "steel", "cat": "physical", "power": "70", "acc": "90", "pp": "25", "effect": "May raise user's Defense.", "prob": "10"}

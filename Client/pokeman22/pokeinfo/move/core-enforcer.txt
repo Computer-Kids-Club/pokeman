@@ -1,0 +1,1 @@
+{"name": "core-enforcer", "type": "dragon", "cat": "special", "power": "100", "acc": "100", "pp": "10", "effect": "Scorches a 'Z' pattern on the ground.", "prob": ""}

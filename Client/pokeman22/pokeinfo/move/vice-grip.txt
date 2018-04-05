@@ -1,0 +1,1 @@
+{"name": "vice-grip", "type": "normal", "cat": "physical", "power": "55", "acc": "100", "pp": "30", "effect": "", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "agility", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Sharply raises user's Speed.", "prob": "-"}

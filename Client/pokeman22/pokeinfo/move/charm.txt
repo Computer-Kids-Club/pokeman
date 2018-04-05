@@ -1,0 +1,1 @@
+{"name": "charm", "type": "fairy", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Sharply lowers opponent's Attack.", "prob": "-"}

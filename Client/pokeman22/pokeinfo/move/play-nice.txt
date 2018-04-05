@@ -1,0 +1,1 @@
+{"name": "play-nice", "type": "normal", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Lowers opponent's Attack. Always hits.", "prob": "-"}

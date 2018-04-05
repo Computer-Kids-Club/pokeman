@@ -1,0 +1,1 @@
+{"name": "magnet-rise", "type": "electric", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "User becomes immune to Ground-type moves for 5 turns.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "trick-room", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "5", "effect": "Slower Pok\u00e9mon move first in the turn for 5 turns.", "prob": "-"}

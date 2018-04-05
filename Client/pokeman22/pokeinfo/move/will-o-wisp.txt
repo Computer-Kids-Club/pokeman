@@ -1,0 +1,1 @@
+{"name": "will-o-wisp", "type": "fire", "cat": "status", "power": "-", "acc": "85", "pp": "15", "effect": "Burns opponent.", "prob": "100"}

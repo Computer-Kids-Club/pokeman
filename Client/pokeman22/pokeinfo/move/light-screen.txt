@@ -1,0 +1,1 @@
+{"name": "light-screen", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "30", "effect": "Halves damage from Special attacks for 5 turns.", "prob": "-"}

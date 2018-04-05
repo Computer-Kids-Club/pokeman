@@ -1,0 +1,1 @@
+{"name": "tectonic-rage", "type": "ground", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Ground type Z-Move.", "prob": ""}

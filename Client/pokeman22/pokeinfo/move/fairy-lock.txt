@@ -1,0 +1,1 @@
+{"name": "fairy-lock", "type": "fairy", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Prevents fleeing in the next turn.", "prob": "-"}

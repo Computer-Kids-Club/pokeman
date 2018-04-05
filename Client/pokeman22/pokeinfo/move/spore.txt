@@ -1,0 +1,1 @@
+{"name": "spore", "type": "grass", "cat": "status", "power": "-", "acc": "100", "pp": "15", "effect": "Puts opponent to sleep.", "prob": "100"}

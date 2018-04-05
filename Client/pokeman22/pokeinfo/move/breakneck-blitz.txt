@@ -1,0 +1,1 @@
+{"name": "breakneck-blitz", "type": "normal", "cat": "error", "power": "-", "acc": "-", "pp": "1", "effect": "Normal type Z-Move.", "prob": ""}

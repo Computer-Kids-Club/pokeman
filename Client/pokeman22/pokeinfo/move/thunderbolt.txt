@@ -1,0 +1,1 @@
+{"name": "thunderbolt", "type": "electric", "cat": "special", "power": "90", "acc": "100", "pp": "15", "effect": "May paralyze opponent.", "prob": "10"}

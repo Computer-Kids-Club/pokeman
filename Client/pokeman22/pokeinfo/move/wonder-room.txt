@@ -1,0 +1,1 @@
+{"name": "wonder-room", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "10", "effect": "Swaps every Pok\u00e9mon's Defense and Special Defense for 5 turns.", "prob": "-"}

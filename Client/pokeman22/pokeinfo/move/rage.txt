@@ -1,0 +1,1 @@
+{"name": "rage", "type": "normal", "cat": "physical", "power": "20", "acc": "100", "pp": "20", "effect": "Raises user's Attack when hit.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "autotomize", "type": "steel", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Halves weight and sharply raises Speed.", "prob": "-"}

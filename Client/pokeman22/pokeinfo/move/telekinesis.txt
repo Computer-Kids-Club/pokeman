@@ -1,0 +1,1 @@
+{"name": "telekinesis", "type": "psychic", "cat": "status", "power": "-", "acc": "-", "pp": "15", "effect": "Ignores opponent's Evasiveness for three turns, add Ground immunity.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "retaliate", "type": "normal", "cat": "physical", "power": "70", "acc": "100", "pp": "5", "effect": "Inflicts double damage if a teammate fainted on the last turn.", "prob": "-"}

@@ -1,0 +1,1 @@
+{"name": "confuse-ray", "type": "ghost", "cat": "status", "power": "-", "acc": "100", "pp": "10", "effect": "Confuses opponent.", "prob": "-"}

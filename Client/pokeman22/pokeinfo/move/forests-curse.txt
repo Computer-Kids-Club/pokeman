@@ -1,0 +1,1 @@
+{"name": "forests-curse", "type": "grass", "cat": "status", "power": "-", "acc": "100", "pp": "20", "effect": "Adds Grass type to opponent.", "prob": "-"}

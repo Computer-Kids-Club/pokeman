@@ -1,0 +1,1 @@
+{"name": "covet", "type": "normal", "cat": "physical", "power": "60", "acc": "100", "pp": "25", "effect": "Opponent's item is stolen by the user.", "prob": "-"}

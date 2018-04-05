@@ -1,0 +1,1 @@
+{"name": "charge", "type": "electric", "cat": "status", "power": "-", "acc": "-", "pp": "20", "effect": "Raises user's Special Defense and next Electric move's power increases.", "prob": "-"}

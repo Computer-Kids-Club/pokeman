@@ -1,0 +1,1 @@
+{"name": "lunge", "type": "bug", "cat": "physical", "power": "80", "acc": "100", "pp": "15", "effect": "The user makes a lunge at the target, attacking with full force. This also lowers the target\u2019s Attack stat.", "prob": ""}

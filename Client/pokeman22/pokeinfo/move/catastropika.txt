@@ -1,0 +1,1 @@
+{"name": "catastropika", "type": "electric", "cat": "physical", "power": "210", "acc": "-", "pp": "1", "effect": "Pikachu-exclusive Z-Move.", "prob": ""}

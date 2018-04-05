@@ -1,0 +1,1 @@
+{"name": "clamp", "type": "water", "cat": "physical", "power": "35", "acc": "85", "pp": "10", "effect": "Traps opponent, damaging them for 4-5 turns.", "prob": "-"}
