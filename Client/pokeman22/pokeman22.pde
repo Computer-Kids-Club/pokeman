@@ -65,18 +65,18 @@ int sliderStartY;
 String fileName = ".\\pokeinfo\\";
 
 class Pokemon {
-  String name, type1, type2, species, h, weight, ability1, ability2, hiddenability, move1, move2, move3, move4, ability;
+  String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4, ability;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
   Boolean shiny;
   String[][] moves;
   PImage[] animation;
   PImage[] animationBack;
-  Pokemon (int num, Boolean s, int hap = 255, int lvl = 100/*, String m1, String m2, String m3, String m4, String ab*/) {
+  Pokemon (int num, Boolean s/*, int hap, int lvl, String m1, String m2, String m3, String m4, String ab*/) {
     pokemonLocation = loadJSONObject(fileName+"pokemon\\"+num+".txt");
     //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
 
-    happiness = hap;
-    level = lvl;
+    //happiness = hap;
+    //level = lvl;
     shiny = s;
 
     // All Strings
@@ -86,9 +86,7 @@ class Pokemon {
     species = pokemonLocation.getString("species");
     h = pokemonLocation.getString("height");
     weight = pokemonLocation.getString("weight");
-    ability1 = pokemonLocation.getString("ability1");
-    ability2 = pokemonLocation.getString("ability2");
-    hiddenability = pokemonLocation.getString("hiddenabililty");
+    //ability = ab;
 
     // All Integers
     number = num;
