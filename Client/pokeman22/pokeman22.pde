@@ -62,7 +62,7 @@ boolean pokemonSelectScreen = false;
 
 int sliderStartY;
 
-String fileName = "C:\\Users\\Ethan\\Desktop\\pokeman\\pokeinfo\\";
+String fileName = ".\\pokeinfo\\";
 
 class Pokemon {
   String name, type1, type2, species, h, weight, ability1, ability2, hiddenability, move1, move2, move3, move4, ability;
@@ -243,44 +243,46 @@ void drawPokemonSelectionScreen(int slotNumber) {
   rectMode(CORNER);
   println(height/9);
   offset = int(((sliderY - sliderStartY)*792)/580);
-  rect(0, height/9, width, (height/9)*8);
-  rect(0, 0, width, height/18);
-  rect(0, height/18, width, height/18);
+  rect(width/7, height/9, width/1.4, (height/9)*8);
+  rect(width/7, 0, width/1.4, height/18);
+  rect(width/7, height/18, width/1.4, height/18);
 
   fill(0);
   int textHight = (height/180)*17;
-  text("Number", width/2 - 485, textHight);
-  text("Name", width/2 - 400, textHight);
-  text("Types", width/2 - 225, textHight);
+  text("Number", (width/280)*43, textHight);
+  text("Name", (width/3)*14, textHight);
+  text("Types", (width/56)*19, textHight);
   text("Abilities", width/2, textHight);
-  text("HP", width/2 + 210, textHight);
-  text("ATK", width/2 + 250, textHight);
-  text("DEF", width/2 + 290, textHight);
-  text("SPA", width/2 + 330, textHight);
-  text("SPD", width/2 + 370, textHight);
-  text("SPE", width/2 + 410, textHight);
-  text("BST", width/2 + 450, textHight);
-
-  int gridSize = 50;
+  text("HP", (width/20)*13, textHight);
+  text("ATK", (width/28)*19, textHight);
+  text("DEF", (width/140)*99, textHight);
+  text("SPA", (width/140)*103, textHight);
+  text("SPD", (width/140)*107, textHight);
+  text("SPE", (width/140)*111, textHight);
+  text("BST", (width/140)*115, textHight);
+  
+  rect((width/7)*6 - sliderW, height/9, sliderW, (height/9)*8);
+  
+  int gridSize = (height/180)*8;
   int BST = 0;
-  for (int i = 1; i <= 16; i++) {
-    line(0, height/9 + i*gridSize, width-sliderW, height/9 + i*gridSize);
-    text(i + offset, width/2 - 485, (height/2) - 315 + i*gridSize);
-    text(num_names.get(i + offset), width/2 - 400, (height/2) - 315 + i*gridSize);
+  for (int i = 0; i <= 19; i++) {
+    line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
+    text(i + 1 + offset, width/2 - 485, (height/2) - 315 + i*gridSize);
+    text(num_names.get(i + 1 + offset), width/2 - 400, (height/2) - 315 + i*gridSize);
     for (int j = 0; j < 2; j++) {
-      if (names_types.get(num_names.get(i + offset))[j] != null) {
-        text(names_types.get(num_names.get(i + offset))[j], width/2 - 260 + j*70, (height/2) - 315 + i*gridSize);
+      if (names_types.get(num_names.get(i + 1 + offset))[j] != null) {
+        text(names_types.get(num_names.get(i + 1 + offset))[j], width/2 - 260 + j*70, (height/2) - 315 + i*gridSize);
       }
     }
     for (int j = 0; j < 3; j++) {
-      if (names_abilities.get(num_names.get(i + offset))[j] != null) {
-        text(names_abilities.get(num_names.get(i + offset))[j], width/2 - 70 + j*70, (height/2) - 315 + i*gridSize);
+      if (names_abilities.get(num_names.get(i + 1 + offset))[j] != null) {
+        text(names_abilities.get(num_names.get(i + 1 + offset))[j], width/2 - 70 + j*70, (height/2) - 315 + i*gridSize);
       }
     }
     BST = 0;
     for (int j = 0; j < 6; j++) {
-      BST += names_stats.get(num_names.get(i + offset))[j];
-      text(names_stats.get(num_names.get(i + offset))[j], width/2 + 210 + j*40, (height/2) - 315 + i*gridSize);
+      BST += names_stats.get(num_names.get(i + 1 + offset))[j];
+      text(names_stats.get(num_names.get(i + 1 + offset))[j], width/2 + 210 + j*40, (height/2) - 315 + i*gridSize);
     }
     text(BST, width/2 + 450, (height/2) - 315 + i*gridSize);
     if (mousePressed && mousePressValid == true) {
@@ -293,7 +295,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
   fill(255);
 
+  rectMode(CENTER);
   rect(sliderX, sliderY, sliderW, sliderH);
+  rectMode(CORNER);
 
   if (mousePressed) {
     if (mouseX >= sliderX - sliderW/2 && mouseX <= sliderX + sliderW/2 && mouseY >= sliderY - sliderH/2 && mouseY <= sliderY + sliderH/2) {
@@ -338,9 +342,9 @@ public void setup() {
   noSmooth();
   colorMode(HSB);
 
-  sliderX = width/2 + 490 + sliderW/2;
-  sliderY = height/2 - 300 + sliderH/2;
-  sliderStartY = height/2 - 300 + sliderH/2;
+  sliderX = (width/7)*6 - sliderW/2;
+  sliderY = height/9 + sliderH/2;
+  sliderStartY = height/9 + sliderH/2;
 
   Gif.tmpPath = dataPath("");
 
