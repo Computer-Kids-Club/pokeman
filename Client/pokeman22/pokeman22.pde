@@ -52,7 +52,7 @@ boolean transitionStart = false;
 
 boolean sliderFollow = false;
 
-int startY = 100;
+int startY = 50;
 int sliderH = 20;
 int sliderW = 10;
 int sliderX;
@@ -60,6 +60,8 @@ int sliderY;
 
 int pokemonChangeNumber;
 boolean pokemonSelectScreen = false;
+
+int sliderStartY;
 
 class Pokemon {
   String name, type1, type2, species, h, weight, ability1, ability2, hiddenability, move1, move2, move3, move4, ability;
@@ -237,7 +239,7 @@ void drawStartScreen() {
 }
 
 void drawPokemonSelectionScreen(int slotNumber) {
-  offset =int(((sliderY - 260)*792)/580);
+  offset = int(((sliderY - sliderStartY)*792)/580);
   rectMode(CENTER);
   rect(width/2, height/2 + startY, 1000, 600);
   rect(width/2, height/2  + startY - 325, 1000, 50);
@@ -294,7 +296,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
     if (mouseX >= sliderX - sliderW/2 && mouseX <= sliderX + sliderW/2 && mouseY >= sliderY - sliderH/2 && mouseY <= sliderY + sliderH/2) {
       sliderFollow = true;
     }
-    if (mouseX < width/2 - 500 || mouseX > width/2 + 500 || mouseY < height/2 + startY - 350 || mouseY > height/2 + startY + 300) {
+    if (mouseX < width/2 - 500 || mouseX > width/2 + 500 /*|| mouseY < height/2 + startY - 350 || mouseY > height/2 + startY + 300*/) {
       pokemonSelectScreen = false;
     }
   } else {
@@ -337,6 +339,7 @@ public void setup() {
 
   sliderX = width/2 + 490 + sliderW/2;
   sliderY = height/2 + startY - 300 + sliderH/2;
+  sliderStartY = height/2 + startY - 300 + sliderH/2;
 
   Gif.tmpPath = dataPath("");
 
@@ -427,7 +430,7 @@ void mouseReleased() {
 }
 
 void mouseClicked() {
-  offset += 1;
+  //offset += 1;
 }
 
 void keyPressed() {
