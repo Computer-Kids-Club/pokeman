@@ -64,6 +64,8 @@ int sliderStartY;
 
 String fileName = ".\\pokeinfo\\";
 
+float mouseWheelChange = 0;
+
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
@@ -319,9 +321,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
       sliderY = height - sliderH;
     }
   }
-  if (sliderY + sliderH >= height) {
+  if (sliderY + sliderH > height) {
     sliderY = height - sliderH;
-  } else if (sliderY <= height/9) {
+  } else if (sliderY < height/9) {
     sliderY = height/9;
   }
 }
@@ -428,7 +430,6 @@ void draw() {
 }
 
 void mousePressed() {
-  println(mouseX);
 }
 
 void mouseReleased() {
@@ -436,9 +437,19 @@ void mouseReleased() {
 }
 
 void mouseClicked() {
-  //offset += 1;
 }
-
+void mouseWheel(MouseEvent event) {
+  if (pokemonSelectScreen == true) {
+    if (sliderY >= height/9 && sliderY +sliderH <= height) {
+      sliderY += (event.getCount())*5;
+    }
+    if (sliderY + sliderH > height) {
+      sliderY = height - sliderH;
+    } else if (sliderY < height/9) {
+      sliderY = height/9;
+    }
+  }
+}
 void keyPressed() {
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
