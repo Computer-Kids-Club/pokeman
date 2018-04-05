@@ -62,7 +62,7 @@ boolean pokemonSelectScreen = false;
 
 int sliderStartY;
 
-String fileName = ".\\pokeinfo\\";
+String fileName = "./pokeinfo/";
 
 float mouseWheelChange = 0;
 
@@ -74,7 +74,7 @@ class Pokemon {
   PImage[] animation;
   PImage[] animationBack;
   Pokemon (int num, Boolean s/*, int hap, int lvl, String m1, String m2, String m3, String m4, String ab*/) {
-    pokemonLocation = loadJSONObject(fileName+"pokemon\\"+num+".txt");
+    pokemonLocation = loadJSONObject(fileName+"pokemon/"+num+".txt");
     //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
 
     //happiness = hap;
@@ -139,7 +139,7 @@ PImage[][] loadPokemon(int num, JSONObject file, boolean shiny) {
 
 void drawMove(String move_name) {
 
-  JSONObject move_json = loadJSONObject(fileName+"move\\"+move_name+".txt");
+  JSONObject move_json = loadJSONObject(fileName+"move/"+move_name+".txt");
   //JSONObject move_json = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/move/"+move_name+".txt");
 
   //println(move_json.getString("type"));
@@ -356,7 +356,7 @@ public void setup() {
   }
 
   for (int i = 1; i <= 807; i++) {
-    JSONObject file = loadJSONObject(fileName+"pokemon\\"+i+".txt");
+    JSONObject file = loadJSONObject(fileName+"pokemon/"+i+".txt");
     //JSONObject file = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+i+".txt");
     names_num.put(file.getString("name"), i);
     num_names.put(i, file.getString("name"));
