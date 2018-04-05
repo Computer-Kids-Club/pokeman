@@ -3,6 +3,8 @@
 ## litterally a bunch of constants
 ## -------------------------------------- ##
 
+from Log import *
+
 # weather constants
 class Weather(object):
     CLEAR_SKIES = 0

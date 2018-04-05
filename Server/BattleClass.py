@@ -1,13 +1,13 @@
 ## -------------------------------------- ##
-## Client Connections
-## connects clients
+## Battle Class
+## just the class
 ## -------------------------------------- ##
 
 from Constants import *
 
-class Client(object):
+class Battle(object):
     def __init__(self):
         pass
 
     def run(self):
-        Log.info("client running")
+        Log.info("battle running")
