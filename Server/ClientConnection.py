@@ -10,4 +10,4 @@ class Client(object):
         pass
 
     def run(self):
-        print("client running")
+        Log.info("client running")

@@ -10,4 +10,4 @@ class Battle(object):
         pass
 
     def run(self):
-        print("battle running")
+        Log.info("battle running")
