@@ -69,7 +69,8 @@ class Pokemon {
   PImage[] animation;
   PImage[] animationBack;
   Pokemon (int num, Boolean s /*, String m1, String m2, String m3, String m4, String ab*/) {
-    pokemonLocation = loadJSONObject("/Users/ethanzohar/Desktop/pokeman22/pokeinfo/pokemon/"+num+".txt");
+    pokemonLocation = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/pokemon/"+num+".txt");
+    //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
 
     // All Strings
     name = pokemonLocation.getString("name");
@@ -133,7 +134,8 @@ PImage[][] loadPokemon(int num, JSONObject file, boolean shiny) {
 
 void drawMove(String move_name) {
 
-  JSONObject move_json = loadJSONObject("/Users/ethanzohar/Desktop/pokeman22/pokeinfo/move/"+move_name+".txt");
+  JSONObject move_json = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/move/"+move_name+".txt");
+  //JSONObject move_json = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/move/"+move_name+".txt");
 
   //println(move_json.getString("type"));
   fill(type_colors.get(move_json.getString("type")));
@@ -344,7 +346,8 @@ public void setup() {
   }
 
   for (int i = 1; i <= 807; i++) {
-    JSONObject file = loadJSONObject("/Users/ethanzohar/Desktop/pokeman22/pokeinfo/pokemon/"+i+".txt");
+    JSONObject file = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/pokemon/"+i+".txt");
+    //JSONObject file = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+i+".txt");
     names_num.put(file.getString("name"), i);
     num_names.put(i, file.getString("name"));
     Integer[] stats = {int(file.getString("HP")), int(file.getString("ATK")), int(file.getString("DEF")), int(file.getString("SPA")), int(file.getString("SPD")), int(file.getString("SPE"))};
