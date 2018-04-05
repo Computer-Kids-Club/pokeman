@@ -65,7 +65,7 @@ int sliderStartY;
 String fileName = ".\\pokeinfo\\";
 
 class Pokemon {
-  String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4, ability;
+  String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
   Boolean shiny;
   String[][] moves;
