@@ -28,6 +28,8 @@ class Pokeman(object):
         self.iv_stats = Stats()
         self.nature_stats = Stats()
 
+        self.evasion = 1
+
         self.item_stats = Stats()
         self.modifier_stats = Stats()
 
