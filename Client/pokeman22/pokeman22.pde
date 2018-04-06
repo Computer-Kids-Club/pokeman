@@ -52,8 +52,8 @@ boolean transitionStart = false;
 
 boolean sliderFollow = false;
 
-int sliderH = 20;
-int sliderW = 10;
+int sliderH;
+int sliderW;
 int sliderX;
 int sliderY;
 
@@ -179,20 +179,20 @@ void drawMove(String move_name) {
 
 void drawStartScreen() {
   PImage infoButton = loadImage("infoButton.png");
-  infoButton.resize(30, 30);
+  infoButton.resize((width/140)*3, height/30);
   PImage pokeBall = loadImage("Pokeball.png");
-  pokeBall.resize(30, 30);
+  pokeBall.resize((width/140)*3, height/30);
   PImage settingsButton = loadImage("settingsButton.png");
-  settingsButton.resize(50, 50);
+  settingsButton.resize(width/28, height/18);
 
-  int[] startButton = {width/2, height/2 + 50, 400, 100};
-  int[] pokemonButton = {width/2 - 500, height - 150, 200, 200};
+  int[] startButton = {width/2, (height/9)*5, (width/7)*2, height/9};
+  int[] pokemonButton = {width/7, (height/6)*5, width/7, (height/9)*2};
   //int[] settingsButton = {width - 60, 60, 100, 100};
 
-  int infoButtonX = pokemonButton[0] - pokemonButton[2]/2+ 18;
-  int infoButtonY = pokemonButton[1] + pokemonButton[3]/2 - 18;
-  int pokeBallX = pokemonButton[0] + pokemonButton[2]/2 - 18;
-  int pokeBallY = pokemonButton[1] + pokemonButton[3]/2 - 18;
+  int infoButtonX = pokemonButton[0] - pokemonButton[2]/2 + (width/700)*9;
+  int infoButtonY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
+  int pokeBallX = pokemonButton[0] + pokemonButton[2]/2 - (width/700)*9;
+  int pokeBallY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
 
   rectMode(CENTER);
   imageMode(CENTER);
@@ -202,12 +202,12 @@ void drawStartScreen() {
     rect(pokemonButton[0] + i*pokemonButton[2], pokemonButton[1], pokemonButton[2], pokemonButton[3]);
     drawPokemon(pokemons.get(i).animation, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1]);
     fill(0);
-    text(pokemons.get(i).name, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1] + pokemonButton[3]/2 - 10);
+    text(pokemons.get(i).name, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1] + pokemonButton[3]/2 - height/90);
     fill(255);
     image(infoButton, infoButtonX + i*pokemonButton[2], infoButtonY);
     image(pokeBall, pokeBallX + i*pokemonButton[2], pokeBallY);
   }
-  image(settingsButton, width-30, 30);
+  image(settingsButton, (width/140)*137, height/30);
   //rect(settingsButton[0], settingsButton[1], settingsButton[2], settingsButton[3]);
   imageMode(CORNER);
   textAlign(CORNER);
@@ -223,14 +223,14 @@ void drawStartScreen() {
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false) {
     for (int i = 0; i < 6; i++) {
-      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton[2], pokeBallY) <= 15) {
+      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton[2], pokeBallY) <= height/60) {
         println("HEYEHEYEHEHEHHEHE", i);
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
         //pokemons.set(i, new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
         mousePressValid = false;
       }
-      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton[2], infoButtonY) <= 15) {
+      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton[2], infoButtonY) <= height/60) {
         println("sdjfghsldjkhfgasldhjfg", i);
         mousePressValid = false;
       }
@@ -268,7 +268,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   int BST = 0;
   for (int i = 0; i <= 19; i++) {
     line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
-    text(i + 1 + offset, width/2 - 485, textHight + (i+1)*gridSize);
+    text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
     text(num_names.get(i + 1 + offset), (width/14)*3, textHight + (i+1)*gridSize);
     for (int j = 0; j < 2; j++) {
       if (names_types.get(num_names.get(i + 1 + offset))[j] != null) {
@@ -338,12 +338,14 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 public void setup() {
-  size(1400, 900, P2D);
+  size(1050, 675, P2D);
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
 
+  sliderH = height/45;
+  sliderW = width/140;
   sliderX = (width/7)*6 - sliderW;
   sliderY = height/9;
   sliderStartY = height/9;
