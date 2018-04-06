@@ -306,34 +306,37 @@ void drawPokemonSelectionScreen(int slotNumber) {
         }
       }
     } else {
-      offset = int(((sliderY - sliderStartY)*validPokemonSearch.size())/((height/9)*8));
-      //println(validPokemonSearch.size());
-      /*text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
-       text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
-       for (int j = 0; j < 2; j++) {
-       if (names_types.get(validPokemonSearch.get(i + offset))[j] != null) {
-       text(names_types.get(validPokemonSearch.get(i + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
-       }
-       }
-       for (int j = 0; j < 3; j++) {
-       if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
-       text(names_abilities.get(validPokemonSearch.get(i + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
-       }
-       }
-       BST = 0;
-       for (int j = 0; j < 6; j++) {
-       BST += names_stats.get(validPokemonSearch.get(i + offset))[j];
-       text(names_stats.get(validPokemonSearch.get(i + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
-       }
-       text(BST, (width/140)*115, textHight + (i+1)*gridSize);
-       if (mousePressed && mousePressValid == true) {
-       if (mouseX < (width/7)*6 - sliderW && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
-       pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
-       sliderY = sliderStartY;
-       pokemonSelectScreen = false;
-       mousePressValid = false;
-       }
-       }*/
+      if (i < validPokemonSearch.size()) {
+        offset = int(((sliderY - sliderStartY)*(10)/((height/9)*8)));
+        //println(validPokemonSearch.size());
+        println(i+offset, validPokemonSearch.size());
+        text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
+        text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
+        for (int j = 0; j < 2; j++) {
+          if (names_types.get(validPokemonSearch.get(i + offset))[j] != null) {
+            text(names_types.get(validPokemonSearch.get(i + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
+          }
+        }
+        for (int j = 0; j < 3; j++) {
+          if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
+            text(names_abilities.get(validPokemonSearch.get(i + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
+          }
+        }
+        BST = 0;
+        for (int j = 0; j < 6; j++) {
+          BST += names_stats.get(validPokemonSearch.get(i + offset))[j];
+          text(names_stats.get(validPokemonSearch.get(i + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
+        }
+        text(BST, (width/140)*115, textHight + (i+1)*gridSize);
+        if (mousePressed && mousePressValid == true) {
+          if (mouseX < (width/7)*6 - sliderW && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
+            pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
+            sliderY = sliderStartY;
+            pokemonSelectScreen = false;
+            mousePressValid = false;
+          }
+        }
+      }
     }
   }
   fill(255);
@@ -399,8 +402,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
       validPokemonSearch = new StringList();
       for (int i = 1; i <= 807; i++) {
         if (pokemonSearch.length() <= num_names.get(i).length()) {
-          println(pokemonSearch, num_names.get(i), num_names.get(i).substring(0, pokemonSearch.length()), num_names.get(i).substring(pokemonSearch.length(), num_names.get(i).length()));
-          if (pokemonSearch == num_names.get(i).substring(0, pokemonSearch.length())) {
+          if (pokemonSearch.equals(num_names.get(i).substring(0, pokemonSearch.length()))) {
             validPokemonSearch.append(num_names.get(i));
           }
         }
