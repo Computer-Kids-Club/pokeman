@@ -307,7 +307,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
       }
     } else {
       if (i < validPokemonSearch.size()) {
-        offset = int(((sliderY - sliderStartY)*(10)/((height/9)*8)));
+        offset = int(((sliderY - sliderStartY)*(validPokemonSearch.size() - 20)/((height/9)*8)));
         //println(validPokemonSearch.size());
         println(i+offset, validPokemonSearch.size());
         text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
