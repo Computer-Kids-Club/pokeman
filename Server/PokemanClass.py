@@ -12,7 +12,10 @@ class Pokeman(object):
         self.i_num = num
         self.str_name = "Pikachu"
 
+        self.i_happy = 255
         self.b_shiny = False
+        self.i_lv = 100
+        self.str_gender = "gay"
 
         self.type_1 = Type()
         self.type_2 = None
@@ -22,6 +25,9 @@ class Pokeman(object):
         self.str_item = "error"
 
         self.l_moves = [Move(),Move(),Move(),Move()]
+
+        self.f_height = 0
+        self.f_weight = 0
 
         self.base_stats = Stats()
         self.ev_stats = Stats()

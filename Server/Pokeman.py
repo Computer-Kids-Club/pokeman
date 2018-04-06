@@ -7,14 +7,21 @@
 ## Alex is here
 ## Alex is here again
 
-from DamageCalculation import *
-from ClientConnection import *
-from FieldClass import Field
-from PokemanClass import Pokeman
-from MoveClass import Move
+from BattleClass import Battle
+from ClientConnection import Client
 
+# master list of all the ongoing battles
+l_battles = [Battle()]
+
+# idle users
+l_clients = [Client()]
+
+# GAME ON
 b_game_on = True
 
 while b_game_on:
-    print(Pokeman(),Move())
+    for battle in l_battles:
+        battle.run()
+    for client in l_clients:
+        client.run()
 

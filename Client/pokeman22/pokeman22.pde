@@ -52,9 +52,8 @@ boolean transitionStart = false;
 
 boolean sliderFollow = false;
 
-int startY = 50;
-int sliderH = 20;
-int sliderW = 10;
+int sliderH;
+int sliderW;
 int sliderX;
 int sliderY;
 
@@ -63,16 +62,24 @@ boolean pokemonSelectScreen = false;
 
 int sliderStartY;
 
+String fileName = "./pokeinfo/";
+
+float mouseWheelChange = 0;
+
 class Pokemon {
-  String name, type1, type2, species, h, weight, ability1, ability2, hiddenability, move1, move2, move3, move4, ability;
-  int number, HP, ATK, DEF, SPA, SPD, SPE;
+  String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
+  int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
   Boolean shiny;
   String[][] moves;
   PImage[] animation;
   PImage[] animationBack;
-  Pokemon (int num, Boolean s /*, String m1, String m2, String m3, String m4, String ab*/) {
-    pokemonLocation = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/pokemon/"+num+".txt");
+  Pokemon (int num, Boolean s/*, int hap, int lvl, String m1, String m2, String m3, String m4, String ab*/) {
+    pokemonLocation = loadJSONObject(fileName+"pokemon/"+num+".txt");
     //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
+
+    //happiness = hap;
+    //level = lvl;
+    shiny = s;
 
     // All Strings
     name = pokemonLocation.getString("name");
@@ -81,9 +88,7 @@ class Pokemon {
     species = pokemonLocation.getString("species");
     h = pokemonLocation.getString("height");
     weight = pokemonLocation.getString("weight");
-    ability1 = pokemonLocation.getString("ability1");
-    ability2 = pokemonLocation.getString("ability2");
-    hiddenability = pokemonLocation.getString("hiddenabililty");
+    //ability = ab;
 
     // All Integers
     number = num;
@@ -93,8 +98,6 @@ class Pokemon {
     SPA = int(pokemonLocation.getString("SPA"));
     SPD = int(pokemonLocation.getString("SPD"));
     SPE = int(pokemonLocation.getString("SPE"));
-
-    shiny = s;
 
     // All String Arrays
     moves = names_moves.get(name);
@@ -136,7 +139,7 @@ PImage[][] loadPokemon(int num, JSONObject file, boolean shiny) {
 
 void drawMove(String move_name) {
 
-  JSONObject move_json = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/move/"+move_name+".txt");
+  JSONObject move_json = loadJSONObject(fileName+"move/"+move_name+".txt");
   //JSONObject move_json = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/move/"+move_name+".txt");
 
   //println(move_json.getString("type"));
@@ -176,20 +179,20 @@ void drawMove(String move_name) {
 
 void drawStartScreen() {
   PImage infoButton = loadImage("infoButton.png");
-  infoButton.resize(30, 30);
+  infoButton.resize((width/140)*3, height/30);
   PImage pokeBall = loadImage("Pokeball.png");
-  pokeBall.resize(30, 30);
+  pokeBall.resize((width/140)*3, height/30);
   PImage settingsButton = loadImage("settingsButton.png");
-  settingsButton.resize(50, 50);
+  settingsButton.resize(width/28, height/18);
 
-  int[] startButton = {width/2, height/2 + 50, 400, 100};
-  int[] pokemonButton = {width/2 - 500, height - 150, 200, 200};
+  int[] startButton = {width/2, (height/9)*5, (width/7)*2, height/9};
+  int[] pokemonButton = {width/7, (height/6)*5, width/7, (height/9)*2};
   //int[] settingsButton = {width - 60, 60, 100, 100};
 
-  int infoButtonX = pokemonButton[0] - pokemonButton[2]/2+ 18;
-  int infoButtonY = pokemonButton[1] + pokemonButton[3]/2 - 18;
-  int pokeBallX = pokemonButton[0] + pokemonButton[2]/2 - 18;
-  int pokeBallY = pokemonButton[1] + pokemonButton[3]/2 - 18;
+  int infoButtonX = pokemonButton[0] - pokemonButton[2]/2 + (width/700)*9;
+  int infoButtonY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
+  int pokeBallX = pokemonButton[0] + pokemonButton[2]/2 - (width/700)*9;
+  int pokeBallY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
 
   rectMode(CENTER);
   imageMode(CENTER);
@@ -199,12 +202,12 @@ void drawStartScreen() {
     rect(pokemonButton[0] + i*pokemonButton[2], pokemonButton[1], pokemonButton[2], pokemonButton[3]);
     drawPokemon(pokemons.get(i).animation, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1]);
     fill(0);
-    text(pokemons.get(i).name, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1] + pokemonButton[3]/2 - 10);
+    text(pokemons.get(i).name, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1] + pokemonButton[3]/2 - height/90);
     fill(255);
     image(infoButton, infoButtonX + i*pokemonButton[2], infoButtonY);
     image(pokeBall, pokeBallX + i*pokemonButton[2], pokeBallY);
   }
-  image(settingsButton, width-30, 30);
+  image(settingsButton, (width/140)*137, height/30);
   //rect(settingsButton[0], settingsButton[1], settingsButton[2], settingsButton[3]);
   imageMode(CORNER);
   textAlign(CORNER);
@@ -218,16 +221,16 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-  if (mousePressed && mousePressValid) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false) {
     for (int i = 0; i < 6; i++) {
-      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton[2], pokeBallY) <= 15) {
+      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton[2], pokeBallY) <= height/60) {
         println("HEYEHEYEHEHEHHEHE", i);
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
         //pokemons.set(i, new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
         mousePressValid = false;
       }
-      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton[2], infoButtonY) <= 15) {
+      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton[2], infoButtonY) <= height/60) {
         println("sdjfghsldjkhfgasldhjfg", i);
         mousePressValid = false;
       }
@@ -239,86 +242,90 @@ void drawStartScreen() {
 }
 
 void drawPokemonSelectionScreen(int slotNumber) {
-  offset = int(((sliderY - sliderStartY)*792)/580);
-  rectMode(CENTER);
-  rect(width/2, height/2 + startY, 1000, 600);
-  rect(width/2, height/2  + startY - 325, 1000, 50);
+  rectMode(CORNER);
+  offset = int(((sliderY - sliderStartY)*808)/((height/9)*8));
+  rect(width/7, height/9, width/1.4, (height/9)*8);
+  rect(width/7, 0, width/1.4, height/18);
+  rect(width/7, height/18, width/1.4, height/18);
 
   fill(0);
-  text("Number", width/2 - 485, height/2 + startY - 325);
-  text("Name", width/2 - 400, height/2 + startY - 325);
-  text("Types", width/2 - 225, height/2 + startY - 325);
-  text("Abilities", width/2, height/2 + startY - 325);
-  text("HP", width/2 + 210, height/2 + startY - 325);
-  text("ATK", width/2 + 250, height/2 + startY - 325);
-  text("DEF", width/2 + 290, height/2 + startY - 325);
-  text("SPA", width/2 + 330, height/2 + startY - 325);
-  text("SPD", width/2 + 370, height/2 + startY - 325);
-  text("SPE", width/2 + 410, height/2 + startY - 325);
-  text("BST", width/2 + 450, height/2 + startY - 325);
+  int textHight = (height/180)*17;
+  text("Number", (width/280)*43, textHight);
+  text("Name", (width/14)*3, textHight);
+  text("Types", (width/56)*19, textHight);
+  text("Abilities", width/2, textHight);
+  text("HP", (width/20)*13, textHight);
+  text("ATK", (width/28)*19, textHight);
+  text("DEF", (width/140)*99, textHight);
+  text("SPA", (width/140)*103, textHight);
+  text("SPD", (width/140)*107, textHight);
+  text("SPE", (width/140)*111, textHight);
+  text("BST", (width/140)*115, textHight);
 
-  int gridSize = 40;
+  rect((width/7)*6 - sliderW, height/9, sliderW, (height/9)*8);
+
+  int gridSize = (height/180)*8;
   int BST = 0;
-  for (int i = 1; i <= 15; i++) {
-    line(width/2-500, (height/2) + startY - 300 + i*gridSize, width/2+490, (height/2) + startY - 300 + i*gridSize);
-    rect(width/2+495, height/2 + startY, 10, 600);
-    text(i + offset, width/2 - 485, (height/2) + startY - 315 + i*gridSize);
-    text(num_names.get(i + offset), width/2 - 400, (height/2) + startY - 315 + i*gridSize);
+  for (int i = 0; i <= 19; i++) {
+    line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
+    text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
+    text(num_names.get(i + 1 + offset), (width/14)*3, textHight + (i+1)*gridSize);
     for (int j = 0; j < 2; j++) {
-      if (names_types.get(num_names.get(i + offset))[j] != null) {
-        text(names_types.get(num_names.get(i + offset))[j], width/2 - 260 + j*70, (height/2) + startY - 315 + i*gridSize);
+      if (names_types.get(num_names.get(i + 1 + offset))[j] != null) {
+        text(names_types.get(num_names.get(i + 1 + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
       }
     }
     for (int j = 0; j < 3; j++) {
-      if (names_abilities.get(num_names.get(i + offset))[j] != null) {
-        text(names_abilities.get(num_names.get(i + offset))[j], width/2 - 70 + j*70, (height/2) + startY - 315 + i*gridSize);
+      if (names_abilities.get(num_names.get(i + 1 + offset))[j] != null) {
+        text(names_abilities.get(num_names.get(i + 1 + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
       }
     }
     BST = 0;
     for (int j = 0; j < 6; j++) {
-      BST += names_stats.get(num_names.get(i + offset))[j];
-      text(names_stats.get(num_names.get(i + offset))[j], width/2 + 210 + j*40, (height/2) + startY - 315 + i*gridSize);
+      BST += names_stats.get(num_names.get(i + 1 + offset))[j];
+      text(names_stats.get(num_names.get(i + 1 + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
     }
-    text(BST, width/2 + 450, (height/2) + startY - 315 + i*gridSize);
+    text(BST, (width/140)*115, textHight + (i+1)*gridSize);
     if (mousePressed && mousePressValid == true) {
-      if (mouseX < width/2 + 490 && mouseX >= width/2 - 500 && mouseY < (height/2) + startY - 295 + i*gridSize && mouseY > (height/2) + startY - 335 + i*gridSize && sliderFollow == false) {
-        pokemons.set(pokemonChangeNumber, new Pokemon(i+offset, boolean(int(random(0, 2)))));
+      if (mouseX < (width/7)*6 - sliderW && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
+        pokemons.set(pokemonChangeNumber, new Pokemon(i+1+offset, boolean(int(random(0, 2)))));
+        sliderY = sliderStartY;
         pokemonSelectScreen = false;
         mousePressValid = false;
       }
     }
   }
   fill(255);
-
   rect(sliderX, sliderY, sliderW, sliderH);
 
-  if (mousePressed) {
-    if (mouseX >= sliderX - sliderW/2 && mouseX <= sliderX + sliderW/2 && mouseY >= sliderY - sliderH/2 && mouseY <= sliderY + sliderH/2) {
+  if (mousePressed && mousePressValid == true) {
+    if (mouseX >= sliderX && mouseX <= sliderX + sliderW && mouseY >= sliderY && mouseY <= sliderY + sliderH) {
       sliderFollow = true;
     }
-    if (mouseX < width/2 - 500 || mouseX > width/2 + 500 /*|| mouseY < height/2 + startY - 350 || mouseY > height/2 + startY + 300*/) {
-      pokemonSelectScreen = false;
+    if (sliderFollow == false) {
+      if (mouseX < width/7 || mouseX >= (width/7)*6) {
+        pokemonSelectScreen = false;
+        sliderY = sliderStartY;
+      }
     }
   } else {
     sliderFollow = false;
   }
 
   if (sliderFollow == true) {
-    if (mouseY >= height/2 + startY - 300 + sliderH/2 && mouseY <= height/2 + startY + 300 + sliderH/2) {
-      sliderY = mouseY;
-    } else if (mouseY <= height/2 + startY - 300 + sliderH/2) {
-      sliderY = height/2 + startY - 300 + sliderH/2;
-    } else if (mouseY >= height/2 + startY + 300 + sliderH/2) {
-      sliderY = height/2 + startY + 300 + sliderH/2;
+    if (mouseY >= height/9 && mouseY <= height - sliderH/2) {
+      sliderY = mouseY - sliderH/2;
+    } else if (mouseY <= height/9) {
+      sliderY = height/9;
+    } else if (mouseY >= height - sliderH) {
+      sliderY = height - sliderH;
     }
   }
-  if (sliderY >= height/2 + startY + 300 - sliderH/2) {
-    sliderY = height/2 + startY + 300 - sliderH/2;
-  } else if (sliderY <= height/2 + startY - 300 + sliderH/2) {
-    sliderY = height/2 + startY - 300 + sliderH/2;
+  if (sliderY + sliderH > height) {
+    sliderY = height - sliderH;
+  } else if (sliderY < height/9) {
+    sliderY = height/9;
   }
-
-  rectMode(CORNER);
 }
 
 void drawPokemonInformationScreen(int slotNumber) {
@@ -331,15 +338,17 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 public void setup() {
-  size(1400, 900, P2D);
+  size(1050, 675, P2D);
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
 
-  sliderX = width/2 + 490 + sliderW/2;
-  sliderY = height/2 + startY - 300 + sliderH/2;
-  sliderStartY = height/2 + startY - 300 + sliderH/2;
+  sliderH = height/45;
+  sliderW = width/140;
+  sliderX = (width/7)*6 - sliderW;
+  sliderY = height/9;
+  sliderStartY = height/9;
 
   Gif.tmpPath = dataPath("");
 
@@ -349,7 +358,7 @@ public void setup() {
   }
 
   for (int i = 1; i <= 807; i++) {
-    JSONObject file = loadJSONObject("/Users/ethanzohar/Desktop/pokeman/Client/pokeman22/pokeinfo/pokemon/"+i+".txt");
+    JSONObject file = loadJSONObject(fileName+"pokemon/"+i+".txt");
     //JSONObject file = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+i+".txt");
     names_num.put(file.getString("name"), i);
     num_names.put(i, file.getString("name"));
@@ -430,9 +439,19 @@ void mouseReleased() {
 }
 
 void mouseClicked() {
-  //offset += 1;
 }
-
+void mouseWheel(MouseEvent event) {
+  if (pokemonSelectScreen == true) {
+    if (sliderY >= height/9 && sliderY +sliderH <= height) {
+      sliderY += (event.getCount())*5;
+    }
+    if (sliderY + sliderH > height) {
+      sliderY = height - sliderH;
+    } else if (sliderY < height/9) {
+      sliderY = height/9;
+    }
+  }
+}
 void keyPressed() {
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
