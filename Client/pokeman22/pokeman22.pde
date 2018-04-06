@@ -338,7 +338,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 public void setup() {
-  size(1050, 675, P2D);
+  size(1400,900, P2D);
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
