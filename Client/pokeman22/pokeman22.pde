@@ -43,6 +43,7 @@ JSONObject curr_json;
 JSONObject pokemonLocation;
 
 Boolean mousePressValid = true;
+Boolean keyPressValid = true;
 
 PImage[] pokemonImages = new PImage[807];
 
@@ -65,6 +66,11 @@ int sliderStartY;
 String fileName = "./pokeinfo/";
 
 float mouseWheelChange = 0;
+
+String pokemonSearch = "";
+String alphabet_lower = "abcdefghijklmnopqrstuvwxyz";
+String alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+String punctuation = " -:";
 
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
@@ -264,7 +270,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   rect((width/7)*6 - sliderW, height/9, sliderW, (height/9)*8);
 
-  int gridSize = (height/180)*8;
+  int gridSize = (height - height/9)/20;
   int BST = 0;
   for (int i = 0; i <= 19; i++) {
     line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
@@ -297,8 +303,30 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
   fill(255);
   rect(sliderX, sliderY, sliderW, sliderH);
+  int searchButtonX = width/7 + 10;
+  int searchButtonY = 10;
+  int searchButtonW = 200;
+  int searchButtonH = 30;
+  rect(searchButtonX, searchButtonY, searchButtonW, searchButtonH);
+  textAlign(LEFT);
+  fill(0);
+  if (pokemonSearch == "") {
+    text("Search by Name", width/7 + 15, 30);
+  } else {
+    text(pokemonSearch, width/7 + 15, 30);
+  }
+  fill(255);
+  textAlign(CENTER);
 
   if (mousePressed && mousePressValid == true) {
+    if (mouseX <= searchButtonX + searchButtonW && mouseX >= searchButtonX && mouseY <= searchButtonY + searchButtonH && mouseY >= searchButtonY) {
+      if (pokemonSearch == "") {
+        pokemonSearch = " ";
+      }
+    } else {
+      pokemonSearch = "";
+    }
+
     if (mouseX >= sliderX && mouseX <= sliderX + sliderW && mouseY >= sliderY && mouseY <= sliderY + sliderH) {
       sliderFollow = true;
     }
@@ -310,6 +338,28 @@ void drawPokemonSelectionScreen(int slotNumber) {
     }
   } else {
     sliderFollow = false;
+  }
+
+  if (keyPressed && keyPressValid == true) {
+    for (int i = 0; i < 26; i++) {
+      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
+        if (pokemonSearch == " ") {
+          pokemonSearch = str(key);
+          break;
+        } else {
+          pokemonSearch += key;
+          break;
+        }
+      }
+    }
+    if (key == BACKSPACE) {
+      if (pokemonSearch.length() > 0) {
+        pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
+      }
+    }
+    keyPressValid = false;
+  } else if (keyPressed == false) {
+    keyPressValid = true;
   }
 
   if (sliderFollow == true) {
@@ -338,7 +388,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 public void setup() {
-  size(1400,900, P2D);
+  size(1400, 900, P2D);
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
@@ -453,8 +503,11 @@ void mouseWheel(MouseEvent event) {
   }
 }
 void keyPressed() {
-  pokemons = new ArrayList<Pokemon>();
-  for (int i = 0; i < 6; i ++) {
-    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
-  }
+  //  pokemons = new ArrayList<Pokemon>();
+  //  for (int i = 0; i < 6; i ++) {
+  //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
+  //  }
+}
+
+void keyReleased() {
 }
