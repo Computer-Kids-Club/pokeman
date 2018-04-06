@@ -251,7 +251,6 @@ void drawStartScreen() {
 
 void drawPokemonSelectionScreen(int slotNumber) {
   rectMode(CORNER);
-  offset = int(((sliderY - sliderStartY)*808)/((height/9)*8));
   rect(width/7, height/9, width/1.4, (height/9)*8);
   rect(width/7, 0, width/1.4, height/18);
   rect(width/7, height/18, width/1.4, height/18);
@@ -276,9 +275,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
   int BST = 0;
   for (int i = 0; i <= 19; i++) {
     line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
-    text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
     if (pokemonSearch == "") {
-      print("TRUE");
+      offset = int(((sliderY - sliderStartY)*808)/((height/9)*8));
+      text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
       text(num_names.get(i + 1 + offset), (width/14)*3, textHight + (i+1)*gridSize);
       for (int j = 0; j < 2; j++) {
         if (names_types.get(num_names.get(i + 1 + offset))[j] != null) {
