@@ -308,11 +308,11 @@ void drawPokemonSelectionScreen(int slotNumber) {
     } else {
       if (i < validPokemonSearch.size()) {
         if (validPokemonSearch.size() > 20) {
-          offset = int(((sliderY - sliderStartY)*(validPokemonSearch.size() - 20)/((height/9)*8 - 20)));
+          offset = int(((sliderY - sliderStartY)*(validPokemonSearch.size() - 20)/((height/9)*8 - sliderH)));
         } else {
           offset = 0;
         }
-        println(validPokemonSearch.size(), validPokemonSearch.size()-20, offset, (height/9)*8 - sliderH, sliderY - sliderStartY);
+        //println(validPokemonSearch.size(), validPokemonSearch.size()-20, offset, (height/9)*8 - sliderH, sliderY - sliderStartY);
         text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
         text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
         for (int j = 0; j < 2; j++) {
