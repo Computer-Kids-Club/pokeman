@@ -312,7 +312,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
         } else {
           offset = 0;
         }
-        //println(validPokemonSearch.size(), validPokemonSearch.size()-20, offset, (height/9)*8 - sliderH, sliderY - sliderStartY);
+        println(validPokemonSearch.size(), validPokemonSearch.size()-20, offset, (height/9)*8 - sliderH, sliderY - sliderStartY);
         text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
         text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
         for (int j = 0; j < 2; j++) {
@@ -379,47 +379,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
     sliderFollow = false;
   }
 
-  if (keyPressed && keyPressValid == true) {
-    if (pokemonSearchBool == true) {
-      for (int i = 0; i < 26; i++) {
-        if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
-          if (pokemonSearch == "") {
-            pokemonSearch = str(key);
-            break;
-          } else {
-            pokemonSearch += key;
-            break;
-          }
-        }
-      }
-      if (key == BACKSPACE) {
-        if (pokemonSearch.length() > 1) {
-          pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
-        } else if (pokemonSearch.length() > 0) {
-          pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
-          pokemonSearch = "";
-        } else {
-          pokemonSearch = "";
-        }
-      }
-      validPokemonSearch = new StringList();
-      for (int i = 1; i <= 807; i++) {
-        if (pokemonSearch.length() <= num_names.get(i).length()) {
-          if (pokemonSearch.equals(num_names.get(i).substring(0, pokemonSearch.length()))) {
-            validPokemonSearch.append(num_names.get(i));
-          }
-        }
-      }
-      //for (int i = 0; i < validPokemonSearch.size(); i++) {
-      // print(names_num.get(validPokemonSearch.get(i)));
-      // print(" ");
-      //}
-      //println();
-      keyPressValid = false;
-    }
-  } else if (keyPressed == false) {
-    keyPressValid = true;
-  }
+
 
   if (sliderFollow == true) {
     if (mouseY >= height/9 && mouseY <= height - sliderH/2) {
@@ -568,6 +528,38 @@ void keyPressed() {
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
   //  }
+
+  if (pokemonSearchBool == true) {
+    for (int i = 0; i < 26; i++) {
+      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
+        if (pokemonSearch == "") {
+          pokemonSearch = str(key);
+          break;
+        } else {
+          pokemonSearch += key;
+          break;
+        }
+      }
+    }
+    if (key == BACKSPACE) {
+      if (pokemonSearch.length() > 1) {
+        pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
+      } else if (pokemonSearch.length() > 0) {
+        pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
+        pokemonSearch = "";
+      } else {
+        pokemonSearch = "";
+      }
+    }
+    validPokemonSearch = new StringList();
+    for (int i = 1; i <= 807; i++) {
+      if (pokemonSearch.length() <= num_names.get(i).length()) {
+        if (pokemonSearch.equals(num_names.get(i).substring(0, pokemonSearch.length()))) {
+          validPokemonSearch.append(num_names.get(i));
+        }
+      }
+    }
+  }
 }
 
 void keyReleased() {
