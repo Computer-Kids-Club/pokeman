@@ -337,6 +337,8 @@ void drawPokemonSelectionScreen(int slotNumber) {
           if (mouseX < (width/7)*6 - sliderW && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
             pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
             sliderY = sliderStartY;
+            pokemonSearch = "";
+            pokemonSearchBool = false;
             pokemonSelectScreen = false;
             mousePressValid = false;
           }
@@ -375,6 +377,8 @@ void drawPokemonSelectionScreen(int slotNumber) {
       if (mouseX < width/7 || mouseX >= (width/7)*6) {
         pokemonSelectScreen = false;
         sliderY = sliderStartY;
+        pokemonSearch = "";
+        pokemonSearchBool = false;
       }
     }
   } else {
@@ -429,7 +433,7 @@ public void setup() {
   pokeBall = loadImage("Pokeball.png");
   settingsButton = loadImage("settingsButton.png");
   backgroundImg = loadImage("Background.jpg");
-  
+
   settingsButton.resize(width/28, height/18);
   pokeBall.resize((width/140)*3, height/30);
   infoButton.resize((width/140)*3, height/30);
@@ -563,6 +567,7 @@ void keyPressed() {
         pokemonSearch = "";
       }
     }
+    sliderY = sliderStartY;
     validPokemonSearch = new StringList();
     for (int i = 1; i <= 807; i++) {
       if (pokemonSearch.length() <= num_names.get(i).length()) {
