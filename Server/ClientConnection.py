@@ -4,16 +4,21 @@
 ## -------------------------------------- ##
 
 from Constants import *
-import sys
+import json
 import socket
+from PokemanClass import Pokeman
+from StatClass import Stats
 import select
-from random import randint
+#from random import randint
 
 # sockets
 l_sockets = []
 
 # idle users
 l_clients = {}
+
+# message queue
+l_msg = []
 
 # broadcast chat messages to all connected clients
 def broadcast (server_socket, sock, message):
@@ -39,6 +44,11 @@ server_socket.listen(10)
 print("Chat server started on port " + str(PORT))
 
 def recieve_connection():
+
+    while len(l_msg)>0:
+        l_clients[l_msg[0][0]].recieved_data(l_msg[0][1])
+        l_msg.pop(0)
+
     ready_to_read, ready_to_write, in_error = select.select([server_socket], [], [], 0)
 
     if len(ready_to_read)>0:
@@ -67,7 +77,8 @@ def recieve_connection():
                 #sockfd.send(data)
                 # broadcast(server_socket, sock, "\r" + '[' + str(sock.getpeername()) + '] ' + data)
                 #print(str(sock.getpeername()) + ': ' + data)
-                l_clients[sock.getpeername()].recieved_data(data)
+                #l_clients[sock.getpeername()].recieved_data(data)
+                l_msg.append((sock.getpeername(),data))
             else:
                 # at this stage, no data means probably the connection has been broken
                 # broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr)
@@ -91,9 +102,28 @@ def recieve_connection():
 class Client(object):
     def __init__(self,addr=None):
         self.addr = addr
+        self.team = []
 
     def recieved_data(self,str_data):
-        print(str_data)
+        #print(str_data)
+        try:
+            dic_data = json.loads(str_data.decode("utf-8"))
+        except:
+            return
+
+        self.team = []
+        for dic_poke in dic_data["pokes"]:
+            poke = Pokeman(dic_poke["num"])
+
+            poke.base_stats = Stats(dic_poke['hp'],dic_poke['atk'],dic_poke['def'],dic_poke['spa'],dic_poke['spd'],dic_poke['spe'])
+
+            poke.i_happy = dic_poke['hap']
+            poke.i_lv = dic_poke['lv']
+            poke.b_shiny = dic_poke['shiny']
+
+            self.team.append(poke)
+
+        print(str(self.team))
 
     def run(self):
         Log.info("here")

@@ -553,6 +553,9 @@ void keyPressed() {
   if (key=='h') {
     send_hey();
   }
+  if (key=='s') {
+    send_pokes();
+  }
   if (key=='`') {
     reconnect();
   }
