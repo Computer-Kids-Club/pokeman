@@ -419,6 +419,8 @@ public void setup() {
   noSmooth();
   colorMode(HSB);
 
+  myClient = new Client(this, "127.0.0.1", PORT);
+
   sliderH = height/45;
   sliderW = width/140;
   sliderX = (width/7)*6 - sliderW;
@@ -511,6 +513,9 @@ public void setup() {
 }
 
 void draw() {
+
+  recieve_data();
+
   background(200);
   drawStartScreen();
   if (pokemonSelectScreen == true) {
@@ -544,6 +549,13 @@ void keyPressed() {
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
   //  }
+
+  if (key=='h') {
+    send_hey();
+  }
+  if (key=='`') {
+    reconnect();
+  }
 
   if (pokemonSearchBool == true) {
     for (int i = 0; i < 26; i++) {
