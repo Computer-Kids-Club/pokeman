@@ -76,6 +76,11 @@ boolean pokemonSearchBool = false;
 
 StringList validPokemonSearch;
 
+PImage infoButton;
+PImage pokeBall;
+PImage settingsButton;
+PImage backgroundImg;
+
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
@@ -188,12 +193,9 @@ void drawMove(String move_name) {
 }
 
 void drawStartScreen() {
-  PImage infoButton = loadImage("infoButton.png");
-  infoButton.resize((width/140)*3, height/30);
-  PImage pokeBall = loadImage("Pokeball.png");
-  pokeBall.resize((width/140)*3, height/30);
-  PImage settingsButton = loadImage("settingsButton.png");
-  settingsButton.resize(width/28, height/18);
+  //backgroundImg.resize(width, height);
+
+  image(backgroundImg, 0, 0);
 
   int[] startButton = {width/2, (height/9)*5, (width/7)*2, height/9};
   int[] pokemonButton = {width/7, (height/6)*5, width/7, (height/9)*2};
@@ -422,6 +424,16 @@ public void setup() {
   Gif.tmpPath = dataPath("");
 
   validPokemonSearch = new StringList();
+
+  infoButton = loadImage("infoButton.png");
+  pokeBall = loadImage("Pokeball.png");
+  settingsButton = loadImage("settingsButton.png");
+  backgroundImg = loadImage("Background.jpg");
+  
+  settingsButton.resize(width/28, height/18);
+  pokeBall.resize((width/140)*3, height/30);
+  infoButton.resize((width/140)*3, height/30);
+  backgroundImg.resize(width, height);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
