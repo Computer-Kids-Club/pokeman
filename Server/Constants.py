@@ -30,3 +30,7 @@ class EntryHazard(object):
     STEALTH_ROCK = 1
     STICKY_WEB = 2
     TOXIC_SPIKES = 3
+
+HOST = ''
+RECV_BUFFER = 4096
+PORT = 17171

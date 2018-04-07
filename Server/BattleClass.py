@@ -15,4 +15,5 @@ class Battle(object):
         self.players = [Client(),Client()]
 
     def run(self):
-        Log.info("battle running")
+        #Log.info("battle running")
+        return
