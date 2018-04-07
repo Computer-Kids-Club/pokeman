@@ -206,7 +206,7 @@ public class Gif extends PImage implements PConstants, Runnable {
       gifDecoder.read(createInputStream(parent, "tmp"+tmpFileIdx+".gif"));
       //tmpFileIdx++;
 
-      //new File(tmpPath+"/tmp"+tmpFileIdx+".gif").delete();
+      new File(tmpPath+"/tmp"+tmpFileIdx+".gif").delete();
 
       return gifDecoder;
     } else {
