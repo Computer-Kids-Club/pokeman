@@ -402,10 +402,8 @@ void draw() {
   background(200);
 
   if (i_battle_state == BATTLING) {
-    if ('1'<=key&&key<='6'&&(i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-    }
-    if ((key=='q'||key=='w'||key=='e'||key=='r')&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-    }
+    draw_battle();
+    return;
   }
 
   drawStartScreen();

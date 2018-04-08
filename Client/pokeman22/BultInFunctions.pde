@@ -2,8 +2,8 @@
 
 void mousePressed() {
   /*print(mouseX);
-  print(" ");
-  println(mouseY);*/
+   print(" ");
+   println(mouseY);*/
   if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
     START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY) {
     send_pokes();
@@ -35,16 +35,21 @@ void keyPressed() {
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
   //  }
-  
-  if(i_battle_state == BATTLING) {
+
+  if (i_battle_state == BATTLING) {
+    if ('1'<=key&&key<='6'&&(i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+      select_poke(int(key-'1'));
+    } else if (KEY_TO_ID.get(key)!=null&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+      select_move(KEY_TO_ID.get(key));
+    }
   }
 
   /*if (key=='h') {
-    send_hey();
-  }
-  if (key=='s') {
-    send_pokes();
-  }*/
+   send_hey();
+   }
+   if (key=='s') {
+   send_pokes();
+   }*/
   if (key=='`') {
     reconnect();
   }

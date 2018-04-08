@@ -21,6 +21,8 @@ int BATTLING = 2;
 
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
+HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
+
 void init_constants() {
 
   SLIDER = new Rect((width/7)*6-width/140, height/9, width/140, height/45);
@@ -33,6 +35,11 @@ void init_constants() {
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
   SEARCH_BUTTON = new Rect(width/7 + 10, 10, 200, 30);
+  
+  KEY_TO_ID.put('q', 0);
+  KEY_TO_ID.put('w', 1);
+  KEY_TO_ID.put('e', 2);
+  KEY_TO_ID.put('r', 3);
 
   // hard code all the type colours
   TYPE_COLOURS.put("normal", color(#A8A878));
