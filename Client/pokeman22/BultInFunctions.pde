@@ -1,9 +1,13 @@
 
 
 void mousePressed() {
-  if (START_BUTTON.i_x<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w &&
-    START_BUTTON.i_y<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h) {
+  /*print(mouseX);
+  print(" ");
+  println(mouseY);*/
+  if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
+    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2) {
     send_pokes();
+    println("pressed");
   }
 }
 
