@@ -67,6 +67,8 @@ def recieve_connection():
 
     # get the list sockets which are ready to be read through select
     # 4th arg, time_out  = 0 : poll and never block
+    if(len(l_sockets)==0):
+        return
     ready_to_read, ready_to_write, in_error = select.select(l_sockets, [], [], 0)
 
     for sock in ready_to_read:
