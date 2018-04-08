@@ -11,7 +11,7 @@ Rect POKEMON_BUTTON;
 
 Rect SEARCH_BUTTON;
 
-int POKEMON_PER_PAGE = 30;
+int POKEMON_PER_PAGE = 20;
 
 String POKEINFO_PATH = "./pokeinfo/";
 

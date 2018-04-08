@@ -180,13 +180,17 @@ void drawStartScreen() {
 }
 
 void drawPokemonSelectionScreen(int slotNumber) {
+
+  float gridSize = (height - height/9)*1.0f/POKEMON_PER_PAGE;
+  int BST = 0;
+  float textHight = height/9-10;
+
   rectMode(CORNER);
-  rect(width/7, height/9, width/1.4, (height/9)*8);
-  rect(width/7, 0, width/1.4, height/18);
-  rect(width/7, height/18, width/1.4, height/18);
+  rect(width/7, height/9, width*5/7, (height/9)*8);
+  rect(width/7, 0, width*5/7, height/9);
+  //rect(width/7, height/18, width*5/7, height/18);
 
   fill(0);
-  int textHight = (height/180)*17;
   text("Number", (width/280)*43, textHight);
   text("Name", (width/14)*3, textHight);
   text("Types", (width/56)*19, textHight);
@@ -201,12 +205,14 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   rect((width/7)*6 - SLIDER.i_w, height/9, SLIDER.i_w, (height/9)*8);
 
-  int gridSize = (height - height/9)/POKEMON_PER_PAGE;
-  int BST = 0;
-  for (int i = 0; i < POKEMON_PER_PAGE; i++) {
-    line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
+  textHight = - gridSize/2 + height/9;
+
+  textAlign(LEFT, CENTER);
+
+  offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height/9.0)*8.0-SLIDER.i_h));
+  for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
+    line(width/7, i*gridSize+textHight+gridSize/2, (width/7)*6, i*gridSize+textHight+gridSize/2);
     if (pokemonSearch == "") {
-      offset = int(((SLIDER.i_y - sliderStartY)*808)/((height/9)*8));
       text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
       text(num_names.get(i + 1 + offset), (width/14)*3, textHight + (i+1)*gridSize);
       for (int j = 0; j < 2; j++) {
