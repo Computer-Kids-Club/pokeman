@@ -209,71 +209,48 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   textAlign(LEFT, CENTER);
 
+  if (pokemonSearch == "" && validPokemonSearch.size()!=807) {
+    for (int i = 1; i <= 807; i++) {
+      validPokemonSearch.append(num_names.get(i));
+    }
+  }
+
   offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height/9.0)*8.0-SLIDER.i_h));
   for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
     line(width/7, i*gridSize+textHight+gridSize/2, (width/7)*6, i*gridSize+textHight+gridSize/2);
-    if (pokemonSearch == "") {
-      text(i + 1 + offset, (width/280)*43, textHight + (i+1)*gridSize);
-      text(num_names.get(i + 1 + offset), (width/14)*3, textHight + (i+1)*gridSize);
+    if (i < validPokemonSearch.size()) {
+      if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
+        offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
+      } else {
+        offset = 0;
+      }
+      //println(validPokemonSearch.size(), validPokemonSearch.size()-POKEMON_PER_PAGE, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
+      text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
+      text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
       for (int j = 0; j < 2; j++) {
-        if (names_types.get(num_names.get(i + 1 + offset))[j] != null) {
-          text(names_types.get(num_names.get(i + 1 + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
+        if (names_types.get(validPokemonSearch.get(i + offset))[j] != null) {
+          text(names_types.get(validPokemonSearch.get(i + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
         }
       }
       for (int j = 0; j < 3; j++) {
-        if (names_abilities.get(num_names.get(i + 1 + offset))[j] != null) {
-          text(names_abilities.get(num_names.get(i + 1 + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
+        if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
+          text(names_abilities.get(validPokemonSearch.get(i + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
         }
       }
       BST = 0;
       for (int j = 0; j < 6; j++) {
-        BST += names_stats.get(num_names.get(i + 1 + offset))[j];
-        text(names_stats.get(num_names.get(i + 1 + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
+        BST += names_stats.get(validPokemonSearch.get(i + offset))[j];
+        text(names_stats.get(validPokemonSearch.get(i + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
       }
       text(BST, (width/140)*115, textHight + (i+1)*gridSize);
       if (mousePressed && mousePressValid == true) {
         if (mouseX < (width/7)*6 - SLIDER.i_w && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
-          pokemons.set(pokemonChangeNumber, new Pokemon(i+1+offset, boolean(int(random(0, 2)))));
+          pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           SLIDER.i_y = sliderStartY;
+          pokemonSearch = "";
+          pokemonSearchBool = false;
           pokemonSelectScreen = false;
           mousePressValid = false;
-        }
-      }
-    } else {
-      if (i < validPokemonSearch.size()) {
-        if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
-          offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
-        } else {
-          offset = 0;
-        }
-        println(validPokemonSearch.size(), validPokemonSearch.size()-POKEMON_PER_PAGE, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
-        text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
-        text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
-        for (int j = 0; j < 2; j++) {
-          if (names_types.get(validPokemonSearch.get(i + offset))[j] != null) {
-            text(names_types.get(validPokemonSearch.get(i + offset))[j], (width/35)*11 + j*(width/20), textHight + (i+1)*gridSize);
-          }
-        }
-        for (int j = 0; j < 3; j++) {
-          if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
-            text(names_abilities.get(validPokemonSearch.get(i + offset))[j], (width/20)*9 + j*(width/20), textHight + (i+1)*gridSize);
-          }
-        }
-        BST = 0;
-        for (int j = 0; j < 6; j++) {
-          BST += names_stats.get(validPokemonSearch.get(i + offset))[j];
-          text(names_stats.get(validPokemonSearch.get(i + offset))[j], (width/20)*13 + j*(width/35), textHight + (i+1)*gridSize);
-        }
-        text(BST, (width/140)*115, textHight + (i+1)*gridSize);
-        if (mousePressed && mousePressValid == true) {
-          if (mouseX < (width/7)*6 - SLIDER.i_w && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
-            pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
-            SLIDER.i_y = sliderStartY;
-            pokemonSearch = "";
-            pokemonSearchBool = false;
-            pokemonSelectScreen = false;
-            mousePressValid = false;
-          }
         }
       }
     }
