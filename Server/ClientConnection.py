@@ -104,30 +104,33 @@ class Client(object):
         self.addr = addr
         self.socket = socket
         self.team = []
+        self.i_battle_state = NOT_READY
 
     def send_data(self,str_data):
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
 
     def recieved_data(self,str_data):
-        #print(str_data)
+
         try:
             dic_data = json.loads(str_data.decode("utf-8"))
         except:
             return
 
-        self.team = []
-        for dic_poke in dic_data["pokes"]:
-            poke = Pokeman(dic_poke["num"])
+        if dic_data["battlestate"] == "pokes":
+            self.team = []
+            for dic_poke in dic_data["pokes"]:
+                poke = Pokeman(dic_poke["num"])
 
-            poke.base_stats = Stats(dic_poke['hp'],dic_poke['atk'],dic_poke['def'],dic_poke['spa'],dic_poke['spd'],dic_poke['spe'])
+                poke.base_stats = Stats(dic_poke['hp'],dic_poke['atk'],dic_poke['def'],dic_poke['spa'],dic_poke['spd'],dic_poke['spe'])
 
-            poke.i_happy = dic_poke['hap']
-            poke.i_lv = dic_poke['lv']
-            poke.b_shiny = dic_poke['shiny']
+                poke.i_happy = dic_poke['hap']
+                poke.i_lv = dic_poke['lv']
+                poke.b_shiny = dic_poke['shiny']
 
-            self.team.append(poke)
-
-        print(str(self.team))
+                self.team.append(poke)
+            print(str(self.team))
+        elif dic_data["battlestate"] == "move":
+            print("hey")
 
     def run(self):
         Log.info("here")

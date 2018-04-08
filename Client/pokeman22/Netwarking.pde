@@ -27,7 +27,7 @@ void recieve_data() {
       dataIn = dataIn.substring(0, dataIn.length()-1);
       print("Recieved data: ");
       println(dataIn);
-      if (dataIn.length()>2) {
+      if (dataIn.length()>=1) {
         if (dataIn.charAt(0)==FOUND_BATTLE) {
           println("FOUND BATTLE");
           i_battle_state = BATTLING;
@@ -54,8 +54,8 @@ void send_pokes() {
 
   JSONArray json_poke_array = new JSONArray();
 
-  /*json.setInt("id", 0);
-   json.setString("species", "Panthera leo");
+  json.setString("battlestate", "pokes");
+   /*json.setString("species", "Panthera leo");
    json.setString("name", "Lion");*/
 
   for (int i=0; i<pokemons.size(); i++) {
