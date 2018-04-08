@@ -8,7 +8,6 @@ class Pokemon {
   PImage[] animationBack;
   Pokemon (int num, Boolean s/*, int hap, int lvl, String m1, String m2, String m3, String m4, String ab*/) {
     pokemonLocation = loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt");
-    //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
 
     //happiness = hap;
     //level = lvl;
