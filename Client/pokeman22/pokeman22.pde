@@ -155,9 +155,9 @@ void drawStartScreen() {
 
   textAlign(CENTER);
   fill(0);
-  if(i_battle_state==NOT_READY)
+  if (i_battle_state==NOT_READY)
     text("Find Match", START_BUTTON.i_x, START_BUTTON.i_y);
-  else if(i_battle_state==SEARCHING)
+  else if (i_battle_state==SEARCHING)
     text("Searching for Match", START_BUTTON.i_x, START_BUTTON.i_y);
   //text("Find Match", startButton[0], startButton[1]);
   //text("Settings", settingsButton[0], settingsButton[1]);
@@ -400,6 +400,14 @@ void draw() {
   recieve_data();
 
   background(200);
+
+  if (i_battle_state == BATTLING) {
+    if ('1'<=key&&key<='6'&&(i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+    }
+    if ((key=='q'||key=='w'||key=='e'||key=='r')&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+    }
+  }
+
   drawStartScreen();
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);

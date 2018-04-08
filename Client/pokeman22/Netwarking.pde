@@ -9,6 +9,13 @@ char TERMINATING_CHAR = '`';
 char FOUND_BATTLE = 'f';
 char NEXT_TURN = 't';
 
+char SELECT_POKE = 'p';
+char SELECT_MOVE = 'm';
+char SELECT_POKE_OR_MOVE = 'o';
+char AWAITING_SELECTION = 'w';
+
+char i_selection_stage = AWAITING_SELECTION;
+
 boolean reconnect() {
   if (!myClient.active()) {
 
@@ -30,11 +37,19 @@ void recieve_data() {
       if (dataIn.length()>=1) {
         if (dataIn.charAt(0)==FOUND_BATTLE) {
           println("FOUND BATTLE");
+          text_chat.add(0, "FOUND BATTLE");
           i_battle_state = BATTLING;
         } else if (dataIn.charAt(0)==NEXT_TURN) {
           println("NEXT TURN");
           i_battle_state = NOT_READY;
-        } else if (dataIn.charAt(0)=='b') {
+        } else if (dataIn.charAt(0)==SELECT_POKE) {
+          i_selection_stage = SELECT_POKE;
+        } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
+          i_selection_stage = SELECT_POKE_OR_MOVE;
+        } else if (dataIn.charAt(0)==SELECT_MOVE) {
+          i_selection_stage = SELECT_MOVE;
+        } else if (dataIn.charAt(0)==AWAITING_SELECTION) {
+          i_selection_stage = AWAITING_SELECTION;
         }
       }
       dataIn = "";
@@ -55,7 +70,7 @@ void send_pokes() {
   JSONArray json_poke_array = new JSONArray();
 
   json.setString("battlestate", "pokes");
-   /*json.setString("species", "Panthera leo");
+  /*json.setString("species", "Panthera leo");
    json.setString("name", "Lion");*/
 
   for (int i=0; i<pokemons.size(); i++) {

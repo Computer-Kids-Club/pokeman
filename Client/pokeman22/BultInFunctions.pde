@@ -5,7 +5,7 @@ void mousePressed() {
   print(" ");
   println(mouseY);*/
   if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
-    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2) {
+    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY) {
     send_pokes();
     i_battle_state = SEARCHING;
     println("pressed");
@@ -35,13 +35,16 @@ void keyPressed() {
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
   //  }
+  
+  if(i_battle_state == BATTLING) {
+  }
 
-  if (key=='h') {
+  /*if (key=='h') {
     send_hey();
   }
   if (key=='s') {
     send_pokes();
-  }
+  }*/
   if (key=='`') {
     reconnect();
   }
