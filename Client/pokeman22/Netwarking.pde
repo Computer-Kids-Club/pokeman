@@ -4,6 +4,11 @@ Client myClient;
 
 int PORT = 17171;
 
+char TERMINATING_CHAR = '`';
+
+char FOUND_BATTLE = 'f';
+char NEXT_TURN = 't';
+
 boolean reconnect() {
   if (!myClient.active()) {
 
@@ -18,13 +23,17 @@ void recieve_data() {
   if (myClient.available() > 0) { 
     char newChar = char(myClient.read());
     dataIn += newChar;
-    if (newChar == '\n') {
+    if (newChar == TERMINATING_CHAR) {
       dataIn = dataIn.substring(0, dataIn.length()-1);
       print("Recieved data: ");
       println(dataIn);
       if (dataIn.length()>2) {
-        if (dataIn.charAt(0)=='r') {
-        } else if (dataIn.charAt(0)=='g') {
+        if (dataIn.charAt(0)==FOUND_BATTLE) {
+          println("FOUND BATTLE");
+          i_battle_state = BATTLING;
+        } else if (dataIn.charAt(0)==NEXT_TURN) {
+          println("NEXT TURN");
+          i_battle_state = NOT_READY;
         } else if (dataIn.charAt(0)=='b') {
         }
       }

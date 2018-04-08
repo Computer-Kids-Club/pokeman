@@ -71,6 +71,8 @@ PImage pokeBall;
 PImage settingsButton;
 PImage backgroundImg;
 
+int i_battle_state = 0;
+
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
 PImage[][] loadPokemon(int num, JSONObject file, boolean shiny) {
@@ -153,13 +155,16 @@ void drawStartScreen() {
 
   textAlign(CENTER);
   fill(0);
-  text("Find Match", START_BUTTON.i_x, START_BUTTON.i_y);
+  if(i_battle_state==NOT_READY)
+    text("Find Match", START_BUTTON.i_x, START_BUTTON.i_y);
+  else if(i_battle_state==SEARCHING)
+    text("Searching for Match", START_BUTTON.i_x, START_BUTTON.i_y);
   //text("Find Match", startButton[0], startButton[1]);
   //text("Settings", settingsButton[0], settingsButton[1]);
   fill(255);
   textAlign(CORNER);
 
-  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY) {
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         println("HEYEHEYEHEHEHHEHE", i);

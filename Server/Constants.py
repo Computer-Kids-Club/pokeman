@@ -34,3 +34,7 @@ class EntryHazard(object):
 HOST = ''
 RECV_BUFFER = 4096
 PORT = 17171
+
+TERMINATING_CHAR = '`'
+FOUND_BATTLE = 'f'
+NEXT_TURN = 't'

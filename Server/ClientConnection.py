@@ -27,7 +27,7 @@ def broadcast (server_socket, sock, message):
         # send the message only to peer
         if socket != server_socket and socket != sock :
             try :
-                socket.send((message+"\n").encode("utf-8"))
+                socket.send((message+TERMINATING_CHAR).encode("utf-8"))
                 #socket.send(b"b100x")
             except :
                 # broken socket connection
@@ -56,7 +56,7 @@ def recieve_connection():
         l_sockets.append(sockfd)
         print(str(addr) + " connected")
 
-        l_clients[addr] = Client(addr)
+        l_clients[addr] = Client(addr,sockfd)
 
         # sockfd.send(b"gey")
         # broadcast(server_socket, sockfd, "[%s:%s] entered our chatting room\n" % addr)
@@ -100,9 +100,13 @@ def recieve_connection():
             continue
 
 class Client(object):
-    def __init__(self,addr=None):
+    def __init__(self,addr=None,socket=None):
         self.addr = addr
+        self.socket = socket
         self.team = []
+
+    def send_data(self,str_data):
+        self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
 
     def recieved_data(self,str_data):
         #print(str_data)

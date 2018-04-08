@@ -15,6 +15,10 @@ int POKEMON_PER_PAGE = 20;
 
 String POKEINFO_PATH = "./pokeinfo/";
 
+int NOT_READY = 0;
+int SEARCHING = 1;
+int BATTLING = 2;
+
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 void init_constants() {

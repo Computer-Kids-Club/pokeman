@@ -7,6 +7,7 @@ void mousePressed() {
   if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
     START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2) {
     send_pokes();
+    i_battle_state = SEARCHING;
     println("pressed");
   }
 }
