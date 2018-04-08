@@ -73,63 +73,6 @@ PImage backgroundImg;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
-class Pokemon {
-  String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
-  int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
-  Boolean shiny;
-  String[][] moves;
-  PImage[] animation;
-  PImage[] animationBack;
-  Pokemon (int num, Boolean s/*, int hap, int lvl, String m1, String m2, String m3, String m4, String ab*/) {
-    pokemonLocation = loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt");
-    //pokemonLocation = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+num+".txt");
-
-    //happiness = hap;
-    //level = lvl;
-    shiny = s;
-
-    // All Strings
-    name = pokemonLocation.getString("name");
-    type1 = pokemonLocation.getString("type1");
-    type2 = pokemonLocation.getString("type2");
-    species = pokemonLocation.getString("species");
-    h = pokemonLocation.getString("height");
-    weight = pokemonLocation.getString("weight");
-    //ability = ab;
-
-    // All Integers
-    number = num;
-    HP = int(pokemonLocation.getString("HP"));
-    ATK = int(pokemonLocation.getString("ATK"));
-    DEF = int(pokemonLocation.getString("DEF"));
-    SPA = int(pokemonLocation.getString("SPA"));
-    SPD = int(pokemonLocation.getString("SPD"));
-    SPE = int(pokemonLocation.getString("SPE"));
-
-    // All String Arrays
-    moves = names_moves.get(name);
-
-    // All PImage Arrays
-    PImage[][] animations = loadPokemon(num, pokemonLocation, s);
-    if (s) {
-      animation = animations[0];
-      animationBack = animations[1];
-    } else {
-      animation = animations[0];
-      animationBack = animations[1];
-    }
-
-    // All Given
-    /*
-    move1 = m1;
-     move2 = m2;
-     move3 = m3;
-     move4 = m4;
-     ability = ab;
-     */
-  }
-}
-
 PImage[][] loadPokemon(int num, JSONObject file, boolean shiny) {
   PImage[][] animations = new PImage[2][];
 
@@ -395,7 +338,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
   }
 }
 
-public void setup() {
+void setup() {
   size(1400, 900, P2D);
   frameRate(50);
   imageMode(CENTER);
@@ -479,82 +422,4 @@ void draw() {
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
   }
-}
-
-void mousePressed() {
-  if (START_BUTTON.i_x<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w &&
-    START_BUTTON.i_y<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h) {
-    send_pokes();
-  }
-}
-
-void mouseReleased() {
-  mousePressValid = true;
-}
-
-void mouseClicked() {
-}
-void mouseWheel(MouseEvent event) {
-  if (pokemonSelectScreen == true) {
-    if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
-      SLIDER.i_y += (event.getCount())*5;
-    }
-    if (SLIDER.i_y + SLIDER.i_h > height) {
-      SLIDER.i_y = height - SLIDER.i_h;
-    } else if (SLIDER.i_y < height/9) {
-      SLIDER.i_y = height/9;
-    }
-  }
-}
-void keyPressed() {
-  //  pokemons = new ArrayList<Pokemon>();
-  //  for (int i = 0; i < 6; i ++) {
-  //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
-  //  }
-
-  if (key=='h') {
-    send_hey();
-  }
-  if (key=='s') {
-    send_pokes();
-  }
-  if (key=='`') {
-    reconnect();
-  }
-
-  if (pokemonSearchBool == true) {
-    for (int i = 0; i < 26; i++) {
-      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
-        if (pokemonSearch == "") {
-          pokemonSearch = str(key);
-          break;
-        } else {
-          pokemonSearch += key;
-          break;
-        }
-      }
-    }
-    if (key == BACKSPACE) {
-      if (pokemonSearch.length() > 1) {
-        pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
-      } else if (pokemonSearch.length() > 0) {
-        pokemonSearch = pokemonSearch.substring(0, pokemonSearch.length()-1);
-        pokemonSearch = "";
-      } else {
-        pokemonSearch = "";
-      }
-    }
-    SLIDER.i_y = sliderStartY;
-    validPokemonSearch = new StringList();
-    for (int i = 1; i <= 807; i++) {
-      if (pokemonSearch.length() <= num_names.get(i).length()) {
-        if (pokemonSearch.equals(num_names.get(i).substring(0, pokemonSearch.length()))) {
-          validPokemonSearch.append(num_names.get(i));
-        }
-      }
-    }
-  }
-}
-
-void keyReleased() {
 }
