@@ -135,8 +135,15 @@ class Client(object):
                 self.team.append(poke)
             print(str(self.team))
             self.send_data(FOUND_BATTLE)
-        elif dic_data["battlestate"] == "move":
-            print("hey")
+            self.send_data(SELECT_POKE_OR_MOVE)
+        elif dic_data["battlestate"] == "selectpoke":
+            print(dic_data["poke"])
+            self.send_data(DISPLAY_TEXT+"Player selected pokeman number "+str(dic_data["poke"]))
+            self.send_data(SELECT_POKE_OR_MOVE)
+        elif dic_data["battlestate"] == "selectmove":
+            print(dic_data["move"])
+            self.send_data(DISPLAY_TEXT+"Player selected move number "+str(dic_data["move"]))
+            self.send_data(SELECT_POKE_OR_MOVE)
 
     def run(self):
         Log.info("here")

@@ -14,6 +14,8 @@ char SELECT_MOVE = 'm';
 char SELECT_POKE_OR_MOVE = 'o';
 char AWAITING_SELECTION = 'w';
 
+char DISPLAY_TEXT = 'd';
+
 char i_selection_stage = AWAITING_SELECTION;
 
 boolean reconnect() {
@@ -44,12 +46,18 @@ void recieve_data() {
           i_battle_state = NOT_READY;
         } else if (dataIn.charAt(0)==SELECT_POKE) {
           i_selection_stage = SELECT_POKE;
+          text_chat.add(0, "Select a pokemon with keys: 1,2,3,4,5,6");
         } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
           i_selection_stage = SELECT_POKE_OR_MOVE;
+          text_chat.add(0, "Select a pokemon with keys: 1,2,3,4,5,6 OR Select a move with keys: q,w,e,r");
         } else if (dataIn.charAt(0)==SELECT_MOVE) {
           i_selection_stage = SELECT_MOVE;
+          text_chat.add(0, "Select a move with keys: q,w,e,r");
         } else if (dataIn.charAt(0)==AWAITING_SELECTION) {
           i_selection_stage = AWAITING_SELECTION;
+          text_chat.add(0, "FOUND BATTLE");
+        } else if (dataIn.charAt(0)==DISPLAY_TEXT) {
+          text_chat.add(0, dataIn.substring(1));
         }
       }
       dataIn = "";

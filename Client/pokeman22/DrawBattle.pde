@@ -11,8 +11,32 @@ void draw_battle() {
 
 void select_poke(int i_poke_id) {
   
+  JSONObject json = new JSONObject();
+  
+  json.setString("battlestate", "selectpoke");
+  json.setInt("poke", i_poke_id);
+
+  if (!myClient.active()) {
+    return;
+  }
+
+  myClient.write(json.toString());
+  
+  println(i_poke_id);
 }
 
 void select_move(int i_move_id) {
   
+  JSONObject json = new JSONObject();
+  
+  json.setString("battlestate", "selectmove");
+  json.setInt("move", i_move_id);
+
+  if (!myClient.active()) {
+    return;
+  }
+
+  myClient.write(json.toString());
+  
+  println(i_move_id);
 }
