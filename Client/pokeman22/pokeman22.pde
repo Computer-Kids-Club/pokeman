@@ -201,9 +201,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   rect((width/7)*6 - SLIDER.i_w, height/9, SLIDER.i_w, (height/9)*8);
 
-  int gridSize = (height - height/9)/20;
+  int gridSize = (height - height/9)/POKEMON_PER_PAGE;
   int BST = 0;
-  for (int i = 0; i <= 19; i++) {
+  for (int i = 0; i < POKEMON_PER_PAGE; i++) {
     line(width/7, height/9 + i*gridSize, (width/7)*6, height/9 + i*gridSize);
     if (pokemonSearch == "") {
       offset = int(((SLIDER.i_y - sliderStartY)*808)/((height/9)*8));
@@ -235,12 +235,12 @@ void drawPokemonSelectionScreen(int slotNumber) {
       }
     } else {
       if (i < validPokemonSearch.size()) {
-        if (validPokemonSearch.size() > 20) {
-          offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - 20)/((height/9)*8 - SLIDER.i_h)));
+        if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
+          offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
         } else {
           offset = 0;
         }
-        println(validPokemonSearch.size(), validPokemonSearch.size()-20, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
+        println(validPokemonSearch.size(), validPokemonSearch.size()-POKEMON_PER_PAGE, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
         text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43, textHight + (i+1)*gridSize);
         text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
         for (int j = 0; j < 2; j++) {
@@ -274,11 +274,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
   fill(255);
   rect(SLIDER.i_x, SLIDER.i_y, SLIDER.i_w, SLIDER.i_h);
-  int searchButtonX = width/7 + 10;
-  int searchButtonY = 10;
-  int searchButtonW = 200;
-  int searchButtonH = 30;
-  rect(searchButtonX, searchButtonY, searchButtonW, searchButtonH);
+  rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   textAlign(LEFT);
   fill(0);
   if (pokemonSearchBool == false) {
@@ -290,7 +286,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   textAlign(CENTER);
 
   if (mousePressed && mousePressValid == true) {
-    if (mouseX <= searchButtonX + searchButtonW && mouseX >= searchButtonX && mouseY <= searchButtonY + searchButtonH && mouseY >= searchButtonY) {
+    if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
       pokemonSearchBool = true;
     } else {
       pokemonSearchBool = false;
@@ -310,8 +306,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
   } else {
     sliderFollow = false;
   }
-
-
 
   if (sliderFollow == true) {
     if (mouseY >= height/9 && mouseY <= height - SLIDER.i_h/2) {

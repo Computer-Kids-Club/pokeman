@@ -9,6 +9,10 @@ Rect POKEBALL;
 Rect START_BUTTON;
 Rect POKEMON_BUTTON;
 
+Rect SEARCH_BUTTON;
+
+int POKEMON_PER_PAGE = 30;
+
 String POKEINFO_PATH = "./pokeinfo/";
 
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
@@ -23,6 +27,8 @@ void init_constants() {
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
+
+  SEARCH_BUTTON = new Rect(width/7 + 10, 10, 200, 30);
 
   // hard code all the type colours
   TYPE_COLOURS.put("normal", color(#A8A878));
