@@ -81,6 +81,15 @@ PImage pokeBall;
 PImage settingsButton;
 PImage backgroundImg;
 
+Button startButton;
+Button pokemonButton;
+//int[] settingsButton = {width - 60, 60, 100, 100};
+
+int infoButtonX;
+int infoButtonY;
+int pokeBallX;
+int pokeBallY;
+
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
@@ -197,27 +206,18 @@ void drawStartScreen() {
 
   image(backgroundImg, 0, 0);
 
-  int[] startButton = {width/2, (height/9)*5, (width/7)*2, height/9};
-  int[] pokemonButton = {width/7, (height/6)*5, width/7, (height/9)*2};
-  //int[] settingsButton = {width - 60, 60, 100, 100};
-
-  int infoButtonX = pokemonButton[0] - pokemonButton[2]/2 + (width/700)*9;
-  int infoButtonY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
-  int pokeBallX = pokemonButton[0] + pokemonButton[2]/2 - (width/700)*9;
-  int pokeBallY = pokemonButton[1] + pokemonButton[3]/2 - height/50;
-
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
-  rect(startButton[0], startButton[1], startButton[2], startButton[3]);
+  rect(startButton.i_x, startButton.i_y, startButton.i_w, startButton.i_h);
   for (int i = 0; i < 6; i++) {
-    rect(pokemonButton[0] + i*pokemonButton[2], pokemonButton[1], pokemonButton[2], pokemonButton[3]);
-    drawPokemon(pokemons.get(i).animation, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1]);
+    rect(pokemonButton.i_x + i*pokemonButton.i_w, pokemonButton.i_y, pokemonButton.i_w, pokemonButton.i_h);
+    drawPokemon(pokemons.get(i).animation, pokemonButton.i_x + i*pokemonButton.i_w, pokemonButton.i_y);
     fill(0);
-    text(pokemons.get(i).name, pokemonButton[0] + i*pokemonButton[2], pokemonButton[1] + pokemonButton[3]/2 - height/90);
+    text(pokemons.get(i).name, pokemonButton.i_x + i*pokemonButton.i_w, pokemonButton.i_y + pokemonButton.i_h/2 - height/90);
     fill(255);
-    image(infoButton, infoButtonX + i*pokemonButton[2], infoButtonY);
-    image(pokeBall, pokeBallX + i*pokemonButton[2], pokeBallY);
+    image(infoButton, infoButtonX + i*pokemonButton.i_w, infoButtonY);
+    image(pokeBall, pokeBallX + i*pokemonButton.i_w, pokeBallY);
   }
   image(settingsButton, (width/140)*137, height/30);
   //rect(settingsButton[0], settingsButton[1], settingsButton[2], settingsButton[3]);
@@ -227,7 +227,7 @@ void drawStartScreen() {
 
   textAlign(CENTER);
   fill(0);
-  text("Find Match", startButton[0], startButton[1]);
+  text("Find Match", startButton.i_x, startButton.i_y);
   //text("Find Match", startButton[0], startButton[1]);
   //text("Settings", settingsButton[0], settingsButton[1]);
   fill(255);
@@ -235,14 +235,14 @@ void drawStartScreen() {
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false) {
     for (int i = 0; i < 6; i++) {
-      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton[2], pokeBallY) <= height/60) {
+      if (dist(mouseX, mouseY, pokeBallX + i*pokemonButton.i_w, pokeBallY) <= height/60) {
         println("HEYEHEYEHEHEHHEHE", i);
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
         //pokemons.set(i, new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
         mousePressValid = false;
       }
-      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton[2], infoButtonY) <= height/60) {
+      if (dist(mouseX, mouseY, infoButtonX + i*pokemonButton.i_w, infoButtonY) <= height/60) {
         println("sdjfghsldjkhfgasldhjfg", i);
         mousePressValid = false;
       }
@@ -421,11 +421,7 @@ public void setup() {
 
   myClient = new Client(this, "127.0.0.1", PORT);
 
-  sliderH = height/45;
-  sliderW = width/140;
-  sliderX = (width/7)*6 - sliderW;
-  sliderY = height/9;
-  sliderStartY = height/9;
+  init_constants();
 
   Gif.tmpPath = dataPath("");
 
@@ -524,6 +520,10 @@ void draw() {
 }
 
 void mousePressed() {
+  if (startButton.i_x<=mouseX && mouseX<=startButton.i_x+startButton.i_w &&
+    startButton.i_y<=mouseY && mouseY<=startButton.i_y+startButton.i_h) {
+    send_pokes();
+  }
 }
 
 void mouseReleased() {
