@@ -39,8 +39,10 @@ void keyPressed() {
   if (i_battle_state == BATTLING) {
     if ('1'<=key&&key<='6'&&(i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
       select_poke(int(key-'1'));
+      i_selection_stage = AWAITING_SELECTION;
     } else if (KEY_TO_ID.get(key)!=null&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
       select_move(KEY_TO_ID.get(key));
+      i_selection_stage = AWAITING_SELECTION;
     }
   }
 
