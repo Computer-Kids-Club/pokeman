@@ -167,14 +167,12 @@ void drawStartScreen() {
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY) {
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
-        println("HEYEHEYEHEHEHHEHE", i);
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
         //pokemons.set(i, new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
         mousePressValid = false;
       }
       if (dist(mouseX, mouseY, INFO_BUTTON.i_x + i*POKEMON_BUTTON.i_w, INFO_BUTTON.i_y) <= height/60) {
-        println("sdjfghsldjkhfgasldhjfg", i);
         mousePressValid = false;
       }
     }
@@ -223,6 +221,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height/9.0)*8.0-SLIDER.i_h));
   for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
     line(width/7, i*gridSize+textHight+gridSize/2, (width/7)*6, i*gridSize+textHight+gridSize/2);
+    println(validPokemonSearch.size(), pokemonSearch);
     if (i < validPokemonSearch.size()) {
       if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
         offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
@@ -253,6 +252,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
           pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           SLIDER.i_y = sliderStartY;
           pokemonSearch = "";
+          validPokemonSearch = new StringList();
           pokemonSearchBool = false;
           pokemonSelectScreen = false;
           mousePressValid = false;
@@ -288,6 +288,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
         pokemonSelectScreen = false;
         SLIDER.i_y = sliderStartY;
         pokemonSearch = "";
+        validPokemonSearch = new StringList();
         pokemonSearchBool = false;
       }
     }
