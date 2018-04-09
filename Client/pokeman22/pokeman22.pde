@@ -70,6 +70,7 @@ PImage infoButton;
 PImage pokeBall;
 PImage settingsButton;
 PImage backgroundImg;
+PImage startButton;
 
 int i_battle_state = 0;
 
@@ -221,7 +222,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
   offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height/9.0)*8.0-SLIDER.i_h));
   for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
     line(width/7, i*gridSize+textHight+gridSize/2, (width/7)*6, i*gridSize+textHight+gridSize/2);
-    println(validPokemonSearch.size(), pokemonSearch);
     if (i < validPokemonSearch.size()) {
       if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
         offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
@@ -340,6 +340,7 @@ void setup() {
   pokeBall = loadImage("Pokeball.png");
   settingsButton = loadImage("settingsButton.png");
   backgroundImg = loadImage("Background.jpg");
+  startButton = loadImage("Button.jpg");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize((width/140)*3, height/30);
