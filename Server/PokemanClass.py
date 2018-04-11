@@ -46,7 +46,22 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
-        return Stats()
+        return self.base_stats
+
+    def to_dic(self):
+        dic_poke = {}
+
+        dic_poke["num"] = self.i_num
+
+        self.get_usable_stats().to_dic(dic_poke,"base")
+
+        dic_poke['hap'] = self.i_happy
+        dic_poke['lv'] = self.i_lv
+        dic_poke['shiny'] = self.b_shiny
+
+        dic_poke['moves'] = [move.to_dic() for move in self.l_moves]
+
+        return dic_poke
 
     # overriding str method
     def __str__(self):

@@ -14,6 +14,9 @@ char SELECT_MOVE = 'm';
 char SELECT_POKE_OR_MOVE = 'o';
 char AWAITING_SELECTION = 'w';
 
+char SENDING_POKE = 's';
+char CHANGING_POKE = 'c';
+
 char DISPLAY_TEXT = 'd';
 
 char i_selection_stage = AWAITING_SELECTION;
@@ -29,13 +32,13 @@ boolean reconnect() {
 String dataIn = ""; 
 void recieve_data() { 
   //reconnect();
-  if (myClient.available() > 0) { 
+  while (myClient.available() > 0) { 
     char newChar = char(myClient.read());
     dataIn += newChar;
     if (newChar == TERMINATING_CHAR) {
       dataIn = dataIn.substring(0, dataIn.length()-1);
-      print("Recieved data: ");
-      println(dataIn);
+      //println("Recieved data: ");
+      //println(dataIn);
       if (dataIn.length()>=1) {
         if (dataIn.charAt(0)==FOUND_BATTLE) {
           println("FOUND BATTLE");
@@ -58,6 +61,22 @@ void recieve_data() {
           text_chat.add(0, "FOUND BATTLE");
         } else if (dataIn.charAt(0)==DISPLAY_TEXT) {
           text_chat.add(0, dataIn.substring(1));
+        } else if (dataIn.charAt(0)==SENDING_POKE) {
+          JSONObject json = parseJSONObject(dataIn.substring(1));
+          JSONArray json_pokes_array = json.getJSONArray("pokes");
+          other_pokemons = new ArrayList<Pokemon>();
+          for (int j = 0; j < json_pokes_array.size(); j++) {
+            other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
+            other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
+          }
+        } else if (dataIn.charAt(0)==CHANGING_POKE) {
+          JSONObject json = parseJSONObject(dataIn.substring(1));
+          JSONArray json_pokes_array = json.getJSONArray("pokes");
+          other_pokemons = new ArrayList<Pokemon>();
+          for (int j = 0; j < json_pokes_array.size(); j++) {
+            other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
+            //other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
+          }
         }
       }
       dataIn = "";
