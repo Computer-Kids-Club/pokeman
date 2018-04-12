@@ -6,11 +6,17 @@ void draw_battle() {
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
+  for (int i = 0; i < pokemons.size(); i++) {
+    drawPokemon(pokemons.get(i).animationBack, 150+i*150, 500+i*40);
+    //fill(0);
+    //text(pokemons.get(i).name, POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/90);
+    //fill(255);
+  }
   for (int i = 0; i < other_pokemons.size(); i++) {
-    drawPokemon(other_pokemons.get(i).animation, POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y);
-    fill(0);
-    text(other_pokemons.get(i).name, POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/90);
-    fill(255);
+    drawPokemon(other_pokemons.get(i).animation, 600+i*150, 150+i*40);
+    //fill(0);
+    //text(other_pokemons.get(i).name, POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/90);
+    //fill(255);
   }
   imageMode(CORNER);
   textAlign(CORNER);

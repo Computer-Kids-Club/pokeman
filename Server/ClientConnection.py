@@ -144,7 +144,7 @@ class Client(object):
             print(str(self.team))
             self.send_data(FOUND_BATTLE)
             self.send_pokes()
-            self.send_data(SELECT_POKE_OR_MOVE)
+            self.send_data(SELECT_POKE)
         elif dic_data["battlestate"] == "selectpoke":
             print(dic_data["poke"])
             self.send_data(DISPLAY_TEXT+"Player selected pokeman number "+str(dic_data["poke"]))

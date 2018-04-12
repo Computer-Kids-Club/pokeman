@@ -315,10 +315,18 @@ void drawPokemonSelectionScreen(int slotNumber) {
 void drawPokemonInformationScreen(int slotNumber) {
 }
 
-void drawPokemon(PImage[] pAnimation, int x, int y) {
+void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
   if (pAnimation.length>0) {
-    image(pAnimation[(int) frameCount%pAnimation.length], x, y);
+    pushMatrix();
+    translate(x, y);
+    scale(s, s);
+    image(pAnimation[(int) frameCount%pAnimation.length], 0, 0);
+    popMatrix();
   }
+}
+
+void drawPokemon(PImage[] pAnimation, int x, int y) {
+  drawPokemon(pAnimation, x, y, 1);
 }
 
 void setup() {
