@@ -342,7 +342,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
     tempAnimationLoad = false;
   }
   rectMode(CORNER);
-  //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, height - SELECTSCREENSHIFT_Y*2);
+  //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2 + 100, height - SELECTSCREENSHIFT_Y*2);
   for (int i = 0; i < 4; i++) {
     rect(width/7 + SELECTSCREENSHIFT_X + (900/4)*i, SELECTSCREENSHIFT_Y, 900/4, 900/4);
     imageMode(CENTER);
@@ -350,20 +350,31 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
     imageMode(CORNER);
   }
   rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
+  //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
   if (moveSelect){
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 187, width*5/7 - SELECTSCREENSHIFT_X*2, 40);
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 40);
   rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 227, width*5/7 - SELECTSCREENSHIFT_X*2, 228);
   } else {
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 187, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
+  }
+  for (int i = 0; i < 3; i++){
+    rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + 900/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
+  }
+  for (int i = 0; i < 4; i++){
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + i*(188/4), (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188/4);
+  }
+  for (int i = 0; i < 4; i++){
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + i*(188/4), (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188/4);
   }
   //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
   //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,60);
   //for (int i = 0; i < 3; i++) {
   //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y + 60 + i*50,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,50);
   //}
+  rect(860, 395, 282, 150, 10);
   fill(0);
   //text("Name: " + num_names.get(pokeNum), 700,150);
+  text("Stats", 860, 385);
   fill(255);
 }
 
