@@ -76,6 +76,7 @@ int i_battle_state = 0;
 
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
+boolean moveSelect = true;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -89,6 +90,16 @@ PImage[][] loadPokemon(JSONObject file, boolean shiny) {
     animations[0] = Gif.getPImages(this, file.getString("gif"));
     animations[1] = Gif.getPImages(this, file.getString("gifb"));
   }
+
+  return animations;
+}
+
+PImage[][] loadPokemonAll(JSONObject file) {
+  PImage[][] animations = new PImage[4][];
+  animations[0] = Gif.getPImages(this, file.getString("gif"));
+  animations[1] = Gif.getPImages(this, file.getString("gifb"));
+  animations[2] = Gif.getPImages(this, file.getString("gifs"));
+  animations[3] = Gif.getPImages(this, file.getString("gifbs"));
 
   return animations;
 }
@@ -326,17 +337,34 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
-  if (tempAnimationLoad){
-  tempAnimations = loadPokemon(loadJSONObject(POKEINFO_PATH+"pokemon/"+pokeNum+".txt"),false); 
-  tempAnimationLoad = false;
+  if (tempAnimationLoad) {
+    tempAnimations = loadPokemonAll(loadJSONObject(POKEINFO_PATH+"pokemon/"+pokeNum+".txt")); 
+    tempAnimationLoad = false;
   }
   rectMode(CORNER);
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, height - SELECTSCREENSHIFT_Y*2);
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
+  //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, height - SELECTSCREENSHIFT_Y*2);
+  for (int i = 0; i < 4; i++) {
+    rect(width/7 + SELECTSCREENSHIFT_X + (900/4)*i, SELECTSCREENSHIFT_Y, 900/4, 900/4);
+    imageMode(CENTER);
+    drawPokemon(tempAnimations[i], width/7 + SELECTSCREENSHIFT_X + (900/4)*i + 900/8, SELECTSCREENSHIFT_Y + 900/8);
+    imageMode(CORNER);
+  }
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
+  if (moveSelect){
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 187, width*5/7 - SELECTSCREENSHIFT_X*2, 40);
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 227, width*5/7 - SELECTSCREENSHIFT_X*2, 228);
+  } else {
+  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 187, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
+  }
+  //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
+  //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,60);
+  //for (int i = 0; i < 3; i++) {
+  //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y + 60 + i*50,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,50);
+  //}
   fill(0);
-  text("Name: " + num_names.get(pokeNum), 700,150);
+  //text("Name: " + num_names.get(pokeNum), 700,150);
   fill(255);
-  drawPokemon(tempAnimations[0], width/7 + SELECTSCREENSHIFT_X + 10,SELECTSCREENSHIFT_Y + 10,2);
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -441,7 +469,7 @@ void draw() {
   }
 
   drawStartScreen();
-  drawPokemonInformationScreen(1,398);
+  drawPokemonInformationScreen(1, 398);
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
   }
