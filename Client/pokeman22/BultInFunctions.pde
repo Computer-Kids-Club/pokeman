@@ -1,5 +1,3 @@
-
-
 void mousePressed() {
   /*print(mouseX);
    print(" ");
@@ -21,15 +19,25 @@ void mouseClicked() {
 void mouseWheel(MouseEvent event) {
   if (pokemonSelectScreen == true) {
     if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
-      SLIDER.i_y += (event.getCount())*5;
+      int count = (event.getCount())*5;
+      if (count > 0) {
+        if (SLIDER.i_y + SLIDER.i_h < height - SELECTSCREENSHIFT) {
+          SLIDER.i_y += (event.getCount())*5;
+        }
+      } else {
+        if (SLIDER.i_y > sliderStartY) {
+          SLIDER.i_y += (event.getCount())*5;
+        }
+      }
     }
-    if (SLIDER.i_y + SLIDER.i_h > height) {
-      SLIDER.i_y = height - SLIDER.i_h;
-    } else if (SLIDER.i_y < height/9) {
-      SLIDER.i_y = height/9;
+    if (SLIDER.i_y + SLIDER.i_h > height - SELECTSCREENSHIFT) {
+      SLIDER.i_y = height - SLIDER.i_h - SELECTSCREENSHIFT;
+    } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT) {
+      SLIDER.i_y = height/9 + SELECTSCREENSHIFT;
     }
   }
 }
+
 void keyPressed() {
   //  pokemons = new ArrayList<Pokemon>();
   //  for (int i = 0; i < 6; i ++) {

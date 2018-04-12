@@ -185,13 +185,13 @@ void drawStartScreen() {
 
 void drawPokemonSelectionScreen(int slotNumber) {
 
-  float gridSize = (height - height/9)*1.0f/POKEMON_PER_PAGE;
+  float gridSize = (height - height/9 - SELECTSCREENSHIFT*2)*1.0f/POKEMON_PER_PAGE;
   int BST = 0;
-  float textHight = height/9-10;
+  float textHight = height/9-10 + SELECTSCREENSHIFT;
 
   rectMode(CORNER);
-  rect(width/7, height/9, width*5/7, (height/9)*8);
-  rect(width/7, 0, width*5/7, height/9);
+  rect(width/7, height/9 + SELECTSCREENSHIFT, width*5/7, (height/9)*8 - SELECTSCREENSHIFT*2);
+  rect(width/7, SELECTSCREENSHIFT, width*5/7, height/9);
   //rect(width/7, height/18, width*5/7, height/18);
 
   fill(0);
@@ -207,9 +207,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
   text("SPE", (width/140)*111, textHight);
   text("BST", (width/140)*115, textHight);
 
-  rect((width/7)*6 - SLIDER.i_w, height/9, SLIDER.i_w, (height/9)*8);
+  rect((width/7)*6 - SLIDER.i_w, height/9 + SELECTSCREENSHIFT, SLIDER.i_w, (height/9)*8 - SELECTSCREENSHIFT*2);
 
-  textHight = - gridSize/2 + height/9;
+  textHight = - gridSize/2 + height/9 + SELECTSCREENSHIFT;
 
   textAlign(LEFT, CENTER);
 
@@ -219,12 +219,12 @@ void drawPokemonSelectionScreen(int slotNumber) {
     }
   }
 
-  offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height/9.0)*8.0-SLIDER.i_h));
+  offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height - height/9 - SELECTSCREENSHIFT*2)-SLIDER.i_h));
   for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
     line(width/7, i*gridSize+textHight+gridSize/2, (width/7)*6, i*gridSize+textHight+gridSize/2);
     if (i < validPokemonSearch.size()) {
       if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
-        offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height/9)*8 - SLIDER.i_h)));
+        offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height - height/9 - SELECTSCREENSHIFT*2) - SLIDER.i_h)));
       } else {
         offset = 0;
       }
@@ -248,7 +248,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
       }
       text(BST, (width/140)*115, textHight + (i+1)*gridSize);
       if (mousePressed && mousePressValid == true) {
-        if (mouseX < (width/7)*6 - SLIDER.i_w && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize && mouseY > height/9 + i*gridSize && sliderFollow == false) {
+        if (mouseX < (width/7)*6 - SLIDER.i_w && mouseX >= width/7 && mouseY < (height/45)*7 + i*gridSize + SELECTSCREENSHIFT && mouseY > height/9 + i*gridSize + SELECTSCREENSHIFT && sliderFollow == false) {
           pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           SLIDER.i_y = sliderStartY;
           pokemonSearch = "";
@@ -266,9 +266,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
   textAlign(LEFT);
   fill(0);
   if (pokemonSearchBool == false) {
-    text("Search by Name", width/7 + 15, 30);
+    text("Search by Name", width/7 + 15, 30 + SELECTSCREENSHIFT);
   } else {
-    text(pokemonSearch, width/7 + 15, 30);
+    text(pokemonSearch, width/7 + 15, 30 + SELECTSCREENSHIFT);
   }
   fill(255);
   textAlign(CENTER);
@@ -279,7 +279,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
     } else {
       pokemonSearchBool = false;
     }
-
+println(mouseX >= SLIDER.i_x, mouseX <= SLIDER.i_x + SLIDER.i_w, mouseY >= SLIDER.i_y,mouseY <= SLIDER.i_y + SLIDER.i_h);
     if (mouseX >= SLIDER.i_x && mouseX <= SLIDER.i_x + SLIDER.i_w && mouseY >= SLIDER.i_y && mouseY <= SLIDER.i_y + SLIDER.i_h) {
       sliderFollow = true;
     }
@@ -297,18 +297,18 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
 
   if (sliderFollow == true) {
-    if (mouseY >= height/9 && mouseY <= height - SLIDER.i_h/2) {
+    if (mouseY >= height/9 + SELECTSCREENSHIFT && mouseY <= height - SLIDER.i_h/2 - SELECTSCREENSHIFT) {
       SLIDER.i_y = mouseY - SLIDER.i_h/2;
-    } else if (mouseY <= height/9) {
-      SLIDER.i_y = height/9;
+    } else if (mouseY <= height/9 + SELECTSCREENSHIFT) {
+      SLIDER.i_y = height/9 + SELECTSCREENSHIFT;
     } else if (mouseY >= height - SLIDER.i_h) {
-      SLIDER.i_y = height - SLIDER.i_h;
+      SLIDER.i_y = height - SELECTSCREENSHIFT - SLIDER.i_h;
     }
   }
-  if (SLIDER.i_y + SLIDER.i_h > height) {
-    SLIDER.i_y = height - SLIDER.i_h;
-  } else if (SLIDER.i_y < height/9) {
-    SLIDER.i_y = height/9;
+  if (SLIDER.i_y + SLIDER.i_h > height - SELECTSCREENSHIFT) {
+    SLIDER.i_y = height - SLIDER.i_h - SELECTSCREENSHIFT;
+  } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT) {
+    SLIDER.i_y = height/9 + SELECTSCREENSHIFT;
   }
 }
 
