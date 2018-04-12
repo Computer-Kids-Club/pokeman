@@ -8,6 +8,7 @@ import json
 import socket
 from PokemanClass import Pokeman
 from StatClass import Stats
+from random import randint
 import select
 
 # from random import randint
@@ -104,7 +105,6 @@ def recieve_connection():
 
             continue
 
-
 class Client(object):
     def __init__(self, addr=None, socket=None):
         self.addr = addr
@@ -115,9 +115,9 @@ class Client(object):
     def send_data(self, str_data):
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
 
-    def send_pokes(self):
+    def send_pokes(self, team):
         l_poke_data = []
-        for poke in self.team:
+        for poke in team:
             l_poke_data.append(poke.to_dic())
         self.send_data(SENDING_POKE+json.dumps({"pokes":l_poke_data}))
 
@@ -143,7 +143,8 @@ class Client(object):
                 self.team.append(poke)
             print(str(self.team))
             self.send_data(FOUND_BATTLE)
-            self.send_pokes()
+            tmp_client.team = [Pokeman(randint(1,807)) for i in range(6)]
+            self.send_pokes(tmp_client.team)
             self.send_data(SELECT_POKE)
         elif dic_data["battlestate"] == "selectpoke":
             print(dic_data["poke"])
@@ -159,3 +160,5 @@ class Client(object):
     def run(self):
         Log.info("here")
         return True
+
+tmp_client = Client()
