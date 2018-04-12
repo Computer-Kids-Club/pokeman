@@ -21,7 +21,7 @@ void mouseWheel(MouseEvent event) {
     if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
       int count = (event.getCount())*5;
       if (count > 0) {
-        if (SLIDER.i_y + SLIDER.i_h < height - SELECTSCREENSHIFT) {
+        if (SLIDER.i_y + SLIDER.i_h < height - SELECTSCREENSHIFT_Y) {
           SLIDER.i_y += (event.getCount())*5;
         }
       } else {
@@ -30,10 +30,10 @@ void mouseWheel(MouseEvent event) {
         }
       }
     }
-    if (SLIDER.i_y + SLIDER.i_h > height - SELECTSCREENSHIFT) {
-      SLIDER.i_y = height - SLIDER.i_h - SELECTSCREENSHIFT;
-    } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT) {
-      SLIDER.i_y = height/9 + SELECTSCREENSHIFT;
+    if (SLIDER.i_y + SLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      SLIDER.i_y = height - SLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT_Y) {
+      SLIDER.i_y = height/9 + SELECTSCREENSHIFT_Y;
     }
   }
 }
