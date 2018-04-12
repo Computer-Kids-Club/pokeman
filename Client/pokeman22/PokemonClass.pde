@@ -50,7 +50,7 @@ class Pokemon {
     moves = names_moves.get(name);
 
     // All PImage Arrays
-    PImage[][] animations = loadPokemon(number, json, shiny);
+    PImage[][] animations = loadPokemon(json, shiny);
     if (shiny) {
       animation = animations[0];
       animationBack = animations[1];
