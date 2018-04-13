@@ -71,6 +71,7 @@ PImage pokeBall;
 PImage settingsButton;
 PImage backgroundImg;
 PImage startButton;
+PImage pokedex;
 
 int i_battle_state = 0;
 
@@ -199,6 +200,7 @@ void drawStartScreen() {
 
 void drawPokemonSelectionScreen(int slotNumber) {
 
+  image(pokedex, 0, 0);
   float gridSize = (height - height/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
   int BST = 0;
   float textHight = height/9-10 + SELECTSCREENSHIFT_Y;
@@ -337,6 +339,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
+  //image(pokedex, 0, 0);
   if (tempAnimationLoad) {
     tempAnimations = loadPokemonAll(loadJSONObject(POKEINFO_PATH+"pokemon/"+pokeNum+".txt")); 
     tempAnimationLoad = false;
@@ -351,19 +354,19 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
   }
   rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
   //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
-  if (moveSelect){
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 40);
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 227, width*5/7 - SELECTSCREENSHIFT_X*2, 228);
+  if (moveSelect) {
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 40);
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 227, width*5/7 - SELECTSCREENSHIFT_X*2, 228);
   } else {
-  rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
   }
-  for (int i = 0; i < 3; i++){
+  for (int i = 0; i < 3; i++) {
     rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + 900/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
   }
-  for (int i = 0; i < 4; i++){
+  for (int i = 0; i < 4; i++) {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + i*(188/4), (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188/4);
   }
-  for (int i = 0; i < 4; i++){
+  for (int i = 0; i < 4; i++) {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60 + i*(188/4), (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188/4);
   }
   //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
@@ -371,10 +374,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
   //for (int i = 0; i < 3; i++) {
   //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y + 60 + i*50,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,50);
   //}
-  rect(860, 395, 282, 150, 10);
+  println(width/7 + SELECTSCREENSHIFT_X + 2*((width*5/7 - SELECTSCREENSHIFT_X*2)/3));
+  rect(590, 400, 220, 30);
+    rect(860, 395, 282, 150, 10);
   fill(0);
   //text("Name: " + num_names.get(pokeNum), 700,150);
-  text("Stats", 860, 385);
+  text("Moves", 560, 385);
+  text("1.", 560, 420);
+  text("2.", 560, 457);
+  text("3.", 560, 493);
+  text("4.", 560, 530);
+  text("Stats", 870, 385);
+  text("HP", 870, 415);
+  text("ATK", 870, 438);
+  text("DEF", 870, 461);
+  text("SPA", 870, 484);
+  text("SPD", 870, 507);
+  text("SPE", 870, 530);
   fill(255);
 }
 
@@ -412,6 +428,7 @@ void setup() {
   settingsButton = loadImage("settingsButton.png");
   backgroundImg = loadImage("Background.jpg");
   startButton = loadImage("Button.jpg");
+  pokedex = loadImage("pokedex.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize((width/140)*3, height/30);
