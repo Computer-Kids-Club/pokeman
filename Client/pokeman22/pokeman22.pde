@@ -195,7 +195,7 @@ void drawStartScreen() {
       }
     }
   }
-
+  image(startButton, START_BUTTON.i_x - START_BUTTON.i_w/2, START_BUTTON.i_y - START_BUTTON.i_h/2);
   // line(width/2, 0, width/2, height);
   //line(0, height/2, width, height/2);
 }
@@ -436,6 +436,7 @@ void setup() {
   pokeBall.resize((width/140)*3, height/30);
   infoButton.resize((width/140)*3, height/30);
   backgroundImg.resize(width, height);
+  startButton.resize(START_BUTTON.i_w,START_BUTTON.i_h);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {

@@ -31,7 +31,7 @@ void init_constants() {
   SLIDER = new Rect((width/7)*6-width/140 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
 
-  START_BUTTON = new Rect(width/2, (height/9)*5, (width/7)*2, height/9);
+  START_BUTTON = new Rect(width/2, height/2, 400, 200);
   POKEMON_BUTTON = new Rect(width/7, (height/6)*5, width/7, (height/9)*2);
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
