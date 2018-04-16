@@ -149,6 +149,8 @@ class Client(object):
         elif dic_data["battlestate"] == "selectpoke":
             print(dic_data["poke"])
             self.send_data(DISPLAY_TEXT+"Player selected pokeman number "+str(dic_data["poke"]))
+            self.send_data(DISPLAY_POKES+json.dumps({"player":ME,"pokeidx":dic_data["poke"]}))
+            self.send_data(DISPLAY_POKES+json.dumps({"player":OTHER,"pokeidx":randint(0,5)}))
             #self.send_pokes()
             self.send_data(SELECT_POKE_OR_MOVE)
         elif dic_data["battlestate"] == "selectmove":

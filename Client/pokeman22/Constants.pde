@@ -22,6 +22,29 @@ int BATTLING = 2;
 int SELECTSCREENSHIFT_Y = 80;
 int SELECTSCREENSHIFT_X = 50;
 
+int ME = 0;
+int OTHER = 1;
+
+int PORT = 17171;
+
+char TERMINATING_CHAR = '`';
+
+char FOUND_BATTLE = 'f';
+char NEXT_TURN = 't';
+
+char SELECT_POKE = 'p';
+char SELECT_MOVE = 'm';
+char SELECT_POKE_OR_MOVE = 'o';
+char AWAITING_SELECTION = 'w';
+
+char SENDING_POKE = 's';
+char CHANGING_POKE = 'c';
+
+char DISPLAY_TEXT = 'd';
+char DISPLAY_TEAMS = 'T';
+char DISPLAY_POKES = 'P';
+char DISPLAY_NONE = 'N';
+
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
@@ -38,7 +61,7 @@ void init_constants() {
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
   SEARCH_BUTTON = new Rect(width/7 + 10 + SELECTSCREENSHIFT_X, 10 + SELECTSCREENSHIFT_Y, 200, 30);
-  
+
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);
   KEY_TO_ID.put('e', 2);
