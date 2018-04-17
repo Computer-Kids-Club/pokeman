@@ -22,10 +22,10 @@ void draw_battle() {
   }
 
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
-    drawPokemon(pokemons.get(c_my_display_poke).animationBack, 150+3*150, 400+3*40);
+    drawPokemon(pokemons.get(c_my_display_poke).animationBack, 150, 400+3*40);
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
-    drawPokemon(other_pokemons.get(c_other_display_poke).animation, 500+3*150, 50+3*40);
+    drawPokemon(other_pokemons.get(c_other_display_poke).animation, 500+5*150, 50+3*40);
   }
 
   imageMode(CORNER);

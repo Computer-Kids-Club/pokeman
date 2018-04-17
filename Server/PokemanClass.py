@@ -39,6 +39,8 @@ class Pokeman(object):
         self.item_stats = Stats()
         self.modifier_stats = Stats()
 
+        self.i_hp = self.get_usable_stats().i_hp
+
     def get_moves(self):
         return self.l_moves
 
