@@ -19,8 +19,8 @@ int NOT_READY = 0;
 int SEARCHING = 1;
 int BATTLING = 2;
 
-int SELECTSCREENSHIFT_Y = 80;
-int SELECTSCREENSHIFT_X = 50;
+int SELECTSCREENSHIFT_Y;
+int SELECTSCREENSHIFT_X;
 
 int ME = 0;
 int OTHER = 1;
@@ -50,7 +50,8 @@ HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
 
 void init_constants() {
-
+  SELECTSCREENSHIFT_Y = height*4/45;
+  SELECTSCREENSHIFT_X = width/28;
   SLIDER = new Rect((width/7)*6-width/140 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
 
