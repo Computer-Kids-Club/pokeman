@@ -204,7 +204,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
   strokeWeight(0);
 
   image(backgroundImg, 0, 0);
-  image(pokedex, 0, 0);
   float gridSize = (height - height/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
   int BST = 0;
   float textHight = height/9-10 + SELECTSCREENSHIFT_Y;
@@ -240,9 +239,12 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height - height/9 - SELECTSCREENSHIFT_Y*2)-SLIDER.i_h));
   fill(0, 0, 0, 150);
-  rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, (height*38)/45 - height/9 - SELECTSCREENSHIFT_Y);
+  rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, (height*38)/45 - SELECTSCREENSHIFT_Y);
   fill(255);
-  line(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y,width*5/7 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y);
+  stroke(255);
+  strokeWeight(1);
+  line(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/7 + SELECTSCREENSHIFT_X + width*5/7 - SELECTSCREENSHIFT_X*2, height/9 + SELECTSCREENSHIFT_Y);
+  strokeWeight(0);
   for (int i = 0; i < POKEMON_PER_PAGE && i + 1 + offset <= num_names.size(); i++) {
     //line(width/7 + SELECTSCREENSHIFT_X, i*gridSize+textHight+gridSize/2, (width/7)*6 - SELECTSCREENSHIFT_X, i*gridSize+textHight+gridSize/2);
     //rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y + i*gridSize, width*5/7 - SELECTSCREENSHIFT_X*2, gridSize);
@@ -285,11 +287,11 @@ void drawPokemonSelectionScreen(int slotNumber) {
       }
     }
   }
-  fill(0);
-  rect((width/7)*6 - SLIDER.i_w - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, SLIDER.i_w, (height/9)*8 - SELECTSCREENSHIFT_Y*2);
+  //fill(0);
+  //rect((width/7)*6 - SLIDER.i_w - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, SLIDER.i_w, (height/9)*8 - SELECTSCREENSHIFT_Y*2);
   fill(255);
   rect(SLIDER.i_x, SLIDER.i_y, SLIDER.i_w, SLIDER.i_h);
-  fill(0, 0, 0, 10);
+  fill(0, 0, 0, 60);
   rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
   textAlign(LEFT);
@@ -338,6 +340,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT_Y) {
     SLIDER.i_y = height/9 + SELECTSCREENSHIFT_Y;
   }
+  image(pokedex, 0, 0);
   strokeWeight(1);
 }
 
