@@ -294,11 +294,10 @@ void drawPokemonSelectionScreen(int slotNumber) {
   fill(0, 0, 0, 60);
   rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
-  textAlign(LEFT);
   if (pokemonSearchBool == false) {
-    text("Search by Name", width*43/280 + SELECTSCREENSHIFT_X, height/30 + SELECTSCREENSHIFT_Y);
+    text("Search by Name", width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   } else {
-    text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/30 + SELECTSCREENSHIFT_Y);
+    text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   }
   fill(255);
   textAlign(CENTER);
@@ -342,6 +341,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
   image(pokedex, 0, 0);
   strokeWeight(1);
+  stroke(0);
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
@@ -422,7 +422,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  size(1050, 675, P2D);
+  size(1400, 900, P2D);
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
@@ -463,7 +463,19 @@ void setup() {
     Integer[] stats = {int(file.getString("HP")), int(file.getString("ATK")), int(file.getString("DEF")), int(file.getString("SPA")), int(file.getString("SPD")), int(file.getString("SPE"))};
     String[] types = {file.getString("type1"), file.getString("type2")};
     String[] height_weight = {file.getString("height"), file.getString("weight")};
-    String[] abilities = {file.getString("ability1"), file.getString("ability2"), file.getString("hiddenability")};
+    String ab1 = file.getString("ability1");
+    String ab2 = file.getString("ability2");
+    String ab3 = file.getString("hiddenability");
+    if (ab1 != null) {
+      ab1 = ab1.replaceAll("-", " ");
+    }
+    if (ab2 != null) {
+      ab2 = ab2.replaceAll("-", " ");
+    }
+    if (ab3 != null) {
+      ab3 = ab3.replaceAll("-", " ");
+    }
+    String[] abilities = {ab1, ab2, ab3};
     names_stats.put(file.getString("name"), stats);
     names_types.put(file.getString("name"), types);
     names_species.put(file.getString("name"), file.getString("species"));
