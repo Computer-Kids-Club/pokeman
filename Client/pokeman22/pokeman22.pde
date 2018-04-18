@@ -80,7 +80,7 @@ int i_battle_state = 0;
 
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
-boolean moveSelect = true;
+boolean moveSelect = false;
 
 int moveSlot;
 
@@ -587,7 +587,9 @@ void draw() {
   }
 
   drawStartScreen();
-  drawPokemonInformationScreen(1, 398, 32);
+  if (moveSelect == true) {
+    drawPokemonInformationScreen(1, 398, 32);
+  }
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
   }
