@@ -206,7 +206,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   image(backgroundImg, 0, 0);
   float gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
   int BST = 0;
-  float textHight = height/9-10 + SELECTSCREENSHIFT_Y;
+  float textHight = height/10 + SELECTSCREENSHIFT_Y;
 
   rectMode(CORNER);
   fill(0, 0, 0, 150);
@@ -217,14 +217,14 @@ void drawPokemonSelectionScreen(int slotNumber) {
   text("#", width*43/280 + SELECTSCREENSHIFT_X, textHight);
   text("Name", width*3/14, textHight);
   text("Types", width*19/56 - SELECTSCREENSHIFT_X, textHight);
-  text("Abilities", (width/20)*9 + (width/14) - SELECTSCREENSHIFT_X*1.5, textHight);
-  text("HP", (width/20)*13 - SELECTSCREENSHIFT_X, textHight);
-  text("ATK", (width/28)*19 - SELECTSCREENSHIFT_X, textHight);
-  text("DEF", (width/140)*99 - SELECTSCREENSHIFT_X, textHight);
-  text("SPA", (width/140)*103 - SELECTSCREENSHIFT_X, textHight);
-  text("SPD", (width/140)*107 - SELECTSCREENSHIFT_X, textHight);
-  text("SPE", (width/140)*111 - SELECTSCREENSHIFT_X, textHight);
-  text("BST", (width/140)*115 - SELECTSCREENSHIFT_X, textHight);
+  text("Abilities", width*9/20 + (width/14) - SELECTSCREENSHIFT_X*1.5, textHight);
+  text("HP", width*13/20 - SELECTSCREENSHIFT_X, textHight);
+  text("ATK", width*19/28 - SELECTSCREENSHIFT_X, textHight);
+  text("DEF", width*99/140 - SELECTSCREENSHIFT_X, textHight);
+  text("SPA", width*103/140 - SELECTSCREENSHIFT_X, textHight);
+  text("SPD", width*107/140 - SELECTSCREENSHIFT_X, textHight);
+  text("SPE", width*111/140 - SELECTSCREENSHIFT_X, textHight);
+  text("BST", width*115/140 - SELECTSCREENSHIFT_X, textHight);
 
 
   textHight = height/9 + SELECTSCREENSHIFT_Y- gridSize/2;
@@ -251,31 +251,31 @@ void drawPokemonSelectionScreen(int slotNumber) {
     fill(255);
     if (i < validPokemonSearch.size()) {
       if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
-        offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height - height/9 - SELECTSCREENSHIFT_Y*2) - SLIDER.i_h)));
+        offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height*8/9 - SELECTSCREENSHIFT_Y*2) - SLIDER.i_h)));
       } else {
         offset = 0;
       }
       //println(validPokemonSearch.size(), validPokemonSearch.size()-POKEMON_PER_PAGE, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
-      text(names_num.get(validPokemonSearch.get(i + offset)), (width/280)*43 + SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
-      text(validPokemonSearch.get(i + offset), (width/14)*3, textHight + (i+1)*gridSize);
+      text(names_num.get(validPokemonSearch.get(i + offset)), width*43/280 + SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
+      text(validPokemonSearch.get(i + offset), width*3/14, textHight + (i+1)*gridSize);
       for (int j = 0; j < 2; j++) {
         if (names_types.get(validPokemonSearch.get(i + offset))[j] != null) {
-          text(names_types.get(validPokemonSearch.get(i + offset))[j], (width/35)*11 + j*(width/20) - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
+          text(names_types.get(validPokemonSearch.get(i + offset))[j], width*11/35 + j*(width/20) - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
         }
       }
       for (int j = 0; j < 3; j++) {
         if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
-          text(names_abilities.get(validPokemonSearch.get(i + offset))[j], (width/20)*9 + j*(width/14) - SELECTSCREENSHIFT_X*1.5, textHight + (i+1)*gridSize);
+          text(names_abilities.get(validPokemonSearch.get(i + offset))[j], width*9/20 + j*(width/14) - SELECTSCREENSHIFT_X*1.5, textHight + (i+1)*gridSize);
         }
       }
       BST = 0;
       for (int j = 0; j < 6; j++) {
         BST += names_stats.get(validPokemonSearch.get(i + offset))[j];
-        text(names_stats.get(validPokemonSearch.get(i + offset))[j], (width/20)*13 + j*(width/35) - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
+        text(names_stats.get(validPokemonSearch.get(i + offset))[j], width*13/20 + j*(width/35) - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
       }
-      text(BST, (width/140)*115 - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
+      text(BST, width*115/140 - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
       if (mousePressed && mousePressValid == true) {
-        if (mouseX < (width/7)*6 - SLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < (height/45)*7 + i*gridSize + SELECTSCREENSHIFT_Y && mouseY > height/9 + i*gridSize + SELECTSCREENSHIFT_Y && sliderFollow == false) {
+        if (mouseX < width*6/7 - SLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*7/45 + i*gridSize + SELECTSCREENSHIFT_Y && mouseY > height/9 + i*gridSize + SELECTSCREENSHIFT_Y && sliderFollow == false) {
           pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           SLIDER.i_y = sliderStartY;
           pokemonSearch = "";
@@ -340,7 +340,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT_Y) {
     SLIDER.i_y = height/9 + SELECTSCREENSHIFT_Y;
   }
-  //image(pokedex, 0, 0);
+  image(pokedex, 0, 0);
   strokeWeight(1);
 }
 
