@@ -155,6 +155,8 @@ void drawStartScreen() {
   textAlign(CENTER);
   rect(START_BUTTON.i_x, START_BUTTON.i_y, START_BUTTON.i_w, START_BUTTON.i_h);
   for (int i = 0; i < 6; i++) {
+    
+    fill(0,0,100,100);
     rect(POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y, POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_h);
     drawPokemon(pokemons.get(i).animation, POKEMON_BUTTON.i_x + i*POKEMON_BUTTON.i_w, POKEMON_BUTTON.i_y);
     fill(0);
@@ -193,7 +195,7 @@ void drawStartScreen() {
       }
     }
   }
-
+  image(startButton, START_BUTTON.i_x - START_BUTTON.i_w/2, START_BUTTON.i_y - START_BUTTON.i_h/2);
   // line(width/2, 0, width/2, height);
   //line(0, height/2, width, height/2);
 }
@@ -374,16 +376,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
   //for (int i = 0; i < 3; i++) {
   //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y + 60 + i*50,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,50);
   //}
-  println(width/7 + SELECTSCREENSHIFT_X + 2*((width*5/7 - SELECTSCREENSHIFT_X*2)/3));
-  rect(590, 400, 220, 30);
-    rect(860, 395, 282, 150, 10);
+  //println(width/7 + SELECTSCREENSHIFT_X + 2*((width*5/7 - SELECTSCREENSHIFT_X*2)/3));
+  rect(580, 395, 240, 30);
+  rect(580, 435, 240, 30);
+  rect(580, 475, 240, 30);
+  rect(580, 515, 240, 30);
+  rect(860, 395, 282, 150, 10);
   fill(0);
   //text("Name: " + num_names.get(pokeNum), 700,150);
+  text("Name : " + num_names.get(pokeNum),width/7 + SELECTSCREENSHIFT_X + 10,395);
+  text("Types :",width/7 + SELECTSCREENSHIFT_X + 10,442);
+  text("Level :",width/7 + SELECTSCREENSHIFT_X + 10,489);
+  text("Ability :",width/7 + SELECTSCREENSHIFT_X + 10,536);
   text("Moves", 560, 385);
-  text("1.", 560, 420);
-  text("2.", 560, 457);
-  text("3.", 560, 493);
-  text("4.", 560, 530);
+  text("1.", 560, 415);
+  text("2.", 560, 455);
+  text("3.", 560, 495);
+  text("4.", 560, 535);
   text("Stats", 870, 385);
   text("HP", 870, 415);
   text("ATK", 870, 438);
@@ -425,7 +434,7 @@ void setup() {
 
   infoButton = loadImage("infoButton.png");
   pokeBall = loadImage("Pokeball.png");
-  settingsButton = loadImage("settingsButton.png");
+  settingsButton = loadImage("Settings.png");
   backgroundImg = loadImage("Background.jpg");
   startButton = loadImage("Button.jpg");
   pokedex = loadImage("pokedex.png");
@@ -434,6 +443,7 @@ void setup() {
   pokeBall.resize((width/140)*3, height/30);
   infoButton.resize((width/140)*3, height/30);
   backgroundImg.resize(width, height);
+  startButton.resize(START_BUTTON.i_w,START_BUTTON.i_h);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
