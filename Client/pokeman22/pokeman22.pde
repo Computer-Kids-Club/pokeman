@@ -377,15 +377,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum) {
   //rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y + 60 + i*50,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,50);
   //}
   //println(width/7 + SELECTSCREENSHIFT_X + 2*((width*5/7 - SELECTSCREENSHIFT_X*2)/3));
-  rect(590, 400, 220, 30);
-    rect(860, 395, 282, 150, 10);
+  rect(580, 395, 240, 30);
+  rect(580, 435, 240, 30);
+  rect(580, 475, 240, 30);
+  rect(580, 515, 240, 30);
+  rect(860, 395, 282, 150, 10);
   fill(0);
   //text("Name: " + num_names.get(pokeNum), 700,150);
+  text("Name : " + num_names.get(pokeNum),width/7 + SELECTSCREENSHIFT_X + 10,395);
+  text("Types :",width/7 + SELECTSCREENSHIFT_X + 10,442);
+  text("Level :",width/7 + SELECTSCREENSHIFT_X + 10,489);
+  text("Ability :",width/7 + SELECTSCREENSHIFT_X + 10,536);
   text("Moves", 560, 385);
-  text("1.", 560, 420);
-  text("2.", 560, 457);
-  text("3.", 560, 493);
-  text("4.", 560, 530);
+  text("1.", 560, 415);
+  text("2.", 560, 455);
+  text("3.", 560, 495);
+  text("4.", 560, 535);
   text("Stats", 870, 385);
   text("HP", 870, 415);
   text("ATK", 870, 438);
@@ -500,7 +507,7 @@ void draw() {
   }
 
   drawStartScreen();
-  //drawPokemonInformationScreen(1, 398);
+  drawPokemonInformationScreen(1, 398);
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
   }
