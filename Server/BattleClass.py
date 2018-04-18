@@ -77,7 +77,7 @@ class Battle(object):
 
         # calculate damage
         for player in self.l_players:
-            player.i_active_poke.i_hp = randint(0,player.i_active_poke.get_usable_stats().i_hp)
+            player.active_poke.i_hp = randint(0,player.active_poke.get_usable_stats().i_hp)
 
         # send updated info to players
         for player in self.l_players:
@@ -86,10 +86,10 @@ class Battle(object):
             player.i_turn_readiness = NOT_READY
 
             player.send_data(DISPLAY_TEXT + "You selected pokeman number " + str(player.i_active_poke_idx))
-            player.send_data(DISPLAY_POKES+json.dumps({"player":ME,"pokeidx":player.i_active_poke_idx}))
+            player.send_data(DISPLAY_POKES+json.dumps({"player":ME,"pokeidx":player.i_active_poke_idx,"poke":player.active_poke.to_dic()}))
 
             player.send_data(DISPLAY_TEXT + "Your opponent selected pokeman number " + str(other_player.i_active_poke_idx))
-            player.send_data(DISPLAY_POKES+json.dumps({"player":OTHER,"pokeidx":other_player.i_active_poke_idx}))
+            player.send_data(DISPLAY_POKES+json.dumps({"player":OTHER,"pokeidx":other_player.i_active_poke_idx,"poke":player.active_poke.to_dic()}))
 
             player.send_data(SELECT_POKE_OR_MOVE)
 
