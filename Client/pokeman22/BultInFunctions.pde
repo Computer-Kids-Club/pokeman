@@ -17,7 +17,7 @@ void mouseReleased() {
 void mouseClicked() {
 }
 void mouseWheel(MouseEvent event) {
-  if (pokemonSelectScreen == true) {
+  if (pokemonSelectScreen == true && moveSelect == false) {
     if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
       int count = (event.getCount())*5;
       if (count > 0) {
@@ -34,6 +34,24 @@ void mouseWheel(MouseEvent event) {
       SLIDER.i_y = height - SLIDER.i_h - SELECTSCREENSHIFT_Y;
     } else if (SLIDER.i_y < height/9 + SELECTSCREENSHIFT_Y) {
       SLIDER.i_y = height/9 + SELECTSCREENSHIFT_Y;
+    }
+  } else if (moveSelect == true) {
+    if (MOVESLIDER.i_y >= SELECTSCREENSHIFT_Y + height/4 + 291 && MOVESLIDER.i_y + MOVESLIDER.i_h <= height) {
+      int count = (event.getCount())*5;
+      if (count > 0) {
+        if (MOVESLIDER.i_y + MOVESLIDER.i_h < height - SELECTSCREENSHIFT_Y) {
+          MOVESLIDER.i_y += (event.getCount())*5;
+        }
+      } else {
+        if (MOVESLIDER.i_y > moveSliderStartY) {
+          MOVESLIDER.i_y += (event.getCount())*5;
+        }
+      }
+    }
+    if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height/4 + 291) {
+      MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height/4 + 291;
     }
   }
 }
