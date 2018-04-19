@@ -4,7 +4,7 @@
 ## -------------------------------------- ##
 
 class Stats(object):
-    def __init__(self, i_hp=60, i_atk=60, i_def=60, i_spa=60, i_spd=60, i_spe=60):
+    def __init__(self, i_hp=30, i_atk=30, i_def=30, i_spa=30, i_spd=30, i_spe=30):
         self.i_hp = i_hp
         self.i_atk = i_atk
         self.i_def = i_def
