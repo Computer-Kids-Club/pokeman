@@ -87,3 +87,6 @@ class Pokeman(object):
 
     def is_usable(self):
         return not self.b_fainted
+
+    def is_trapped(self):
+        return False
