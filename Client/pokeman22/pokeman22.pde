@@ -80,7 +80,7 @@ int i_battle_state = 0;
 
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
-boolean moveSelect = true;
+boolean moveSelect = false;
 
 int moveSlot;
 
@@ -277,6 +277,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
       for (int j = 0; j < 3; j++) {
         if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
           text(names_abilities.get(validPokemonSearch.get(i + offset))[j].replaceAll("-", " "), width*9/20 + j*(width/14) - SELECTSCREENSHIFT_X*1.5, textHight + (i+1)*gridSize);
+          println(names_abilities.get(validPokemonSearch.get(i + offset)));
         }
       }
       BST = 0;
@@ -510,6 +511,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 
 void setup() {
   size(1400, 900, P2D);
+  //fullScreen();
   frameRate(50);
   imageMode(CENTER);
   noSmooth();
@@ -550,7 +552,7 @@ void setup() {
     Integer[] stats = {int(file.getString("HP")), int(file.getString("ATK")), int(file.getString("DEF")), int(file.getString("SPA")), int(file.getString("SPD")), int(file.getString("SPE"))};
     String[] types = {file.getString("type1"), file.getString("type2")};
     String[] height_weight = {file.getString("height"), file.getString("weight")};
-    String ab1 = file.getString("1");
+    String ab1 = file.getString("ability1");
     String ab2 = file.getString("ability2");
     String ab3 = file.getString("hiddenability");
     String[] abilities = {ab1, ab2, ab3};
