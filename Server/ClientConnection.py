@@ -45,6 +45,11 @@ server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server_socket.bind((HOST, PORT))
 server_socket.listen(10)
 
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+print(s.getsockname()[0])
+s.close()
+
 print("Chat server started on port " + str(PORT))
 
 def init_tmp_client():
@@ -122,7 +127,9 @@ class Client(object):
         self.i_turn_readiness = NOT_READY
 
         self.active_poke = None
-        self.i_active_poke_idx = None
+        self.i_active_poke_idx = 0
+
+        self.i_active_move_idx = -1
 
         self.battle = None
 
@@ -130,12 +137,17 @@ class Client(object):
 
         if self.b_tmp:
             if str_data == SELECT_POKE_OR_MOVE:
-                self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             elif str_data == SELECT_POKE:
-                print("here")
                 self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
             elif str_data == SELECT_MOVE:
-                self.recieved_data(json.dumps({"battlestate":"selectmove","poke":randint(0,3)}).encode("utf-8"))
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             return
 
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
@@ -166,6 +178,8 @@ class Client(object):
                 poke.i_lv = dic_poke['lv']
                 poke.b_shiny = dic_poke['shiny']
 
+                poke.i_hp = poke.get_usable_stats().i_hp
+
                 self.team.append(poke)
             self.i_battle_state = READY
             self.i_turn_readiness = READY
@@ -175,10 +189,20 @@ class Client(object):
             print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
+            self.i_active_move_idx = dic_data["move"]
+            self.i_turn_readiness = READY
+        elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
+
+    def get_available_pokes(self):
+        l_ret = []
+        for i in range(len(self.team)):
+            if self.team[i].is_usable():
+                l_ret.append(i)
+        return l_ret
 
     def run(self):
         Log.info("here")
