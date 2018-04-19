@@ -197,6 +197,13 @@ class Client(object):
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
 
+    def get_available_pokes(self):
+        l_ret = []
+        for i in range(len(self.team)):
+            if self.team[i].is_usable():
+                l_ret.append(i)
+        return l_ret
+
     def run(self):
         Log.info("here")
         return True
