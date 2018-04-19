@@ -277,7 +277,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
       for (int j = 0; j < 3; j++) {
         if (names_abilities.get(validPokemonSearch.get(i + offset))[j] != null) {
           text(names_abilities.get(validPokemonSearch.get(i + offset))[j].replaceAll("-", " "), width*9/20 + j*(width/14) - SELECTSCREENSHIFT_X*1.5, textHight + (i+1)*gridSize);
-          println(names_abilities.get(validPokemonSearch.get(i + offset)));
         }
       }
       BST = 0;
