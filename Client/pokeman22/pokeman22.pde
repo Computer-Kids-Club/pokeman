@@ -83,8 +83,9 @@ int i_battle_state = 0;
 
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
-boolean moveSelect = true;
+boolean moveSelect = false;
 boolean moveScreenReset = true;
+boolean moveSelectScreen = true;
 
 int moveSlot;
 int textRestrain;
@@ -201,7 +202,7 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelect == false) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false) {
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
