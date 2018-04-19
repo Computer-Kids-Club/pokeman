@@ -1,5 +1,5 @@
 /* ron is bad
-* Demonstrates the use of the GifAnimation library.
+ * Demonstrates the use of the GifAnimation library.
  * the left animation is looping, the one in the middle 
  * plays once on mouse click and the one in the right
  * is a PImage array. 
@@ -367,7 +367,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   if (moveScreenReset == true) {
     allPokeMoves = new StringList();
     selectedMoves = new String[4];
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++) {
       selectedMoves[i] = "";
     }
     textRestrain = 525 - MOVESLIDER.i_w;
@@ -450,7 +450,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     fill(255);
     rect(580, 395 + i*40, 240, height/30);
     fill(0);
-    if (selectedMoves[i] == ""){
+    if (selectedMoves[i] == "") {
       text("Select a move", 585, 395 + i*40 + height/60);
     } else {
       text(selectedMoves[i], 585, 395 + i*40 + height/60);
@@ -498,7 +498,13 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (mouseX <= 820 && mouseX >= 580 && mouseY <= 425 + i*40 && mouseY >= 395 + i*40) {
         moveSelect = true;
         moveSlot = i;
-        print("TRUE");
+      }
+    }
+    if (moveSelect == true) {
+        for (int i = 0; i < MOVES_PER_PAGE; i++) {
+        if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X  && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 323 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 291 + i*gridsize) {
+          selectedMoves[moveSlot] = allPokeMoves.get(i + offsetMoves);
+        }
       }
     }
     if (mouseX >= MOVESLIDER.i_x && mouseX <= MOVESLIDER.i_x + MOVESLIDER.i_w && mouseY >= MOVESLIDER.i_y && mouseY <= MOVESLIDER.i_y + MOVESLIDER.i_h) {
@@ -634,7 +640,7 @@ void draw() {
   }
 
   drawStartScreen();
-  if (moveSelect == true) {
+  if (moveSelectScreen == true) {
     drawPokemonInformationScreen(1, 151, 32);
   }
   if (pokemonSelectScreen == true) {
