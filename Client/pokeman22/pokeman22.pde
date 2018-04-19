@@ -380,7 +380,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
       }
     }
-    print(moveScreenNamePos);
     moveScreenReset = false;
   }
   //image(pokedex, 0, 0);
