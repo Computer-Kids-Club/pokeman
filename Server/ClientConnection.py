@@ -9,6 +9,7 @@ import socket
 from PokemanClass import Pokeman
 from StatClass import Stats
 from random import randint
+from BattleClass import *
 import select
 
 # from random import randint
@@ -21,7 +22,6 @@ l_clients = {}
 
 # message queue
 l_msg = []
-
 
 # broadcast chat messages to all connected clients
 def broadcast(server_socket, sock, message):
@@ -45,8 +45,18 @@ server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server_socket.bind((HOST, PORT))
 server_socket.listen(10)
 
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+print(s.getsockname()[0])
+s.close()
+
 print("Chat server started on port " + str(PORT))
 
+def init_tmp_client():
+    tmp_client = Client()
+    tmp_client.team = [Pokeman(randint(1,807)) for i in range(6)]
+    tmp_client.b_tmp = True
+    return tmp_client
 
 def recieve_connection():
     while len(l_msg) > 0:
@@ -112,7 +122,34 @@ class Client(object):
         self.team = []
         self.i_battle_state = NOT_READY
 
+        self.b_tmp = False
+
+        self.i_turn_readiness = NOT_READY
+
+        self.active_poke = None
+        self.i_active_poke_idx = 0
+
+        self.i_active_move_idx = -1
+
+        self.battle = None
+
     def send_data(self, str_data):
+
+        if self.b_tmp:
+            if str_data == SELECT_POKE_OR_MOVE:
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
+            elif str_data == SELECT_POKE:
+                self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+            elif str_data == SELECT_MOVE:
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
+            return
+
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
 
     def send_pokes(self, team):
@@ -126,6 +163,7 @@ class Client(object):
         try:
             dic_data = json.loads(str_data.decode("utf-8"))
         except:
+            print("Woah Error!")
             return
 
         if dic_data["battlestate"] == "pokes":
@@ -140,25 +178,32 @@ class Client(object):
                 poke.i_lv = dic_poke['lv']
                 poke.b_shiny = dic_poke['shiny']
 
+                poke.i_hp = poke.get_usable_stats().i_hp
+
                 self.team.append(poke)
-            print(str(self.team))
-            self.send_data(FOUND_BATTLE)
-            tmp_client.team = [Pokeman(randint(1,807)) for i in range(6)]
-            self.send_pokes(tmp_client.team)
-            self.send_data(SELECT_POKE)
+            self.i_battle_state = READY
+            self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectpoke":
+            self.i_active_poke_idx = dic_data["poke"]
+            self.active_poke = self.team[self.i_active_poke_idx]
             print(dic_data["poke"])
-            self.send_data(DISPLAY_TEXT+"Player selected pokeman number "+str(dic_data["poke"]))
-            #self.send_pokes()
-            self.send_data(SELECT_POKE_OR_MOVE)
+            self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
-            print(dic_data["move"])
-            self.send_data(DISPLAY_TEXT+"Player selected move number "+str(dic_data["move"]))
-            #self.send_pokes()
-            self.send_data(SELECT_POKE_OR_MOVE)
+            self.i_active_move_idx = dic_data["move"]
+            self.i_turn_readiness = READY
+        elif dic_data["battlestate"] == "selectpass":
+            self.i_turn_readiness = READY
+
+        if self.battle != None:
+            self.battle.recieved_data(self, dic_data)
+
+    def get_available_pokes(self):
+        l_ret = []
+        for i in range(len(self.team)):
+            if self.team[i].is_usable():
+                l_ret.append(i)
+        return l_ret
 
     def run(self):
         Log.info("here")
         return True
-
-tmp_client = Client()

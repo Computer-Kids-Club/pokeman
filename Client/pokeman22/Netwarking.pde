@@ -2,23 +2,6 @@ import processing.net.*;
 
 Client myClient; 
 
-int PORT = 17171;
-
-char TERMINATING_CHAR = '`';
-
-char FOUND_BATTLE = 'f';
-char NEXT_TURN = 't';
-
-char SELECT_POKE = 'p';
-char SELECT_MOVE = 'm';
-char SELECT_POKE_OR_MOVE = 'o';
-char AWAITING_SELECTION = 'w';
-
-char SENDING_POKE = 's';
-char CHANGING_POKE = 'c';
-
-char DISPLAY_TEXT = 'd';
-
 char i_selection_stage = AWAITING_SELECTION;
 
 boolean reconnect() {
@@ -69,6 +52,7 @@ void recieve_data() {
             other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
             other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
           }
+          c_display_state = DISPLAY_TEAMS;
         } else if (dataIn.charAt(0)==CHANGING_POKE) {
           JSONObject json = parseJSONObject(dataIn.substring(1));
           JSONArray json_pokes_array = json.getJSONArray("pokes");
@@ -76,6 +60,21 @@ void recieve_data() {
           for (int j = 0; j < json_pokes_array.size(); j++) {
             other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
             //other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
+          }
+        } else if (dataIn.charAt(0)==DISPLAY_POKES) {
+          c_display_state = DISPLAY_POKES;
+          JSONObject json = parseJSONObject(dataIn.substring(1));
+          int i_display_player = json.getInt("player");
+          Pokemon new_poke = null;
+          if (i_display_player==ME) {
+            c_my_display_poke = json.getInt("pokeidx");
+            new_poke = pokemons.get(c_my_display_poke);
+          } else if (i_display_player==OTHER) {
+            c_other_display_poke = json.getInt("pokeidx");
+            new_poke = other_pokemons.get(c_other_display_poke);
+          }
+          if(new_poke!=null) {
+            new_poke.update_with_json(json.getJSONObject("poke"));
           }
         }
       }

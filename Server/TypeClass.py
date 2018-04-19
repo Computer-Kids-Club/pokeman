@@ -48,6 +48,9 @@ class Type(object):
     def getIdx(self):
         return l_typ_short.index(self.str_name.capitalize()[:3]) // 3
 
+    def getName(self):
+        return self.str_name
+
     # overriding str method
     def __str__(self):
         return self.str_name.capitalize()

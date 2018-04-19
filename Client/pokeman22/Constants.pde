@@ -1,7 +1,9 @@
 
 Rect SLIDER;
+Rect MOVESLIDER;
 
 int sliderStartY;
+int moveSliderStartY;
 
 Rect INFO_BUTTON;
 Rect POKEBALL;
@@ -12,6 +14,7 @@ Rect POKEMON_BUTTON;
 Rect SEARCH_BUTTON;
 
 int POKEMON_PER_PAGE = 20;
+int MOVES_PER_PAGE = 7;
 
 String POKEINFO_PATH = "./pokeinfo/";
 
@@ -19,26 +22,52 @@ int NOT_READY = 0;
 int SEARCHING = 1;
 int BATTLING = 2;
 
-int SELECTSCREENSHIFT_Y = 80;
-int SELECTSCREENSHIFT_X = 50;
+int SELECTSCREENSHIFT_Y;
+int SELECTSCREENSHIFT_X;
+
+int ME = 0;
+int OTHER = 1;
+
+int PORT = 17171;
+
+char TERMINATING_CHAR = '`';
+
+char FOUND_BATTLE = 'f';
+char NEXT_TURN = 't';
+
+char SELECT_POKE = 'p';
+char SELECT_MOVE = 'm';
+char SELECT_POKE_OR_MOVE = 'o';
+char AWAITING_SELECTION = 'w';
+
+char SENDING_POKE = 's';
+char CHANGING_POKE = 'c';
+
+char DISPLAY_TEXT = 'd';
+char DISPLAY_TEAMS = 'T';
+char DISPLAY_POKES = 'P';
+char DISPLAY_NONE = 'N';
 
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
 
 void init_constants() {
-
-  SLIDER = new Rect((width/7)*6-width/140 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
+  SELECTSCREENSHIFT_Y = height*4/45;
+  SELECTSCREENSHIFT_X = width/28;
+  SLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
+  MOVESLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 291, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
+  moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
 
-  START_BUTTON = new Rect(width/2, (height/9)*5, (width/7)*2, height/9);
-  POKEMON_BUTTON = new Rect(width/7, (height/6)*5, width/7, (height/9)*2);
+  START_BUTTON = new Rect(width/2, height/2, 400, 200);
+  POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
 
-  INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
-  POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - (width/700)*9, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
+  INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
+  POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
   SEARCH_BUTTON = new Rect(width/7 + 10 + SELECTSCREENSHIFT_X, 10 + SELECTSCREENSHIFT_Y, 200, 30);
-  
+
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);
   KEY_TO_ID.put('e', 2);
