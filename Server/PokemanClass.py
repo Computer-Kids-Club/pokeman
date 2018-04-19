@@ -41,6 +41,8 @@ class Pokeman(object):
 
         self.i_hp = self.get_usable_stats().i_hp
 
+        self.b_fainted = False
+
     def get_moves(self):
         return self.l_moves
 
@@ -75,8 +77,13 @@ class Pokeman(object):
 
         dic_poke['hp'] = self.i_hp
 
+        dic_poke['faint'] = self.b_fainted
+
         return dic_poke
 
     # overriding str method
     def __str__(self):
         return self.str_name
+
+    def is_usable(self):
+        return not self.b_fainted
