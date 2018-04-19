@@ -127,7 +127,9 @@ class Client(object):
         self.i_turn_readiness = NOT_READY
 
         self.active_poke = None
-        self.i_active_poke_idx = None
+        self.i_active_poke_idx = 0
+
+        self.i_active_move_idx = -1
 
         self.battle = None
 
@@ -180,6 +182,7 @@ class Client(object):
             print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
+            self.i_active_move_idx = dic_data["move"]
             self.i_turn_readiness = READY
 
         if self.battle != None:

@@ -23,9 +23,29 @@ void draw_battle() {
 
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
     drawPokemon(pokemons.get(c_my_display_poke).animationBack, 150, 400+3*40);
+    rectMode(CORNER);
+    fill(150);
+    rect(50, 350+2*40, 200, 7);
+    fill(100,255,255);
+    noStroke();
+    rect(50, 350+2*40, 200*round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
+    stroke(0);
+    fill(0,0);
+    rect(50, 350+2*40, 200, 7);
+    textAlign(CENTER);
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
     drawPokemon(other_pokemons.get(c_other_display_poke).animation, 500+5*150, 50+3*40);
+    rectMode(CORNER);
+    fill(150);
+    rect(400+5*150, 0+2*40, 200, 7);
+    fill(100,255,255);
+    noStroke();
+    rect(400+5*150, 0+2*40, 200*round(other_pokemons.get(c_other_display_poke).cur_hp)/other_pokemons.get(c_other_display_poke).HP, 7);
+    stroke(0);
+    fill(0,0);
+    rect(400+5*150, 0+2*40, 200, 7);
+    textAlign(CENTER);
   }
 
   imageMode(CORNER);

@@ -34,7 +34,7 @@ class Pokeman(object):
         self.iv_stats = Stats()
         self.nature_stats = Stats()
 
-        self.evasion = 1
+        self.i_evasion = 1
 
         self.item_stats = Stats()
         self.modifier_stats = Stats()
@@ -58,10 +58,22 @@ class Pokeman(object):
         self.get_usable_stats().to_dic(dic_poke,"base")
 
         dic_poke['hap'] = self.i_happy
-        dic_poke['lv'] = self.i_lv
         dic_poke['shiny'] = self.b_shiny
+        dic_poke['lv'] = self.i_lv
+        dic_poke['gender'] = self.str_gender
+
+        dic_poke['type1'] = self.type_1.getName()
+        if self.type_2 != None:
+            dic_poke['type2'] = self.type_2.getName()
+
+        dic_poke['ability'] = self.str_ability
+        dic_poke['item'] = self.str_item
 
         dic_poke['moves'] = [move.to_dic() for move in self.l_moves]
+
+        dic_poke['eva'] = self.i_evasion
+
+        dic_poke['hp'] = self.i_hp
 
         return dic_poke
 

@@ -65,10 +65,16 @@ void recieve_data() {
           c_display_state = DISPLAY_POKES;
           JSONObject json = parseJSONObject(dataIn.substring(1));
           int i_display_player = json.getInt("player");
+          Pokemon new_poke = null;
           if (i_display_player==ME) {
             c_my_display_poke = json.getInt("pokeidx");
+            new_poke = pokemons.get(c_my_display_poke);
           } else if (i_display_player==OTHER) {
             c_other_display_poke = json.getInt("pokeidx");
+            new_poke = other_pokemons.get(c_other_display_poke);
+          }
+          if(new_poke!=null) {
+            new_poke.update_with_json(json.getJSONObject("poke"));
           }
         }
       }
