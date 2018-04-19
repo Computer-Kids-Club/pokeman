@@ -1,4 +1,4 @@
-/*
+/* ron is bad
 * Demonstrates the use of the GifAnimation library.
  * the left animation is looping, the one in the middle 
  * plays once on mouse click and the one in the right
