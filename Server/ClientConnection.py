@@ -137,12 +137,17 @@ class Client(object):
 
         if self.b_tmp:
             if str_data == SELECT_POKE_OR_MOVE:
-                self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             elif str_data == SELECT_POKE:
-                print("here")
                 self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":randint(0,5)}).encode("utf-8"))
             elif str_data == SELECT_MOVE:
-                self.recieved_data(json.dumps({"battlestate":"selectmove","poke":randint(0,3)}).encode("utf-8"))
+                if randint(0,5)==0:
+                    self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
+                else:
+                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             return
 
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))
@@ -173,6 +178,8 @@ class Client(object):
                 poke.i_lv = dic_poke['lv']
                 poke.b_shiny = dic_poke['shiny']
 
+                poke.i_hp = poke.get_usable_stats().i_hp
+
                 self.team.append(poke)
             self.i_battle_state = READY
             self.i_turn_readiness = READY
@@ -183,6 +190,8 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
             self.i_active_move_idx = dic_data["move"]
+            self.i_turn_readiness = READY
+        elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
 
         if self.battle != None:

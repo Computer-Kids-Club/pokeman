@@ -29,6 +29,7 @@ void draw_battle() {
     fill(100,255,255);
     noStroke();
     rect(50, 350+2*40, 200*round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
+    //println("hey "+pokemons.get(c_my_display_poke).cur_hp);
     stroke(0);
     fill(0,0);
     rect(50, 350+2*40, 200, 7);
@@ -42,6 +43,7 @@ void draw_battle() {
     fill(100,255,255);
     noStroke();
     rect(400+5*150, 0+2*40, 200*round(other_pokemons.get(c_other_display_poke).cur_hp)/other_pokemons.get(c_other_display_poke).HP, 7);
+    //println("no u "+other_pokemons.get(c_other_display_poke).cur_hp);
     stroke(0);
     fill(0,0);
     rect(400+5*150, 0+2*40, 200, 7);

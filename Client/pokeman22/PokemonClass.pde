@@ -50,6 +50,7 @@ class Pokemon {
 
     HP = max(HP, 1);
     cur_hp = json.getInt("hp");
+    //println(cur_hp);
   }
 
   void init_with_json(JSONObject json) {

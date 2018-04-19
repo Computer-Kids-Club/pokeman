@@ -77,8 +77,16 @@ class Battle(object):
 
         # calculate damage
         for player in self.l_players:
-            #player.active_poke.i_hp = player.active_poke.get_usable_stats().i_hp #randint(0,player.active_poke.get_usable_stats().i_hp)
-            pass
+            if(player.i_active_move_idx==-1):
+                continue
+
+            other_player = self.get_other_player(player)
+
+            print(player.active_poke, "used move", player.active_poke.get_moves()[player.i_active_move_idx])
+            other_player.active_poke.i_hp -= randint(5,20)
+            other_player.active_poke.i_hp = max(0,other_player.active_poke.i_hp)
+
+            #player.active_poke.i_hp = randint(0,player.active_poke.get_usable_stats().i_hp)
 
         # send updated info to players
         for player in self.l_players:
@@ -92,7 +100,7 @@ class Battle(object):
             #print(json.dumps({"player":ME,"pokeidx":player.i_active_poke_idx,"poke":player.active_poke.to_dic()}))
 
             player.send_data(DISPLAY_TEXT + "Your opponent selected pokeman number " + str(other_player.i_active_poke_idx))
-            player.send_data(DISPLAY_POKES+json.dumps({"player":OTHER,"pokeidx":other_player.i_active_poke_idx,"poke":player.active_poke.to_dic()}))
+            player.send_data(DISPLAY_POKES+json.dumps({"player":OTHER,"pokeidx":other_player.i_active_poke_idx,"poke":other_player.active_poke.to_dic()}))
 
             player.send_data(SELECT_POKE_OR_MOVE)
 
