@@ -500,13 +500,15 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
   if (mousePressed && mousePressValid == true) {
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
-      if (mouseX <= 310 && mouseX >= 310 + height/30) {
+      if (mouseX <= 310 + height/30 && mouseX >= 310) {
+        println("DOWN");
         if (level > 0) {
           level -= 1;
           mousePressValid = false;
         }
       }
-      if (mouseX <= 420 && mouseX >= 420 + height/30) {
+      if (mouseX <= 420 + height/30 && mouseX >= 420) {
+        println("UP");
         if (level < 100) {
           level += 1;
           mousePressValid = false;
@@ -519,7 +521,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         moveSlot = i;
       }
     }
-    if (moveSelect == true) {
+    if (moveSelect == true && moveSliderFollow == false) {
       for (int i = 0; i < MOVES_PER_PAGE; i++) {
         if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X  && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 323 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 291 + i*gridsize) {
           selectedMoves[moveSlot] = allPokeMoves.get(i + offsetMoves);
