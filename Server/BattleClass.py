@@ -74,7 +74,7 @@ class Battle(object):
 
         #print(self.l_players[0].i_turn_readiness,self.l_players[1].i_turn_readiness)
 
-        if(not self.everyone_ready() and not self.b_gameover):
+        if(not self.everyone_ready() or self.b_gameover):
             return
 
         # calculate damage

@@ -48,6 +48,9 @@ char DISPLAY_TEAMS = 'T';
 char DISPLAY_POKES = 'P';
 char DISPLAY_NONE = 'N';
 
+char DISPLAY_WIN = 'W';
+char DISPLAY_LOSE = 'L';
+
 HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();

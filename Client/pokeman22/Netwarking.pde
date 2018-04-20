@@ -94,7 +94,12 @@ void recieve_data() {
           if (new_poke!=null) {
             new_poke.update_with_json(json.getJSONObject("poke"));
           }
-        } else if (dataIn.charAt(0)==DISPLAY_POKES) {
+        } else if (dataIn.charAt(0)==DISPLAY_WIN) {
+          text_chat.add(0, "YOU WIN :)");
+          stop_battle();
+        } else if (dataIn.charAt(0)==DISPLAY_LOSE) {
+          text_chat.add(0, "YOU LOSE :(");
+          stop_battle();
         }
       }
       dataIn = "";
