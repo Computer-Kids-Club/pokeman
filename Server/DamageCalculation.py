@@ -39,7 +39,7 @@ def attack(atk_poke,def_poke,move,field):
         i_def = def_poke.get_usable_stats().get_spd()
     else:
         i_atk = 0
-        i_def = 0
+        i_def = 7
     #str_weather = field.get_weather()
     #str_terrain = field.get_terrain()
     i_mod = i_crit*i_stab*i_type*i_rand
