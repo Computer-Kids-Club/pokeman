@@ -605,7 +605,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  size(1400, 900, P2D);
+  size(1400,900, P2D);
   //fullScreen();
   frameRate(50);
   imageMode(CENTER);
@@ -628,8 +628,8 @@ void setup() {
   pokedex = loadImage("pokedex2.png");
 
   settingsButton.resize(width/28, height/18);
-  pokeBall.resize((width/140)*3, height/30);
-  infoButton.resize((width/140)*3, height/30);
+  pokeBall.resize(height/30, height/30);
+  infoButton.resize(height/30, height/30);
   backgroundImg.resize(width, height);
   startButton.resize(START_BUTTON.i_w, START_BUTTON.i_h);
   pokedex.resize(width, height);
