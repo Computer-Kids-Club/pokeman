@@ -85,7 +85,7 @@ PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
 boolean moveSelect = false;
 boolean moveScreenReset = true;
-boolean moveSelectScreen = true;
+boolean moveSelectScreen = false;
 
 int moveSlot;
 int textRestrain;
