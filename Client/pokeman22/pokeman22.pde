@@ -84,6 +84,7 @@ int i_battle_state = 0;
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
 boolean moveSelect = false;
+boolean statSelect = false;
 boolean moveScreenReset = true;
 boolean moveSelectScreen = true;
 
@@ -536,16 +537,15 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
+    if (mouseX <= 9999 && mouseX >= 9999 && mouseY <= 9999 && mouseY >= 9999
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
-        println("DOWN");
         if (level > 0) {
           level -= 1;
           mousePressValid = false;
         }
       }
       if (mouseX <= 420 + height/30 && mouseX >= 420) {
-        println("UP");
         if (level < 100) {
           level += 1;
           mousePressValid = false;
