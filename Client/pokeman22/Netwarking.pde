@@ -4,12 +4,22 @@ Client myClient;
 
 char i_selection_stage = AWAITING_SELECTION;
 
+JSONArray json_avail_pokes_array = null;
+
 boolean reconnect() {
   if (!myClient.active()) {
 
     myClient = new Client(this, "127.0.0.1", PORT);
   }
   return myClient.active();
+}
+
+String json_array_to_string(JSONArray json_arr, char c_split) {
+  String str_ret = "";
+  for (int j = 0; j < json_arr.size(); j++) {
+    str_ret += json_arr.getInt(j) + "" + c_split;
+  }
+  return str_ret;
 }
 
 String dataIn = ""; 
@@ -32,10 +42,18 @@ void recieve_data() {
           i_battle_state = NOT_READY;
         } else if (dataIn.charAt(0)==SELECT_POKE) {
           i_selection_stage = SELECT_POKE;
-          text_chat.add(0, "Select a pokemon with keys: 1,2,3,4,5,6");
+          if (dataIn.length()>1) {
+            JSONObject json = parseJSONObject(dataIn.substring(1));
+            json_avail_pokes_array = json.getJSONArray("availpoke");
+            text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
+          }
         } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
           i_selection_stage = SELECT_POKE_OR_MOVE;
-          text_chat.add(0, "Select a pokemon with keys: 1,2,3,4,5,6 OR Select a move with keys: q,w,e,r");
+          if (dataIn.length()>1) {
+            JSONObject json = parseJSONObject(dataIn.substring(1));
+            json_avail_pokes_array = json.getJSONArray("availpoke");
+            text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
+          }
         } else if (dataIn.charAt(0)==SELECT_MOVE) {
           i_selection_stage = SELECT_MOVE;
           text_chat.add(0, "Select a move with keys: q,w,e,r");
@@ -73,9 +91,10 @@ void recieve_data() {
             c_other_display_poke = json.getInt("pokeidx");
             new_poke = other_pokemons.get(c_other_display_poke);
           }
-          if(new_poke!=null) {
+          if (new_poke!=null) {
             new_poke.update_with_json(json.getJSONObject("poke"));
           }
+        } else if (dataIn.charAt(0)==DISPLAY_POKES) {
         }
       }
       dataIn = "";
