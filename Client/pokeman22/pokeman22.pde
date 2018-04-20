@@ -97,6 +97,7 @@ int[] IV = {0, 0, 0, 0, 0, 0};
 int[] EV = {0, 0, 0, 0, 0, 0};
 int[] stats = {0, 0, 0, 0, 0, 0};
 int[] nature = {0, 0, 0, 0, 0, 0};
+int maxEV = 508;
 
 int level;
 
@@ -373,6 +374,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   if (moveScreenReset == true) {
     level = 100;
+    maxEV = 508;
     allPokeMoves = new StringList();
     selectedMoves = new String[4];
     for (int i = 0; i < 4; i++) {
