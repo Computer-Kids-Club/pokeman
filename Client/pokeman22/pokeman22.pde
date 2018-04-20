@@ -473,6 +473,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     textAlign(LEFT);
     fill(255);
     //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
+  } else if (statSelect == true){
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
   } else {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
   }
@@ -537,7 +539,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
-    //if (mouseX <= 9999 && mouseX >= 9999 && mouseY <= 9999 && mouseY >= 9999
+    if (mouseX <= 860 + 282 && mouseX >= 860 && mouseY <= 395 + 150 && mouseY >= 295){
+      statSelect = true;
+      println("BING");
+    }
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
         if (level > 0) {
