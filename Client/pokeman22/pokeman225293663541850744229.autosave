@@ -407,8 +407,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       } else if (nature[i] == -1){
         stats[i]  = int(stats[i] / 1.1);
       }
-      println(stats[i]);
+      print(stats[i]);
     }
+    println();
+    println(2*names_stats.get(num_names.get(pokeNum))[0] + IV[0] + (int(EV[0]/4))*level);
+    println((2*names_stats.get(num_names.get(pokeNum))[0] + IV[0] + (int(EV[0]/4))*level)/100);
     moveScreenReset = false;
   }
   //image(pokedex, 0, 0);
@@ -560,7 +563,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       for (int i = 0; i < MOVES_PER_PAGE; i++) {
         if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - MOVESLIDER.i_w && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 323 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 291 + i*gridsize) {
           selectedMoves[moveSlot] = allPokeMoves.get(i + offsetMoves);
-          moveSelect = false;
         }
       }
     }
