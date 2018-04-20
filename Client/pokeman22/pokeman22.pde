@@ -93,6 +93,8 @@ int moveScreenNamePos = 0;
 
 String[] selectedMoves;
 
+int level;
+
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
 PImage[][] loadPokemon(JSONObject file, boolean shiny) {
@@ -365,6 +367,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   if (moveScreenReset == true) {
+    level = 100;
     allPokeMoves = new StringList();
     selectedMoves = new String[4];
     for (int i = 0; i < 4; i++) {
@@ -473,6 +476,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   rect(310, 515, 220, height/30);
   rect(860, 395, 282, 150, height/90);
   fill(0);
+  textAlign(CENTER, CENTER);
+  text(level, 350 + height/30, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
+  textAlign(LEFT);
   //text("Name: " + num_names.get(pokeNum), 700,150);
   text("Name : " + num_names.get(pokeNum), width/7 + SELECTSCREENSHIFT_X + 10, 395);
   text("Types :", width/7 + SELECTSCREENSHIFT_X + 10, 442);
@@ -493,6 +499,20 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
+    if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
+      if (mouseX <= 310 && mouseX >= 310 + height/30) {
+        if (level > 0) {
+          level -= 1;
+          mousePressValid = false;
+        }
+      }
+      if (mouseX <= 420 && mouseX >= 420 + height/30) {
+        if (level < 100) {
+          level += 1;
+          mousePressValid = false;
+        }
+      }
+    }
     for (int i = 0; i < 4; i++) {
       if (mouseX <= 820 && mouseX >= 580 && mouseY <= 425 + i*40 && mouseY >= 395 + i*40) {
         moveSelect = true;
