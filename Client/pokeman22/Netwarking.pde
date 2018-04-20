@@ -35,6 +35,7 @@ void recieve_data() {
       if (dataIn.length()>=1) {
         if (dataIn.charAt(0)==FOUND_BATTLE) {
           println("FOUND BATTLE");
+          text_chat = new ArrayList<String>();
           text_chat.add(0, "FOUND BATTLE");
           i_battle_state = BATTLING;
         } else if (dataIn.charAt(0)==NEXT_TURN) {
