@@ -537,7 +537,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
-    if (mouseX <= 9999 && mouseX >= 9999 && mouseY <= 9999 && mouseY >= 9999
+    //if (mouseX <= 9999 && mouseX >= 9999 && mouseY <= 9999 && mouseY >= 9999
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
         if (level > 0) {
@@ -625,7 +625,7 @@ void setup() {
   settingsButton = loadImage("Settings.png");
   backgroundImg = loadImage("Background.jpg");
   startButton = loadImage("Button.jpg");
-  pokedex = loadImage("pokedex.png");
+  pokedex = loadImage("pokedex2.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize((width/140)*3, height/30);
