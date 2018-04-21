@@ -64,6 +64,11 @@ class Battle(object):
 
             player.send_data(DISPLAY_POKES + json.dumps({"player": OTHER, "pokeidx": other_player.i_active_poke_idx, "poke": other_player.active_poke.to_dic()}))
 
+    def send_move(self, player, move):
+        other_player = self.get_other_player(player)
+        player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.str_name}))
+        other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.str_name}))
+
     def run(self):
         # Log.info("battle running")
 
@@ -80,8 +85,6 @@ class Battle(object):
             if (player.i_active_move_idx == -1):
                 continue
 
-            other_player = self.get_other_player(player)
-
             if len(l_move_queue)>=1 and player.i_active_poke_idx.get_usable_stats().i_spe > l_move_queue[0].i_active_poke_idx.get_usable_stats().i_spe:
                 l_move_queue.insert(0,player)
             else:
@@ -92,6 +95,10 @@ class Battle(object):
             other_player = self.get_other_player(player)
 
             print(player.active_poke, "used move", player.active_poke.get_moves()[player.i_active_move_idx])
+
+            self.send_move(player, player.active_poke.get_moves()[player.i_active_move_idx])
+
+            self.send_players_pokes()
 
             other_player.active_poke.i_hp -= randint(5, 20)
             if (other_player.active_poke.i_hp <= 0):
