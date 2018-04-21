@@ -47,6 +47,7 @@ char DISPLAY_TEXT = 'd';
 char DISPLAY_TEAMS = 'T';
 char DISPLAY_POKES = 'P';
 char DISPLAY_NONE = 'N';
+char DISPLAY_MOVE = 'M';
 
 char DISPLAY_WIN = 'W';
 char DISPLAY_LOSE = 'L';

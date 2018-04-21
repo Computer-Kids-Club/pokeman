@@ -114,8 +114,8 @@ class Battle(object):
             player.i_turn_readiness = NOT_READY
             player.i_active_move_idx = -1
 
-            player.send_data(DISPLAY_TEXT + "You selected pokeman number " + str(player.i_active_poke_idx))
-            player.send_data(DISPLAY_TEXT + "Your opponent selected pokeman number " + str(other_player.i_active_poke_idx))
+            #player.send_data(DISPLAY_TEXT + "You selected pokeman number " + str(player.i_active_poke_idx))
+            #player.send_data(DISPLAY_TEXT + "Your opponent selected pokeman number " + str(other_player.i_active_poke_idx))
 
             self.send_players_pokes()
 

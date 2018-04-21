@@ -86,7 +86,7 @@ boolean tempAnimationLoad = true;
 boolean moveSelect = false;
 boolean statSelect = false;
 boolean moveScreenReset = true;
-boolean moveSelectScreen = true;
+boolean moveSelectScreen = false;
 
 int moveSlot;
 int textRestrain;
