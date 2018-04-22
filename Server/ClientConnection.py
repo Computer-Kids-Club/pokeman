@@ -131,6 +131,8 @@ class Client(object):
 
         self.i_active_move_idx = -1
 
+        self.b_active_poke_is_new = False
+
         self.battle = None
 
     def send_data(self, str_data):
@@ -188,6 +190,7 @@ class Client(object):
         elif dic_data["battlestate"] == "selectpoke":
             self.i_active_poke_idx = dic_data["poke"]
             self.active_poke = self.team[self.i_active_poke_idx]
+            self.b_active_poke_is_new = True
             print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":

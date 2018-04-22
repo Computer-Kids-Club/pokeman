@@ -27,6 +27,9 @@ String json_array_to_string(JSONArray json_arr, char c_split) {
 }
 
 void process_data(String dataIn) {
+
+  i_cur_animation_frames_left = 0;
+
   if (dataIn.charAt(0)==FOUND_BATTLE) {
     println("FOUND BATTLE");
     text_chat = new ArrayList<String>();
@@ -67,24 +70,41 @@ void process_data(String dataIn) {
     }
     c_display_state = DISPLAY_TEAMS;
   } else if (dataIn.charAt(0)==CHANGING_POKE) {
-    JSONObject json = parseJSONObject(dataIn.substring(1));
-    JSONArray json_pokes_array = json.getJSONArray("pokes");
-    other_pokemons = new ArrayList<Pokemon>();
-    for (int j = 0; j < json_pokes_array.size(); j++) {
-      other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
-      //other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
-    }
+    /*JSONObject json = parseJSONObject(dataIn.substring(1));
+     JSONArray json_pokes_array = json.getJSONArray("pokes");
+     other_pokemons = new ArrayList<Pokemon>();
+     for (int j = 0; j < json_pokes_array.size(); j++) {
+     other_pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
+     //other_pokemons.add(new Pokemon(other_pokemon_jsons[j]));
+     }*/
   } else if (dataIn.charAt(0)==DISPLAY_POKES) {
+    //i_cur_animation_frames_left = 30;
     c_display_state = DISPLAY_POKES;
     JSONObject json = parseJSONObject(dataIn.substring(1));
     int i_display_player = json.getInt("player");
     Pokemon new_poke = null;
     if (i_display_player==ME) {
-      c_my_display_poke = json.getInt("pokeidx");
-      new_poke = pokemons.get(c_my_display_poke);
+      int i_tmp_new_display_poke = json.getInt("pokeidx");
+      new_poke = pokemons.get(i_tmp_new_display_poke);
+      if (c_my_display_poke != i_tmp_new_display_poke) {
+        i_cur_animation_frames_left = 30;
+        i_switching_direction = ME;
+        i_switching = i_total_switching;
+        c_my_display_poke_tmp_new = i_tmp_new_display_poke;
+      } else {
+        c_my_display_poke = i_tmp_new_display_poke;
+      }
     } else if (i_display_player==OTHER) {
-      c_other_display_poke = json.getInt("pokeidx");
-      new_poke = other_pokemons.get(c_other_display_poke);
+      int i_tmp_new_display_poke = json.getInt("pokeidx");
+      new_poke = other_pokemons.get(i_tmp_new_display_poke);
+      if (c_other_display_poke != i_tmp_new_display_poke) {
+        i_cur_animation_frames_left = 30;
+        i_switching_direction = OTHER;
+        i_switching = i_total_switching;
+        c_other_display_poke_tmp_new = i_tmp_new_display_poke;
+      } else {
+        c_other_display_poke = i_tmp_new_display_poke;
+      }
     }
     if (new_poke!=null) {
       new_poke.update_with_json(json.getJSONObject("poke"));
@@ -96,30 +116,35 @@ void process_data(String dataIn) {
     text_chat.add(0, "YOU LOSE :(");
     stop_battle();
   } else if (dataIn.charAt(0)==DISPLAY_MOVE) {
+    i_cur_animation_frames_left = 30;
     JSONObject json = parseJSONObject(dataIn.substring(1));
     int i_display_player = json.getInt("player");
     if (i_display_player==ME) {
       text_chat.add(0, "You used "+json.getString("move"));
+      i_moving_direction = -1;
+      i_moving = i_total_moving;
     } else if (i_display_player==OTHER) {
       text_chat.add(0, "Your opponent used "+json.getString("move"));
+      i_moving_direction = 1;
+      i_moving = i_total_moving;
     }
+  } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
+    i_cur_animation_frames_left = 30;
   }
 }
 
 String dataIn = ""; 
 void recieve_data() { 
 
+  //println("cur anime frames left " + i_cur_animation_frames_left);
   if (i_cur_animation_frames_left>0) {
-    
+
     i_cur_animation_frames_left--;
-    
-  } else if(l_display_queue.size()>0) {
+  } else if (l_display_queue.size()>0) {
 
     process_data(l_display_queue.get(0));
 
     l_display_queue.remove(l_display_queue.get(0));
-
-    i_cur_animation_frames_left = 30;
   }
 
   //reconnect();

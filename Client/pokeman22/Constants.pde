@@ -13,6 +13,11 @@ Rect POKEMON_BUTTON;
 
 Rect SEARCH_BUTTON;
 
+Rect POKE_ME_RECT;
+Rect POKE_OTHER_RECT;
+
+int HEALTH_BAR_WIDTH = 200;
+
 int POKEMON_PER_PAGE = 20;
 int MOVES_PER_PAGE = 7;
 
@@ -48,6 +53,7 @@ char DISPLAY_TEAMS = 'T';
 char DISPLAY_POKES = 'P';
 char DISPLAY_NONE = 'N';
 char DISPLAY_MOVE = 'M';
+char DISPLAY_DELAY = 'D';
 
 char DISPLAY_WIN = 'W';
 char DISPLAY_LOSE = 'L';
@@ -71,6 +77,9 @@ void init_constants() {
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
   SEARCH_BUTTON = new Rect(width/7 + 10 + SELECTSCREENSHIFT_X, 10 + SELECTSCREENSHIFT_Y, 200, 30);
+
+  POKE_ME_RECT = new Rect(150, 400+3*40);
+  POKE_OTHER_RECT = new Rect(500+5*150, 50+3*40);
 
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);
@@ -115,4 +124,12 @@ class Rect {
     i_x = x;
     i_y = y;
   }
+}
+
+int interpolate(int x1, int x2, int m, int mt) {
+  return x1+(x2-x1)*m/mt;
+}
+
+void translate_interpolation(Rect r1, Rect r2, int m, int mt) {
+  translate(interpolate(r1.i_x, r2.i_x, m, mt), interpolate(r1.i_y, r2.i_y, m, mt));
 }
