@@ -177,6 +177,8 @@ class Client(object):
             for dic_poke in dic_data["pokes"]:
                 poke = Pokeman(dic_poke["num"])
 
+                poke.str_name = dic_poke["name"]
+
                 poke.base_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
                                         dic_poke['spa'], dic_poke['spd'], dic_poke['spe'])
 

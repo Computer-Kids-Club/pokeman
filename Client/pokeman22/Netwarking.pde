@@ -184,10 +184,6 @@ void send_pokes() {
     JSONObject json_poke = new JSONObject();
     Pokemon poke = pokemons.get(i);
 
-    String name, type1, type2, species, h, weight, ability, move1, move2, move3, move4;
-    int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level;
-    Boolean shiny;
-
     json_poke.setString("name", poke.name);
     json_poke.setString("ability", poke.ability);
 

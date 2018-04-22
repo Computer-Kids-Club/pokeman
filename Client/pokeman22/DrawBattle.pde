@@ -138,16 +138,29 @@ void draw_battle() {
   text(i_cur_animation_frames_left, 50, 50);
 
   // moves
-  rectMode(CENTER);
-  for (int i=0; i<4; i++) {
-    stroke(50);
-    fill(TYPE_COLOURS.get("fire"));
-    rect((1+2*i)*TEXT_CHAT_DIVIDE/8, 660, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
-  }
-  for (int i=0; i<6; i++) {
-    stroke(50);
-    fill(255);
-    rect((1+2*i)*TEXT_CHAT_DIVIDE/12, 730, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+  if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
+    rectMode(CENTER);
+    textAlign(CENTER, CENTER);
+    for (int i=0; i<4; i++) {
+      pushMatrix();
+      translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
+      stroke(50);
+      fill(TYPE_COLOURS.get("fire"));
+      rect(0, 0, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+      fill(255);
+      text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
+      popMatrix();
+    }
+    for (int i=0; i<6; i++) {
+      pushMatrix();
+      translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
+      stroke(50);
+      fill(255);
+      rect(0, 0, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+      fill(0);
+      text(pokemons.get(i).name, 0, 0);
+      popMatrix();
+    }
   }
 
   // chat
