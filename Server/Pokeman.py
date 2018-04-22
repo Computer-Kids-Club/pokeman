@@ -14,16 +14,24 @@ from ClientConnection import *
 b_game_on = True
 
 while b_game_on:
-    for battle in l_battles:
+    for b in range(len(l_battles)-1,-1,-1):
+        battle = l_battles[b]
         battle.run()
+        if battle.b_gameover:
+            for client in battle.l_players:
+                client.battle = None
+                client.i_battle_state = NOT_READY
+            l_battles.pop(b)
+            continue
+
+
     recieve_connection()
 
     for client in l_clients:
         client = l_clients[client]
-        if not client in dic_battles and client.i_battle_state==READY:
+        if client.battle == None and client.i_battle_state==READY:
             tmp_client = init_tmp_client()
             new_battle = Battle([client,tmp_client])
-            dic_battles[client] = new_battle
             client.battle = new_battle
             tmp_client.battle = new_battle
             l_battles.append(new_battle)
