@@ -139,19 +139,21 @@ class Client(object):
 
         if self.b_tmp:
             if str_data[0] == SELECT_POKE_OR_MOVE:
-                if randint(0,5)==0:
+                if randint(0,7)==0:
                     l_avail_pokes = json.loads(str_data[1:])["availpoke"]
                     self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":l_avail_pokes[randint(0,len(l_avail_pokes)-1)]}).encode("utf-8"))
                 else:
-                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
+                    self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
+                    #self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             elif str_data[0] == SELECT_POKE:
                 l_avail_pokes = json.loads(str_data[1:])["availpoke"]
                 self.recieved_data(json.dumps({"battlestate":"selectpoke","poke":l_avail_pokes[randint(0,len(l_avail_pokes)-1)]}).encode("utf-8"))
             elif str_data[0] == SELECT_MOVE:
-                if randint(0,5)==0:
+                if randint(0,7)==0:
                     self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
                 else:
-                    self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
+                    self.recieved_data(json.dumps({"battlestate":"selectmove","move":randint(0,3)}).encode("utf-8"))
+                    #self.recieved_data(json.dumps({"battlestate": "selectpass"}).encode("utf-8"))
             return
 
         self.socket.send((str_data + TERMINATING_CHAR).encode("utf-8"))

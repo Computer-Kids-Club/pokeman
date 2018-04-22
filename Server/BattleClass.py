@@ -96,7 +96,7 @@ class Battle(object):
 
             player.i_active_move_idx = -1
 
-            if len(l_move_queue)>=1 and player.i_active_poke_idx.get_usable_stats().i_spe > l_move_queue[0].i_active_poke_idx.get_usable_stats().i_spe:
+            if len(l_move_queue)>=1 and player.active_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
                 l_move_queue.insert(0,player)
             else:
                 l_move_queue.append(player)
