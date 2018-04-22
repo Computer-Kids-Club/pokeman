@@ -4,6 +4,7 @@
 ## -------------------------------------- ##
 
 from Constants import *
+from TypeClass import Type
 
 class Move(object):
     def __init__(self,name="Thunder Bolt"):
@@ -12,6 +13,8 @@ class Move(object):
 
         self.str_type = "normal"
         self.str_cat = "physical"
+
+        self.type = Type()
 
         self.i_pow = 0
         self.i_acc = 0
