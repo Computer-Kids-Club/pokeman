@@ -56,6 +56,7 @@ class Pokeman(object):
         dic_poke = {}
 
         dic_poke["num"] = self.i_num
+        dic_poke["name"] = self.str_name
 
         self.get_usable_stats().to_dic(dic_poke,"base")
 

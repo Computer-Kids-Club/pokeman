@@ -29,6 +29,33 @@ void stop_battle() {
   c_other_display_poke = DISPLAY_NONE;
 }
 
+void draw_health_bar(int x, int y, float p) {
+  rectMode(CORNER);
+  fill(150);
+  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
+  fill(100, 255, 255);
+  noStroke();
+  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH*p, 7); // round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
+  stroke(0);
+  fill(0, 0);
+  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
+}
+
+void draw_battling_poke(Pokemon poke, int me_or_other) {
+
+  if (me_or_other==ME) {
+    drawPokemon(poke.animationBack, 0, 0);
+  } else {
+    drawPokemon(poke.animation, 0, 0);
+  }
+
+  draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP);
+
+  textAlign(CENTER, CENTER);
+  fill(0);
+  text(poke.name, 0, -80);
+}
+
 void draw_battle() {
 
   rectMode(CENTER);
@@ -37,10 +64,10 @@ void draw_battle() {
 
   if (c_display_state==DISPLAY_TEAMS) {
     for (int i = 0; i < pokemons.size(); i++) {
-      drawPokemon(pokemons.get(i).animationBack, 150+i*150, 400+i*40);
+      drawPokemon(pokemons.get(i).animationBack, (i+1)*100, 400+i*40);
     }
     for (int i = 0; i < other_pokemons.size(); i++) {
-      drawPokemon(other_pokemons.get(i).animation, 500+i*150, 50+i*40);
+      drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE-(i+1)*100, 250-i*40);
     }
   }
 
@@ -58,18 +85,8 @@ void draw_battle() {
     }
   }
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
-
-    drawPokemon(pokemons.get(c_my_display_poke).animationBack, POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
-    rectMode(CORNER);
-    fill(150);
-    rect(POKE_ME_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_ME_RECT.i_y-100, HEALTH_BAR_WIDTH, 7);
-    fill(100, 255, 255);
-    noStroke();
-    rect(POKE_ME_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_ME_RECT.i_y-100, HEALTH_BAR_WIDTH*round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
-    stroke(0);
-    fill(0, 0);
-    rect(POKE_ME_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_ME_RECT.i_y-100, HEALTH_BAR_WIDTH, 7);
-    textAlign(CENTER);
+    translate(POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
+    draw_battling_poke(pokemons.get(c_my_display_poke), ME);
   }
   popMatrix();
 
@@ -87,17 +104,8 @@ void draw_battle() {
     }
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
-    drawPokemon(other_pokemons.get(c_other_display_poke).animation, POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
-    rectMode(CORNER);
-    fill(150);
-    rect(POKE_OTHER_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_OTHER_RECT.i_y-100, HEALTH_BAR_WIDTH, 7);
-    fill(100, 255, 255);
-    noStroke();
-    rect(POKE_OTHER_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_OTHER_RECT.i_y-100, HEALTH_BAR_WIDTH*round(other_pokemons.get(c_other_display_poke).cur_hp)/other_pokemons.get(c_other_display_poke).HP, 7);
-    stroke(0);
-    fill(0, 0);
-    rect(POKE_OTHER_RECT.i_x-HEALTH_BAR_WIDTH/2, POKE_OTHER_RECT.i_y-100, HEALTH_BAR_WIDTH, 7);
-    textAlign(CENTER);
+    translate(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
+    draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
   }
   popMatrix();
 
@@ -126,14 +134,18 @@ void draw_battle() {
   textAlign(CORNER);
   rectMode(CORNER);
 
-  textAlign(CENTER, CENTER);
-  fill(0);
-  for (int i=0; i<text_chat.size() && height - i*30 > 30; i++) {
-    text(text_chat.get(i), width/2, height - i*30 - 30);
-  }
-
   textAlign(LEFT);
   text(i_cur_animation_frames_left, 50, 50);
+  
+  stroke(0);
+  fill(255);
+  rect(TEXT_CHAT_DIVIDE,0,width-TEXT_CHAT_DIVIDE,height);
+  
+  textAlign(LEFT, CENTER);
+  fill(0);
+  for (int i=0; i<text_chat.size() && height - i*30 > 30; i++) {
+    text(text_chat.get(i), TEXT_CHAT_DIVIDE+10, height - i*30 - 30);
+  }
 }
 
 void select_poke(int i_poke_id) {

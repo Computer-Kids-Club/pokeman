@@ -28,6 +28,8 @@ class Pokemon {
   }
 
   void update_with_json(JSONObject json) {
+    
+    name = json.getString("name");
 
     HP = json.getInt("basehp");
     ATK = json.getInt("baseatk");

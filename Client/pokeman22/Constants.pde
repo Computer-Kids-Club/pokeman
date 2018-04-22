@@ -62,6 +62,8 @@ HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
 
+int TEXT_CHAT_DIVIDE = 1000;
+
 void init_constants() {
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
@@ -79,7 +81,7 @@ void init_constants() {
   SEARCH_BUTTON = new Rect(width/7 + 10 + SELECTSCREENSHIFT_X, 10 + SELECTSCREENSHIFT_Y, 200, 30);
 
   POKE_ME_RECT = new Rect(150, 400+3*40);
-  POKE_OTHER_RECT = new Rect(500+5*150, 50+3*40);
+  POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-150, 50+3*40);
 
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);
