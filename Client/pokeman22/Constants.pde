@@ -75,7 +75,7 @@ void init_constants() {
   NATURESLIDER = new Rect(width*31/56, height*299/450, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
   moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
-  natureSliderStartY = height*523/900;
+  natureSliderStartY = height*299/450;
 
   START_BUTTON = new Rect(width/2, height/2, 400, 200);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
