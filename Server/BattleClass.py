@@ -86,6 +86,8 @@ class Battle(object):
         if (not self.everyone_ready() or self.b_gameover):
             return
 
+        self.send_players_pokes()
+
         # calculate damage
 
         l_move_queue: list[Client] = []
