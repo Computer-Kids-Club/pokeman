@@ -1,9 +1,11 @@
 
 Rect SLIDER;
 Rect MOVESLIDER;
+Rect NATURESLIDER;
 
 int sliderStartY;
 int moveSliderStartY;
+int natureSliderStartY;
 
 Rect INFO_BUTTON;
 Rect POKEBALL;
@@ -20,6 +22,7 @@ int HEALTH_BAR_WIDTH = 200;
 
 int POKEMON_PER_PAGE = 20;
 int MOVES_PER_PAGE = 7;
+int NATURES_PER_PAGE = 11;
 
 String POKEINFO_PATH = "./pokeinfo/";
 
@@ -69,8 +72,10 @@ void init_constants() {
   SELECTSCREENSHIFT_X = width/28;
   SLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
   MOVESLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 291, width/140, height/45);
+  NATURESLIDER = new Rect(width*31/56, height*299/450, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
   moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
+  natureSliderStartY = height*523/900;
 
   START_BUTTON = new Rect(width/2, height/2, 400, 200);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);

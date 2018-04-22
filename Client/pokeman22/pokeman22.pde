@@ -51,6 +51,7 @@ PImage[] pokemonImages = new PImage[807];
 
 int offset = 0;
 int offsetMoves = 0;
+int offsetNature = 0;
 
 boolean transitionStart = false; 
 
@@ -101,6 +102,7 @@ int[] nature = {0, 0, 0, 0, 0, 0};
 int maxEV = 508;
 
 int level;
+String natureString = "";
 
 String[] natureName = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"};
 String[][] natureStat = {{}, {"Atk", "Def"}, {"Atk", "Spe"}, {"Atk", "SpA"}, {"Atk", "SpD"}, {"Def", "Atk"}, {}, {"Def", "Spe"}, {"Def", "SpA"}, {"Def", "SpD"}, {"Spe", "Atk"}, {"Spe", "Def"}, {}, {"Spe", "SpA"}, {"Spe", "SpD"}, {"SpA", "Atk"}, {"SpA", "Def"}, {"SpA", "Spe"}, 
@@ -421,6 +423,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   //image(pokedex, 0, 0);
 
   offsetMoves = int((MOVESLIDER.i_y - moveSliderStartY)*(allPokeMoves.size()-MOVES_PER_PAGE)/((height - SELECTSCREENSHIFT_Y - moveSliderStartY)-MOVESLIDER.i_h));
+  offsetNature = int((NATURESLIDER.i_y - natureSliderStartY)*(natureName.length-NATURES_PER_PAGE)/(223-NATURESLIDER.i_h));
 
   if (tempAnimationLoad) {
     tempAnimations = loadPokemonAll(loadJSONObject(POKEINFO_PATH+"pokemon/"+pokeNum+".txt")); 
@@ -479,8 +482,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
   } else if (statSelect == true) {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);    
-    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2, 268);
+    rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, 268);    
+    rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 268);
+    rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 45);
     fill(0);
+    rect(775, 598, 10, 223);
     textAlign(RIGHT, CENTER);
     text("EVs", 100, 100);
     text("IVs", 100, 100);
@@ -491,11 +497,21 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     text("Sp. Def.", 315, 730);
     text("Speed", 315, 760);
 
-    text("Base", 355, 580);
+    text("Base", 350, 580);
     for (int i = 0; i < 6; i++) {
-      text(names_stats.get(num_names.get(pokeNum))[i], 355, 610 + i*30);
-      rect(370, 606 + i*30, 260, 10);
-      rect(370, 606 + i*30, (stats[i] * 260) / 714, 10);
+      text(names_stats.get(num_names.get(pokeNum))[i], 350, 610 + i*30);
+      rect(355, 606 + i*30, 250, 10);
+      rect(355, 606 + i*30, (stats[i] * 250) / 714, 10);
+    }
+    textAlign(CENTER, CENTER);
+    text("Nature", 700, 580);
+    textAlign(LEFT, CENTER);
+    for (int i = 0; i < natureName.length; i++) {
+      natureString = natureName[i];
+      if (natureStat[i].length > 0) {
+        natureString += " (+" + natureStat[i][0] + ", -" + natureStat[i][1] + ")";
+      }
+      text(natureString, 625, 610 + i*20);
     }
     textAlign(LEFT);
     fill(255);
