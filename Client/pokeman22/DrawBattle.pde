@@ -138,9 +138,9 @@ void draw_battle() {
   text(i_cur_animation_frames_left, 50, 50);
 
   // moves
-  if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
-    rectMode(CENTER);
-    textAlign(CENTER, CENTER);
+  rectMode(CENTER);
+  textAlign(CENTER, CENTER);
+  if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<4; i++) {
       pushMatrix();
       translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
@@ -151,6 +151,8 @@ void draw_battle() {
       text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
       popMatrix();
     }
+  }
+  if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<6; i++) {
       pushMatrix();
       translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
