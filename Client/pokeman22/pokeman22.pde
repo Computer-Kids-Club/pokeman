@@ -385,7 +385,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       IV[i] = 0;
       EV[i] = 0;
     }
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
       nature[i] = 0;
     }
     textRestrain = 525 - MOVESLIDER.i_w;
@@ -404,10 +404,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     stats[3] = ((2*names_stats.get(num_names.get(pokeNum))[3] + IV[3] + (int(EV[1]/4))*level) + 5);
     stats[4] = ((2*names_stats.get(num_names.get(pokeNum))[4] + IV[4] + (int(EV[1]/4))*level) + 5);
     stats[5] = ((2*names_stats.get(num_names.get(pokeNum))[5] + IV[5] + (int(EV[1]/4))*level) + 5);
-    for (int i = 0; i < 6; i++){
-      if (nature[i] == 1){
+    for (int i = 0; i < 6; i++) {
+      if (nature[i] == 1) {
         stats[i] *= 1.1;
-      } else if (nature[i] == -1){
+      } else if (nature[i] == -1) {
         stats[i]  = int(stats[i] / 1.1);
       }
       println(stats[i]);
@@ -473,7 +473,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     textAlign(LEFT);
     fill(255);
     //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
-  } else if (statSelect == true){
+  } else if (statSelect == true) {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
   } else {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
@@ -509,8 +509,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(0);
   //rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
-  for (int i = 0; i < 6; i++){
-    if (i == 0){
+  for (int i = 0; i < 6; i++) {
+    if (i == 0) {
       rect(895, 405, (stats[i] * 205) / 714, 10);
     } else {
       rect(895, 405 + 23*i, (stats[i] * 205) / 669, 10);
@@ -539,7 +539,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
-    if (mouseX <= 860 + 282 && mouseX >= 860 && mouseY <= 395 + 150 && mouseY >= 295){
+    if (mouseX <= 860 + 282 && mouseX >= 860 && mouseY <= 395 + 150 && mouseY >= 295) {
       statSelect = true;
       println("BING");
     }
@@ -610,7 +610,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  size(1400,900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
   frameRate(50);
   imageMode(CENTER);
@@ -709,5 +709,10 @@ void draw() {
   }
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
+  }
+
+  if (i_battle_state == SEARCHING) {
+    fill(50, 50);
+    rect(0, 0, width, height);
   }
 }
