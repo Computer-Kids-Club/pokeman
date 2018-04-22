@@ -64,7 +64,7 @@ void draw_battle() {
 
   if (c_display_state==DISPLAY_TEAMS) {
     for (int i = 0; i < pokemons.size(); i++) {
-      drawPokemon(pokemons.get(i).animationBack, (i+1)*100, 400+i*40);
+      drawPokemon(pokemons.get(i).animationBack, (i+1)*100, 350+i*40);
     }
     for (int i = 0; i < other_pokemons.size(); i++) {
       drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE-(i+1)*100, 250-i*40);
@@ -136,11 +136,26 @@ void draw_battle() {
 
   textAlign(LEFT);
   text(i_cur_animation_frames_left, 50, 50);
-  
+
+  // moves
+  rectMode(CENTER);
+  for (int i=0; i<4; i++) {
+    stroke(50);
+    fill(TYPE_COLOURS.get("fire"));
+    rect((1+2*i)*TEXT_CHAT_DIVIDE/8, 660, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+  }
+  for (int i=0; i<6; i++) {
+    stroke(50);
+    fill(255);
+    rect((1+2*i)*TEXT_CHAT_DIVIDE/12, 730, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+  }
+
+  // chat
   stroke(0);
   fill(255);
-  rect(TEXT_CHAT_DIVIDE,0,width-TEXT_CHAT_DIVIDE,height);
-  
+  rectMode(CORNER);
+  rect(TEXT_CHAT_DIVIDE, 0, width-TEXT_CHAT_DIVIDE, height);
+
   textAlign(LEFT, CENTER);
   fill(0);
   for (int i=0; i<text_chat.size() && height - i*30 > 30; i++) {
