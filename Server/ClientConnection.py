@@ -205,7 +205,7 @@ class Client(object):
     def get_available_pokes(self):
         l_ret = []
         for i in range(len(self.team)):
-            if self.team[i].is_usable():
+            if self.team[i].is_usable() and i != self.i_active_poke_idx:
                 l_ret.append(i)
         return l_ret
 
