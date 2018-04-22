@@ -8,6 +8,7 @@ import json
 import socket
 from PokemanClass import Pokeman
 from StatClass import Stats
+from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
@@ -185,6 +186,10 @@ class Client(object):
                 poke.i_happy = dic_poke['hap']
                 poke.i_lv = dic_poke['lv']
                 poke.b_shiny = dic_poke['shiny']
+
+                poke.l_moves = []
+                for dic_move in dic_poke['moves']:
+                    poke.l_moves.append(Move(dic_move))
 
                 poke.i_hp = poke.get_usable_stats().i_hp
 

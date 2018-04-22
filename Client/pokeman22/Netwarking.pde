@@ -198,6 +198,11 @@ void send_pokes() {
     json_poke.setInt("lv", poke.level);
     json_poke.setBoolean("shiny", poke.shiny);
 
+    JSONArray json_move_array = new JSONArray();
+    for (int j=0; j<poke.move.length; j++) {
+      json_move_array.setString(j, poke.move[j]);
+    }
+
     json_poke_array.setJSONObject(i, json_poke);
   }
 
