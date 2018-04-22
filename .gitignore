@@ -10,3 +10,4 @@ Client/pokeman22/data/tmp0.gif
 *.pyc
 Server/venv/
 *.pyc
+*.pyc

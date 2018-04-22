@@ -6,8 +6,8 @@
 from Log import *
 import os
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print(str(dir_path))
+dir_path = str(os.path.dirname(os.path.realpath(__file__)))
+print(dir_path)
 
 # weather constants
 class Weather(object):

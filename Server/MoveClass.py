@@ -18,9 +18,12 @@ def parse_move_json(str_json, i_default=0):
 
 class Move(object):
     def __init__(self, name="tackle"):
+        if name == None:
+            name = "tackle"
+
         self.str_name = name
 
-        dic_move = json.load(open(str(dir_path) + '/pokeinfo/move/' + name + '.txt'))
+        dic_move = json.load(open(dir_path + '/pokeinfo/move/' + name + '.txt'))
 
         self.str_type = dic_move['type']
         self.str_cat = dic_move['cat']
