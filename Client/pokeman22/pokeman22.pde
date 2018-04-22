@@ -102,7 +102,7 @@ int maxEV = 508;
 
 int level;
 
-String[] nature = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"};
+String[] natureNames = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"};
 String[][] natureStat = {{},{"Atk", "Def"},{"Atk", "Spe"},{"Atk", "SpA"},{"Atk", "SpD"},{"Def", "Atk"},{},{"Def", "Spe"},{"Def", "SpA"},{"Def", "SpD"},{"Spe", "Atk"},{"Spe", "Def"},{},{"Spe", "SpA"},{"Spe", "SpD"},{"SpA", "Atk"},{"SpA", "Def"},{"SpA", "Spe"},
                         {},{"SpA", "SpD"},{"SpD", "Atk"},{"SpD", "Def"},{"SpD", "Spe"},{"SpD", "Spa"},{}};
 
