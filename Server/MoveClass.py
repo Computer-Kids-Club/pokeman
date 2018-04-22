@@ -8,18 +8,19 @@ from TypeClass import Type
 import json
 from pathlib import Path
 
+
 def parse_move_json(str_json, i_default=0):
     i_ret = i_default
     if str_json != '-':
         i_ret = int(str_json)
     return i_ret
 
-class Move(object):
-    def __init__(self,name="tackle"):
 
+class Move(object):
+    def __init__(self, name="tackle"):
         self.str_name = name
 
-        dic_move = json.load(open('pokeinfo/move/'+name+'.txt'))
+        dic_move = json.load(open(str(dir_path) + '/pokeinfo/move/' + name + '.txt'))
 
         self.str_type = dic_move['type']
         self.str_cat = dic_move['cat']
@@ -35,7 +36,6 @@ class Move(object):
         self.i_prob = parse_move_json(dic_move['prob'])
 
     def to_dic(self, move_dic={}):
-
         move_dic["name"] = self.str_name
 
         move_dic["type"] = self.i_pow

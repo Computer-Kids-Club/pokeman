@@ -9,9 +9,6 @@
 
 from BattleClass import *
 from ClientConnection import *
-import json
-
-dic_move = open('pokeinfo/move/tackle.txt')
 
 # GAME ON
 b_game_on = True
