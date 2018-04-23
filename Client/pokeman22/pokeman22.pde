@@ -679,7 +679,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
   text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
   textAlign(LEFT, CENTER);
-  if (selectedAbility == "") {
+  if (selectedAbility == "" || chooseAbility == true) {
     text("Select an ability", 320, 515 + height/60);
   } else {
     text(selectedAbility, 320, 515 + height/60);
