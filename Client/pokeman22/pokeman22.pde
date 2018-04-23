@@ -88,7 +88,7 @@ boolean tempAnimationLoad = true;
 boolean moveSelect = false;
 boolean statSelect = true;
 boolean moveScreenReset = true;
-boolean moveSelectScreen = true;
+boolean moveSelectScreen = false;
 
 int moveSlot;
 int textRestrain;
@@ -556,7 +556,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
           statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w;
         } 
-        
+
         EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
 
         int EVRemaining = maxEV;
@@ -565,10 +565,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             EVRemaining -= EV[j];
         }
         /*if (statSliders.get(i).i_x >= 845+round(EVRemaining*180.0/252) && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
-          statSliders.get(i).i_x = 845+round(EVRemaining*180.0/252);
-        }*/
-        
-        while(EV[i]>EVRemaining) {
+         statSliders.get(i).i_x = 845+round(EVRemaining*180.0/252);
+         }*/
+
+        while (EV[i]>EVRemaining) {
           statSliders.get(i).i_x--;
           EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
         }
@@ -578,7 +578,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       } else if (statSliders.get(i).i_x < statSliderStartX[i]) {
         statSliders.get(i).i_x = statSliderStartX[i];
       }
-      
+
       EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
 
       fill(150);
@@ -703,19 +703,19 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
-        if (level > 0) {
+        if (level > 0 && moveSliderFollow == false) {
           level -= 1;
           mousePressValid = false;
         }
       }
       if (mouseX <= 420 + height/30 && mouseX >= 420) {
-        if (level < 100) {
+        if (level < 100 && moveSliderFollow == false) {
           level += 1;
           mousePressValid = false;
         }
       }
     }
-    if (statSelect == false) {
+    if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       for (int i = 0; i < 4; i++) {
         if (mouseX <= 820 && mouseX >= 580 && mouseY <= 425 + i*40 && mouseY >= 395 + i*40) {
           moveSelect = true;
