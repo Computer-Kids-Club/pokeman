@@ -11,12 +11,24 @@ class Pokemon {
   PImage[] animation;
   String[] moves;
   PImage[] animationBack;
-  Pokemon (int num, Boolean s) {
+  Pokemon (int num, Boolean s, int lvl, String abil, int[] statList, String[] moveList) {
 
     moves = new String[4];
     
-    shiny = s;
     number = num;
+    shiny = s;
+    level = lvl;
+    ability = abil;
+    HP = statList[0];
+    ATK = statList[1];
+    DEF = statList[2];
+    SPA = statList[3];
+    SPD = statList[4];
+    SPE = statList[5];
+    moves[0] = moveList[0];
+    moves[1] = moveList[1];
+    moves[2] = moveList[2];
+    moves[3] = moveList[3];
 
     init_with_json(loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt"));
   }
