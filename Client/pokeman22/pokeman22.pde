@@ -545,7 +545,42 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     text("IVs", width*6/7 - SELECTSCREENSHIFT_X - 80, 580);
 
     for (int i = 0; i < 6; i++) {
-      EV[i] = int((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
+      EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
+
+      if (statSliderFollow[i] == true) {
+        if (mouseX >= statSliderStartX[i] && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w/2) {
+          statSliders.get(i).i_x = mouseX - statSliders.get(i).i_w/2;
+          println(statSliders.get(i).i_x);
+        } else if (mouseX <= statSliderStartX[i]) {
+          statSliders.get(i).i_x = statSliderStartX[i];
+        } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
+          statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w;
+        } 
+        
+        EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
+
+        int EVRemaining = maxEV;
+        for (int j=0; j<6; j++) {
+          if (i!=j)
+            EVRemaining -= EV[j];
+        }
+        /*if (statSliders.get(i).i_x >= 845+round(EVRemaining*180.0/252) && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
+          statSliders.get(i).i_x = 845+round(EVRemaining*180.0/252);
+        }*/
+        
+        while(EV[i]>EVRemaining) {
+          statSliders.get(i).i_x--;
+          EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
+        }
+      }
+      if (statSliders.get(i).i_x + statSliders.get(i).i_w > 845 + width*6/7 - SELECTSCREENSHIFT_X - 960) {
+        statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960;
+      } else if (statSliders.get(i).i_x < statSliderStartX[i]) {
+        statSliders.get(i).i_x = statSliderStartX[i];
+      }
+      
+      EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
+
       fill(150);
       strokeWeight(0);
       rect(845, 608 + i*30, width*6/7 - SELECTSCREENSHIFT_X - 960, 6);
@@ -561,38 +596,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       textAlign(CENTER, CENTER);
       text(stats[i], width*6/7 - SELECTSCREENSHIFT_X - 30, 611 + i*30);
       fill(255);
-
-      if (statSliderFollow[i] == true && EVRemaining >= 0) {
-        if (mouseX >= statSliderStartX[i] && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
-          statSliders.get(i).i_x = mouseX - statSliders.get(i).i_w/2;
-          println(statSliders.get(i).i_x);
-        } else if (mouseX <= statSliderStartX[i]) {
-          statSliders.get(i).i_x = statSliderStartX[i];
-        } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
-          statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w;
-        }
-      }
-      if (statSliders.get(i).i_x + statSliders.get(i).i_w > 845 + width*6/7 - SELECTSCREENSHIFT_X - 960) {
-        statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960;
-      } else if (statSliders.get(i).i_x < statSliderStartX[i]) {
-        statSliders.get(i).i_x = statSliderStartX[i];
-      }
     }
 
-    if (EVRemaining < 0) {
-      //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
-      // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-      //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
-      //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;          EV[lastSliderTouhced] = 0;
-
-      EV[lastSliderTouched] = 0;
-      EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
-      println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-      statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
-      //EV[i]*150/252 + statSliderStartX[i];
-      statSliderFollow[lastSliderTouched] = false;
-      mousePressValid = false;
-    }
+    /*if (EVRemaining < 0) {
+     //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
+     // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
+     //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
+     //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;          EV[lastSliderTouhced] = 0;
+     
+     EV[lastSliderTouched] = 0;
+     EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
+     println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
+     statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
+     //EV[i]*150/252 + statSliderStartX[i];
+     statSliderFollow[lastSliderTouched] = false;
+     mousePressValid = false;
+     }*/
 
     textAlign(LEFT);
     fill(255);
@@ -752,20 +771,21 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
               lastSliderTouched = i;
             }
           }
-        } else if (EVRemaining < 0) {
-          //statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-          //EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
-
-          EV[lastSliderTouched] = 0;
-          EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
-          println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-          //statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
-          statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
-          //EV[i]*150/252 + statSliderStartX[i];
-          statSliderFollow[lastSliderTouched] = false;
-          mousePressValid = false;
-          println("HERE");
-        }
+        } 
+        /*if (EVRemaining < 0) {
+         //statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
+         //EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
+         
+         EV[lastSliderTouched] = 0;
+         EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
+         println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
+         //statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
+         statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
+         //EV[i]*150/252 + statSliderStartX[i];
+         //statSliderFollow[lastSliderTouched] = false;
+         mousePressValid = false;
+         println("HERE");
+         }*/
       }
     }
   } else {
