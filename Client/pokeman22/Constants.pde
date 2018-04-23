@@ -166,3 +166,11 @@ String string_pop(String str) {
   }
   return str;
 }
+
+String combine_char_list(ArrayList<String> l_str) {
+  String str_ret = "";
+  for (int i=0; i<l_str.size(); i++) {
+    str_ret += l_str.get(i);
+  }
+  return str_ret;
+}

@@ -20,7 +20,7 @@ void draw_console() {
 
   // update things
 
-  i_console_cursor = constrain(i_console_cursor,0,l_console_current.size());
+  i_console_cursor = constrain(i_console_cursor, 0, l_console_current.size());
 
   // draw things
 
@@ -42,10 +42,7 @@ void draw_console() {
   textAlign(LEFT, CENTER);
 
   // console current text
-  String str_console_current = "";
-  for (int i=0; i<l_console_current.size(); i++) {
-    str_console_current += l_console_current.get(i);
-  }
+  String str_console_current = combine_char_list(l_console_current);
   while (textWidth(str_console_current) > rect_console_window.i_w - console_margin_size*2 - textWidth(" ")) {
     str_console_current = string_pop(str_console_current, 0);
   }
@@ -61,11 +58,9 @@ void draw_console() {
   }
 
   // lots of console texts
-  String str_console = "";
-  for (int i=0; i<l_console_current.size(); i++) {
-    str_console += l_console_current.get(i);
+  for (int i=0; i<l_console.size() && rect_console_window.i_h/2 - console_margin_size*2 - console_text_size*(1.5 + i) > -rect_console_window.i_h/2 + console_margin_size/2; i++) {
+    text(l_console.get(i), -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size*(1.5 + i));
   }
-  text(str_console, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, 0);
 
   fill(75);
   noStroke();
@@ -133,6 +128,10 @@ void key_pressed_console() {
       i_console_cursor--;
     }
   } else if (keyCode == ENTER || keyCode == RETURN) {
+
+    String str_console_current = combine_char_list(l_console_current);
+    l_console.add(0, "\""+str_console_current+"\" is not a valid command.");
+
     l_console_current.clear();
     i_console_cursor = 0;
   } else if (keyCode == LEFT) {
