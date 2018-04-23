@@ -2,6 +2,8 @@ import static java.awt.event.KeyEvent.*;
 
 ArrayList<String> l_console = new ArrayList<String>();
 
+ArrayList<String> l_console_current = new ArrayList<String>();
+
 boolean b_console = false;
 
 Rect rect_console_window;
@@ -15,26 +17,69 @@ void draw_console() {
     return;
 
   pushMatrix();
-  translate((width-600)/2, (height-600)/2);
+  translate(width/2, height/2);
+
+  int console_margin_size = 15;
+  int console_text_size = 20;
 
   fill(100);
   noStroke();
   rectMode(CENTER);
-  
-  rect_console_window.draw_rect();
-  
-  fill(100);
+
+  // entire console background
+  rect(0, 0, rect_console_window.i_w, rect_console_window.i_h);
+
+  // display all text 
+  fill(255);
+  textAlign(LEFT, CENTER);
+
+  // console current text
+  String str_console_current = "";
+  for (int i=0; i<l_console_current.size(); i++) {
+    str_console_current += l_console_current.get(i);
+  }
+  while (textWidth(str_console_current) > rect_console_window.i_w - console_margin_size*2 - textWidth(" ")) {
+    str_console_current = string_pop(str_console_current, 0);
+  }
+  text(str_console_current, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
+
+  // lots of console texts
+  String str_console = "";
+  for (int i=0; i<l_console_current.size(); i++) {
+    str_console += l_console_current.get(i);
+  }
+  text(str_console, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, 0);
+
+  fill(75);
   noStroke();
   rectMode(CORNER);
-  
-  int console_size = 15;
-  
-  rect(-rect_console_window.i_w/2,-rect_console_window.i_h/2,15,rect_console_window.i_h);
-  
+
+  // left and right margin
+  rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
+  rect(rect_console_window.i_w/2 - console_margin_size, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
+
+  // top and bottom margin
+  rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, rect_console_window.i_w, console_margin_size);
+  rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size, rect_console_window.i_w, console_margin_size);
+
+  // sandwich margin
+  rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size, rect_console_window.i_w, console_margin_size);
+
   noFill();
-  stroke(255);
+  stroke(200);
+  rectMode(CORNER);
+
+  // lots of text box outline
+  rect(-rect_console_window.i_w/2 + console_margin_size, -rect_console_window.i_h/2 + console_margin_size, rect_console_window.i_w - console_margin_size*2, rect_console_window.i_h - console_margin_size*3 - console_text_size);
+
+  // text box outline
+  rect(-rect_console_window.i_w/2 + console_margin_size, rect_console_window.i_h/2 - console_margin_size - console_text_size, rect_console_window.i_w - console_margin_size*2, console_text_size);
+
+  noFill();
+  stroke(200);
   rectMode(CENTER);
-  
+
+  // entire console outline
   rect_console_window.draw_rect();
 
   popMatrix();
@@ -51,11 +96,23 @@ void mouse_released_console() {
 }
 
 void key_pressed_console() {
+
+  if (key == '`') {
+    b_console = !b_console;
+    return;
+  }
+
   if (!b_console)
     return;
 
-  if (keyCode == 97) {
-    b_console = !b_console;
+  if (keyCode == BACKSPACE) {
+    if (l_console_current.size()>0) {
+      l_console_current.remove(l_console_current.size()-1);
+    }
+  } else if (keyCode == ENTER || keyCode == RETURN) {
+    l_console_current.clear();
+  } else if (key != CODED) {
+    l_console_current.add(""+key);
   }
 }
 
