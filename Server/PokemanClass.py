@@ -24,6 +24,8 @@ class Pokeman(object):
         self.str_nature = "error"
         self.str_item = "error"
 
+        self.str_status = 'none'
+
         self.l_moves = [Move(),Move(),Move(),Move()]
 
         self.f_height = 0

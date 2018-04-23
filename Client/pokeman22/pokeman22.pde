@@ -114,6 +114,10 @@ String[][] natureStat = {{}, {"Atk", "Def"}, {"Atk", "Spe"}, {"Atk", "SpA"}, {"A
   {}, {"SpA", "SpD"}, {"SpD", "Atk"}, {"SpD", "Def"}, {"SpD", "Spe"}, {"SpD", "Spa"}, {}};
 String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 
+String selectedAbility = "";
+boolean chooseAbility = false;
+int abilityCount = 0;
+
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
 PImage[][] loadPokemon(JSONObject file, boolean shiny) {
@@ -391,6 +395,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     allPokeMoves = new StringList();
     selectedMoves = new String[4];
     EVRemaining = maxEV;
+    selectedAbility = "";
+    chooseAbility = false;
+    abilityCount = 0;
+    for (int i = 0; i < names_abilities.get(num_names.get(pokeNum)).length; i++) {
+      if (names_abilities.get(num_names.get(pokeNum))[i] != null) {
+        abilityCount++;
+      }
+    }
     for (int i = 0; i < 4; i++) {
       selectedMoves[i] = "";
     }    
@@ -556,7 +568,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
           statSliders.get(i).i_x = 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w;
         } 
-        
+
         EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
 
         int EVRemaining = maxEV;
@@ -564,11 +576,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
           if (i!=j)
             EVRemaining -= EV[j];
         }
-        /*if (statSliders.get(i).i_x >= 845+round(EVRemaining*180.0/252) && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
-          statSliders.get(i).i_x = 845+round(EVRemaining*180.0/252);
-        }*/
-        
-        while(EV[i]>EVRemaining) {
+
+        while (EV[i]>EVRemaining) {
           statSliders.get(i).i_x--;
           EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
         }
@@ -578,7 +587,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       } else if (statSliders.get(i).i_x < statSliderStartX[i]) {
         statSliders.get(i).i_x = statSliderStartX[i];
       }
-      
+
       EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[i])-statSliders.get(i).i_w));
 
       fill(150);
@@ -597,21 +606,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       text(stats[i], width*6/7 - SELECTSCREENSHIFT_X - 30, 611 + i*30);
       fill(255);
     }
-
-    /*if (EVRemaining < 0) {
-     //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
-     // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-     //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
-     //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;          EV[lastSliderTouhced] = 0;
-     
-     EV[lastSliderTouched] = 0;
-     EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
-     println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-     statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
-     //EV[i]*150/252 + statSliderStartX[i];
-     statSliderFollow[lastSliderTouched] = false;
-     mousePressValid = false;
-     }*/
 
     textAlign(LEFT);
     fill(255);
@@ -661,6 +655,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   rect(420, SELECTSCREENSHIFT_Y + height/4 + 325/2, height/30, height/30);
   rect(310, 515, 220, height/30);
   rect(860, 395, 282, 150, height/90);
+
+  if (chooseAbility) {
+    rect(310, 515, 220, (abilityCount + 1)*(height/30));
+    //rect(310, 515, 220, height/30);
+  }
   fill(0);
   //rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
@@ -679,6 +678,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   text("Types :", width/7 + SELECTSCREENSHIFT_X + 10, 442);
   text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
   text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
+  textAlign(LEFT, CENTER);
+  if (selectedAbility == "") {
+    text("Select an ability", 320, 515 + height/60);
+  } else {
+    text(selectedAbility, 320, 515 + height/60);
+  }
+  if (chooseAbility) {
+    for (int i = 0; i < abilityCount; i++) {
+      if (names_abilities.get(num_names.get(pokeNum))[i] == null) {
+        text(names_abilities.get(num_names.get(pokeNum))[i+1], 320, 515 + height/60 + (i+1)*height/30);
+      } else {
+        text(names_abilities.get(num_names.get(pokeNum))[i], 320, 515 + height/60 + (i+1)*height/30);
+      }
+    }
+  }
+  textAlign(LEFT);
   text("Moves", 560, 385);
   text("1.", 560, 415);
   text("2.", 560, 455);
@@ -696,6 +711,15 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
+    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
+      chooseAbility = false;
+    }
+    if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
+      if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
+        chooseAbility = true;
+        println("DONE");
+      }
+    }
     if (moveSelect == false) {
       if (mouseX <= 860 + 282 && mouseX >= 860 && mouseY <= 395 + 150 && mouseY >= 295) {
         statSelect = true;
@@ -703,19 +727,19 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
-        if (level > 0) {
+        if (level > 0 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level -= 1;
           mousePressValid = false;
         }
       }
       if (mouseX <= 420 + height/30 && mouseX >= 420) {
-        if (level < 100) {
+        if (level < 100 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level += 1;
           mousePressValid = false;
         }
       }
     }
-    if (statSelect == false) {
+    if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       for (int i = 0; i < 4; i++) {
         if (mouseX <= 820 && mouseX >= 580 && mouseY <= 425 + i*40 && mouseY >= 395 + i*40) {
           moveSelect = true;
@@ -908,7 +932,7 @@ void draw() {
 
   drawStartScreen();
   if (moveSelectScreen == true) {
-    drawPokemonInformationScreen(1, 151, 32);
+    drawPokemonInformationScreen(1, 171, 32);
   }
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
