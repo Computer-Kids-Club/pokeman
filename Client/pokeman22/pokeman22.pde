@@ -80,15 +80,17 @@ PImage settingsButton;
 PImage backgroundImg;
 PImage startButton;
 PImage pokedex;
+PImage back;
+PImage confirm;
 
 int i_battle_state = 0;
 
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
 boolean moveSelect = false;
-boolean statSelect = false;
+boolean statSelect = true;
 boolean moveScreenReset = true;
-boolean moveSelectScreen = false;
+boolean moveSelectScreen = true;
 
 int moveSlot;
 int textRestrain;
@@ -117,6 +119,8 @@ String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 String selectedAbility = "";
 boolean chooseAbility = false;
 int abilityCount = 0;
+
+boolean shinyBool = false;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -398,6 +402,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     selectedAbility = "";
     chooseAbility = false;
     abilityCount = 0;
+    shinyBool = false;
     for (int i = 0; i < names_abilities.get(num_names.get(pokeNum)).length; i++) {
       if (names_abilities.get(num_names.get(pokeNum))[i] != null) {
         abilityCount++;
@@ -458,6 +463,29 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     imageMode(CORNER);
   }
   rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
+  image(back, width/7 + SELECTSCREENSHIFT_X + 10, SELECTSCREENSHIFT_Y + height/4 + 5);
+  image(confirm, width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10, SELECTSCREENSHIFT_Y + height/4 + 5);
+
+  fill(200);
+  strokeWeight(3);
+  textAlign(CENTER, CENTER);
+  if (shinyBool == false) {
+    stroke(100);
+    rect(width/2 - 60, SELECTSCREENSHIFT_Y + height/4 + 7, 120, 46);
+    rect(width/2 - 55, SELECTSCREENSHIFT_Y + height/4 + 12, 60, 36);
+    fill(0);
+    text("SHINY", width/2 - 25, SELECTSCREENSHIFT_Y + height/4 + 30);
+  } else {
+    stroke(#36FAFF);
+    rect(width/2 - 60, SELECTSCREENSHIFT_Y + height/4 + 7, 120, 46);
+    rect(width/2 - 5, SELECTSCREENSHIFT_Y + height/4 + 12, 60, 36);
+    fill(0);
+    text("SHINY", width/2 + 25, SELECTSCREENSHIFT_Y + height/4 + 30);
+  }
+  textAlign(LEFT);
+  fill(255);
+  stroke(0);
+  strokeWeight(1);
   //rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
   if (moveSelect) {
     rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 248, width*5/7 - SELECTSCREENSHIFT_X*2, 44);
@@ -711,6 +739,12 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
+    if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
+      if (mouseX <= width/2 + 60 && mouseX >= width/2 - 60 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 53 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 7) {
+        shinyBool = !shinyBool;
+        mousePressValid = false;
+      }
+    }
     if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
       chooseAbility = false;
     }
@@ -869,6 +903,8 @@ void setup() {
   backgroundImg = loadImage("Background.jpg");
   startButton = loadImage("Button.jpg");
   pokedex = loadImage("pokedex2.png");
+  back = loadImage("back.png");
+  confirm = loadImage("Confirm.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize(height/30, height/30);
@@ -876,6 +912,8 @@ void setup() {
   backgroundImg.resize(width, height);
   startButton.resize(START_BUTTON.i_w, START_BUTTON.i_h);
   pokedex.resize(width, height);
+  back.resize(width*23/350, height/18);
+  confirm.resize(width*23/350, height/18);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
@@ -928,7 +966,7 @@ void setup() {
   println();
   println(names_moves.get("bulbasaur"));
   println(names_moves.get("bulbasaur")[1]);
-  
+
   init_console();
 }
 
@@ -938,7 +976,7 @@ void draw() {
 
   background(200);
   stroke(0);
-  
+
   if (i_battle_state == BATTLING) {
     draw_battle();
     return;
@@ -956,6 +994,6 @@ void draw() {
     fill(50, 50);
     rect(0, 0, width, height);
   }
-  
+
   draw_console();
 }
