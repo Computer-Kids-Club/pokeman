@@ -711,6 +711,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
+    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515){
+      chooseAbility = false;
+    }
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
@@ -929,7 +932,7 @@ void draw() {
 
   drawStartScreen();
   if (moveSelectScreen == true) {
-    drawPokemonInformationScreen(1, 151, 32);
+    drawPokemonInformationScreen(1, 171, 32);
   }
   if (pokemonSelectScreen == true) {
     drawPokemonSelectionScreen(pokemonChangeNumber);
