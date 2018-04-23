@@ -104,7 +104,7 @@ void keyPressed() {
    send_pokes();
    }*/
   if (key=='`') {
-    reconnect();
+    //reconnect();
   }
 
   if (pokemonSearchBool == true) {

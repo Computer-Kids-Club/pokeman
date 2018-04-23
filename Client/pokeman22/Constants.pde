@@ -152,3 +152,10 @@ int interpolate(int x1, int x2, int m, int mt) {
 void translate_interpolation(Rect r1, Rect r2, int m, int mt) {
   translate(interpolate(r1.i_x, r2.i_x, m, mt), interpolate(r1.i_y, r2.i_y, m, mt));
 }
+
+String string_pop(String str) {
+  if (str != null && str.length() > 0) {
+    str = str.substring(0, str.length() - 1);
+  }
+  return str;
+}
