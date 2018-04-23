@@ -116,6 +116,7 @@ String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 
 String selectedAbility = "";
 boolean chooseAbility = false;
+int abilityCount = 0;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -396,6 +397,12 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     EVRemaining = maxEV;
     selectedAbility = "";
     chooseAbility = false;
+    abilityCount = 0;
+    for (int i = 0; i < names_abilities.get(num_names.get(pokeNum)).length; i++) {
+      if (names_abilities.get(num_names.get(pokeNum))[i] != null) {
+        abilityCount++;
+      }
+    }
     for (int i = 0; i < 4; i++) {
       selectedMoves[i] = "";
     }    
@@ -650,8 +657,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   rect(860, 395, 282, 150, height/90);
 
   if (chooseAbility) {
-    println(names_abilities.get(num_names.get(pokeNum)).length);
-    rect(310, 515, 220, (names_abilities.get(num_names.get(pokeNum)).length + 1)*(height/30));
+    rect(310, 515, 220, (abilityCount + 1)*(height/30));
     //rect(310, 515, 220, height/30);
   }
   fill(0);
@@ -672,11 +678,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   text("Types :", width/7 + SELECTSCREENSHIFT_X + 10, 442);
   text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
   text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
-  if (selectedAbility == ""){
-  text("Select an ability", width/7 + SELECTSCREENSHIFT_X + 20, 536);
+  textAlign(LEFT, CENTER);
+  if (selectedAbility == "") {
+    text("Select an ability", 320, 515 + height/60);
   } else {
-  text(chosenAbility, width/7 + SELECTSCREENSHIFT_X + 20, 536);
+    text(selectedAbility, 320, 515 + height/60);
   }
+  if (chooseAbility) {
+    for (int i = 0; i < abilityCount; i++) {
+      if (names_abilities.get(num_names.get(pokeNum))[i] == null) {
+        text(names_abilities.get(num_names.get(pokeNum))[i+1], 320, 515 + height/60 + (i+1)*height/30);
+      } else {
+        text(names_abilities.get(num_names.get(pokeNum))[i], 320, 515 + height/60 + (i+1)*height/30);
+      }
+    }
+  }
+  textAlign(LEFT);
   text("Moves", 560, 385);
   text("1.", 560, 415);
   text("2.", 560, 455);
