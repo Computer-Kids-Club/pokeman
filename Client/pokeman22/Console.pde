@@ -38,8 +38,8 @@ void draw_console() {
   for (int i=0; i<l_console_current.size(); i++) {
     str_console_current += l_console_current.get(i);
   }
-  while (textWidth(str_console_current) > rect_console_window.i_w - console_margin_size*2) {
-    str_console_current = string_pop(str_console_current);
+  while (textWidth(str_console_current) > rect_console_window.i_w - console_margin_size*2 - textWidth(" ")) {
+    str_console_current = string_pop(str_console_current, 0);
   }
   text(str_console_current, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
 
