@@ -79,10 +79,10 @@ void init_constants() {
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
   moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
   natureSliderStartY = height*299/450;
-  
-  for (int i = 0; i < 6; i++){
-   statSliders.add(new Rect(width*169/280, 601 + i*30,10,20));
-   statSliderStartX[i] = width*169/280;
+
+  for (int i = 0; i < 6; i++) {
+    statSliders.add(new Rect(width*169/280, 601 + i*30, 10, 20));
+    statSliderStartX[i] = width*169/280;
   }
 
   START_BUTTON = new Rect(width/2, height/2, 400, 200);
@@ -138,6 +138,10 @@ class Rect {
   Rect(int x, int y) {
     i_x = x;
     i_y = y;
+  }
+
+  void draw_rect() {
+    rect(i_x, i_y, i_w, i_h);
   }
 }
 

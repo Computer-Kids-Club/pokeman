@@ -937,7 +937,8 @@ void draw() {
   recieve_data();
 
   background(200);
-
+  stroke(0);
+  
   if (i_battle_state == BATTLING) {
     draw_battle();
     return;
