@@ -579,12 +579,20 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
     }
 
-    //if (EVRemaining < 0) {
-    //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
-    // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-    //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
-    //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;
-    //  }
+    /*if (EVRemaining < 0) {
+      //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
+      // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
+      //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
+      //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;          EV[lastSliderTouhced] = 0;
+
+      EV[lastSliderTouched] = 0;
+      EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
+      println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
+      statSliders.get(lastSliderTouched).i_x = EVRemaining*150/252 + statSliderStartX[lastSliderTouched];
+      //EV[i]*150/252 + statSliderStartX[i];
+      statSliderFollow[lastSliderTouched] = false;
+      mousePressValid = false;
+    }*/
 
     textAlign(LEFT);
     fill(255);
@@ -745,11 +753,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             }
           }
         } else if (EVRemaining < 0) {
-          statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-          EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
+          //statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
+          //EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
+
+          EV[lastSliderTouched] = 0;
           EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
           println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-          statSliders.get(lastSliderTouched).i_x = EVRemaining*160/252;
+          statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
+          //EV[i]*150/252 + statSliderStartX[i];
           statSliderFollow[lastSliderTouched] = false;
           mousePressValid = false;
           println("HERE");
