@@ -427,7 +427,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       stats[i+1] = int(stats[i+1] / 1.1);
     }
   }
-  EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
+  EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
   //image(pokedex, 0, 0);
 
   offsetMoves = int((MOVESLIDER.i_y - moveSliderStartY)*(allPokeMoves.size()-MOVES_PER_PAGE)/((height - SELECTSCREENSHIFT_Y - moveSliderStartY)-MOVESLIDER.i_h));
@@ -565,6 +565,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (statSliderFollow[i] == true && EVRemaining >= 0) {
         if (mouseX >= statSliderStartX[i] && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
           statSliders.get(i).i_x = mouseX - statSliders.get(i).i_w/2;
+          println(statSliders.get(i).i_x);
         } else if (mouseX <= statSliderStartX[i]) {
           statSliders.get(i).i_x = statSliderStartX[i];
         } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
@@ -579,11 +580,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
 
     //if (EVRemaining < 0) {
-      //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
-     // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-//EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
+    //statSliders.get(lastSliderTouched).i_x = statSliders.get(lastSliderTouched).i_x + EVRemaining*(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])/252 - statSliders.get(lastSliderTouched).i_w;
+    // statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
+    //EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
     //  statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;
-  //  }
+    //  }
 
     textAlign(LEFT);
     fill(255);
@@ -743,12 +744,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
               lastSliderTouched = i;
             }
           }
-        } else if (EVRemaining <= 0) {
+        } else if (EVRemaining < 0) {
           statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-          EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4];
-          println(EVREmaining);
-          statSliders.get(lastSliderTouched).i_x = EVRemaining*252/(845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched]) + 845;
+          EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
+          EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
+          println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
+          statSliders.get(lastSliderTouched).i_x = EVRemaining*160/252;
           statSliderFollow[lastSliderTouched] = false;
+          mousePressValid = false;
           println("HERE");
         }
       }
