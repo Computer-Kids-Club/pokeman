@@ -711,7 +711,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   if (mousePressed && mousePressValid == true) {
-    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515){
+    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
       chooseAbility = false;
     }
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
@@ -727,13 +727,13 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
       if (mouseX <= 310 + height/30 && mouseX >= 310) {
-        if (level > 0 && moveSliderFollow == false) {
+        if (level > 0 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level -= 1;
           mousePressValid = false;
         }
       }
       if (mouseX <= 420 + height/30 && mouseX >= 420) {
-        if (level < 100 && moveSliderFollow == false) {
+        if (level < 100 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level += 1;
           mousePressValid = false;
         }
