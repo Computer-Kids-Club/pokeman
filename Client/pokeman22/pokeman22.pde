@@ -236,7 +236,6 @@ void drawStartScreen() {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
-        //pokemons.set(i, new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
         mousePressValid = false;
       }
       if (dist(mouseX, mouseY, INFO_BUTTON.i_x + i*POKEMON_BUTTON.i_w, INFO_BUTTON.i_y) <= height/60) {
@@ -744,14 +743,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         shinyBool = !shinyBool;
         mousePressValid = false;
       }
-    }
-    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
-      chooseAbility = false;
-    }
-    if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
+      if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 + width*23/350 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
+      }
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
       }
+    }
+    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
+      chooseAbility = false;
     }
     if (chooseAbility == true) {
       for (int i = 0; i < abilityCount; i++) {
@@ -840,21 +839,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
               lastSliderTouched = i;
             }
           }
-        } 
-        /*if (EVRemaining < 0) {
-         //statSliders.get(lastSliderTouched).i_x = statSliderStartX[lastSliderTouched];
-         //EV[lastSliderTouched] = int((statSliders.get(lastSliderTouched).i_x - statSliderStartX[lastSliderTouched])*(252)/((845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliderStartX[lastSliderTouched])-statSliders.get(lastSliderTouched).i_w));
-         
-         EV[lastSliderTouched] = 0;
-         EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
-         println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-         //statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
-         statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
-         //EV[i]*150/252 + statSliderStartX[i];
-         //statSliderFollow[lastSliderTouched] = false;
-         mousePressValid = false;
-         println("HERE");
-         }*/
+        }
       }
     }
   } else {
