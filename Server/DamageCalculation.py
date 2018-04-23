@@ -57,11 +57,15 @@ def attack(atk_poke, def_poke, move, field):
     str_status = atk_poke.str_status
     i_other = 1
     i_burn = 0
+    str_ability = atk_poke.str_ability
+    str_mov_name = move.str_name
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
         i_def = def_poke.get_usable_stats().get_def()
         if str_status == 'burn':
             i_burn = 0.5
+            if str_ability == 'guts' or str_mov_name == 'facade':
+                i_burn = 1.5
     elif move.str_cat == 'special':
         i_atk = atk_poke.get_usable_stats().get_spa()
         i_def = def_poke.get_usable_stats().get_spd()
