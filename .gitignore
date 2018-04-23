@@ -11,3 +11,6 @@ Client/pokeman22/data/tmp0.gif
 Server/venv/
 *.pyc
 *.pyc
+*.pyc
+Server/__pycache__/Constants.cpython-37.pyc
+*.pyc
