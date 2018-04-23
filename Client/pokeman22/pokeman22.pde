@@ -588,7 +588,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       EV[lastSliderTouched] = 0;
       EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
       println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-      statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
+      statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
       //EV[i]*150/252 + statSliderStartX[i];
       statSliderFollow[lastSliderTouched] = false;
       mousePressValid = false;
@@ -759,7 +759,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
           EV[lastSliderTouched] = 0;
           EVRemaining = maxEV - EV[0] - EV[1] - EV[2] - EV[3] - EV[4] - EV[5];
           println(EVRemaining, statSliders.get(lastSliderTouched).i_x, EVRemaining*160/252);
-          statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
+          //statSliders.get(lastSliderTouched).i_x = EVRemaining*180/252 + statSliderStartX[lastSliderTouched];
+          statSliders.get(lastSliderTouched).i_x = round(float(EVRemaining)*180.0/252.0 + float(statSliderStartX[lastSliderTouched]));
           //EV[i]*150/252 + statSliderStartX[i];
           statSliderFollow[lastSliderTouched] = false;
           mousePressValid = false;
