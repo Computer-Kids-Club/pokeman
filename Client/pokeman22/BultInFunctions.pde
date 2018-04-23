@@ -1,4 +1,6 @@
 void mousePressed() {
+  mouse_pressed_console();
+  
   /*print(mouseX);
    print(" ");
    println(mouseY);*/
@@ -8,9 +10,12 @@ void mousePressed() {
     i_battle_state = SEARCHING;
     println("pressed");
   }
+  
 }
 
 void mouseReleased() {
+  mouse_released_console();
+  
   mousePressValid = true;
 }
 
@@ -75,6 +80,8 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
+  key_pressed_console();
+  
   //  pokemons = new ArrayList<Pokemon>();
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
@@ -135,4 +142,6 @@ void keyPressed() {
 }
 
 void keyReleased() {
+  key_released_console();
+  
 }

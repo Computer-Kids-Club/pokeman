@@ -928,6 +928,8 @@ void setup() {
   println();
   println(names_moves.get("bulbasaur"));
   println(names_moves.get("bulbasaur")[1]);
+  
+  init_console();
 }
 
 void draw() {
