@@ -99,18 +99,18 @@ String[] selectedMoves;
 int[] IV = {31, 31, 31, 31, 31, 31};
 int[] EV = {0, 0, 0, 0, 0, 0};
 int[] stats = {0, 0, 0, 0, 0, 0};
-int[] nature = {0, 0, 0, 0, 0, 0};
+int[] nature = {0, 0, 0, 0, 0};
 int maxEV = 508;
 
 int level;
 String natureString = "";
 
 boolean[] statSliderFollow = {false, false, false, false, false, false};
-boolean natureReset = false;
 
 String[] natureName = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"};
 String[][] natureStat = {{}, {"Atk", "Def"}, {"Atk", "Spe"}, {"Atk", "SpA"}, {"Atk", "SpD"}, {"Def", "Atk"}, {}, {"Def", "Spe"}, {"Def", "SpA"}, {"Def", "SpD"}, {"Spe", "Atk"}, {"Spe", "Def"}, {}, {"Spe", "SpA"}, {"Spe", "SpD"}, {"SpA", "Atk"}, {"SpA", "Def"}, {"SpA", "Spe"}, 
   {}, {"SpA", "SpD"}, {"SpD", "Atk"}, {"SpD", "Def"}, {"SpD", "Spe"}, {"SpD", "Spa"}, {}};
+String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -417,13 +417,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   stats[3] = (((2*names_stats.get(num_names.get(pokeNum))[3] + IV[3] + int(EV[3]/4))*level)/100 + 5);
   stats[4] = (((2*names_stats.get(num_names.get(pokeNum))[4] + IV[4] + int(EV[4]/4))*level)/100 + 5);
   stats[5] = (((2*names_stats.get(num_names.get(pokeNum))[5] + IV[5] + int(EV[5]/4))*level)/100 + 5);
-  if (natureReset == true) {
-    for (int i = 0; i < 6; i++) {
-      if (nature[i] == 1) {
-        stats[i] *= 1.1;
-      } else if (nature[i] == -1) {
-        stats[i]  = int(stats[i] / 1.1);
-      }
+  for (int i = 0; i < 5; i++) {
+    if (nature[i] == 1) {
+      stats[i+1] *= 1.1;
+    } else if (nature[i] == -1) {
+      stats[i+1] = int(stats[i+1] / 1.1);
     }
   }
   //image(pokedex, 0, 0);
@@ -701,6 +699,28 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         moveSliderFollow = true;
       }
     } else if (statSelect) {
+      if (natureSliderFollow == false) {
+        for (int i = 0; i < NATURES_PER_PAGE; i++) {
+          if (mouseX <= 785 - NATURESLIDER.i_w && mouseX >= 615 && mouseY <= natureSliderStartY + (i+1)*20 && mouseY >= natureSliderStartY + i*20) {
+            println(natureName[i+offsetNature], nature[0], nature[1], nature[2], nature[3], nature[4]);
+            if (natureStat[i + offsetNature].length > 0) {
+              for (int j = 0; j < 5; j++) {
+                if (natureStat[i + offsetNature][0] == natureAbility[j]) {
+                  nature[j] = 1;
+                } else if (natureStat[i + offsetNature][1] == natureAbility[j]) {
+                  nature[j] = -1;
+                } else {
+                  nature[j] = 0;
+                }
+              }
+            } else {
+              for (int j = 0; j < 5; j++) {
+                nature[j] = 0;
+              }
+            }
+          }
+        }
+      }
       if (mouseX >= NATURESLIDER.i_x && mouseX <= NATURESLIDER.i_x + NATURESLIDER.i_w && mouseY >= NATURESLIDER.i_y && mouseY <= NATURESLIDER.i_y + NATURESLIDER.i_h) {
         natureSliderFollow = true;
       }
