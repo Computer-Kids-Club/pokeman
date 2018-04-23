@@ -745,7 +745,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         }
       }
       for (int i = 0; i < 6; i++) {
-        if (EVRemaining > 0) {
+        if (EVRemaining >= 0) {
           if (statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false && natureSliderFollow == false) {
             if (mouseX <= statSliders.get(i).i_x + statSliders.get(i).i_w && mouseX >= statSliders.get(i).i_x && mouseY <= statSliders.get(i).i_y + statSliders.get(i).i_h && mouseY >= statSliders.get(i).i_y) {
               statSliderFollow[i] = true;
