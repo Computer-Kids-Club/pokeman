@@ -717,7 +717,18 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
-        println("DONE");
+      }
+    }
+    if (chooseAbility == true) {
+      for (int i = 0; i < abilityCount; i++) {
+        if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + (i+2)*(height/30) && mouseY >= 515 + (i+1)*(height/30)) {
+          if (names_abilities.get(num_names.get(pokeNum))[i] == null) {
+            selectedAbility = names_abilities.get(num_names.get(pokeNum))[i+1];
+          } else {
+            selectedAbility = names_abilities.get(num_names.get(pokeNum))[i];
+          }
+          chooseAbility = false;
+        }
       }
     }
     if (moveSelect == false) {
