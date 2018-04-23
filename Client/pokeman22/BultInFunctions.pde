@@ -1,5 +1,7 @@
 void mousePressed() {
   mouse_pressed_console();
+  if (b_console)
+    return;
   
   /*print(mouseX);
    print(" ");
@@ -15,6 +17,8 @@ void mousePressed() {
 
 void mouseReleased() {
   mouse_released_console();
+  if (b_console)
+    return;
   
   mousePressValid = true;
 }
@@ -22,6 +26,10 @@ void mouseReleased() {
 void mouseClicked() {
 }
 void mouseWheel(MouseEvent event) {
+  mouse_wheel_console();
+  if (b_console)
+    return;
+  
   if (pokemonSelectScreen == true && moveSelect == false) {
     if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
       int count = (event.getCount())*5;
@@ -81,6 +89,8 @@ void mouseWheel(MouseEvent event) {
 
 void keyPressed() {
   key_pressed_console();
+  if (b_console)
+    return;
   
   //  pokemons = new ArrayList<Pokemon>();
   //  for (int i = 0; i < 6; i ++) {
@@ -143,5 +153,7 @@ void keyPressed() {
 
 void keyReleased() {
   key_released_console();
+  if (b_console)
+    return;
   
 }

@@ -6,6 +6,8 @@ ArrayList<String> l_console_current = new ArrayList<String>();
 
 boolean b_console = false;
 
+int i_console_cursor = 0;
+
 Rect rect_console_window;
 
 void init_console() {
@@ -15,6 +17,12 @@ void init_console() {
 void draw_console() {
   if (!b_console)
     return;
+
+  // update things
+
+  i_console_cursor = constrain(i_console_cursor,0,l_console_current.size());
+
+  // draw things
 
   pushMatrix();
   translate(width/2, height/2);
@@ -42,6 +50,15 @@ void draw_console() {
     str_console_current = string_pop(str_console_current, 0);
   }
   text(str_console_current, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
+
+  // blinking cursor
+  if (frameCount%30<15) {
+    stroke(255);
+    pushMatrix();
+    translate(-rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2 + textWidth(str_console_current.substring(0, i_console_cursor)), rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
+    line(0, -7, 0, 7);
+    popMatrix();
+  }
 
   // lots of console texts
   String str_console = "";
@@ -95,6 +112,11 @@ void mouse_released_console() {
     return;
 }
 
+void mouse_wheel_console() {
+  if (!b_console)
+    return;
+}
+
 void key_pressed_console() {
 
   if (key == '`') {
@@ -108,11 +130,18 @@ void key_pressed_console() {
   if (keyCode == BACKSPACE) {
     if (l_console_current.size()>0) {
       l_console_current.remove(l_console_current.size()-1);
+      i_console_cursor--;
     }
   } else if (keyCode == ENTER || keyCode == RETURN) {
     l_console_current.clear();
+    i_console_cursor = 0;
+  } else if (keyCode == LEFT) {
+    i_console_cursor--;
+  } else if  (keyCode == RIGHT) {
+    i_console_cursor++;
   } else if (key != CODED) {
-    l_console_current.add(""+key);
+    l_console_current.add(i_console_cursor, ""+key);
+    i_console_cursor++;
   }
 }
 

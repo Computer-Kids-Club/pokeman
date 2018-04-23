@@ -88,9 +88,9 @@ int i_battle_state = 0;
 PImage[][] tempAnimations;
 boolean tempAnimationLoad = true;
 boolean moveSelect = false;
-boolean statSelect = true;
+boolean statSelect = false;
 boolean moveScreenReset = true;
-boolean moveSelectScreen = true;
+boolean moveSelectScreen = false;
 
 int moveSlot;
 int textRestrain;
