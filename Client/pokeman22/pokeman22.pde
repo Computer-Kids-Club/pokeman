@@ -515,7 +515,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     text("Base", 350, 580);
     for (int i = 0; i < 6; i++) {
       text(names_stats.get(num_names.get(pokeNum))[i], 350, 610 + i*30);
-      //rect(355, 606 + i*30, 250, 10);
+      rect(355, 606 + i*30, 250, 10);
       rect(355, 606 + i*30, (stats[i] * 250) / 714, 10);    
       if (i == 0) {
         rect(355, 606 + i*30, (stats[i] * 250) / 714, 10);
@@ -533,6 +533,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       text(natureString, 625, 610 + i*20);
     }
+
+    textAlign(CENTER, CENTER);
+    text("EVs", 815, 580);
+    text("IVs", width*6/7 - SELECTSCREENSHIFT_X - 80, 580);
+
+    for (int i = 0; i < 6; i++) {
+      fill(150);
+      strokeWeight(0);
+      rect(845, 608 + i*30, width*6/7 - SELECTSCREENSHIFT_X - 100 - 850 - 10, 6);
+      fill(255);
+      strokeWeight(1);
+      rect(795, 601 + i*30, 40, 20);
+      rect(width*6/7 - SELECTSCREENSHIFT_X - 100, 601 + i*30, 40, 20);
+      rect(statSliders.get(i).i_x, statSliders.get(i).i_y, statSliders.get(i).i_w, statSliders.get(i).i_h);
+    }
+
     textAlign(LEFT);
     fill(255);
 

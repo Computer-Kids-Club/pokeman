@@ -3,6 +3,9 @@ Rect SLIDER;
 Rect MOVESLIDER;
 Rect NATURESLIDER;
 
+ArrayList<Rect> statSliders = new ArrayList<Rect>();
+int[] statSliderStartX = new int[6];
+
 int sliderStartY;
 int moveSliderStartY;
 int natureSliderStartY;
@@ -76,6 +79,11 @@ void init_constants() {
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
   moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
   natureSliderStartY = height*299/450;
+  
+  for (int i = 0; i < 6; i++){
+   statSliders.add(new Rect(width*169/280, 601 + i*30,10,20));
+   statSliderStartX[i] = width*169/280;
+  }
 
   START_BUTTON = new Rect(width/2, height/2, 400, 200);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
