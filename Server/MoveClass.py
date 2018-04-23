@@ -5,25 +5,40 @@
 
 from Constants import *
 from TypeClass import Type
+import json
+from pathlib import Path
+
+
+def parse_move_json(str_json, i_default=0):
+    i_ret = i_default
+    if str_json != '-':
+        i_ret = int(str_json)
+    return i_ret
+
 
 class Move(object):
-    def __init__(self,name="Thunder Bolt"):
+    def __init__(self, name="tackle"):
+        if name == None:
+            name = "tackle"
 
         self.str_name = name
 
-        self.str_type = "normal"
-        self.str_cat = "physical"
+        dic_move = json.load(open(dir_path + '/pokeinfo/move/' + name + '.txt'))
 
-        self.type = Type()
+        self.str_type = dic_move['type']
+        self.str_cat = dic_move['cat']
 
-        self.i_pow = 0
-        self.i_acc = 0
+        self.type = Type(self.str_type)
 
-        self.i_pp = 0
-        self.i_max_pp = 0
+        self.i_pow = parse_move_json(dic_move['power'])
+        self.i_acc = parse_move_json(dic_move['acc'])
+
+        self.i_max_pp = parse_move_json(dic_move['pp'])
+        self.i_pp = self.i_max_pp
+
+        self.i_prob = parse_move_json(dic_move['prob'])
 
     def to_dic(self, move_dic={}):
-
         move_dic["name"] = self.str_name
 
         move_dic["type"] = self.i_pow

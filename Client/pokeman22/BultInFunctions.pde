@@ -53,6 +53,24 @@ void mouseWheel(MouseEvent event) {
     } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height/4 + 291) {
       MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height/4 + 291;
     }
+  } else if (statSelect == true) {
+    if (NATURESLIDER.i_y >= natureSliderStartY && NATURESLIDER.i_y + MOVESLIDER.i_h <= height) {
+      int count = (event.getCount())*5;
+      if (count > 0) {
+        if (NATURESLIDER.i_y + NATURESLIDER.i_h < height - SELECTSCREENSHIFT_Y) {
+          NATURESLIDER.i_y += (event.getCount())*5;
+        }
+      } else {
+        if (NATURESLIDER.i_y > natureSliderStartY) {
+          NATURESLIDER.i_y += (event.getCount())*5;
+        }
+      }
+    }
+    if (NATURESLIDER.i_y + NATURESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      NATURESLIDER.i_y = height - NATURESLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (NATURESLIDER.i_y < 598) {
+      NATURESLIDER.i_y = 598;
+    }
   }
 }
 

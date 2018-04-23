@@ -4,6 +4,10 @@
 ## -------------------------------------- ##
 
 from Log import *
+import os
+
+dir_path = str(os.path.dirname(os.path.realpath(__file__)))
+print(dir_path)
 
 # weather constants
 class Weather(object):
@@ -51,6 +55,8 @@ DISPLAY_TEXT = 'd'
 DISPLAY_TEAMS = 'T'
 DISPLAY_POKES = 'P'
 DISPLAY_NONE = 'N'
+DISPLAY_MOVE = 'M'
+DISPLAY_DELAY = 'D'
 
 DISPLAY_WIN = 'W'
 DISPLAY_LOSE = 'L'
