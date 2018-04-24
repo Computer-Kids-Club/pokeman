@@ -716,7 +716,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(0, 0, 0, 150);
   for (int i = 0; i < 2; i++) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + height/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
-    line(width/7 + SELECTSCREENSHIFT_X + (width*11/28)*i, SELECTSCREENSHIFT_Y + height/4 + 60, width/7 + SELECTSCREENSHIFT_X + (width*11/28)*i, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
+    line(width/7 + SELECTSCREENSHIFT_X + (width*3/14)*i, SELECTSCREENSHIFT_Y + height/4 + 60, width/7 + SELECTSCREENSHIFT_X + (width*3/14)*i, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
     println((width*11/28)*(i+1));
   }
   line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
