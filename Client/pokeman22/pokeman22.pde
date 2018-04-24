@@ -1056,6 +1056,6 @@ void draw() {
   if (i_battle_state == SEARCHING) {
     fill(50, 50);
     draw_rect(0, 0, width, height);
-  }
+  } 
   draw_console();
 }
