@@ -265,7 +265,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 
   draw_rectMode(CORNER);
   fill(0, 0, 0, 150);
-  draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, height/9);
+  draw_rect(0, 0, width, height);
   //draw_rect(width/7, height/18, width*5/7, height/18);
 
   fill(255);
@@ -293,8 +293,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   }
 
   offset = int((SLIDER.i_y - sliderStartY)*(807.0-POKEMON_PER_PAGE)/((height - height/9 - SELECTSCREENSHIFT_Y*2)-SLIDER.i_h));
-  fill(0, 0, 0, 150);
-  draw_rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, (height*38)/45 - SELECTSCREENSHIFT_Y);
+  //draw_rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, (height*38)/45 - SELECTSCREENSHIFT_Y);
   fill(255);
   stroke(255);
   strokeWeight(1);
@@ -384,7 +383,9 @@ void drawPokemonSelectionScreen(int slotNumber) {
   //draw_rect((width/7)*6 - SLIDER.i_w - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, SLIDER.i_w, (height/9)*8 - SELECTSCREENSHIFT_Y*2);
   fill(255);
   draw_rect(SLIDER.i_x, SLIDER.i_y, SLIDER.i_w, SLIDER.i_h);
-  fill(0, 0, 0, 60);
+  fill(0, 0, 0, 150);
+  stroke(255);
+  strokeWeight(1);
   draw_rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
   if (pokemonSearchBool == false) {
