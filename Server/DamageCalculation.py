@@ -54,6 +54,9 @@ def attack(atk_poke, def_poke, move, field):
     elif str_terrain == 'psychic' and (str_pok_type_1 == 'psychic'or str_pok_type_2 == 'psychic'):
         i_terrain = 1.5
 
+    if str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude':
+        i_terrain = 0.5
+
     str_status = atk_poke.str_status
     i_other = 1
     i_burn = 0
@@ -76,3 +79,4 @@ def attack(atk_poke, def_poke, move, field):
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = ((((((2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod
     return i_damage
+#attack(Pokeman, Pokeman, )
