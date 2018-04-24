@@ -90,7 +90,11 @@ class Battle(object):
 
         # calculate damage
 
-        l_move_queue: list[Client] = []
+<<<<<<< HEAD
+        l_move_queue = []
+=======
+        l_move_queue= []
+>>>>>>> 58249722a166d82904aba0b0b25d1b90ae5fd9ed
 
         for player in self.l_players:
             if (player.i_active_move_idx == -1):
