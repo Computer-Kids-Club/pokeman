@@ -193,6 +193,8 @@ class Client(object):
 
                 poke.i_hp = poke.get_usable_stats().i_hp
 
+                #print("hey hey hey ", poke.get_usable_stats().i_atk)
+
                 self.team.append(poke)
             self.i_battle_state = READY
             self.i_turn_readiness = READY
