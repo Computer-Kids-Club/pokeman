@@ -9,6 +9,9 @@
 
 from BattleClass import *
 from ClientConnection import *
+from DamageCalculation import *
+
+
 
 # GAME ON
 b_game_on = True

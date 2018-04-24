@@ -43,7 +43,7 @@ class Move(object):
 
         move_dic["name"] = self.str_name
 
-        move_dic["type"] = self.i_pow
+        move_dic["type"] = self.type.getName()
         move_dic["cat"] = self.str_cat
 
         move_dic["power"] = self.i_pow
