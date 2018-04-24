@@ -157,15 +157,37 @@ void keyReleased() {
 }
 
 void draw_rect(int x, int y, int w, int h, int r) {
+  if(i_r_drawothermodels==2) {
+    noFill();
+    stroke(#00EDDB);
+    tint(#00EDDB);
+  }
+    
   rect(x, y, w, h, r);
+}
+
+void draw_text(String str, int x, int y) {
+  if(i_r_drawothermodels==2) {
+    noFill();
+    stroke(#00EDDB);
+    tint(#00EDDB);
+  }
+    
+  text(str, x, y);
+}
+
+void draw_image(PImage img, int x, int y) {
+  if(i_r_drawothermodels==2) {
+    noFill();
+    stroke(#00EDDB);
+    tint(#00EDDB);
+  }
+    
+  image(img, x, y);
 }
 
 void draw_rect(int x, int y, int w, int h) {
   draw_rect(x, y, w, h, 0);
-}
-
-void draw_text(String str, int x, int y) {
-  text(str, x, y);
 }
 
 void draw_text(String str, int x, float y) {
@@ -178,9 +200,4 @@ void draw_text(String str, float x, float y) {
 
 void draw_text(int str, int x, float y) {
   draw_text(""+str, x, y);
-}
-
-
-void draw_image(PImage img, int x, int y) {
-  image(img, x, y);
 }
