@@ -53,16 +53,16 @@ class Pokeman(object):
 
         self.l_moves = [Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves))]
 
-        self.f_height = dic_poke["height"]
-        self.f_weight = dic_poke["weight"]
+        self.f_height = (dic_poke["height"])
+        self.f_weight = (dic_poke["weight"])
 
         self.base_stats = Stats()
-        self.base_stats.i_hp = dic_poke["HP"]
-        self.base_stats.i_atk = dic_poke["ATK"]
-        self.base_stats.i_def = dic_poke["DEF"]
-        self.base_stats.i_spa = dic_poke["SPA"]
-        self.base_stats.i_spd = dic_poke["SPD"]
-        self.base_stats.i_spe = dic_poke["SPE"]
+        self.base_stats.i_hp = int(dic_poke["HP"])
+        self.base_stats.i_atk = int(dic_poke["ATK"])
+        self.base_stats.i_def = int(dic_poke["DEF"])
+        self.base_stats.i_spa = int(dic_poke["SPA"])
+        self.base_stats.i_spd = int(dic_poke["SPD"])
+        self.base_stats.i_spe = int(dic_poke["SPE"])
 
         #self.ev_stats = Stats()
         #self.iv_stats = Stats()
