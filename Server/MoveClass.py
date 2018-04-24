@@ -18,8 +18,8 @@ def parse_move_json(str_json, i_default=0):
 
 class Move(object):
     def __init__(self, name="tackle"):
-        if name == None:
-            name = "tackle"
+        if name == None or name == "":
+            name = "error"
 
         self.str_name = name
 
