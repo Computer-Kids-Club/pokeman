@@ -325,7 +325,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
       }
       draw_text(BST, width*115/140 - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
       if (mousePressed && mousePressValid == true) {
-        println("GASDJalksjdghalkjhsdg");
         if (mouseX < width*6/7 - SLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*7/45 + i*gridSize + SELECTSCREENSHIFT_Y && mouseY > height/9 + i*gridSize + SELECTSCREENSHIFT_Y && sliderFollow == false) {
           //pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           pokemonSlotNumber = slotNumber;
@@ -333,6 +332,39 @@ void drawPokemonSelectionScreen(int slotNumber) {
           moveSelectScreen = true;
           moveScreenReset = true;
           tempAnimationLoad = true;
+
+          for (int k = i; k < POKEMON_PER_PAGE && k + 1 + offset <= num_names.size(); k++) {
+            //line(width/7 + SELECTSCREENSHIFT_X, i*gridSize+textHight+gridSize/2, (width/7)*6 - SELECTSCREENSHIFT_X, i*gridSize+textHight+gridSize/2);
+            //draw_rect(width/7 + SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y + i*gridSize, width*5/7 - SELECTSCREENSHIFT_X*2, gridSize);
+            fill(255);
+            if (k < validPokemonSearch.size()) {
+              if (validPokemonSearch.size() > POKEMON_PER_PAGE) {
+                offset = int(((SLIDER.i_y - sliderStartY)*(validPokemonSearch.size() - POKEMON_PER_PAGE)/((height*8/9 - SELECTSCREENSHIFT_Y*2) - SLIDER.i_h)));
+              } else {
+                offset = 0;
+              }
+              //println(validPokemonSearch.size(), validPokemonSearch.size()-POKEMON_PER_PAGE, offset, (height/9)*8 - SLIDER.i_h, SLIDER.i_y - sliderStartY);
+              draw_text(names_num.get(validPokemonSearch.get(k + offset)), width*43/280 + SELECTSCREENSHIFT_X, textHight + (k+1)*gridSize);
+              draw_text(validPokemonSearch.get(k + offset), width*3/14, textHight + (k+1)*gridSize);
+              for (int j = 0; j < 2; j++) {
+                if (names_types.get(validPokemonSearch.get(k + offset))[j] != null) {
+                  draw_text(names_types.get(validPokemonSearch.get(k + offset))[j], width*11/35 + j*(width/20) - SELECTSCREENSHIFT_X, textHight + (k+1)*gridSize);
+                }
+              }
+              for (int j = 0; j < 3; j++) {
+                if (names_abilities.get(validPokemonSearch.get(k + offset))[j] != null) {
+                  draw_text(names_abilities.get(validPokemonSearch.get(k + offset))[j].replaceAll("-", " "), width*9/20 + j*(width/14) - SELECTSCREENSHIFT_X*1.5, textHight + (k+1)*gridSize);
+                }
+              }
+              BST = 0;
+              for (int j = 0; j < 6; j++) {
+                BST += names_stats.get(validPokemonSearch.get(k + offset))[j];
+                draw_text(names_stats.get(validPokemonSearch.get(k + offset))[j], width*13/20 + j*(width/35) - SELECTSCREENSHIFT_X, textHight + (k+1)*gridSize);
+              }
+              draw_text(BST, width*115/140 - SELECTSCREENSHIFT_X, textHight + (k+1)*gridSize);
+            }
+          }
+
           SLIDER.i_y = sliderStartY;
           pokemonSearch = "";
           validPokemonSearch = new StringList();
@@ -597,7 +629,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (statSliderFollow[i] == true) {
         if (mouseX >= statSliderStartX[i] && mouseX <= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w/2) {
           statSliders.get(i).i_x = mouseX - statSliders.get(i).i_w/2;
-          println(statSliders.get(i).i_x);
         } else if (mouseX <= statSliderStartX[i]) {
           statSliders.get(i).i_x = statSliderStartX[i];
         } else if (mouseX >= 845 + width*6/7 - SELECTSCREENSHIFT_X - 960 - statSliders.get(i).i_w) {
@@ -752,6 +783,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         mousePressValid = false;
       }
       if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 + width*23/350 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
+        if (selectedAbility == "") {
+          selectedAbility = names_abilities.get(num_names.get(pokeNum))[0];
+        }
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
         pokemonSelectScreen = false;
         moveSelectScreen = false;
@@ -825,7 +859,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
           if (mouseX <= 785 - NATURESLIDER.i_w && mouseX >= 615 && mouseY <= natureSliderStartY + (i+1)*20 && mouseY >= natureSliderStartY + i*20) {
-            println(natureName[i+offsetNature], nature[0], nature[1], nature[2], nature[3], nature[4]);
             if (natureStat[i + offsetNature].length > 0) {
               for (int j = 0; j < 5; j++) {
                 if (natureStat[i + offsetNature][0] == natureAbility[j]) {
@@ -1000,6 +1033,5 @@ void draw() {
     fill(50, 50);
     draw_rect(0, 0, width, height);
   }
-  println(moveScreenReset);
   draw_console();
 }
