@@ -11,7 +11,7 @@ from Constants import *
 from random import randint
 
 
-def attack(atk_poke, def_poke, move, field):
+def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
     i_crit = 1

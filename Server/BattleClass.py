@@ -7,6 +7,7 @@ from Constants import *
 from FieldClass import Field
 from random import randint
 from ClientConnection import Client
+from DamageCalculation import attack
 import json
 
 # master dictionary of all the ongoing battles
@@ -92,6 +93,7 @@ class Battle(object):
 
         l_move_queue= []
 
+        # add moves to queue according to speed
         for player in self.l_players:
             if (player.i_active_move_idx == -1):
                 continue
@@ -101,6 +103,7 @@ class Battle(object):
             else:
                 l_move_queue.append(player)
 
+        # move according to queue
         for player in l_move_queue:
 
             if not player.active_poke.is_usable():
@@ -114,13 +117,21 @@ class Battle(object):
 
             player.i_active_move_idx = -1
 
-            other_player.active_poke.i_hp -= randint(5, 20)
+            # actually take damage
+
+            i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
+
+            other_player.active_poke.i_hp -= i_dmg
+
+            # is it dead???
             if (other_player.active_poke.i_hp <= 0):
                 other_player.active_poke.i_hp = 0
                 other_player.active_poke.b_fainted = True
 
+            # send updated pokes
             self.send_players_pokes()
 
+            # the moving poke is dead !?!?
             if not other_player.active_poke.is_usable():
                 other_player.i_turn_readiness = NOT_READY
                 other_player.i_active_move_idx = -1
