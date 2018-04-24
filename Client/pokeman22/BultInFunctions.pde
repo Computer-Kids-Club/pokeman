@@ -157,32 +157,31 @@ void keyReleased() {
 }
 
 void draw_rect(int x, int y, int w, int h, int r) {
-  if(i_r_drawothermodels==2) {
+  if (i_r_drawothermodels==2) {
     noFill();
     stroke(#00EDDB);
-    tint(#00EDDB);
+    //line(x-w/2, y-h/2, x+w/2, y+h/2);
+    //line(x-w/2, y+h/2, x+w/2, y-h/2);
   }
-    
+
   rect(x, y, w, h, r);
 }
 
 void draw_text(String str, int x, int y) {
-  if(i_r_drawothermodels==2) {
-    noFill();
+  if (i_r_drawothermodels==2) {
+    fill(#00EDDB);
     stroke(#00EDDB);
-    tint(#00EDDB);
   }
-    
+
   text(str, x, y);
 }
 
 void draw_image(PImage img, int x, int y) {
-  if(i_r_drawothermodels==2) {
-    noFill();
-    stroke(#00EDDB);
-    tint(#00EDDB);
+  if (i_r_drawothermodels==2) {
+    draw_rect(x, y, img.width, img.height);
+    return;
   }
-    
+
   image(img, x, y);
 }
 
