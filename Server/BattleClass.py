@@ -96,8 +96,6 @@ class Battle(object):
             if (player.i_active_move_idx == -1):
                 continue
 
-            player.i_active_move_idx = -1
-
             if len(l_move_queue)>=1 and player.active_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
                 l_move_queue.insert(0,player)
             else:
@@ -113,6 +111,8 @@ class Battle(object):
             print(player.active_poke, "used move", player.active_poke.get_moves()[player.i_active_move_idx])
 
             self.send_move(player, player.active_poke.get_moves()[player.i_active_move_idx])
+
+            player.i_active_move_idx = -1
 
             other_player.active_poke.i_hp -= randint(5, 20)
             if (other_player.active_poke.i_hp <= 0):
