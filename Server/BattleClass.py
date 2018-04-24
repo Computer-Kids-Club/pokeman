@@ -74,6 +74,10 @@ class Battle(object):
         for player in self.l_players:
             player.send_data(DISPLAY_DELAY)
 
+    def send_broadcast(self, str_msg):
+        for player in self.l_players:
+            player.send_data(DISPLAY_TEXT+str_msg)
+
     def send_move(self, player, move):
         other_player = self.get_other_player(player)
         player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.to_dic()}))
@@ -120,6 +124,8 @@ class Battle(object):
             # actually take damage
 
             i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
+
+            self.send_broadcast(str(other_player.active_poke.i_hp) + str(i_dmg) + str(other_player.active_poke.i_hp-i_dmg))
 
             other_player.active_poke.i_hp -= i_dmg
 

@@ -64,6 +64,7 @@ void draw_battle() {
   background(0);
   
   fill(200);
+  noStroke();
   draw_rect(0, 0, width, height);
 
   draw_rectMode(CENTER);

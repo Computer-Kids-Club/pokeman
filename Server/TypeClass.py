@@ -32,6 +32,12 @@ class Type(object):
 
     # return 0, 0.25, 0.5, 1, 2, or 4 representing the effectiveness of the attack
     def getAtkEff(self, def_type_1, def_type_2=None):
+
+        if self.str_name.capitalize()[:3] not in l_typ_short:
+            return 1
+        if def_type_1.str_name.capitalize()[:3] not in l_typ_short:
+            return 1
+
         idx_eff_1 = mat_type_eff[self.getIdx()][def_type_1.getIdx()]
         if idx_eff_1 == -1:
             idx_eff_1 = 0.5
