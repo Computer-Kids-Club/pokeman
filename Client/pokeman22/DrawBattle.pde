@@ -58,6 +58,9 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
 void draw_battle() {
 
+  fill(0);
+  rect(0, 0, width, height);
+
   rectMode(CENTER);
   imageMode(CENTER);
   textAlign(CENTER);
