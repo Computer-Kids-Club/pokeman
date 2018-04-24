@@ -757,9 +757,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         moveSelectScreen = false;
         moveScreenReset = true;
         tempAnimationLoad = true;
+        mousePressValid = false;
       }
       if (mouseX <= width/7 + SELECTSCREENSHIFT_X + 10 + width*23/350 && mouseX >= width/7 + SELECTSCREENSHIFT_X + 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
         moveSelectScreen = false;
+        mousePressValid = false;
       }
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
