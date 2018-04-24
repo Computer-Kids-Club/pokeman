@@ -70,6 +70,8 @@ HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
 
 int TEXT_CHAT_DIVIDE = 1000;
 
+float gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
+
 void init_constants() {
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
@@ -79,6 +81,7 @@ void init_constants() {
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
   moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
   natureSliderStartY = height*299/450;
+  gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
 
   for (int i = 0; i < 6; i++) {
     statSliders.add(new Rect(width*169/280, 601 + i*30, 10, 20));
