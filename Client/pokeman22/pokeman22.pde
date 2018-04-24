@@ -437,6 +437,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
+  draw_image(backgroundImg, 0, 0);
   if (moveScreenReset == true) {
     level = 100;
     maxEV = 508;
@@ -500,6 +501,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   }
   rectMode(CORNER);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2 + 100, height - SELECTSCREENSHIFT_Y*2);
+
+  fill(0, 0, 0, 150);
   for (int i = 0; i < 4; i++) {
     draw_rect(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, height/4, height/4);
     imageMode(CENTER);
@@ -527,7 +530,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("SHINY", width/2 + 25, SELECTSCREENSHIFT_Y + height/4 + 30);
   }
   textAlign(LEFT);
-  fill(255);
+  fill(0, 0, 0, 150);
   stroke(0);
   strokeWeight(1);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
@@ -588,9 +591,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height/4 + 291;
     }
   } else if (statSelect == true) {
-    draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);    
-    draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, 268);    
-    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 268);
+    draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 365, 268); 
+    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 + 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 365, 268);    
+    //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, 268);    
+    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188 + 45, 170, 223);
     draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 45);
     draw_rect(NATURESLIDER.i_x, NATURESLIDER.i_y, NATURESLIDER.i_w, NATURESLIDER.i_h);
     fill(0);
@@ -905,7 +909,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       statSliderFollow[i] = false;
     }
   }
-  //draw_image(pokedex, 0, 0);
+  draw_image(pokedex, 0, 0);
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
