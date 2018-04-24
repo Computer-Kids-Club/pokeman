@@ -180,7 +180,7 @@ class Client(object):
 
                 poke.str_name = dic_poke["name"]
 
-                poke.base_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
+                poke.usable_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
                                         dic_poke['spa'], dic_poke['spd'], dic_poke['spe'])
 
                 poke.i_happy = dic_poke['hap']
@@ -202,7 +202,7 @@ class Client(object):
             self.i_active_poke_idx = dic_data["poke"]
             self.active_poke = self.team[self.i_active_poke_idx]
             self.b_active_poke_is_new = True
-            print(dic_data["poke"])
+            #print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
             self.i_active_move_idx = dic_data["move"]

@@ -1029,8 +1029,14 @@ void setup() {
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
     int pokemonNumber = int(random(1, 808));
-    int[] statListPoke = {((((2*names_stats.get(num_names.get(pokemonNumber))[0])*200))/100 + 110), (((2*names_stats.get(num_names.get(pokemonNumber))[1])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[2])*100)/100 + 5), 
-      (((2*names_stats.get(num_names.get(pokemonNumber))[3])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[4])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[5])*100)/100 + 5)};
+    int[] statListPoke = {
+      (2*names_stats.get(num_names.get(pokemonNumber))[0] + 31 + int(88/4))*100/100 + 100 + 10, 
+      (2*names_stats.get(num_names.get(pokemonNumber))[1] + 31 + int(84/4))*100/100 + 5, 
+      (2*names_stats.get(num_names.get(pokemonNumber))[2] + 31 + int(84/4))*100/100 + 5, 
+      (2*names_stats.get(num_names.get(pokemonNumber))[3] + 31 + int(84/4))*100/100 + 5, 
+      (2*names_stats.get(num_names.get(pokemonNumber))[4] + 31 + int(84/4))*100/100 + 5, 
+      (2*names_stats.get(num_names.get(pokemonNumber))[5] + 31 + int(84/4))*100/100 + 5
+    };
     String[] movelistPoke = new String[4];
     String[][] l_possible_moves = names_moves.get(num_names.get(pokemonNumber));
     for (int j=0; j<movelistPoke.length; j++) {
@@ -1040,14 +1046,14 @@ void setup() {
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
   }
 
-  println(names_stats.get("bulbasaur"));
-  println(names_types.get("bulbasaur"));
-  println(names_species.get("bulbasaur"));
-  println(names_height_weight.get("bulbasaur"));
-  println(names_abilities.get("bulbasaur"));
-  println();
-  println(names_moves.get("bulbasaur"));
-  println(names_moves.get("bulbasaur")[1]);
+  /*println(names_stats.get("bulbasaur"));
+   println(names_types.get("bulbasaur"));
+   println(names_species.get("bulbasaur"));
+   println(names_height_weight.get("bulbasaur"));
+   println(names_abilities.get("bulbasaur"));
+   println();
+   println(names_moves.get("bulbasaur"));
+   println(names_moves.get("bulbasaur")[1]);*/
 
   init_console();
 }

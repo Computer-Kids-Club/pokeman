@@ -125,7 +125,7 @@ class Battle(object):
 
             i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
 
-            self.send_broadcast(str(other_player.active_poke.i_hp) + str(i_dmg) + str(other_player.active_poke.i_hp-i_dmg))
+            self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp-i_dmg))
 
             other_player.active_poke.i_hp -= i_dmg
 

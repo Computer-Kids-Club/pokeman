@@ -64,6 +64,15 @@ class Pokeman(object):
         self.base_stats.i_spd = int(dic_poke["SPD"])
         self.base_stats.i_spe = int(dic_poke["SPE"])
 
+        self.usable_stats = Stats()
+
+        self.usable_stats.i_hp = ((((2 * self.base_stats.i_hp + 31 + int(88 / 4)) * 100)) / 100 + 100 + 10)
+        self.usable_stats.i_atk = (((2 * self.base_stats.i_atk + 31 + int(84 / 4)) * 100) / 100 + 5)
+        self.usable_stats.i_def = (((2 * self.base_stats.i_def + 31 + int(84 / 4)) * 100) / 100 + 5)
+        self.usable_stats.i_spa = (((2 * self.base_stats.i_spa + 31 + int(84 / 4)) * 100) / 100 + 5)
+        self.usable_stats.i_spd = (((2 * self.base_stats.i_spd + 31 + int(84 / 4)) * 100) / 100 + 5)
+        self.usable_stats.i_spe = (((2 * self.base_stats.i_spe + 31 + int(84 / 4)) * 100) / 100 + 5)
+
         #self.ev_stats = Stats()
         #self.iv_stats = Stats()
         #self.nature_stats = Stats()
@@ -84,7 +93,7 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
-        return self.base_stats
+        return self.usable_stats
 
     def to_dic(self):
         dic_poke = {}

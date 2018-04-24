@@ -16,11 +16,14 @@ class Pokemon {
 
     moves = new String[4];
     move_types = new String[4];
-    
+
     number = num;
     shiny = s;
     level = lvl;
     ability = abil;
+
+    init_with_json(loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt"));
+
     HP = statList[0];
     ATK = statList[1];
     DEF = statList[2];
@@ -31,12 +34,10 @@ class Pokemon {
     moves[1] = moveList[1];
     moves[2] = moveList[2];
     moves[3] = moveList[3];
-
-    init_with_json(loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt"));
   }
 
   Pokemon (JSONObject json) {
-    
+
     moves = new String[4];
     move_types = new String[4];
 
@@ -47,7 +48,7 @@ class Pokemon {
   }
 
   void update_with_json(JSONObject json) {
-    
+
     name = json.getString("name");
 
     HP = json.getInt("basehp");
@@ -66,7 +67,7 @@ class Pokemon {
 
     ability = json.getString("ability");
     item = json.getString("item");
-    
+
     JSONArray json_moves_array = json.getJSONArray("moves");
     for (int j = 0; j < json_moves_array.size(); j++) {
       //println(json_moves_array.getJSONObject(j).getString("name"));
@@ -101,6 +102,13 @@ class Pokemon {
     SPA = int(json.getString("SPA"));
     SPD = int(json.getString("SPD"));
     SPE = int(json.getString("SPE"));
+
+    HP = (2*HP + 31 + int(88/4))*100/100 + 100 + 10;
+    ATK = (2*ATK + 31 + int(84/4))*100/100 + 5;
+    DEF = (2*DEF + 31 + int(84/4))*100/100 + 5;
+    SPA = (2*SPA + 31 + int(84/4))*100/100 + 5;
+    SPD = (2*SPD + 31 + int(84/4))*100/100 + 5;
+    SPE = (2*SPE + 31 + int(84/4))*100/100 + 5;
 
     HP = max(HP, 1);
     cur_hp = HP;
