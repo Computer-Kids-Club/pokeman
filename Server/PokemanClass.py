@@ -6,35 +6,67 @@
 from TypeClass import Type
 from MoveClass import Move
 from StatClass import Stats
+from Constants import *
+from random import choice, randint
+import json
 
 class Pokeman(object):
     def __init__(self,num=1):
         self.i_num = num
-        self.str_name = "Pikachu"
+
+        dic_poke = json.load(open(dir_path + '/pokeinfo/pokemon/' + str(num) + '.txt'))
+
+        self.str_name = dic_poke["name"]
 
         self.i_happy = 255
         self.b_shiny = False
         self.i_lv = 100
         self.str_gender = "gay"
 
-        self.type_1 = Type()
+        self.type_1 = Type(dic_poke["type1"])
         self.type_2 = None
+        if "type2" in dic_poke:
+            self.type_2 = Type(dic_poke["type2"])
 
-        self.str_ability = "error"
+        self.l_possible_abi = [dic_poke["ability1"]]
+        if "ability2" in dic_poke:
+            self.l_possible_abi.append(dic_poke["ability2"])
+        if "hiddenability" in dic_poke:
+            self.l_possible_abi.append(dic_poke["hiddenability"])
+
+        self.str_ability = choice(self.l_possible_abi)
         self.str_nature = "error"
         self.str_item = "error"
 
         self.str_status = 'none'
 
-        self.l_moves = [Move(),Move(),Move(),Move()]
+        self.l_possible_moves = []
+        for dic_move in dic_poke["levelmoves"]:
+            self.l_possible_moves.append(dic_move["move"])
+        for dic_move in dic_poke["eggmoves"]:
+            self.l_possible_moves.append(dic_move["move"])
+        for dic_move in dic_poke["tutormoves"]:
+            self.l_possible_moves.append(dic_move["move"])
+        for dic_move in dic_poke["tmmoves"]:
+            self.l_possible_moves.append(dic_move["move"])
+        self.l_possible_moves = list(set(self.l_possible_moves))
 
-        self.f_height = 0
-        self.f_weight = 0
+        self.l_moves = [Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves))]
+
+        self.f_height = dic_poke["height"]
+        self.f_weight = dic_poke["weight"]
 
         self.base_stats = Stats()
-        self.ev_stats = Stats()
-        self.iv_stats = Stats()
-        self.nature_stats = Stats()
+        self.base_stats.i_hp = dic_poke["HP"]
+        self.base_stats.i_atk = dic_poke["ATK"]
+        self.base_stats.i_def = dic_poke["DEF"]
+        self.base_stats.i_spa = dic_poke["SPA"]
+        self.base_stats.i_spd = dic_poke["SPD"]
+        self.base_stats.i_spe = dic_poke["SPE"]
+
+        #self.ev_stats = Stats()
+        #self.iv_stats = Stats()
+        #self.nature_stats = Stats()
 
         self.i_evasion = 1
 
