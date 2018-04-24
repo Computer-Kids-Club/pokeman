@@ -55,7 +55,7 @@ void draw_console() {
     stroke(255);
     pushMatrix();
     translate(-rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2 + textWidth(str_console_current.substring(0, i_console_cursor)), rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
-    line(0, -7, 0, 7);
+    draw_line(0, -7, 0, 7);
     popMatrix();
   }
 
