@@ -34,7 +34,7 @@ void draw_console() {
 
   fill(100);
   noStroke();
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
 
   // entire console background
   draw_rect(0, 0, rect_console_window.i_w, rect_console_window.i_h);
@@ -66,7 +66,7 @@ void draw_console() {
 
   fill(75);
   noStroke();
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
 
   // left and right margin
   draw_rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
@@ -81,7 +81,7 @@ void draw_console() {
 
   noFill();
   stroke(200);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
 
   // lots of text box outline
   draw_rect(-rect_console_window.i_w/2 + console_margin_size, -rect_console_window.i_h/2 + console_margin_size, rect_console_window.i_w - console_margin_size*2, rect_console_window.i_h - console_margin_size*3 - console_text_size);
@@ -91,7 +91,7 @@ void draw_console() {
 
   noFill();
   stroke(200);
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
 
   // entire console outline
   rect_console_window.draw_draw_rect();

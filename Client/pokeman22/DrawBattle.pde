@@ -33,7 +33,7 @@ void stop_battle() {
 }
 
 void draw_health_bar(int x, int y, float p) {
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   fill(150);
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
   fill(100, 255, 255);
@@ -64,8 +64,8 @@ void draw_battle() {
   fill(200);
   rect(0, 0, width, height);
 
-  rectMode(CENTER);
-  imageMode(CENTER);
+  draw_rectMode(CENTER);
+  draw_imageMode(CENTER);
   textAlign(CENTER);
 
   if (c_display_state==DISPLAY_TEAMS) {
@@ -145,7 +145,7 @@ void draw_battle() {
   }
   popMatrix();
 
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
 
   if (i_moving>0) {
     i_moving--;
@@ -171,15 +171,15 @@ void draw_battle() {
     }
   }
 
-  imageMode(CORNER);
+  draw_imageMode(CORNER);
   textAlign(CORNER);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
 
   textAlign(LEFT);
   draw_text(i_cur_animation_frames_left, 50, 50);
 
   // moves
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<4; i++) {
@@ -212,7 +212,7 @@ void draw_battle() {
   // chat
   stroke(0);
   fill(255);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   draw_rect(TEXT_CHAT_DIVIDE, 0, width-TEXT_CHAT_DIVIDE, height);
 
   textAlign(LEFT, CENTER);

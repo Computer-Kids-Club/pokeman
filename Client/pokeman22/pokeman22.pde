@@ -202,8 +202,8 @@ void drawStartScreen() {
 
   draw_image(backgroundImg, 0, 0);
 
-  rectMode(CENTER);
-  imageMode(CENTER);
+  draw_rectMode(CENTER);
+  draw_imageMode(CENTER);
   textAlign(CENTER);
   draw_rect(START_BUTTON.i_x, START_BUTTON.i_y, START_BUTTON.i_w, START_BUTTON.i_h);
   for (int i = 0; i < 6; i++) {
@@ -219,9 +219,9 @@ void drawStartScreen() {
   }
   draw_image(settingsButton, (width/140)*137, height/30);
   //draw_rect(settingsButton[0], settingsButton[1], settingsButton[2], settingsButton[3]);
-  imageMode(CORNER);
+  draw_imageMode(CORNER);
   textAlign(CORNER);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
 
   textAlign(CENTER);
   fill(0);
@@ -263,7 +263,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   int BST = 0;
   float textHight = height/10 + SELECTSCREENSHIFT_Y;
 
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   fill(0, 0, 0, 150);
   draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2, height/9);
   //draw_rect(width/7, height/18, width*5/7, height/18);
@@ -499,7 +499,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     tempAnimations = loadPokemonAll(loadJSONObject(POKEINFO_PATH+"pokemon/"+pokeNum+".txt")); 
     tempAnimationLoad = false;
   }
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y, width*5/7 - SELECTSCREENSHIFT_X*2 + 100, height - SELECTSCREENSHIFT_Y*2);
 
   fill(0, 0, 0, 150);
@@ -509,9 +509,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     if (i > 0) {
       line(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y + height/4);
     }
-    imageMode(CENTER);
+    draw_imageMode(CENTER);
     drawPokemon(tempAnimations[i], width/7 + SELECTSCREENSHIFT_X + (height/4)*i + height/8, SELECTSCREENSHIFT_Y + height/8);
-    imageMode(CORNER);
+    draw_imageMode(CORNER);
   }
   line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4);
   line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60);
@@ -945,7 +945,7 @@ void setup() {
   size(1400, 900, P2D);
   //fullScreen();
   frameRate(50);
-  imageMode(CENTER);
+  draw_imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
 

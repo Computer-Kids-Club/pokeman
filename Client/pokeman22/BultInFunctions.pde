@@ -201,3 +201,11 @@ void draw_text(String str, float x, float y) {
 void draw_text(int str, int x, float y) {
   draw_text(""+str, x, y);
 }
+
+void draw_imageMode(int mode) {
+   imageMode(mode); 
+}
+
+void draw_rectMode(int mode) {
+   rectMode(mode); 
+}
