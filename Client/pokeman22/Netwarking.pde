@@ -131,6 +131,7 @@ void process_data(String dataIn) {
     }
     i_moving = i_total_moving;
     str_cur_move_type = json_move.getString("type");
+    println(json_move+" "+json_move.getString("cat"));
     str_cur_move_cat = json_move.getString("cat");
   } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
     i_cur_animation_frames_left = 30;

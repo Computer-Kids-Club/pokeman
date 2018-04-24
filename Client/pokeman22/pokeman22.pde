@@ -1018,7 +1018,12 @@ void setup() {
     int pokemonNumber = int(random(1, 808));
     int[] statListPoke = {((((2*names_stats.get(num_names.get(pokemonNumber))[0])*200))/100 + 110), (((2*names_stats.get(num_names.get(pokemonNumber))[1])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[2])*100)/100 + 5), 
       (((2*names_stats.get(num_names.get(pokemonNumber))[3])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[4])*100)/100 + 5), (((2*names_stats.get(num_names.get(pokemonNumber))[5])*100)/100 + 5)};
-    String[] movelistPoke = {names_moves.get(num_names.get(pokemonNumber))[0][0], names_moves.get(num_names.get(pokemonNumber))[0][0], names_moves.get(num_names.get(pokemonNumber))[0][0], names_moves.get(num_names.get(pokemonNumber))[0][0]};
+    String[] movelistPoke = new String[4];
+    String[][] l_possible_moves = names_moves.get(num_names.get(pokemonNumber));
+    for(int j=0;j<movelistPoke.length;j++) {
+      int i_rand_cat_move = int(random(l_possible_moves.length));
+      movelistPoke[j] = l_possible_moves[i_rand_cat_move][int(random(l_possible_moves[i_rand_cat_move].length))];
+    }
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
   }
 
