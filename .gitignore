@@ -14,3 +14,4 @@ Server/venv/
 *.pyc
 Server/__pycache__/Constants.cpython-37.pyc
 *.pyc
+*.pyc
