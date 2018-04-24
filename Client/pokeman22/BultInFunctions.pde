@@ -159,6 +159,7 @@ void keyReleased() {
 void draw_rect(int x, int y, int w, int h, int r) {
   if (i_r_drawothermodels==2) {
     noFill();
+    strokeWeight(1);
     stroke(#00EDDB);
     //line(x-w/2, y-h/2, x+w/2, y+h/2);
     //line(x-w/2, y+h/2, x+w/2, y-h/2);
