@@ -20,6 +20,9 @@ int i_total_switching = 30;
 int i_switching = 0;
 int i_switching_direction = 1;
 
+String str_cur_move_type = "";
+String str_cur_move_cat = "";
+
 void stop_battle() {
   i_battle_state = NOT_READY;
 
@@ -117,20 +120,25 @@ void draw_battle() {
   if (i_moving>0) {
     i_moving--;
 
-    pushMatrix();
+    //println(str_cur_move_cat);
+    if (str_cur_move_cat.equals("special")) {
+      pushMatrix();
 
-    int tmp_move = i_moving;
+      int tmp_move = i_moving;
 
-    if (i_moving_direction==-1) {
-      tmp_move = i_total_moving-i_moving;
+      if (i_moving_direction==-1) {
+        tmp_move = i_total_moving-i_moving;
+      }
+
+      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+      rotate((frameCount*20.0)%360);
+      fill(0, 255, 255);
+      if (str_cur_move_type!="")
+        fill(TYPE_COLOURS.get(str_cur_move_type));
+      noStroke();
+      draw_rect(0, 0, 50, 50);
+      popMatrix();
     }
-
-    translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
-    rotate((frameCount*20.0)%360);
-    fill(0, 255, 255);
-    noStroke();
-    draw_rect(0, 0, 50, 50);
-    popMatrix();
   }
 
   imageMode(CORNER);
@@ -156,7 +164,7 @@ void draw_battle() {
       popMatrix();
     }
   }
-  
+
   // team pokes
   if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<6; i++) {

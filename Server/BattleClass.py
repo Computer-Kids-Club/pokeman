@@ -75,8 +75,8 @@ class Battle(object):
 
     def send_move(self, player, move):
         other_player = self.get_other_player(player)
-        player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.str_name}))
-        other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.str_name}))
+        player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.to_dic()}))
+        other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.to_dic()}))
 
     def run(self):
         # Log.info("battle running")
@@ -90,15 +90,7 @@ class Battle(object):
 
         # calculate damage
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        l_move_queue = []
-=======
         l_move_queue= []
->>>>>>> 58249722a166d82904aba0b0b25d1b90ae5fd9ed
-=======
-        l_move_queue= []
->>>>>>> a557f9077b55ca3950c1da79a1fb63facd2a3967
 
         for player in self.l_players:
             if (player.i_active_move_idx == -1):
