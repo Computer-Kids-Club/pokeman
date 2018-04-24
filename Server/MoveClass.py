@@ -11,7 +11,7 @@ from pathlib import Path
 
 def parse_move_json(str_json, i_default=0):
     i_ret = i_default
-    if str_json != '-':
+    if str_json != '-' and str_json != '???' and str_json != 'error':
         i_ret = int(str_json)
     return i_ret
 
@@ -38,7 +38,9 @@ class Move(object):
 
         self.i_prob = parse_move_json(dic_move['prob'])
 
-    def to_dic(self, move_dic={}):
+    def to_dic(self):
+        move_dic = {}
+
         move_dic["name"] = self.str_name
 
         move_dic["type"] = self.i_pow

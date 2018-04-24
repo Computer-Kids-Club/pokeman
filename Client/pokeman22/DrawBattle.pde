@@ -155,6 +155,8 @@ void draw_battle() {
       popMatrix();
     }
   }
+  
+  // team pokes
   if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<6; i++) {
       pushMatrix();

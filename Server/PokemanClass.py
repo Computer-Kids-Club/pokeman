@@ -74,7 +74,11 @@ class Pokeman(object):
         dic_poke['ability'] = self.str_ability
         dic_poke['item'] = self.str_item
 
-        dic_poke['moves'] = [move.to_dic() for move in self.l_moves]
+        l_tmp_move_dic = []
+        for move in self.l_moves:
+            l_tmp_move_dic.append(move.to_dic())
+            #print(str(move))
+        dic_poke['moves'] = l_tmp_move_dic
 
         dic_poke['eva'] = self.i_evasion
 
