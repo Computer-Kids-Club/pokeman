@@ -172,6 +172,7 @@ void draw_text(String str, int x, int y) {
   if (i_r_drawothermodels==2) {
     fill(#00EDDB);
     stroke(#00EDDB);
+    strokeWeight(1);
   }
 
   text(str, x, y);
@@ -184,6 +185,16 @@ void draw_image(PImage img, int x, int y) {
   }
 
   image(img, x, y);
+}
+
+void draw_line(int x1, int y1, int x2, int y2) {
+  if (i_r_drawothermodels==2) {
+    fill(#00EDDB);
+    stroke(#00EDDB);
+    strokeWeight(1);
+  }
+
+  line(x1, y1, x2, y2);
 }
 
 void draw_rect(int x, int y, int w, int h) {
@@ -203,9 +214,9 @@ void draw_text(int str, int x, float y) {
 }
 
 void draw_imageMode(int mode) {
-   imageMode(mode); 
+  imageMode(mode);
 }
 
 void draw_rectMode(int mode) {
-   rectMode(mode); 
+  rectMode(mode);
 }
