@@ -11,9 +11,11 @@ class Pokemon {
   PImage[] animation;
   String[] moves;
   PImage[] animationBack;
+  String[] move_types;
   Pokemon (int num, Boolean s, int lvl, String abil, int[] statList, String[] moveList) {
 
     moves = new String[4];
+    move_types = new String[4];
     
     number = num;
     shiny = s;
@@ -36,6 +38,7 @@ class Pokemon {
   Pokemon (JSONObject json) {
     
     moves = new String[4];
+    move_types = new String[4];
 
     shiny = json.getBoolean("shiny");
     number = json.getInt("num");
@@ -66,8 +69,9 @@ class Pokemon {
     
     JSONArray json_moves_array = json.getJSONArray("moves");
     for (int j = 0; j < json_moves_array.size(); j++) {
-      println(json_moves_array.getJSONObject(j).getString("name"));
+      //println(json_moves_array.getJSONObject(j).getString("name"));
       moves[j] = json_moves_array.getJSONObject(j).getString("name");
+      move_types[j] = json_moves_array.getJSONObject(j).getString("type");
     }
 
     evasion = json.getInt("eva");

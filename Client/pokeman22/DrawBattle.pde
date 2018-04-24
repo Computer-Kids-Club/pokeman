@@ -58,7 +58,7 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
 void draw_battle() {
 
-  fill(0);
+  fill(200);
   rect(0, 0, width, height);
 
   rectMode(CENTER);
@@ -148,10 +148,11 @@ void draw_battle() {
       pushMatrix();
       translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
       stroke(50);
-      fill(TYPE_COLOURS.get("fire"));
+      fill(TYPE_COLOURS.get(pokemons.get(c_my_display_poke).move_types[i]));
       draw_rect(0, 0, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
       fill(255);
       draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
+      //draw_text(pokemons.get(c_my_display_poke).move_types[i], 0, 30);
       popMatrix();
     }
   }
