@@ -32,13 +32,13 @@ void stop_battle() {
 void draw_health_bar(int x, int y, float p) {
   rectMode(CORNER);
   fill(150);
-  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
+  draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
   fill(100, 255, 255);
   noStroke();
-  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH*p, 7); // round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
+  draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH*p, 7); // round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
   stroke(0);
   fill(0, 0);
-  rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
+  draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
 }
 
 void draw_battling_poke(Pokemon poke, int me_or_other) {
@@ -53,7 +53,7 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
   textAlign(CENTER, CENTER);
   fill(0);
-  text(poke.name, 0, -80);
+  draw_text(poke.name, 0, -80);
 }
 
 void draw_battle() {
@@ -126,7 +126,7 @@ void draw_battle() {
     rotate((frameCount*20.0)%360);
     fill(0, 255, 255);
     noStroke();
-    rect(0, 0, 50, 50);
+    draw_rect(0, 0, 50, 50);
     popMatrix();
   }
 
@@ -135,7 +135,7 @@ void draw_battle() {
   rectMode(CORNER);
 
   textAlign(LEFT);
-  text(i_cur_animation_frames_left, 50, 50);
+  draw_text(i_cur_animation_frames_left, 50, 50);
 
   // moves
   rectMode(CENTER);
@@ -146,9 +146,9 @@ void draw_battle() {
       translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
       stroke(50);
       fill(TYPE_COLOURS.get("fire"));
-      rect(0, 0, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+      draw_rect(0, 0, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
       fill(255);
-      text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
+      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
       popMatrix();
     }
   }
@@ -158,9 +158,9 @@ void draw_battle() {
       translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
       stroke(50);
       fill(255);
-      rect(0, 0, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+      draw_rect(0, 0, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
       fill(0);
-      text(pokemons.get(i).name, 0, 0);
+      draw_text(pokemons.get(i).name, 0, 0);
       popMatrix();
     }
   }
@@ -169,12 +169,12 @@ void draw_battle() {
   stroke(0);
   fill(255);
   rectMode(CORNER);
-  rect(TEXT_CHAT_DIVIDE, 0, width-TEXT_CHAT_DIVIDE, height);
+  draw_rect(TEXT_CHAT_DIVIDE, 0, width-TEXT_CHAT_DIVIDE, height);
 
   textAlign(LEFT, CENTER);
   fill(0);
   for (int i=0; i<text_chat.size() && height - i*30 > 30; i++) {
-    text(text_chat.get(i), TEXT_CHAT_DIVIDE+10, height - i*30 - 30);
+    draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+10, height - i*30 - 30);
   }
 }
 

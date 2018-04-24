@@ -2,7 +2,7 @@ void mousePressed() {
   mouse_pressed_console();
   if (b_console)
     return;
-  
+
   /*print(mouseX);
    print(" ");
    println(mouseY);*/
@@ -12,14 +12,13 @@ void mousePressed() {
     i_battle_state = SEARCHING;
     println("pressed");
   }
-  
 }
 
 void mouseReleased() {
   mouse_released_console();
   if (b_console)
     return;
-  
+
   mousePressValid = true;
 }
 
@@ -29,7 +28,7 @@ void mouseWheel(MouseEvent event) {
   mouse_wheel_console();
   if (b_console)
     return;
-  
+
   if (pokemonSelectScreen == true && moveSelect == false) {
     if (SLIDER.i_y >= height/9 && SLIDER.i_y + SLIDER.i_h <= height) {
       int count = (event.getCount())*5;
@@ -91,7 +90,7 @@ void keyPressed() {
   key_pressed_console();
   if (b_console)
     return;
-  
+
   //  pokemons = new ArrayList<Pokemon>();
   //  for (int i = 0; i < 6; i ++) {
   //    pokemons.add(new Pokemon(int(random(1, 808)), boolean(int(random(0, 2)))));
@@ -155,5 +154,33 @@ void keyReleased() {
   key_released_console();
   if (b_console)
     return;
-  
+}
+
+void draw_rect(int x, int y, int w, int h, int r) {
+  rect(x, y, w, h, r);
+}
+
+void draw_rect(int x, int y, int w, int h) {
+  draw_rect(x, y, w, h, 0);
+}
+
+void draw_text(String str, int x, int y) {
+  text(str, x, y);
+}
+
+void draw_text(String str, int x, float y) {
+  draw_text(str, x, (int)y);
+}
+
+void draw_text(String str, float x, float y) {
+  draw_text(str, (int)x, y);
+}
+
+void draw_text(int str, int x, float y) {
+  draw_text(""+str, x, y);
+}
+
+
+void draw_image(PImage img, int x, int y) {
+  image(img, x, y);
 }

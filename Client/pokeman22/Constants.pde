@@ -140,8 +140,8 @@ class Rect {
     i_y = y;
   }
 
-  void draw_rect() {
-    rect(i_x, i_y, i_w, i_h);
+  void draw_draw_rect() {
+    draw_rect(i_x, i_y, i_w, i_h);
   }
 }
 

@@ -8,6 +8,8 @@ boolean b_console = false;
 
 int i_console_cursor = 0;
 
+int i_r_drawothermodels = 0;
+
 Rect rect_console_window;
 
 void init_console() {
@@ -35,7 +37,7 @@ void draw_console() {
   rectMode(CENTER);
 
   // entire console background
-  rect(0, 0, rect_console_window.i_w, rect_console_window.i_h);
+  draw_rect(0, 0, rect_console_window.i_w, rect_console_window.i_h);
 
   // display all text 
   fill(255);
@@ -46,7 +48,7 @@ void draw_console() {
   while (textWidth(str_console_current) > rect_console_window.i_w - console_margin_size*2 - textWidth(" ")) {
     str_console_current = string_pop(str_console_current, 0);
   }
-  text(str_console_current, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
+  draw_text(str_console_current, -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
 
   // blinking cursor
   if (frameCount%30<15) {
@@ -59,7 +61,7 @@ void draw_console() {
 
   // lots of console texts
   for (int i=0; i<l_console.size() && rect_console_window.i_h/2 - console_margin_size*2 - console_text_size*(1.5 + i) > -rect_console_window.i_h/2 + console_margin_size/2; i++) {
-    text(l_console.get(i), -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size*(1.5 + i));
+    draw_text(l_console.get(i), -rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size*(1.5 + i));
   }
 
   fill(75);
@@ -67,32 +69,32 @@ void draw_console() {
   rectMode(CORNER);
 
   // left and right margin
-  rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
-  rect(rect_console_window.i_w/2 - console_margin_size, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
+  draw_rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
+  draw_rect(rect_console_window.i_w/2 - console_margin_size, -rect_console_window.i_h/2, console_margin_size, rect_console_window.i_h);
 
   // top and bottom margin
-  rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, rect_console_window.i_w, console_margin_size);
-  rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size, rect_console_window.i_w, console_margin_size);
+  draw_rect(-rect_console_window.i_w/2, -rect_console_window.i_h/2, rect_console_window.i_w, console_margin_size);
+  draw_rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size, rect_console_window.i_w, console_margin_size);
 
   // sandwich margin
-  rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size, rect_console_window.i_w, console_margin_size);
+  draw_rect(-rect_console_window.i_w/2, rect_console_window.i_h/2 - console_margin_size*2 - console_text_size, rect_console_window.i_w, console_margin_size);
 
   noFill();
   stroke(200);
   rectMode(CORNER);
 
   // lots of text box outline
-  rect(-rect_console_window.i_w/2 + console_margin_size, -rect_console_window.i_h/2 + console_margin_size, rect_console_window.i_w - console_margin_size*2, rect_console_window.i_h - console_margin_size*3 - console_text_size);
+  draw_rect(-rect_console_window.i_w/2 + console_margin_size, -rect_console_window.i_h/2 + console_margin_size, rect_console_window.i_w - console_margin_size*2, rect_console_window.i_h - console_margin_size*3 - console_text_size);
 
   // text box outline
-  rect(-rect_console_window.i_w/2 + console_margin_size, rect_console_window.i_h/2 - console_margin_size - console_text_size, rect_console_window.i_w - console_margin_size*2, console_text_size);
+  draw_rect(-rect_console_window.i_w/2 + console_margin_size, rect_console_window.i_h/2 - console_margin_size - console_text_size, rect_console_window.i_w - console_margin_size*2, console_text_size);
 
   noFill();
   stroke(200);
   rectMode(CENTER);
 
   // entire console outline
-  rect_console_window.draw_rect();
+  rect_console_window.draw_draw_rect();
 
   popMatrix();
 }
@@ -121,6 +123,11 @@ void key_pressed_console() {
 
   if (!b_console)
     return;
+
+  if (keyCode == UP) {
+    i_r_drawothermodels++;
+    i_r_drawothermodels = i_r_drawothermodels%3;
+  }
 
   if (keyCode == BACKSPACE) {
     if (l_console_current.size()>0) {
