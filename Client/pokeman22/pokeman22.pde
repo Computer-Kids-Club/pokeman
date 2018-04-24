@@ -623,15 +623,18 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
     draw_text("Base", 350, 580);
     for (int i = 0; i < 6; i++) {
+      fill(255);
       draw_text(names_stats.get(num_names.get(pokeNum))[i], 350, 610 + i*30);
       //draw_rect(355, 606 + i*30, 250, 10);
-      draw_rect(355, 606 + i*30, (stats[i] * 250) / 714, 10);    
       if (i == 0) {
+        fill(-13 + (stats[i]*180)/714, 205, 205);
         draw_rect(355, 606 + i*30, (stats[i] * 250) / 714, 10);
       } else {
+        fill(-13 + (stats[i]*180)/614, 205, 205);
         draw_rect(355, 606 + i*30, (stats[i] * 250) / 614, 10);
       }
     }
+    fill(255);
     textAlign(CENTER, CENTER);
     draw_text("Nature", 700, 580);
     textAlign(LEFT, CENTER);
@@ -723,7 +726,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   for (int i = 0; i < 2; i++) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + height/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
     draw_line(width/7 + SELECTSCREENSHIFT_X + (width*3/14)*(i+1), SELECTSCREENSHIFT_Y + height/4 + 60, width/7 + SELECTSCREENSHIFT_X + (width*3/14)*(i+1), SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
-    println((width*11/28)*(i+1));
   }
   draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
@@ -756,18 +758,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_rect(310, 515, 220, (abilityCount + 1)*(height/30));
     //draw_rect(310, 515, 220, height/30);
   }
-  fill(255);
   //draw_rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
   for (int i = 0; i < 6; i++) {
     if (i == 0) {
+      fill(-13 + (stats[i]*180)/714, 205, 205);
       draw_rect(895, 405, (stats[i] * 205) / 714, 10);
     } else {
+      fill(-13 + (stats[i]*180)/614, 205, 205);
       draw_rect(895, 405 + 23*i, (stats[i] * 205) / 614, 10);
     }
   }
+  fill(255);
+
   textAlign(CENTER, CENTER);
   draw_text(level, 350 + height/30, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
+  draw_text("-", 310 + height/60, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
+  draw_text("+", 420 + height/60, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
   textAlign(LEFT);
   //draw_text("Name: " + num_names.get(pokeNum), 700,150);
   draw_text("Name : " + num_names.get(pokeNum), width/7 + SELECTSCREENSHIFT_X + 10, 395);
