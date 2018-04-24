@@ -506,14 +506,16 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   stroke(255);
   for (int i = 0; i < 4; i++) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, height/4, height/4);
-    if (i > 0){
-      line(i*(width/7 + SELECTSCREENSHIFT_X + (height/4)*i), SELECTSCREENSHIFT_Y, i*(width/7 + SELECTSCREENSHIFT_X + (height/4)*i),SELECTSCREENSHIFT_Y + height/4);
+    if (i > 0) {
+      line(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y + height/4);
     }
     imageMode(CENTER);
     drawPokemon(tempAnimations[i], width/7 + SELECTSCREENSHIFT_X + (height/4)*i + height/8, SELECTSCREENSHIFT_Y + height/8);
     imageMode(CORNER);
   }
-  draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
+  line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4);
+  line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60);
+  //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
   draw_image(back, width/7 + SELECTSCREENSHIFT_X + 10, SELECTSCREENSHIFT_Y + height/4 + 5);
   draw_image(confirm, width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10, SELECTSCREENSHIFT_Y + height/4 + 5);
 
@@ -712,9 +714,12 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*5/7 - SELECTSCREENSHIFT_X*2, 268);
   }
   fill(0, 0, 0, 150);
-  for (int i = 0; i < 3; i++) {
-    draw_rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + height/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
+  for (int i = 0; i < 2; i++) {
+    //draw_rect(width/7 + SELECTSCREENSHIFT_X + i*((width*5/7 - SELECTSCREENSHIFT_X*2)/3), SELECTSCREENSHIFT_Y + height/4 + 60, (width*5/7 - SELECTSCREENSHIFT_X*2)/3, 188);
+    line(width/7 + SELECTSCREENSHIFT_X + (width*11/28)*i, SELECTSCREENSHIFT_Y + height/4 + 60, width/7 + SELECTSCREENSHIFT_X + (width*11/28)*i, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
+    println((width*11/28)*(i+1));
   }
+  line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y,400,400);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X + 400, SELECTSCREENSHIFT_Y,width*5/7 - SELECTSCREENSHIFT_X*2 - 400,60);
   //for (int i = 0; i < 3; i++) {
