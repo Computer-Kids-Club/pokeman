@@ -242,6 +242,11 @@ void drawStartScreen() {
         mousePressValid = false;
       }
       if (dist(mouseX, mouseY, INFO_BUTTON.i_x + i*POKEMON_BUTTON.i_w, INFO_BUTTON.i_y) <= height/60) {
+        pokemonSlotNumber = i;
+        pokemonNumber = pokemons.get(i).number;
+        moveSelectScreen = true;
+        moveScreenReset = true;
+        tempAnimationLoad = true;
         mousePressValid = false;
       }
     }
