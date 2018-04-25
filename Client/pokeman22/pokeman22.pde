@@ -796,13 +796,13 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   } else {
     draw_text(selectedGender, width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
   }
-  
+
   if (chooseGender) {
     for (int i = 0; i < 3; i++) {
       draw_text(genders[i], width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395 + (i+1)*height/30);
     }
   }
-  
+
   textAlign(LEFT, CENTER);
   if (selectedAbility == "" || chooseAbility == true) {
     draw_text("Select an ability", 320, 515 + height/60);
@@ -867,6 +867,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
       chooseAbility = false;
+    }
+    if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height/30 || mouseY < 374) {
+      chooseGender = false;
     }
     if (chooseAbility == true) {
       for (int i = 0; i < abilityCount; i++) {
