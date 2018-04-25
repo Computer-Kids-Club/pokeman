@@ -118,6 +118,10 @@ String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 
 String selectedAbility = "";
 boolean chooseAbility = false;
+String selectedGender = "";
+boolean chooseGender = false;
+
+String[] genders = {"Male", "Female", "Unspecified"};
 int abilityCount = 0;
 
 boolean shinyBool = false;
@@ -752,11 +756,15 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_rect(350, SELECTSCREENSHIFT_Y + height/4 + 325/2, height/15, height/30);
   draw_rect(420, SELECTSCREENSHIFT_Y + height/4 + 325/2, height/30, height/30);
   draw_rect(310, 515, 220, height/30);
+  draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height/30);
   draw_rect(860, 395, 282, 150, height/90);
 
   if (chooseAbility) {
     draw_rect(310, 515, 220, (abilityCount + 1)*(height/30));
     //draw_rect(310, 515, 220, height/30);
+  }
+  if (chooseGender) {
+    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*4/30);
   }
   //draw_rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
@@ -778,15 +786,31 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   textAlign(LEFT);
   //draw_text("Name: " + num_names.get(pokeNum), 700,150);
   draw_text("Name : " + num_names.get(pokeNum), width/7 + SELECTSCREENSHIFT_X + 10, 395);
+  draw_text("Gender :", width/7 + SELECTSCREENSHIFT_X + (width*3/28) - 15, 395);
   draw_text("Types :", width/7 + SELECTSCREENSHIFT_X + 10, 442);
   draw_text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
   draw_text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
+
+  if (selectedGender == "" || chooseGender == true) {
+    draw_text("Select a gender", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
+  } else {
+    draw_text(selectedGender, width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
+  }
+  
+  if (chooseGender) {
+    for (int i = 0; i < 3; i++) {
+      draw_text(genders[i], width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395 + (i+1)*height/30);
+    }
+  }
+  
   textAlign(LEFT, CENTER);
   if (selectedAbility == "" || chooseAbility == true) {
     draw_text("Select an ability", 320, 515 + height/60);
   } else {
     draw_text(selectedAbility, 320, 515 + height/60);
   }
+
+
   if (chooseAbility) {
     for (int i = 0; i < abilityCount; i++) {
       if (names_abilities.get(num_names.get(pokeNum))[i] == null) {
@@ -795,7 +819,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         draw_text(names_abilities.get(num_names.get(pokeNum))[i], 320, 515 + height/60 + (i+1)*height/30);
       }
     }
-  }
+  }  
   textAlign(LEFT);
   draw_text("Moves", 560, 385);
   draw_text("1.", 560, 415);
@@ -836,6 +860,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
+      }
+      if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + height/30 && mouseY >= 374) {
+        chooseGender = true;
       }
     }
     if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
