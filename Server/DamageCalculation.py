@@ -17,6 +17,7 @@ def attack(atk_poke, def_poke, move, field):
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
+    global str_prv_mov
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -57,7 +58,8 @@ def attack(atk_poke, def_poke, move, field):
         i_terrain = 1.5
 
     str_mov_name = move.str_name
-    if str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude':
+    str_prv_mov = str_mov_name
+    if (str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude') and str_terrain == 'grassy':
         i_terrain = 0.5
 
     str_status = atk_poke.str_status
