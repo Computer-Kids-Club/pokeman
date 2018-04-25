@@ -38,7 +38,7 @@ def get_acc_eva_stage_changes(i_stage):
     if i_stage == 6:
         return 9/3
 
-def accuracy(atk_poke, def_poke, move, field, atk_player, def_player):
+def accuracy(atk_poke, def_poke, move):
     f_acc = 1
 
     f_acc *= move.i_acc/100
@@ -58,9 +58,9 @@ DOUBLE_HIT_MOVES = ["twineedle","bonemerang","double-hit","double-kick","double-
 def multi_hit(move):
     i_hits = 1
 
-    if move.get_name() in DOUBLE_HIT_MOVES:
+    if move.str_name in DOUBLE_HIT_MOVES:
         i_hits = 2
-    elif move.get_name() in MULTI_HIT_MOVES:
+    elif move.str_name in MULTI_HIT_MOVES:
         i_hits = randint(2, 5)
 
     return i_hits
