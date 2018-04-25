@@ -809,7 +809,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   }
   if (chooseGender) {
       draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*3/30);
-      println("HERE");
   }
   //draw_rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
@@ -926,9 +925,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         chooseGender = false;
       }
     } else {
-      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height*2/30 || mouseY < 374) {
+      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height*3/30 || mouseY < 374) {
         chooseGender = false;
-        println("GETFALSE");
       }
     }
     if (chooseAbility == true) {
@@ -947,7 +945,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       for (int i = 0; i < 2; i++) {
         if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + (i+2)*height/30 && mouseY >= 374 + (i+1)*height/30) {
           selectedGender = genders[i];
-          println(genders[i]);
           chooseGender = false;
         }
       }
