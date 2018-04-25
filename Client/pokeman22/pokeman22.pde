@@ -468,6 +468,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
+  println(maleBool, femaleBool, unspecifiedBool);
   draw_image(backgroundImg, 0, 0);
   if (moveScreenReset == true) {
     level = 100;
@@ -488,6 +489,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     if (num_male.get(pokeNum) != null) {
       selectedGender = genders[0];
       maleBool = true;
+      print(num_male.get(pokeNum));
     } else if (num_female.get(pokeNum) != null) {
       selectedGender = genders[1];
       femaleBool = true;
@@ -1147,10 +1149,10 @@ void setup() {
     num_male.put(names_num.get(male[i]), male[i]);
   }
   for (int i = 0; i < female.length; i++) {
-    num_male.put(names_num.get(female[i]), female[i]);
+    num_female.put(names_num.get(female[i]), female[i]);
   }
   for (int i = 0; i < unspecified.length; i++) {
-    num_male.put(names_num.get(unspecified[i]), unspecified[i]);
+    num_unspecified.put(names_num.get(unspecified[i]), unspecified[i]);
   }
   /*println(names_stats.get("bulbasaur"));
    println(names_types.get("bulbasaur"));
