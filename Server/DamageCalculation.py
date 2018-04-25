@@ -9,15 +9,16 @@ from PokemanClass import Pokeman
 from MoveClass import Move
 from Constants import *
 from random import randint
+str_prv_mov = ''
 
 
 def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
+    global str_prv_mov
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
-    global str_prv_mov
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -58,7 +59,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         i_terrain = 1.5
 
     str_mov_name = move.str_name
-    str_prv_mov = str_mov_name
     if (str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude') and str_terrain == 'grassy':
         i_terrain = 0.5
 
@@ -66,7 +66,7 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     i_other = 1
     i_burn = 1
     str_ability = atk_poke.str_ability
-    str_mov_name = move.str_name
+    print(move.str_cat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
         i_def = def_poke.get_usable_stats().get_def()
@@ -81,9 +81,15 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         i_atk = 0
         i_def = 7
         i_other = 0
+    if str_prv_mov == 'minimize':
+        if str_mov_name == 'body-slam' or str_mov_name == 'dragon-rush' or str_mov_name == 'flying-press' or str_mov_name == 'heat-crash' or str_mov_name == 'heavy-slam' or str_mov_name == 'phantom-force' or str_mov_name == 'shadow-force' or str_mov_name == 'stomp':
+            i_other = 2
+    i_rand = 1
+    print('power',i_pow)
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
+    str_prv_mov = str_mov_name
     return i_damage
 
 poke1 = Pokeman()
@@ -93,22 +99,29 @@ poke1.base_stats.i_hp = 341
 poke1.base_stats.i_spa = 236
 poke1.base_stats.i_spd = 236
 poke1.base_stats.i_spe = 259
+poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
-poke1.str_status = 'burn'
+#poke1.str_status = 'burn'
 
 poke2 = Pokeman()
-poke2.base_stats.i_atk = 100
+poke2.base_stats.i_atk = 212
 poke2.base_stats.i_def = 236
 poke2.base_stats.i_hp = 341
-poke2.base_stats.i_spa = 100
+poke2.base_stats.i_spa = 236
 poke2.base_stats.i_spd = 236
-poke2.base_stats.i_spe = 100
+poke2.base_stats.i_spe = 259
+poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 
 
-move = Move("tackle")
+move = Move("minimize")
 
 field = Field()
 field.terrain = Terrain.ELECTRIC
 
 print(attack(poke1, poke2, move, field))
+print(str_prv_mov)
+
+move = Move("body-slam")
+print(attack(poke2, poke1, move, field))
+print(str_prv_mov)
