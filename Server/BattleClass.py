@@ -123,6 +123,19 @@ class Battle(object):
 
             i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
 
+            i_tmp_eff = player.active_poke.get_moves()[player.i_active_move_idx].type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+
+            if i_tmp_eff == 0:
+                self.send_broadcast("It has no effect.")
+            elif i_tmp_eff == 0.25:
+                self.send_broadcast("It is very not very effective.")
+            elif i_tmp_eff == 0.5:
+                self.send_broadcast("It is not very effective.")
+            elif i_tmp_eff == 2:
+                self.send_broadcast("It is super effective.")
+            elif i_tmp_eff == 4:
+                self.send_broadcast("It is super super effective.")
+
             self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp-i_dmg))
 
             other_player.active_poke.i_hp -= i_dmg
