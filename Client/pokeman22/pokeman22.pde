@@ -16,6 +16,10 @@ import java.util.Map;
 
 // Note the HashMap's "key" is a String and "value" is an Integer
 
+String[] male = {"braviary","gallade","hitmonchan","hitmonlee","hitmontop","landorus","latios","mothim","nidoking","nidoran-m","nidorino","rufflet","sawk","tauros","throh","thundurus","tornadus","tyrogue","volbeat"};
+String[] female = {"blissey","bounsweet","chansey","cresselia","flabebe","floette","florges","froslass","happiny","illumise","jynx","kangaskhan","latias","lilligant","mandibuzz","miltank","nidoqueen","nidoran-f","nidorina","petilil","salazzle","smoochum","steenee","tsareena","vespiquen","vullaby","wormadam"};
+String[] unspecified = {"arceus","articuno","azelf","baltoy","beldum","blacephalon","bronzong","bronzor","buzzwole","carbink","celebi","celesteela","claydol","cobalion","cosmoem","cosmog","cryogonal","darkrai","deoxys","dhelmise","dialga","diancie","ditto","electrode","entei","genesect","giratina","golett","golurk","groudon","guzzlord","ho-oh","hoopa","jirachi","kartana","keldeo","klang","klink","klinklang","kyogre","kyurem","lugia","lunala","lunatone","magearna","magnemite","magneton","magnezone","manaphy","marshadow","meloetta","mesprit","metagross","metang","mew","mewtwo","minior","moltres","naganadel","necrozma","nihilego","palkia","pheromosa","phione","poipole","porygon","porygon-z","porygon2","raikou","rayquaza","regice","regigigas","regirock","registeel","reshiram","rotom","shaymin","shedinja","silvally","solgaleo","solrock","stakataka","starmie","staryu","suicune","tapubulu","tapufini","tapukoko","tapulele","terrakion","type: null","unown","uxie","victini","virizion","volcanion","voltorb","xerneas","xurkitree","yveltal","zapdos","zekrom","zeraora","zygarde"};
+
 HashMap<String, Integer> names_num = new HashMap<String, Integer>();
 HashMap<Integer, String> num_names = new HashMap<Integer, String>();
 HashMap<String, Integer[]> names_stats = new HashMap<String, Integer[]>();
@@ -400,7 +404,21 @@ void drawPokemonSelectionScreen(int slotNumber) {
   fill(255);
   textAlign(CENTER);
 
-  if (mousePressed && mousePressValid == true) {
+  draw_imageMode(CORNER);
+  draw_image(back, width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10, SEARCH_BUTTON.i_y);
+  //rect(1048,90,width*23/350, 50);
+  //println(sliderFollow);
+  //draw_image(back, 1048, 90);
+
+  if (mousePressed && mousePressValid == true) {   
+    if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - 10 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SEARCH_BUTTON.i_y + height/18 && mouseY >= SEARCH_BUTTON.i_y) {
+      //if (mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY >= SEARCH_BUTTON.i_y) {
+      //moveSelectScreen = false;
+      //mousePressValid = false;
+      pokemonSelectScreen = false;
+      println(width*6/7 - SELECTSCREENSHIFT_X - 10, width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10, SEARCH_BUTTON.i_y + height/18, SEARCH_BUTTON.i_y);
+      println(mouseX, mouseY);
+    }
     if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
       pokemonSearchBool = true;
     } else {
@@ -464,6 +482,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     for (int i = 0; i < 6; i++) {
       IV[i] = 31;
       EV[i] = 0;
+      statSliders.get(i).i_x = statSliderStartX[i];
     }
     for (int i = 0; i < 5; i++) {
       nature[i] = 0;
