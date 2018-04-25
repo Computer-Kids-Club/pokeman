@@ -125,7 +125,8 @@ class Battle(object):
 
             i_tmp_eff = player.active_poke.get_moves()[player.i_active_move_idx].type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
 
-            self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
+            #self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
+            self.send_broadcast("It lost " + str(i_dmg/other_player.active_poke.get_usable_stats().i_hp*100) + "%.")
 
             if i_tmp_eff == 0:
                 self.send_broadcast("It has no effect.")
