@@ -7,6 +7,7 @@ from Constants import *
 from FieldClass import Field
 from random import randint
 from ClientConnection import Client
+from DamageCalculation import attack
 import json
 
 # master dictionary of all the ongoing battles
@@ -73,10 +74,14 @@ class Battle(object):
         for player in self.l_players:
             player.send_data(DISPLAY_DELAY)
 
+    def send_broadcast(self, str_msg):
+        for player in self.l_players:
+            player.send_data(DISPLAY_TEXT+str_msg)
+
     def send_move(self, player, move):
         other_player = self.get_other_player(player)
-        player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.str_name}))
-        other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.str_name}))
+        player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.to_dic()}))
+        other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.to_dic()}))
 
     def run(self):
         # Log.info("battle running")
@@ -90,27 +95,19 @@ class Battle(object):
 
         # calculate damage
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        l_move_queue = []
-=======
         l_move_queue= []
->>>>>>> 58249722a166d82904aba0b0b25d1b90ae5fd9ed
-=======
-        l_move_queue= []
->>>>>>> a557f9077b55ca3950c1da79a1fb63facd2a3967
 
+        # add moves to queue according to speed
         for player in self.l_players:
             if (player.i_active_move_idx == -1):
                 continue
-
-            player.i_active_move_idx = -1
 
             if len(l_move_queue)>=1 and player.active_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
                 l_move_queue.insert(0,player)
             else:
                 l_move_queue.append(player)
 
+        # move according to queue
         for player in l_move_queue:
 
             if not player.active_poke.is_usable():
@@ -122,13 +119,41 @@ class Battle(object):
 
             self.send_move(player, player.active_poke.get_moves()[player.i_active_move_idx])
 
-            other_player.active_poke.i_hp -= randint(5, 20)
+            # actually take damage
+
+            i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
+
+            i_tmp_eff = player.active_poke.get_moves()[player.i_active_move_idx].type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+
+            #self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
+            self.send_broadcast("It lost " + str(i_dmg/other_player.active_poke.get_usable_stats().i_hp*100) + "%.")
+
+            if i_tmp_eff == 0:
+                self.send_broadcast("It has no effect.")
+            elif i_tmp_eff == 0.25:
+                self.send_broadcast("It is very not very effective.")
+            elif i_tmp_eff == 0.5:
+                self.send_broadcast("It is not very effective.")
+            elif i_tmp_eff == 2:
+                self.send_broadcast("It is super effective.")
+            elif i_tmp_eff == 4:
+                self.send_broadcast("It is super super effective.")
+
+            self.send_broadcast("")
+
+            other_player.active_poke.i_hp -= i_dmg
+
+            player.i_active_move_idx = -1
+
+            # is it dead???
             if (other_player.active_poke.i_hp <= 0):
                 other_player.active_poke.i_hp = 0
                 other_player.active_poke.b_fainted = True
 
+            # send updated pokes
             self.send_players_pokes()
 
+            # the moving poke is dead !?!?
             if not other_player.active_poke.is_usable():
                 other_player.i_turn_readiness = NOT_READY
                 other_player.i_active_move_idx = -1

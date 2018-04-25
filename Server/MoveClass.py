@@ -11,7 +11,7 @@ from pathlib import Path
 
 def parse_move_json(str_json, i_default=0):
     i_ret = i_default
-    if str_json != '-' and str_json != '???' and str_json != 'error':
+    if str_json != '-' and str_json != '???' and str_json != 'error' and str_json != '':
         i_ret = int(str_json)
     return i_ret
 

@@ -20,6 +20,9 @@ int i_total_switching = 30;
 int i_switching = 0;
 int i_switching_direction = 1;
 
+String str_cur_move_type = "";
+String str_cur_move_cat = "";
+
 void stop_battle() {
   i_battle_state = NOT_READY;
 
@@ -30,7 +33,7 @@ void stop_battle() {
 }
 
 void draw_health_bar(int x, int y, float p) {
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   fill(150);
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
   fill(100, 255, 255);
@@ -58,11 +61,14 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
 void draw_battle() {
 
+  background(0);
+  
   fill(200);
-  rect(0, 0, width, height);
+  noStroke();
+  draw_rect(0, 0, width, height);
 
-  rectMode(CENTER);
-  imageMode(CENTER);
+  draw_rectMode(CENTER);
+  draw_imageMode(CENTER);
   textAlign(CENTER);
 
   if (c_display_state==DISPLAY_TEAMS) {
@@ -88,6 +94,21 @@ void draw_battle() {
     }
   }
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
+
+    if (i_moving>0 && str_cur_move_cat.equals("physical") && i_moving_direction == -1) {
+
+      int tmp_move = i_moving * 2;
+
+      if (tmp_move<i_total_moving) {
+        tmp_move = tmp_move;
+      } else {
+        tmp_move = 2*i_total_moving-tmp_move;
+      }
+      //println(tmp_move);
+      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+      translate(-POKE_ME_RECT.i_x, -POKE_ME_RECT.i_y);
+    }
+
     translate(POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
     draw_battling_poke(pokemons.get(c_my_display_poke), ME);
   }
@@ -107,41 +128,61 @@ void draw_battle() {
     }
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
+    
+    if (i_moving>0 && str_cur_move_cat.equals("physical") && i_moving_direction == 1) {
+
+      int tmp_move = i_moving * 2;
+
+      if (tmp_move<i_total_moving) {
+        tmp_move = tmp_move;
+      } else {
+        tmp_move = 2*i_total_moving-tmp_move;
+      }
+      //println(tmp_move);
+      translate_interpolation(POKE_OTHER_RECT, POKE_ME_RECT, tmp_move, i_total_moving);
+      translate(-POKE_OTHER_RECT.i_x, -POKE_OTHER_RECT.i_y);
+    }
+    
     translate(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
     draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
   }
   popMatrix();
 
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
 
   if (i_moving>0) {
     i_moving--;
 
-    pushMatrix();
+    //println(str_cur_move_cat);
+    if (str_cur_move_cat.equals("special")) {
+      pushMatrix();
 
-    int tmp_move = i_moving;
+      int tmp_move = i_moving;
 
-    if (i_moving_direction==-1) {
-      tmp_move = i_total_moving-i_moving;
+      if (i_moving_direction==-1) {
+        tmp_move = i_total_moving-i_moving;
+      }
+
+      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+      rotate((frameCount*20.0)%360);
+      fill(0, 255, 255);
+      if (str_cur_move_type!="")
+        fill(TYPE_COLOURS.get(str_cur_move_type));
+      noStroke();
+      draw_rect(0, 0, 50, 50);
+      popMatrix();
     }
-
-    translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
-    rotate((frameCount*20.0)%360);
-    fill(0, 255, 255);
-    noStroke();
-    draw_rect(0, 0, 50, 50);
-    popMatrix();
   }
 
-  imageMode(CORNER);
+  draw_imageMode(CORNER);
   textAlign(CORNER);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
 
   textAlign(LEFT);
   draw_text(i_cur_animation_frames_left, 50, 50);
 
   // moves
-  rectMode(CENTER);
+  draw_rectMode(CENTER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<4; i++) {
@@ -156,7 +197,7 @@ void draw_battle() {
       popMatrix();
     }
   }
-  
+
   // team pokes
   if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<6; i++) {
@@ -174,7 +215,7 @@ void draw_battle() {
   // chat
   stroke(0);
   fill(255);
-  rectMode(CORNER);
+  draw_rectMode(CORNER);
   draw_rect(TEXT_CHAT_DIVIDE, 0, width-TEXT_CHAT_DIVIDE, height);
 
   textAlign(LEFT, CENTER);

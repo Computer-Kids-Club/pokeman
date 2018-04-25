@@ -119,15 +119,20 @@ void process_data(String dataIn) {
     i_cur_animation_frames_left = 30;
     JSONObject json = parseJSONObject(dataIn.substring(1));
     int i_display_player = json.getInt("player");
+    JSONObject json_move = new JSONObject();
     if (i_display_player==ME) {
-      text_chat.add(0, "You used "+json.getString("move"));
+      json_move = json.getJSONObject("move");
+      text_chat.add(0, "You used "+json_move.getString("name"));
       i_moving_direction = -1;
-      i_moving = i_total_moving;
-    } else if (i_display_player==OTHER) {
-      text_chat.add(0, "Your opponent used "+json.getString("move"));
+    } else/* if (i_display_player==OTHER)*/ {
+      json_move = json.getJSONObject("move");
+      text_chat.add(0, "Your opponent used "+json_move.getString("name"));
       i_moving_direction = 1;
-      i_moving = i_total_moving;
     }
+    i_moving = i_total_moving;
+    str_cur_move_type = json_move.getString("type");
+    //println(json_move+" "+json_move.getString("cat"));
+    str_cur_move_cat = json_move.getString("cat");
   } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
     i_cur_animation_frames_left = 30;
   }
