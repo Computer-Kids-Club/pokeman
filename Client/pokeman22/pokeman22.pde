@@ -478,6 +478,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     for (int i = 0; i < 6; i++) {
       IV[i] = 31;
       EV[i] = 0;
+      statSliders.get(i).i_x = statSliderStartX[i];
     }
     for (int i = 0; i < 5; i++) {
       nature[i] = 0;
@@ -869,8 +870,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         mousePressValid = false;
       }
       if (mouseX <= width/7 + SELECTSCREENSHIFT_X + 10 + width*23/350 && mouseX >= width/7 + SELECTSCREENSHIFT_X + 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
-        moveScreenReset = true;
-        println(moveScreenReset);
         moveSelectScreen = false;
         mousePressValid = false;
       }
