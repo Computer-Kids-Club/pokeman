@@ -810,7 +810,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     //draw_rect(310, 515, 220, height/30);
   }
   if (chooseGender) {
-      draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*3/30);
+    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*3/30);
   }
   //draw_rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
@@ -898,6 +898,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 + width*23/350 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
         if (selectedAbility == "") {
           selectedAbility = names_abilities.get(num_names.get(pokeNum))[0];
+        }
+        if (selectedGender == "") {
+          selectedGender = "Male";
         }
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
         pokemonSelectScreen = false;
