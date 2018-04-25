@@ -51,3 +51,16 @@ def accuracy(atk_poke, def_poke, move, field, atk_player, def_player):
     if randint(0, 99) < 100*f_acc:
         return True
     return False
+
+MULTI_HIT_MOVES = ["arm-thrust","barrage","bone-rush","bullet-seed","comet-punch","doubleslap","fury-attack","fury-swipes","icicle-spear","pin-missile","rock-blast","spike-cannon","tail-slap"]
+DOUBLE_HIT_MOVES = ["twineedle","bonemerang","double-hit","double-kick","double-chop","gear-saucer"]
+
+def multi_hit(move):
+    i_hits = 1
+
+    if move.get_name() in DOUBLE_HIT_MOVES:
+        i_hits = 2
+    elif move.get_name() in MULTI_HIT_MOVES:
+        i_hits = randint(2, 5)
+
+    return i_hits
