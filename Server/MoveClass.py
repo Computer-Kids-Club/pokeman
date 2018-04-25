@@ -32,6 +32,8 @@ class Move(object):
 
         self.i_pow = parse_move_json(dic_move['power'])
         self.i_acc = parse_move_json(dic_move['acc'])
+        if self.i_acc == 0:
+            self.i_acc = 100
 
         self.i_max_pp = parse_move_json(dic_move['pp'])
         self.i_pp = self.i_max_pp
