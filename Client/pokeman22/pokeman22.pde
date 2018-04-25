@@ -16,6 +16,10 @@ import java.util.Map;
 
 // Note the HashMap's "key" is a String and "value" is an Integer
 
+String[] male = {"braviary","gallade","hitmonchan","hitmonlee","hitmontop","landorus","latios","mothim","nidoking","nidoran-m","nidorino","rufflet","sawk","tauros","throh","thundurus","tornadus","tyrogue","volbeat"};
+String[] female = {"blissey","bounsweet","chansey","cresselia","flabebe","floette","florges","froslass","happiny","illumise","jynx","kangaskhan","latias","lilligant","mandibuzz","miltank","nidoqueen","nidoran-f","nidorina","petilil","salazzle","smoochum","steenee","tsareena","vespiquen","vullaby","wormadam"};
+String[] unspecified = {"arceus","articuno","azelf","baltoy","beldum","blacephalon","bronzong","bronzor","buzzwole","carbink","celebi","celesteela","claydol","cobalion","cosmoem","cosmog","cryogonal","darkrai","deoxys","dhelmise","dialga","diancie","ditto","electrode","entei","genesect","giratina","golett","golurk","groudon","guzzlord","ho-oh","hoopa","jirachi","kartana","keldeo","klang","klink","klinklang","kyogre","kyurem","lugia","lunala","lunatone","magearna","magnemite","magneton","magnezone","manaphy","marshadow","meloetta","mesprit","metagross","metang","mew","mewtwo","minior","moltres","naganadel","necrozma","nihilego","palkia","pheromosa","phione","poipole","porygon","porygon-z","porygon2","raikou","rayquaza","regice","regigigas","regirock","registeel","reshiram","rotom","shaymin","shedinja","silvally","solgaleo","solrock","stakataka","starmie","staryu","suicune","tapubulu","tapufini","tapukoko","tapulele","terrakion","type: null","unown","uxie","victini","virizion","volcanion","voltorb","xerneas","xurkitree","yveltal","zapdos","zekrom","zeraora","zygarde"};
+
 HashMap<String, Integer> names_num = new HashMap<String, Integer>();
 HashMap<Integer, String> num_names = new HashMap<Integer, String>();
 HashMap<String, Integer[]> names_stats = new HashMap<String, Integer[]>();
