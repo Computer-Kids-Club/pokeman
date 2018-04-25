@@ -77,7 +77,8 @@ class Pokeman(object):
         #self.iv_stats = Stats()
         #self.nature_stats = Stats()
 
-        self.i_evasion = 1
+        self.i_evasion = 0
+        self.i_accuracy = 0
 
         self.item_stats = Stats()
         self.modifier_stats = Stats()
