@@ -79,7 +79,7 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         i_atk = 0
         i_def = 7
         i_other = 0
-    #print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
+    print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
     return i_damage

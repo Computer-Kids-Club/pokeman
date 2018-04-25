@@ -183,6 +183,8 @@ class Client(object):
                 poke.usable_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
                                         dic_poke['spa'], dic_poke['spd'], dic_poke['spe'])
 
+                #print(poke.str_name,poke.usable_stats.to_dic({}))
+
                 poke.i_happy = dic_poke['hap']
                 poke.i_lv = dic_poke['lv']
                 poke.b_shiny = dic_poke['shiny']
