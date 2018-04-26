@@ -1174,19 +1174,28 @@ void draw() {
 
   if (i_battle_state == BATTLING) {
     draw_battle();
-    return;
+  } else {
+
+    drawStartScreen();
+    if (moveSelectScreen == true) {
+      drawPokemonInformationScreen(pokemonSlotNumber, pokemonNumber, gridSize);
+    } else if (pokemonSelectScreen == true) {
+      drawPokemonSelectionScreen(pokemonChangeNumber);
+    }
+    if (i_battle_state == SEARCHING) {
+      fill(50, 50);
+      draw_rect(0, 0, width, height);
+    }
   }
 
-  drawStartScreen();
-  if (moveSelectScreen == true) {
-    drawPokemonInformationScreen(pokemonSlotNumber, pokemonNumber, gridSize);
-  } else if (pokemonSelectScreen == true) {
-    drawPokemonSelectionScreen(pokemonChangeNumber);
+  for (int i=0; i<100; i++) {
+    if (random(100)<10) {
+      String new_text = num_names.get(int(random(1, 808)));
+      add_text_effect(new_text, int(random(width)), int(random(height)), TYPE_COLOURS.get(names_types.get(new_text)[0]));
+    }
   }
 
-  if (i_battle_state == SEARCHING) {
-    fill(50, 50);
-    draw_rect(0, 0, width, height);
-  } 
+  draw_all_effects();
+
   draw_console();
 }

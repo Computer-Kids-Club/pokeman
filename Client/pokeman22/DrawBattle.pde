@@ -49,6 +49,10 @@ void draw_health_bar(int x, int y, float p, float op) {
   stroke(0);
   noFill();
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
+  
+  textAlign(CENTER, CENTER);
+  fill(0);
+  draw_text(round(100*p)+"%", x-HEALTH_BAR_WIDTH/2-20, y-70-7/2);
 }
 
 void draw_battling_poke(Pokemon poke, int me_or_other) {
@@ -95,6 +99,7 @@ void draw_battle() {
 
   fill(200);
   noStroke();
+  draw_rectMode(CORNER);
   draw_rect(0, 0, width, height);
 
   draw_rectMode(CENTER);

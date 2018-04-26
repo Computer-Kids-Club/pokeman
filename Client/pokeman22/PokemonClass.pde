@@ -57,7 +57,7 @@ class Pokemon {
     if (!status.equals("none")) {
       text_status_effects.add(status);
     }
-    
+
     JSONArray json_stats_array = json.getJSONArray("statchange");
     for (int j = 0; j < json_stats_array.size(); j++) {
       text_status_effects.add(json_stats_array.getString(j));
