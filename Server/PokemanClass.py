@@ -80,8 +80,8 @@ class Pokeman(object):
         self.i_evasion = 0
         self.i_accuracy = 0
 
-        self.item_stats = Stats()
-        self.modifier_stats = Stats()
+        self.item_stats = Stats(0, 0, 0, 0, 0, 0)
+        self.modifier_stats = Stats(0, 0, 0, 0, 0, 0)
 
         self.i_hp = self.get_usable_stats().i_hp
 
@@ -103,6 +103,18 @@ class Pokeman(object):
         dic_poke["name"] = self.str_name
 
         dic_poke["status"] = self.str_status
+
+        dic_poke["statchange"] = []
+        if self.modifier_stats.i_atk != 0:
+            dic_poke["statchange"].append("atk "+str(self.modifier_stats.i_atk))
+        if self.modifier_stats.i_def != 0:
+            dic_poke["statchange"].append("def "+str(self.modifier_stats.i_def))
+        if self.modifier_stats.i_spa != 0:
+            dic_poke["statchange"].append("spa "+str(self.modifier_stats.i_spa))
+        if self.modifier_stats.i_spd != 0:
+            dic_poke["statchange"].append("spd "+str(self.modifier_stats.i_spd))
+        if self.modifier_stats.i_spe != 0:
+            dic_poke["statchange"].append("spe "+str(self.modifier_stats.i_spe))
 
         self.get_usable_stats().to_dic(dic_poke,"base")
 
