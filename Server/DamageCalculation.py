@@ -19,6 +19,8 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
+    str_atk_ability = atk_poke.str_ability
+    str_def_ability = def_poke.str_ability
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -37,7 +39,7 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         if str_atk_ability == 'sniper':
             i_crit = i_crit*1.5
     i_type = move.type.getAtkEff(def_poke.type_1, def_poke.type_2)
-
+    print('type multiplier', i_type)
     str_weather = field.get_weather()
     str_terrain = field.get_terrain()
 
@@ -69,8 +71,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     i_other = 1
     i_move_buff = 1
     i_burn = 1
-    str_atk_ability = atk_poke.str_ability
-    str_def_ability = def_poke.str_ability
     print(move.str_cat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
@@ -100,7 +100,7 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
             i_move_buff = 2
 
     i_ability_buff = 1
-    b_contact = str_mov_name.flag_contact
+    b_contact = move.flag_contact
     if str_atk_ability == 'tough-claws':
         if b_contact:
             i_ability_buff = 1.3
@@ -127,7 +127,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
             i_type = i_type*2
 
     i_rand = 1
-    print('power',i_pow)
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn, i_ability_buff, i_move_buff)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn * i_ability_buff * i_move_buff
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
@@ -143,6 +142,7 @@ poke1.base_stats.i_spd = 236
 poke1.base_stats.i_spe = 259
 poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
+poke1.type_2 = None
 #poke1.str_status = 'burn'
 
 poke2 = Pokeman()
@@ -154,8 +154,9 @@ poke2.base_stats.i_spd = 236
 poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
+poke2.type_2 = None
 
-move = Move("minimize")
+move = Move("tackle")
 
 field = Field()
 field.terrain = Terrain.ELECTRIC
@@ -163,6 +164,6 @@ field.terrain = Terrain.ELECTRIC
 print(attack(poke1, poke2, move, field))
 print(str_prv_mov)
 
-move = Move("body-slam")
+move = Move("stomping-tantrum")
 print(attack(poke2, poke1, move, field))
 print(str_prv_mov)
