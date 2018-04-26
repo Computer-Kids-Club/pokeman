@@ -226,6 +226,14 @@ class Battle(object):
 
             #self.send_broadcast("It regained 7.69230769231% hp.")
 
+            if player.active_poke.str_status == "burn":
+                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16)
+            elif player.active_poke.str_status == "poison":
+                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 8)
+            elif player.active_poke.str_status == "toxic":
+                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16 * player.active_poke.toxic_idx)
+                player.active_poke.toxic_idx += 1
+
             player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
 
             # is it dead???
@@ -241,11 +249,11 @@ class Battle(object):
                 if len(player.get_available_pokes()) <= 0:
                     self.b_gameover = True
                     player.send_data(DISPLAY_LOSE)
-                    player.send_data(DISPLAY_WIN)
+                    other_player.send_data(DISPLAY_WIN)
                     # self.send_delay()
                     return
 
-                    player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
+                player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 # self.send_delay()
 
                 return

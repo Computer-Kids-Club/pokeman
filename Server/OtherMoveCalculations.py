@@ -74,6 +74,9 @@ def status_effect(atk_poke, def_poke, move):
     str_eff = move.str_status_effect
     def_poke.str_status = str_eff
 
+    if str_eff == 'toxic':
+        def_poke.toxic_idx = 1
+
     return str_eff
 
 def stat_change(atk_poke, def_poke, move):

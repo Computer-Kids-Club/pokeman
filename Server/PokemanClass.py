@@ -39,6 +39,7 @@ class Pokeman(object):
         self.str_item = "error"
 
         self.str_status = 'none'
+        self.toxic_idx = 1
 
         self.l_possible_moves = []
         for dic_move in dic_poke["levelmoves"]:
