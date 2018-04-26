@@ -700,7 +700,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("IVs", width*4/5 - SELECTSCREENSHIFT_X, height*29/45);
 
     for (int i = 0; i < 6; i++) {
-      EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/( width*31/40 - SELECTSCREENSHIFT_X - statSliderStartX[i])-statSliders.get(i).i_w));
+      EV[i] = round((statSliders.get(i).i_x - statSliderStartX[i])*(252)/((width*31/40 - SELECTSCREENSHIFT_X - statSliderStartX[i])-statSliders.get(i).i_w));
 
       if (statSliderFollow[i] == true) {
         if (mouseX >= statSliderStartX[i] && mouseX <= width*31/40 - SELECTSCREENSHIFT_X - statSliders.get(i).i_w/2) {
@@ -890,7 +890,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
   if (mousePressed && mousePressValid == true) {
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
-      if (mouseX <= width/2 + 60 && mouseX >= width/2 - 60 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 53 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 7) {
+      if (mouseX <= width*19/35 && mouseX >= width*16/35 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 53 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 7) {
         shinyBool = !shinyBool;
         mousePressValid = false;
       }
