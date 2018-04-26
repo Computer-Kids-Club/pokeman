@@ -33,6 +33,9 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     if i_goal == 1:
         i_crit = 1.5
 
+    if i_crit == 1.5:
+        if str_atk_ability == 'sniper':
+            i_crit = i_crit*1.5
     i_type = move.type.getAtkEff(def_poke.type_1, def_poke.type_2)
 
     str_weather = field.get_weather()
@@ -64,15 +67,17 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
 
     str_status = atk_poke.str_status
     i_other = 1
+    i_move_buff = 1
     i_burn = 1
-    str_ability = atk_poke.str_ability
+    str_atk_ability = atk_poke.str_ability
+    str_def_ability = def_poke.str_ability
     print(move.str_cat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
         i_def = def_poke.get_usable_stats().get_def()
         if str_status == 'burn':
             i_burn = 0.5
-            if str_ability == 'guts' or str_mov_name == 'facade':
+            if str_atk_ability == 'guts' or str_mov_name == 'facade':
                 i_burn = 1.5
     elif move.str_cat == 'special':
         i_atk = atk_poke.get_usable_stats().get_spa()
@@ -81,14 +86,50 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         i_atk = 0
         i_def = 7
         i_other = 0
+
     if str_prv_mov == 'minimize':
         if str_mov_name == 'body-slam' or str_mov_name == 'dragon-rush' or str_mov_name == 'flying-press' or str_mov_name == 'heat-crash' or str_mov_name == 'heavy-slam' or str_mov_name == 'phantom-force' or str_mov_name == 'shadow-force' or str_mov_name == 'stomp':
-            i_other = 2
+            i_move_buff = 2
+
+    if str_prv_mov == 'dig':
+        if str_mov_name == 'earthquake' or str_mov_name == 'magnitude':
+            i_move_buff = 2
+
+    if str_prv_mov == 'dive':
+        if str_mov_name == 'surf' or str_mov_name == 'whirlpool':
+            i_move_buff = 2
+
+    i_ability_buff = 1
+    b_contact = str_mov_name.flag_contact
+    if str_atk_ability == 'tough-claws':
+        if b_contact:
+            i_ability_buff = 1.3
+    if str_def_ability == 'fluffy' and b_contact:
+        if str_mov_type == 'fire':
+            i_ability_buff = 1
+        else:
+            i_ability_buff = 0.5
+    elif str_def_ability == 'fluffy' and b_contact == False:
+        if str_mov_type == 'fire':
+            i_ability_buff = 2
+        else:
+            i_ability_buff = 1
+    if i_type > 1:
+        if str_def_ability == 'filter' or str_def_ability == 'prison-armor' or str_def_ability =='solid-rock':
+            i_ability_buff = 0.75
+
+    i_def_hp = def_poke.i_hp
+    if i_def_hp == def_poke.usable_stats.i_hp:
+        if str_def_ability == 'multi-scale' or str_def_ability == 'shadow-shield':
+            i_ability_buff = 0.5
+    if str_atk_ability == 'tinted-lens':
+        if i_type < 1:
+            i_type = i_type*2
 
     i_rand = 1
     print('power',i_pow)
-    print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
-    i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
+    print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn, i_ability_buff, i_move_buff)
+    i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn * i_ability_buff * i_move_buff
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
     str_prv_mov = str_mov_name
     return i_damage
