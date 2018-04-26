@@ -8,6 +8,7 @@ from FieldClass import Field
 from random import randint
 from ClientConnection import Client
 from DamageCalculation import attack
+from OtherMoveCalculations import accuracy, multi_hit
 import json
 
 # master dictionary of all the ongoing battles
@@ -115,40 +116,66 @@ class Battle(object):
 
             other_player = self.get_other_player(player)
 
-            print(player.active_poke, "used move", player.active_poke.get_moves()[player.i_active_move_idx])
+            cur_move = player.active_poke.get_moves()[player.i_active_move_idx]
 
-            self.send_move(player, player.active_poke.get_moves()[player.i_active_move_idx])
+            print(player.active_poke, "used move", cur_move)
 
-            # actually take damage
+            self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
 
-            i_dmg = attack(player.active_poke, other_player.active_poke, player.active_poke.get_moves()[player.i_active_move_idx], self.field, player, other_player)
+            self.send_move(player, cur_move)
 
-            i_tmp_eff = player.active_poke.get_moves()[player.i_active_move_idx].type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+            # check if move hit
+            b_hit = accuracy(player.active_poke, other_player.active_poke, cur_move)
 
-            #self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
-            self.send_broadcast("It lost " + str(i_dmg/other_player.active_poke.get_usable_stats().i_hp*100) + "%.")
+            if b_hit:
 
-            if i_tmp_eff == 0:
-                self.send_broadcast("It has no effect.")
-            elif i_tmp_eff == 0.25:
-                self.send_broadcast("It is very not very effective.")
-            elif i_tmp_eff == 0.5:
-                self.send_broadcast("It is not very effective.")
-            elif i_tmp_eff == 2:
-                self.send_broadcast("It is super effective.")
-            elif i_tmp_eff == 4:
-                self.send_broadcast("It is super super effective.")
+                # some moves hit more than one time
+                i_hits = multi_hit(cur_move)
+                for i in range(i_hits):
 
+                    # calculate damage
+
+                    i_dmg = attack(player.active_poke, other_player.active_poke, cur_move, self.field, player, other_player)
+
+                    # if the move is not status, tell everyone the damage
+                    if cur_move.str_cat != "status":
+
+                        i_tmp_eff = cur_move.type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+
+                        if i_tmp_eff == 0:
+                            self.send_broadcast("It had no effect!")
+                        elif i_tmp_eff == 0.25:
+                            self.send_broadcast("It is very not very effective!")
+                        elif i_tmp_eff == 0.5:
+                            self.send_broadcast("It is not very effective.")
+                        elif i_tmp_eff == 2:
+                            self.send_broadcast("It is super effective!")
+                        elif i_tmp_eff == 4:
+                            self.send_broadcast("It is super super effective!")
+
+                        # self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
+                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " lost " + str(i_dmg / other_player.active_poke.get_usable_stats().i_hp * 100) + "% HP.")
+
+                    # actually take damage
+
+                    other_player.active_poke.i_hp -= i_dmg
+
+                    player.i_active_move_idx = -1
+
+                    # is it dead???
+                    if (other_player.active_poke.i_hp <= 0):
+                        other_player.active_poke.i_hp = 0
+                        other_player.active_poke.b_fainted = True
+                        break
+
+                    # send updated pokes
+                    self.send_players_pokes()
+            else:
+                # the move missed
+                self.send_broadcast("It missed.")
+
+            # make a new line to look more organised
             self.send_broadcast("")
-
-            other_player.active_poke.i_hp -= i_dmg
-
-            player.i_active_move_idx = -1
-
-            # is it dead???
-            if (other_player.active_poke.i_hp <= 0):
-                other_player.active_poke.i_hp = 0
-                other_player.active_poke.b_fainted = True
 
             # send updated pokes
             self.send_players_pokes()
@@ -170,7 +197,43 @@ class Battle(object):
 
                 return
 
-            # player.active_poke.i_hp = randint(0,player.active_poke.get_usable_stats().i_hp)
+        # after turn heal / damage
+        for player in l_move_queue:
+
+            if not player.active_poke.is_usable():
+                continue
+
+            #player.active_poke.i_hp += int(player.active_poke.get_usable_stats().i_hp / 13)
+
+            #self.send_broadcast("It regained 7.69230769231% hp.")
+
+            player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
+
+            # is it dead???
+            if (player.active_poke.i_hp <= 0):
+                player.active_poke.i_hp = 0
+                player.active_poke.b_fainted = True
+
+            # the moving poke is dead !?!?
+            if not player.active_poke.is_usable():
+                player.i_turn_readiness = NOT_READY
+                player.i_active_move_idx = -1
+
+                if len(player.get_available_pokes()) <= 0:
+                    self.b_gameover = True
+                    player.send_data(DISPLAY_LOSE)
+                    player.send_data(DISPLAY_WIN)
+                    # self.send_delay()
+                    return
+
+                    player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
+                # self.send_delay()
+
+                return
+
+            self.send_players_pokes()
+
+            self.send_delay()
 
         if (not self.everyone_ready() or self.b_gameover):
             return

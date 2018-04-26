@@ -16,9 +16,17 @@ import java.util.Map;
 
 // Note the HashMap's "key" is a String and "value" is an Integer
 
-String[] male = {"braviary","gallade","hitmonchan","hitmonlee","hitmontop","landorus","latios","mothim","nidoking","nidoran-m","nidorino","rufflet","sawk","tauros","throh","thundurus","tornadus","tyrogue","volbeat"};
-String[] female = {"blissey","bounsweet","chansey","cresselia","flabebe","floette","florges","froslass","happiny","illumise","jynx","kangaskhan","latias","lilligant","mandibuzz","miltank","nidoqueen","nidoran-f","nidorina","petilil","salazzle","smoochum","steenee","tsareena","vespiquen","vullaby","wormadam"};
-String[] unspecified = {"arceus","articuno","azelf","baltoy","beldum","blacephalon","bronzong","bronzor","buzzwole","carbink","celebi","celesteela","claydol","cobalion","cosmoem","cosmog","cryogonal","darkrai","deoxys","dhelmise","dialga","diancie","ditto","electrode","entei","genesect","giratina","golett","golurk","groudon","guzzlord","ho-oh","hoopa","jirachi","kartana","keldeo","klang","klink","klinklang","kyogre","kyurem","lugia","lunala","lunatone","magearna","magnemite","magneton","magnezone","manaphy","marshadow","meloetta","mesprit","metagross","metang","mew","mewtwo","minior","moltres","naganadel","necrozma","nihilego","palkia","pheromosa","phione","poipole","porygon","porygon-z","porygon2","raikou","rayquaza","regice","regigigas","regirock","registeel","reshiram","rotom","shaymin","shedinja","silvally","solgaleo","solrock","stakataka","starmie","staryu","suicune","tapubulu","tapufini","tapukoko","tapulele","terrakion","type: null","unown","uxie","victini","virizion","volcanion","voltorb","xerneas","xurkitree","yveltal","zapdos","zekrom","zeraora","zygarde"};
+String[] male = {"braviary", "gallade", "hitmonchan", "hitmonlee", "hitmontop", "landorus", "latios", "mothim", "nidoking", "nidoran-m", "nidorino", "rufflet", "sawk", "tauros", "throh", "thundurus", "tornadus", "tyrogue", "volbeat"};
+String[] female = {"blissey", "bounsweet", "chansey", "cresselia", "flabebe", "floette", "florges", "froslass", "happiny", "illumise", "jynx", "kangaskhan", "latias", "lilligant", "mandibuzz", "miltank", "nidoqueen", "nidoran-f", "nidorina", "petilil", "salazzle", "smoochum", "steenee", "tsareena", "vespiquen", "vullaby", "wormadam"};
+String[] unspecified = {"arceus", "articuno", "azelf", "baltoy", "beldum", "blacephalon", "bronzong", "bronzor", "buzzwole", "carbink", "celebi", "celesteela", "claydol", "cobalion", "cosmoem", "cosmog", "cryogonal", "darkrai", "deoxys", "dhelmise", "dialga", "diancie", "ditto", "electrode", "entei", "genesect", "giratina", "golett", "golurk", "groudon", "guzzlord", "ho-oh", "hoopa", "jirachi", "kartana", "keldeo", "klang", "klink", "klinklang", "kyogre", "kyurem", "lugia", "lunala", "lunatone", "magearna", "magnemite", "magneton", "magnezone", "manaphy", "marshadow", "meloetta", "mesprit", "metagross", "metang", "mew", "mewtwo", "minior", "moltres", "naganadel", "necrozma", "nihilego", "palkia", "pheromosa", "phione", "poipole", "porygon", "porygon-z", "porygon2", "raikou", "rayquaza", "regice", "regigigas", "regirock", "registeel", "reshiram", "rotom", "shaymin", "shedinja", "silvally", "solgaleo", "solrock", "stakataka", "starmie", "staryu", "suicune", "tapu-bulu", "tapu-fini", "tapu-koko", "tapu-lele", "terrakion", "type-null", "unown", "uxie", "victini", "virizion", "volcanion", "voltorb", "xerneas", "xurkitree", "yveltal", "zapdos", "zekrom", "zeraora", "zygarde"};
+
+boolean maleBool = false;
+boolean femaleBool = false;
+boolean unspecifiedBool = false;
+
+HashMap<Integer, String> num_male = new HashMap<Integer, String>();
+HashMap<Integer, String> num_female = new HashMap<Integer, String>();
+HashMap<Integer, String> num_unspecified = new HashMap<Integer, String>();
 
 HashMap<String, Integer> names_num = new HashMap<String, Integer>();
 HashMap<Integer, String> num_names = new HashMap<Integer, String>();
@@ -460,6 +468,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
+  println(maleBool, femaleBool, unspecifiedBool);
   draw_image(backgroundImg, 0, 0);
   if (moveScreenReset == true) {
     level = 100;
@@ -471,6 +480,24 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     chooseAbility = false;
     abilityCount = 0;
     shinyBool = false;
+    selectedGender = "";
+    chooseGender = false;
+    maleBool = false;
+    femaleBool = false;
+    unspecifiedBool = false;
+
+    if (num_male.get(pokeNum) != null) {
+      selectedGender = genders[0];
+      maleBool = true;
+      print(num_male.get(pokeNum));
+    } else if (num_female.get(pokeNum) != null) {
+      selectedGender = genders[1];
+      femaleBool = true;
+    } else if (num_unspecified.get(pokeNum) != null) {
+      selectedGender = genders[2];
+      unspecifiedBool = true;
+    }
+
     for (int i = 0; i < names_abilities.get(num_names.get(pokeNum)).length; i++) {
       if (names_abilities.get(num_names.get(pokeNum))[i] != null) {
         abilityCount++;
@@ -783,7 +810,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     //draw_rect(310, 515, 220, height/30);
   }
   if (chooseGender) {
-    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*4/30);
+    draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40, 374, 100, height*3/30);
   }
   //draw_rect(896,405, 205,10);
   //println((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5), ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5)*205)/714, ((names_stats.get(num_names.get(pokeNum))[0]*2  + IV[0] + EV[0] + 5) / 714)*205);
@@ -810,14 +837,20 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
   draw_text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
 
-  if (selectedGender == "" || chooseGender == true) {
+  if (maleBool) {
+    draw_text("Male", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
+  } else if (femaleBool) {
+    draw_text("Female", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
+  } else if (unspecifiedBool) {
+    draw_text("Unspecified", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
+  } else if (selectedGender == "" || chooseGender == true) {
     draw_text("Select a gender", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
   } else {
     draw_text(selectedGender, width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
   }
 
   if (chooseGender) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       draw_text(genders[i], width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395 + (i+1)*height/30);
     }
   }
@@ -866,6 +899,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (selectedAbility == "") {
           selectedAbility = names_abilities.get(num_names.get(pokeNum))[0];
         }
+        if (selectedGender == "") {
+          selectedGender = "Male";
+        }
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
         pokemonSelectScreen = false;
         moveSelectScreen = false;
@@ -880,15 +916,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
         chooseAbility = true;
       }
-      if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + height/30 && mouseY >= 374) {
-        chooseGender = true;
+      if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
+        if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + height/30 && mouseY >= 374) {
+          chooseGender = true;
+        }
       }
     }
     if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
       chooseAbility = false;
     }
-    if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height/30 || mouseY < 374) {
-      chooseGender = false;
+    if (chooseGender == false) {
+      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height/30 || mouseY < 374) {
+        chooseGender = false;
+      }
+    } else {
+      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height*3/30 || mouseY < 374) {
+        chooseGender = false;
+      }
     }
     if (chooseAbility == true) {
       for (int i = 0; i < abilityCount; i++) {
@@ -899,6 +943,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             selectedAbility = names_abilities.get(num_names.get(pokeNum))[i];
           }
           chooseAbility = false;
+        }
+      }
+    }
+    if (chooseGender == true) {
+      for (int i = 0; i < 2; i++) {
+        if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + (i+2)*height/30 && mouseY >= 374 + (i+1)*height/30) {
+          selectedGender = genders[i];
+          chooseGender = false;
         }
       }
     }
@@ -1037,6 +1089,8 @@ void setup() {
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
 
+
+
   for (int i = 1; i <= 807; i++) {
     JSONObject file = loadJSONObject(POKEINFO_PATH+"pokemon/"+i+".txt");
     //JSONObject file = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+i+".txt");
@@ -1094,7 +1148,15 @@ void setup() {
     }
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
   }
-
+  for (int i = 0; i < male.length; i++) {
+    num_male.put(names_num.get(male[i]), male[i]);
+  }
+  for (int i = 0; i < female.length; i++) {
+    num_female.put(names_num.get(female[i]), female[i]);
+  }
+  for (int i = 0; i < unspecified.length; i++) {
+    num_unspecified.put(names_num.get(unspecified[i]), unspecified[i]);
+  }
   /*println(names_stats.get("bulbasaur"));
    println(names_types.get("bulbasaur"));
    println(names_species.get("bulbasaur"));

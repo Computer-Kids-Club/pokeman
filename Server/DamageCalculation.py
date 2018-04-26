@@ -114,7 +114,6 @@ poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 
-
 move = Move("minimize")
 
 field = Field()
