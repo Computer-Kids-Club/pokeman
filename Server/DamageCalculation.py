@@ -84,6 +84,7 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     if str_prv_mov == 'minimize':
         if str_mov_name == 'body-slam' or str_mov_name == 'dragon-rush' or str_mov_name == 'flying-press' or str_mov_name == 'heat-crash' or str_mov_name == 'heavy-slam' or str_mov_name == 'phantom-force' or str_mov_name == 'shadow-force' or str_mov_name == 'stomp':
             i_other = 2
+
     i_rand = 1
     print('power',i_pow)
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
