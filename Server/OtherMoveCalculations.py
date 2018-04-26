@@ -68,12 +68,19 @@ def multi_hit(move):
 def status_effect(atk_poke, def_poke, move):
     str_eff = "none"
 
-    
+    if def_poke.str_status != "none" or not move.b_status_effect:
+        return str_eff
+
+    str_eff = move.str_status_effect
+    def_poke.str_status = str_eff
 
     return str_eff
 
 def stat_change(atk_poke, def_poke, move):
     str_eff = "none"
+
+    if not move.b_stat_change:
+        return str_eff
 
     atk_poke.modifier_stats = atk_poke.modifier_stats + move.users_stat_changes
     def_poke.modifier_stats = def_poke.modifier_stats + move.targets_stat_changes
