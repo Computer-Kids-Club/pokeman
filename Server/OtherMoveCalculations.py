@@ -64,3 +64,23 @@ def multi_hit(move):
         i_hits = randint(2, 5)
 
     return i_hits
+
+def status_effect(atk_poke, def_poke, move):
+    str_eff = "none"
+
+    
+
+    return str_eff
+
+def stat_change(atk_poke, def_poke, move):
+    str_eff = "none"
+
+    atk_poke.modifier_stats = atk_poke.modifier_stats + move.users_stat_changes
+    def_poke.modifier_stats = def_poke.modifier_stats + move.targets_stat_changes
+
+    atk_poke.modifier_stats.limit()
+    def_poke.modifier_stats.limit()
+
+    return str_eff
+
+
