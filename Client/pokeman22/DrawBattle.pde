@@ -56,13 +56,18 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
   textAlign(CENTER, CENTER);
   fill(0);
+  
+  if (!poke.status.equals("none")) {
+    draw_text(poke.status, 0, -55);
+  }
+  
   draw_text(poke.name, 0, -80);
 }
 
 void draw_battle() {
 
   background(0);
-  
+
   fill(200);
   noStroke();
   draw_rect(0, 0, width, height);
@@ -128,7 +133,7 @@ void draw_battle() {
     }
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
-    
+
     if (i_moving>0 && str_cur_move_cat.equals("physical") && i_moving_direction == 1) {
 
       int tmp_move = i_moving * 2;
@@ -142,7 +147,7 @@ void draw_battle() {
       translate_interpolation(POKE_OTHER_RECT, POKE_ME_RECT, tmp_move, i_total_moving);
       translate(-POKE_OTHER_RECT.i_x, -POKE_OTHER_RECT.i_y);
     }
-    
+
     translate(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
     draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
   }

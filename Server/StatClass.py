@@ -39,6 +39,14 @@ class Stats(object):
     def get_spe(self):
         return self.i_spe
 
+    def limit(self, i_lower=-6, i_upper=6):
+        self.i_hp = max(i_lower,min(self.i_hp,i_upper))
+        self.i_atk = max(i_lower,min(self.i_atk,i_upper))
+        self.i_def = max(i_lower,min(self.i_def,i_upper))
+        self.i_spa = max(i_lower,min(self.i_spa,i_upper))
+        self.i_spd = max(i_lower,min(self.i_spd,i_upper))
+        self.i_spe = max(i_lower,min(self.i_spe,i_upper))
+
     def __add__(self, other):
         return Stats( self.i_hp + other.i_hp,
                      self.i_atk + other.i_atk,
