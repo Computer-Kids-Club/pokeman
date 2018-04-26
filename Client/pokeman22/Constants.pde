@@ -76,19 +76,19 @@ void init_constants() {
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
   SLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
-  MOVESLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 291, width/140, height/45);
+  MOVESLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75, width/140, height/45);
   NATURESLIDER = new Rect(width*31/56, height*299/450, width/140, height/45);
   sliderStartY = height/9 + SELECTSCREENSHIFT_Y;
-  moveSliderStartY = SELECTSCREENSHIFT_Y + height/4 + 291;
+  moveSliderStartY = SELECTSCREENSHIFT_Y + height*43/75;
   natureSliderStartY = height*299/450;
   gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
 
   for (int i = 0; i < 6; i++) {
-    statSliders.add(new Rect(width*169/280, 601 + i*30, 10, 20));
+    statSliders.add(new Rect(width*169/280, height*601/900 + i*(height/30), width/140, height/45));
     statSliderStartX[i] = width*169/280;
   }
 
-  START_BUTTON = new Rect(width/2, height/2, 400, 200);
+  START_BUTTON = new Rect(width/2, height/2, width*2/7, height*2/9);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
