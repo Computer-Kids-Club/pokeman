@@ -276,7 +276,7 @@ class Battle(object):
 
             self.send_players_pokes()
 
-            self.send_delay()
+            #self.send_delay()
 
         if (not self.everyone_ready() or self.b_gameover):
             return

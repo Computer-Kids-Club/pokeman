@@ -86,6 +86,7 @@ void process_data(String dataIn) {
     if (i_display_player==ME) {
       int i_tmp_new_display_poke = json.getInt("pokeidx");
       new_poke = pokemons.get(i_tmp_new_display_poke);
+      i_healthing_direction = -1;
       if (c_my_display_poke != i_tmp_new_display_poke) {
         i_cur_animation_frames_left = 30;
         i_switching_direction = ME;
@@ -97,6 +98,7 @@ void process_data(String dataIn) {
     } else if (i_display_player==OTHER) {
       int i_tmp_new_display_poke = json.getInt("pokeidx");
       new_poke = other_pokemons.get(i_tmp_new_display_poke);
+      i_healthing_direction = 1;
       if (c_other_display_poke != i_tmp_new_display_poke) {
         i_cur_animation_frames_left = 30;
         i_switching_direction = OTHER;
@@ -107,7 +109,13 @@ void process_data(String dataIn) {
       }
     }
     if (new_poke!=null) {
+      i_healthing_original = new_poke.cur_hp;
+      new_poke.old_hp = new_poke.cur_hp;
       new_poke.update_with_json(json.getJSONObject("poke"));
+      if(i_healthing_original != new_poke.cur_hp && i_cur_animation_frames_left == 0) {
+        i_cur_animation_frames_left = 30;
+        i_healthing = i_total_healthing;
+      }
     }
   } else if (dataIn.charAt(0)==DISPLAY_WIN) {
     text_chat.add(0, "YOU WIN :)");

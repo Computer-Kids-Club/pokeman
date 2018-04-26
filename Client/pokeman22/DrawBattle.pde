@@ -20,6 +20,11 @@ int i_total_switching = 30;
 int i_switching = 0;
 int i_switching_direction = 1;
 
+int i_healthing_original = 0;
+int i_total_healthing = 30;
+int i_healthing = 0;
+int i_healthing_direction = 1;
+
 String str_cur_move_type = "";
 String str_cur_move_cat = "";
 
@@ -32,39 +37,55 @@ void stop_battle() {
   c_other_display_poke = DISPLAY_NONE;
 }
 
-void draw_health_bar(int x, int y, float p) {
+void draw_health_bar(int x, int y, float p, float op) {
   draw_rectMode(CORNER);
   fill(150);
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
-  fill(100, 255, 255);
+  fill(50, 150, 200);
   noStroke();
+  draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, round(HEALTH_BAR_WIDTH*op), 7);
+  fill(interpolate(0, 100, int(p*1000), 1000), 255, 255);
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, round(HEALTH_BAR_WIDTH*p), 7); // round(pokemons.get(c_my_display_poke).cur_hp)/pokemons.get(c_my_display_poke).HP, 7);
   stroke(0);
-  fill(0, 0);
+  noFill();
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
 }
 
 void draw_battling_poke(Pokemon poke, int me_or_other) {
 
+  boolean b_cur_poke_hp_anime = false;
+
   if (me_or_other==ME) {
     drawPokemon(poke.animationBack, 0, 0);
+    if (i_healthing_direction == -1) {
+      b_cur_poke_hp_anime = true;
+    }
   } else {
     drawPokemon(poke.animation, 0, 0);
+    if (i_healthing_direction == 1) {
+      b_cur_poke_hp_anime = true;
+    }
   }
 
-  draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP);
+  if (i_healthing>0 && b_cur_poke_hp_anime) {
+    i_healthing--;
+    draw_health_bar(0, 0, (float)(interpolate(i_healthing_original, poke.cur_hp, i_total_healthing-i_healthing, i_total_healthing))/poke.HP, (float)poke.old_hp/poke.HP);
+  } else {
+    draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP, (float)poke.old_hp/poke.HP);
+  }
 
-  textAlign(CENTER, CENTER);
+  textAlign(LEFT);
   fill(0);
-  
+
   pushMatrix();
-  translate(-HEALTH_BAR_WIDTH/2,0);
-  for(int i=0;i<poke.text_status_effects.size();i++) {
-    translate(textWidth(poke.text_status_effects.get(i))+5,0);
+  translate(-HEALTH_BAR_WIDTH/2, 0);
+  for (int i=0; i<poke.text_status_effects.size(); i++) {
+    translate(textWidth(poke.text_status_effects.get(i))+5, 0);
     draw_text(poke.text_status_effects.get(i), 0, -55);
   }
   popMatrix();
   
+  textAlign(CENTER, CENTER);
   draw_text(poke.name, 0, -80);
 }
 

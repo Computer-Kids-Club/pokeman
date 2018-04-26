@@ -5,7 +5,7 @@ ArrayList<Pokemon> other_pokemons;
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, gender, item, status;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion;
-  int cur_hp;
+  int cur_hp, old_hp;
   Boolean shiny;
   ArrayList<String> text_status_effects;
   String[][] possible_moves;
