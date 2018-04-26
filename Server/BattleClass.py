@@ -120,6 +120,8 @@ class Battle(object):
 
             print(player.active_poke, "used move", cur_move)
 
+            self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
+
             self.send_move(player, cur_move)
 
             # check if move hit
@@ -135,21 +137,24 @@ class Battle(object):
 
                     i_dmg = attack(player.active_poke, other_player.active_poke, cur_move, self.field, player, other_player)
 
-                    i_tmp_eff = cur_move.type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+                    # if the move is not status, tell everyone the damage
+                    if cur_move.str_cat != "status":
 
-                    #self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
-                    self.send_broadcast("It lost " + str(i_dmg/other_player.active_poke.get_usable_stats().i_hp*100) + "%.")
+                        i_tmp_eff = cur_move.type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
 
-                    if i_tmp_eff == 0:
-                        self.send_broadcast("It has no effect.")
-                    elif i_tmp_eff == 0.25:
-                        self.send_broadcast("It is very not very effective.")
-                    elif i_tmp_eff == 0.5:
-                        self.send_broadcast("It is not very effective.")
-                    elif i_tmp_eff == 2:
-                        self.send_broadcast("It is super effective.")
-                    elif i_tmp_eff == 4:
-                        self.send_broadcast("It is super super effective.")
+                        if i_tmp_eff == 0:
+                            self.send_broadcast("It had no effect!")
+                        elif i_tmp_eff == 0.25:
+                            self.send_broadcast("It is very not very effective!")
+                        elif i_tmp_eff == 0.5:
+                            self.send_broadcast("It is not very effective.")
+                        elif i_tmp_eff == 2:
+                            self.send_broadcast("It is super effective!")
+                        elif i_tmp_eff == 4:
+                            self.send_broadcast("It is super super effective!")
+
+                        # self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
+                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " lost " + str(i_dmg / other_player.active_poke.get_usable_stats().i_hp * 100) + "% HP.")
 
                     # actually take damage
 
@@ -198,9 +203,9 @@ class Battle(object):
             if not player.active_poke.is_usable():
                 continue
 
-            player.active_poke.i_hp += int(player.active_poke.get_usable_stats().i_hp / 13)
+            #player.active_poke.i_hp += int(player.active_poke.get_usable_stats().i_hp / 13)
 
-            self.send_broadcast("It regained 7.69230769231% hp.")
+            #self.send_broadcast("It regained 7.69230769231% hp.")
 
             player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
 

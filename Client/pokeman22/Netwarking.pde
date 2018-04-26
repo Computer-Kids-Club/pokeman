@@ -122,11 +122,11 @@ void process_data(String dataIn) {
     JSONObject json_move = new JSONObject();
     if (i_display_player==ME) {
       json_move = json.getJSONObject("move");
-      text_chat.add(0, "You used "+json_move.getString("name"));
+      //text_chat.add(0, "You used "+json_move.getString("name"));
       i_moving_direction = -1;
     } else/* if (i_display_player==OTHER)*/ {
       json_move = json.getJSONObject("move");
-      text_chat.add(0, "Your opponent used "+json_move.getString("name"));
+      //text_chat.add(0, "Your opponent used "+json_move.getString("name"));
       i_moving_direction = 1;
     }
     i_moving = i_total_moving;
