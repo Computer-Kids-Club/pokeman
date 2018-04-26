@@ -424,8 +424,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
       //moveSelectScreen = false;
       //mousePressValid = false;
       pokemonSelectScreen = false;
-      println(width*6/7 - SELECTSCREENSHIFT_X - 10, width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10, SEARCH_BUTTON.i_y + height/18, SEARCH_BUTTON.i_y);
-      println(mouseX, mouseY);
     }
     if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
       pokemonSearchBool = true;
@@ -468,7 +466,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
 }
 
 void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
-  println(maleBool, femaleBool, unspecifiedBool);
   draw_image(backgroundImg, 0, 0);
   if (moveScreenReset == true) {
     level = 100;
@@ -954,7 +951,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
     }
     if (moveSelect == false) {
-      if (mouseX <= width*571/700 && mouseX >= widht*43/70 && mouseY <= height*109/180 && mouseY >= height*59/180) {
+      if (mouseX <= width*571/700 && mouseX >= width*43/70 && mouseY <= height*109/180 && mouseY >= height*59/180) {
         statSelect = true;
       }
     }
