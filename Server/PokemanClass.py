@@ -94,7 +94,7 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
-        return self.usable_stats
+        return self.usable_stats*self.modifier_stats.get_modifier_rates()
 
     def to_dic(self):
         dic_poke = {}

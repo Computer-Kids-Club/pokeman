@@ -3,6 +3,34 @@
 ## contains just the class
 ## -------------------------------------- ##
 
+def get_stat_stage_changes(i_stage):
+    if i_stage == -6:
+        return 2/8
+    if i_stage == -5:
+        return 2/7
+    if i_stage == -4:
+        return 2/6
+    if i_stage == -3:
+        return 2/5
+    if i_stage == -2:
+        return 2/4
+    if i_stage == -1:
+        return 2/3
+    if i_stage == 0:
+        return 2/2
+    if i_stage == 1:
+        return 3/2
+    if i_stage == 2:
+        return 4/2
+    if i_stage == 3:
+        return 5/2
+    if i_stage == 4:
+        return 6/2
+    if i_stage == 5:
+        return 7/2
+    if i_stage == 6:
+        return 8/2
+
 class Stats(object):
     def __init__(self, i_hp=30, i_atk=30, i_def=30, i_spa=30, i_spd=30, i_spe=30):
         self.i_hp = i_hp
@@ -12,6 +40,9 @@ class Stats(object):
         self.i_spd = i_spd
         self.i_spe = i_spe
 
+    def __str__(self):
+        return str(self.i_hp) + " " + str(self.i_atk) + " " + str(self.i_def) + " " + str(self.i_spa) + " " + str(self.i_spd) + " " + str(self.i_spe)
+
     def to_dic(self, dic_poke, str_prefix=""):
         dic_poke[str_prefix+"hp"] = self.i_hp
         dic_poke[str_prefix+"atk"] = self.i_atk
@@ -20,6 +51,10 @@ class Stats(object):
         dic_poke[str_prefix+"spd"] = self.i_spd
         dic_poke[str_prefix+"spe"] = self.i_spe
         return dic_poke
+
+    def get_modifier_rates(self):
+        return Stats(get_stat_stage_changes(self.i_hp),get_stat_stage_changes(self.i_atk),get_stat_stage_changes(self.i_def),
+                     get_stat_stage_changes(self.i_spa),get_stat_stage_changes(self.i_spd),get_stat_stage_changes(self.i_spe))
 
     def get_hp(self):
         return self.i_hp

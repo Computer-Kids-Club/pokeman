@@ -185,7 +185,7 @@ class Battle(object):
                     str_eff = stat_change(player.active_poke, other_player.active_poke, cur_move)
 
                     if str_eff != 'none':
-                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " got its " + str_eff + " stat changed.")
+                        self.send_broadcast("Its " + str(player.active_poke.get_usable_stats()) + " stat changed.")
 
                     self.send_players_pokes()
 
