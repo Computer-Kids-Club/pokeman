@@ -825,16 +825,16 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(255);
 
   textAlign(CENTER, CENTER);
-  draw_text(level, 350 + height/30, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
-  draw_text("-", 310 + height/60, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
-  draw_text("+", 420 + height/60, SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/60);
+  draw_text(level, width/4 + height/30, SELECTSCREENSHIFT_Y + height*161/360);
+  draw_text("-", width*31/140 + height/60, SELECTSCREENSHIFT_Y + height*161/360);
+  draw_text("+", width*3/10 + height/60, SELECTSCREENSHIFT_Y + height*161/360);
   textAlign(LEFT);
   //draw_text("Name: " + num_names.get(pokeNum), 700,150);
-  draw_text("Name : " + num_names.get(pokeNum), width/7 + SELECTSCREENSHIFT_X + 10, 395);
-  draw_text("Gender :", width/7 + SELECTSCREENSHIFT_X + (width*3/28) - 15, 395);
-  draw_text("Types :", width/7 + SELECTSCREENSHIFT_X + 10, 442);
-  draw_text("Level :", width/7 + SELECTSCREENSHIFT_X + 10, 489);
-  draw_text("Ability :", width/7 + SELECTSCREENSHIFT_X + 10, 536);
+  draw_text("Name : " + num_names.get(pokeNum), width*3/20 + SELECTSCREENSHIFT_X, height*79/180);
+  draw_text("Gender :", width*67/280 + SELECTSCREENSHIFT_X, height*79/180);
+  draw_text("Types :", width*3/20 + SELECTSCREENSHIFT_X, height*221/450);
+  draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
+  draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
   if (maleBool) {
     draw_text("Male", width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 45, 395);
