@@ -95,7 +95,12 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
-        return self.usable_stats*self.modifier_stats.get_modifier_rates()
+        actually_usable_stats = self.usable_stats*self.modifier_stats.get_modifier_rates()
+
+        if self.str_status == "paralyze":
+            actually_usable_stats.i_spe = actually_usable_stats.i_spe//2
+
+        return actually_usable_stats
 
     def to_dic(self):
         dic_poke = {}

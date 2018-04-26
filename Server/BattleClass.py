@@ -120,14 +120,25 @@ class Battle(object):
 
             print(player.active_poke, "used move", cur_move)
 
-            self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
-
-            self.send_move(player, cur_move)
-
             # check if move hit
             b_hit = accuracy(player.active_poke, other_player.active_poke, cur_move)
 
-            if b_hit:
+            b_para_immo = False
+            if player.active_poke.str_status == "paralyze":
+                if randint(0,99) < 25:
+                    b_para_immo = True
+
+            if b_para_immo:
+
+                # paralysed, can't move
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " is paralyzed!")
+                self.send_broadcast("It can't move!")
+
+            elif b_hit:
+
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
+
+                self.send_move(player, cur_move)
 
                 # some moves hit more than one time
                 i_hits = multi_hit(cur_move)
