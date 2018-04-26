@@ -116,6 +116,8 @@ class Pokeman(object):
         if self.modifier_stats.i_spe != 0:
             dic_poke["statchange"].append("spe "+str(self.modifier_stats.i_spe))
 
+        #print(self.modifier_stats.to_dic({}),dic_poke["statchange"])
+
         self.get_usable_stats().to_dic(dic_poke,"base")
 
         dic_poke['hap'] = self.i_happy

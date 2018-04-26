@@ -41,6 +41,7 @@ class Move(object):
 
         self.i_prob = parse_move_json(dic_move['prob'])
 
+        print(name)
         self.flag_contact = dic_move['flag_contact']
         self.flag_charge = dic_move['flag_charge']
         self.flag_recharge = dic_move['flag_recharge']

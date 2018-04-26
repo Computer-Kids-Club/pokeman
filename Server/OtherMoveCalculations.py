@@ -88,6 +88,8 @@ def stat_change(atk_poke, def_poke, move):
     atk_poke.modifier_stats.limit()
     def_poke.modifier_stats.limit()
 
+    str_eff = "some stat change"
+
     return str_eff
 
 
