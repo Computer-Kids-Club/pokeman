@@ -141,8 +141,8 @@ class Battle(object):
 
             elif b_hit:
 
+                # woah, the move hit
                 self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
-
                 self.send_move(player, cur_move)
 
                 # some moves hit more than one time
