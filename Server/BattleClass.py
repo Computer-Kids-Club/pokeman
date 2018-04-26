@@ -192,7 +192,43 @@ class Battle(object):
 
                 return
 
-            # player.active_poke.i_hp = randint(0,player.active_poke.get_usable_stats().i_hp)
+        # after turn heal / damage
+        for player in l_move_queue:
+
+            if not player.active_poke.is_usable():
+                continue
+
+            player.active_poke.i_hp += int(player.active_poke.get_usable_stats().i_hp / 13)
+
+            self.send_broadcast("It regained 7.69230769231% hp.")
+
+            player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
+
+            # is it dead???
+            if (player.active_poke.i_hp <= 0):
+                player.active_poke.i_hp = 0
+                player.active_poke.b_fainted = True
+
+            # the moving poke is dead !?!?
+            if not player.active_poke.is_usable():
+                player.i_turn_readiness = NOT_READY
+                player.i_active_move_idx = -1
+
+                if len(player.get_available_pokes()) <= 0:
+                    self.b_gameover = True
+                    player.send_data(DISPLAY_LOSE)
+                    player.send_data(DISPLAY_WIN)
+                    # self.send_delay()
+                    return
+
+                    player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
+                # self.send_delay()
+
+                return
+
+            self.send_players_pokes()
+
+            self.send_delay()
 
         if (not self.everyone_ready() or self.b_gameover):
             return
