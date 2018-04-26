@@ -134,6 +134,11 @@ class Battle(object):
                 self.send_broadcast(player.active_poke.str_name.capitalize() + " is paralyzed!")
                 self.send_broadcast("It can't move!")
 
+            elif player.active_poke.str_status == "freeze":
+
+                # frozen, can't move
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " is frozen solid!")
+
             elif b_hit:
 
                 self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
