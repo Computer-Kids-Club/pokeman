@@ -7,6 +7,7 @@ class Pokemon {
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion;
   int cur_hp;
   Boolean shiny;
+  ArrayList<String> text_status_effects;
   String[][] possible_moves;
   PImage[] animation;
   String[] moves;
@@ -50,8 +51,17 @@ class Pokemon {
   void update_with_json(JSONObject json) {
 
     name = json.getString("name");
-    
+
     status = json.getString("status");
+    text_status_effects = new ArrayList<String>();
+    if (!status.equals("none")) {
+      text_status_effects.add(status);
+    }
+    
+    JSONArray json_stats_array = json.getJSONArray("statchange");
+    for (int j = 0; j < json_stats_array.size(); j++) {
+      text_status_effects.add(json_stats_array.getString(j));
+    }
 
     HP = json.getInt("basehp");
     ATK = json.getInt("baseatk");
@@ -87,8 +97,9 @@ class Pokemon {
   void init_with_json(JSONObject json) {
     //happiness = hap;
     //level = lvl;
-    
+
     status = "none";
+    text_status_effects = new ArrayList<String>();
 
     // All Strings
     name = json.getString("name");

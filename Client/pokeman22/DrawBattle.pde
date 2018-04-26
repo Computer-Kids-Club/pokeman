@@ -57,9 +57,13 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
   textAlign(CENTER, CENTER);
   fill(0);
   
-  if (!poke.status.equals("none")) {
-    draw_text(poke.status, 0, -55);
+  pushMatrix();
+  translate(-HEALTH_BAR_WIDTH/2,0);
+  for(int i=0;i<poke.text_status_effects.size();i++) {
+    translate(textWidth(poke.text_status_effects.get(i))+5,0);
+    draw_text(poke.text_status_effects.get(i), 0, -55);
   }
+  popMatrix();
   
   draw_text(poke.name, 0, -80);
 }
