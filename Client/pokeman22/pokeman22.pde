@@ -890,11 +890,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
   if (mousePressed && mousePressValid == true) {
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
-      if (mouseX <= width*19/35 && mouseX >= width*16/35 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 53 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 7) {
+      if (mouseX <= width*19/35 && mouseX >= width*16/35 && mouseY <= SELECTSCREENSHIFT_Y + height*139/450 && mouseY >= SELECTSCREENSHIFT_Y + height*58/225) {
         shinyBool = !shinyBool;
         mousePressValid = false;
       }
-      if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 + width*23/350 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
+      if (mouseX <= width*17/20 - SELECTSCREENSHIFT_X && mouseX >= width*559/700 - SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height*23/90 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height*23/90) {
         if (selectedAbility == "") {
           selectedAbility = names_abilities.get(num_names.get(pokeNum))[0];
         }
@@ -908,34 +908,34 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         tempAnimationLoad = true;
         mousePressValid = false;
       }
-      if (mouseX <= width/7 + SELECTSCREENSHIFT_X + 10 + width*23/350 && mouseX >= width/7 + SELECTSCREENSHIFT_X + 10 && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 5 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 5) {
+      if (mouseX <= width*151/700 + SELECTSCREENSHIFT_X && mouseX >= width*3/20 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height*23/90 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height*23/90) {
         moveSelectScreen = false;
         mousePressValid = false;
       }
-      if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + height/30 && mouseY >= 515) {
+      if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
         chooseAbility = true;
       }
       if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
-        if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + height/30 && mouseY >= 374) {
+        if (mouseX <= width*7/20 + SELECTSCREENSHIFT_X && mouseX >= width*39/140 + SELECTSCREENSHIFT_X && mouseY <= height*187/450 + height/30 && mouseY >= height*187/450) {
           chooseGender = true;
         }
       }
     }
-    if (mouseX < 310 || mouseX > 310 + 220 || mouseY > 515 + (height/30)*(abilityCount+1) || mouseY < 515) {
+    if (mouseX < width*31/140 || mouseX > width*53/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180) {
       chooseAbility = false;
     }
     if (chooseGender == false) {
-      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height/30 || mouseY < 374) {
+      if (mouseX < width*39/140 + SELECTSCREENSHIFT_X || mouseX > width*7/20 + SELECTSCREENSHIFT_X || mouseY > height*187/450 + height/30 || mouseY < height*187/450) {
         chooseGender = false;
       }
     } else {
-      if (mouseX < width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 || mouseX > width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 || mouseY > 374 + height*3/30 || mouseY < 374) {
+      if (mouseX < width*39/140 + SELECTSCREENSHIFT_X || mouseX > width*7/20 + SELECTSCREENSHIFT_X|| mouseY > height*187/450 + height*3/30 || mouseY < height*187/450) {
         chooseGender = false;
       }
     }
     if (chooseAbility == true) {
       for (int i = 0; i < abilityCount; i++) {
-        if (mouseX <= 310 + 220 && mouseX >= 310 && mouseY <= 515 + (i+2)*(height/30) && mouseY >= 515 + (i+1)*(height/30)) {
+        if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + (i+2)*(height/30) && mouseY >= height*103/180 + (i+1)*(height/30)) {
           if (names_abilities.get(num_names.get(pokeNum))[i] == null) {
             selectedAbility = names_abilities.get(num_names.get(pokeNum))[i+1];
           } else {
@@ -947,25 +947,25 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (chooseGender == true) {
       for (int i = 0; i < 2; i++) {
-        if (mouseX <= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 + 100 && mouseX >= width/7 + SELECTSCREENSHIFT_X + (width*3/28) + 40 && mouseY <= 374 + (i+2)*height/30 && mouseY >= 374 + (i+1)*height/30) {
+        if (mouseX <= width*7/20 + SELECTSCREENSHIFT_X && mouseX >= width*39/140 + SELECTSCREENSHIFT_X && mouseY <= height*187/450 + (i+2)*height/30 && mouseY >= height*187/450 + (i+1)*height/30) {
           selectedGender = genders[i];
           chooseGender = false;
         }
       }
     }
     if (moveSelect == false) {
-      if (mouseX <= 860 + 282 && mouseX >= 860 && mouseY <= 395 + 150 && mouseY >= 295) {
+      if (mouseX <= width*571/700 && mouseX >= widht*43/70 && mouseY <= height*109/180 && mouseY >= height*59/180) {
         statSelect = true;
       }
     }
-    if (mouseY <= SELECTSCREENSHIFT_Y + height/4 + 325/2 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 325/2) {
-      if (mouseX <= 310 + height/30 && mouseX >= 310) {
+    if (mouseY <= SELECTSCREENSHIFT_Y + height*31/72 + height/30 && mouseY >= SELECTSCREENSHIFT_Y + height*31/72) {
+      if (mouseX <= width*31/140 + height/30 && mouseX >= width*31/140) {
         if (level > 0 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level -= 1;
           mousePressValid = false;
         }
       }
-      if (mouseX <= 420 + height/30 && mouseX >= 420) {
+      if (mouseX <= width*3/10 + height/30 && mouseX >= width*3/10) {
         if (level < 100 && moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
           level += 1;
           mousePressValid = false;
@@ -974,7 +974,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       for (int i = 0; i < 4; i++) {
-        if (mouseX <= 820 && mouseX >= 580 && mouseY <= 425 + i*40 && mouseY >= 395 + i*40) {
+        if (mouseX <= width*41/70 && mouseX >= width*29/70 && mouseY <= height*17/36 + i*(height*2/45) && mouseY >= height*79/180 + i*(height*2/45)) {
           moveSelect = true;
           moveSlot = i;
         }
@@ -982,7 +982,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
     if (moveSelect == true && moveSliderFollow == false && chooseAbility == false) {
       for (int i = 0; i < MOVES_PER_PAGE; i++) {
-        if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - MOVESLIDER.i_w && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height/4 + 323 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height/4 + 291 + i*gridsize) {
+        if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - MOVESLIDER.i_w && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height*137/225 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height*43/75 + i*gridsize) {
           selectedMoves[moveSlot] = allPokeMoves.get(i + offsetMoves);
           moveSelect = false;
         }
@@ -995,7 +995,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     } else if (statSelect) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
-          if (mouseX <= 785 - NATURESLIDER.i_w && mouseX >= 615 && mouseY <= natureSliderStartY + (i+1)*20 && mouseY >= natureSliderStartY + i*20) {
+          if (mouseX <= width*157/280 - NATURESLIDER.i_w && mouseX >= width*123/280 && mouseY <= natureSliderStartY + (i+1)*(height/45) && mouseY >= natureSliderStartY + i*(height/45)) {
             if (natureStat[i + offsetNature].length > 0) {
               for (int j = 0; j < 5; j++) {
                 if (natureStat[i + offsetNature][0] == natureAbility[j]) {
