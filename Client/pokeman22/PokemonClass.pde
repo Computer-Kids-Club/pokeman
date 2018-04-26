@@ -3,7 +3,7 @@ JSONObject[] other_pokemon_jsons = new JSONObject[6];
 ArrayList<Pokemon> other_pokemons;
 
 class Pokemon {
-  String name, type1, type2, species, h, weight, ability, gender, item;
+  String name, type1, type2, species, h, weight, ability, gender, item, status;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion;
   int cur_hp;
   Boolean shiny;
@@ -50,6 +50,8 @@ class Pokemon {
   void update_with_json(JSONObject json) {
 
     name = json.getString("name");
+    
+    status = json.getString("status");
 
     HP = json.getInt("basehp");
     ATK = json.getInt("baseatk");
@@ -85,6 +87,8 @@ class Pokemon {
   void init_with_json(JSONObject json) {
     //happiness = hap;
     //level = lvl;
+    
+    status = "none";
 
     // All Strings
     name = json.getString("name");
