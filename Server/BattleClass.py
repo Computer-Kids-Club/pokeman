@@ -8,7 +8,7 @@ from FieldClass import Field
 from random import randint
 from ClientConnection import Client
 from DamageCalculation import attack
-from OtherMoveCalculations import accuracy, multi_hit
+from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
 import json
 
 # master dictionary of all the ongoing battles
@@ -170,6 +170,25 @@ class Battle(object):
 
                     # send updated pokes
                     self.send_players_pokes()
+
+                    # implement status effect
+
+                    str_eff = status_effect(player.active_poke, other_player.active_poke, cur_move)
+
+                    if str_eff != 'none':
+                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " is " + str_eff + ".")
+
+                    self.send_players_pokes()
+
+                    # implement stat change
+
+                    str_eff = stat_change(player.active_poke, other_player.active_poke, cur_move)
+
+                    if str_eff != 'none':
+                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " got its " + str_eff + " stat changed.")
+
+                    self.send_players_pokes()
+
             else:
                 # the move missed
                 self.send_broadcast("It missed.")
