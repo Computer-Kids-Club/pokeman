@@ -867,9 +867,21 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   //draw_text("Name: " + num_names.get(pokeNum), 700,150);
   draw_text("Name : " + num_names.get(pokeNum), width*3/20 + SELECTSCREENSHIFT_X, height*79/180);
   draw_text("Gender :", width*67/280 + SELECTSCREENSHIFT_X, height*79/180);
+  //+ names_types.get(num_names.get(pokeNum))[0] + " & " + names_types.get(num_names.get(pokeNum))[1]
   draw_text("Types :", width*3/20 + SELECTSCREENSHIFT_X, height*221/450);
   draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
+
+  fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
+  draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10 + int(textWidth("Types :")), height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
+  fill(255);
+  draw_text(names_types.get(num_names.get(pokeNum))[0], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  if (names_types.get(num_names.get(pokeNum))[1] != null) {
+    fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
+    draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
+    fill(255);
+    draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  }
 
   if (maleBool) {
     draw_text("Male", width*79/280 + SELECTSCREENSHIFT_X, height*79/180);
@@ -950,7 +962,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
         chooseAbility = true;
-      } else if (mouseX > width*53/140 || mouseX < width*31/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180){
+      } else if (mouseX > width*53/140 || mouseX < width*31/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180) {
         chooseAbility = false;
       }
       if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
