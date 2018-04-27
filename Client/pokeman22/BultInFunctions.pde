@@ -154,7 +154,7 @@ void keyPressed() {
   } else if (moveSearchBool == true) {
     for (int i = 0; i < 26; i++) {
       if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
-        if (pokemonSearch == "") {
+        if (moveSearch == "") {
           moveSearch = str(key);
           break;
         } else {
@@ -175,8 +175,8 @@ void keyPressed() {
     }
     MOVESLIDER.i_y = moveSliderStartY;
     validMoveSearch = new StringList();
-    for (int i = 0; i <= 4; i++) {
-      for (int j = 0; j <= names_moves.get(num_names.get(pokemonNumber))[i].length; j++) {
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < names_moves.get(num_names.get(pokemonNumber))[i].length; j++) {
         if (moveSearch.length() <= names_moves.get(num_names.get(pokemonNumber))[i][j].length()) {
           if (moveSearch.equals(names_moves.get(num_names.get(pokemonNumber))[i][j].substring(0, moveSearch.length()))) {
             validMoveSearch.append(names_moves.get(num_names.get(pokemonNumber))[i][j]);
