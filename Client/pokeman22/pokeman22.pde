@@ -567,20 +567,20 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_image(back, width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
   draw_image(confirm, width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
 
-  fill(200);
+  fill(0, 0, 0, 150);
   strokeWeight(3);
   textAlign(CENTER, CENTER);
   if (shinyBool == false) {
     stroke(100);
     draw_rect(width*16/35, SELECTSCREENSHIFT_Y + height*58/225, width*3/35, height*23/450);
     draw_rect(width*129/280, SELECTSCREENSHIFT_Y + height*79/300, width*3/70, height/25);
-    fill(0);
+    fill(255);
     draw_text("SHINY", width*27/56, SELECTSCREENSHIFT_Y + height*17/60);
   } else {
     stroke(#36FAFF);
     draw_rect(width*16/35, SELECTSCREENSHIFT_Y + height*58/225, width*3/35, height*23/450);
     draw_rect(width*139/280, SELECTSCREENSHIFT_Y + height*79/300, width*3/70, height/25);
-    fill(0);
+    fill(255);
     draw_text("SHINY", width*29/56, SELECTSCREENSHIFT_Y + height*17/60);
   }
   textAlign(LEFT);
@@ -1107,19 +1107,27 @@ void setup() {
 
     String[] levelMoves = new String[file.getJSONArray("levelmoves").size()];
     for (int j = 0; j < file.getJSONArray("levelmoves").size(); j++) {
-      levelMoves[j] = file.getJSONArray("levelmoves").getJSONObject(j).getString("move");
+      if (file.getJSONArray("levelmoves").getJSONObject(j).getString("move") != "error") {
+        levelMoves[j] = file.getJSONArray("levelmoves").getJSONObject(j).getString("move");
+      }
     }
     String[] eggMoves = new String[file.getJSONArray("eggmoves").size()];
     for (int j = 0; j < file.getJSONArray("eggmoves").size(); j++) {
-      eggMoves[j] = file.getJSONArray("eggmoves").getJSONObject(j).getString("move");
+      if (file.getJSONArray("eggmoves").getJSONObject(j).getString("move") != "error") {
+        eggMoves[j] = file.getJSONArray("eggmoves").getJSONObject(j).getString("move");
+      }
     }
     String[] tutorMoves = new String[file.getJSONArray("tutormoves").size()];
     for (int j = 0; j < file.getJSONArray("tutormoves").size(); j++) {
-      tutorMoves[j] = file.getJSONArray("tutormoves").getJSONObject(j).getString("move");
+      if (file.getJSONArray("tutormoves").getJSONObject(j).getString("move") != "error") {
+        tutorMoves[j] = file.getJSONArray("tutormoves").getJSONObject(j).getString("move");
+      }
     }
     String[] tmMoves = new String[file.getJSONArray("tmmoves").size()];
     for (int j = 0; j < file.getJSONArray("tmmoves").size(); j++) {
-      tmMoves[j] = file.getJSONArray("tmmoves").getJSONObject(j).getString("move");
+      if (file.getJSONArray("tmmoves").getJSONObject(j).getString("move") != "error") {
+        tmMoves[j] = file.getJSONArray("tmmoves").getJSONObject(j).getString("move");
+      }
     }
     String[][] allMoves = {levelMoves, eggMoves, tutorMoves, tmMoves};
     names_moves.put(file.getString("name"), allMoves);
