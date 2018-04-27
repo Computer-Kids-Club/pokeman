@@ -418,7 +418,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   strokeWeight(1);
   draw_rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
-  if (pokemonSearchBool == false) {
+  if (pokemonSearchBool == false && pokemonSearch == "") {
     draw_text("Search by Name", width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   } else {
     draw_text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
@@ -639,7 +639,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             }
           }
         }
-        println(i);
         if (mousePressed && mousePressValid == true) {
           if (mouseX < width*6/7 - MOVESLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*521/900 + (i+1)*gridSize + SELECTSCREENSHIFT_Y && mouseY > height*521/900 + i*gridSize + SELECTSCREENSHIFT_Y && moveSliderFollow == false) {
             selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
@@ -663,7 +662,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       strokeWeight(1);
       draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
       fill(255);
-      if (moveSearchBool == false) {
+      if (moveSearchBool == false && moveSearch == "") {
         draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
       } else {
         draw_text(moveSearch, 950, SELECTSCREENSHIFT_Y + height*499/900);
