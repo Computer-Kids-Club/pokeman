@@ -151,6 +151,39 @@ void keyPressed() {
         }
       }
     }
+  } else if (moveSearchBool == true) {
+    for (int i = 0; i < 26; i++) {
+      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
+        if (pokemonSearch == "") {
+          moveSearch = str(key);
+          break;
+        } else {
+          moveSearch += key;
+          break;
+        }
+      }
+    }
+    if (key == BACKSPACE) {
+      if (pokemonmoveSearchSearch.length() > 1) {
+        moveSearch = moveSearch.substring(0, moveSearch.length()-1);
+      } else if (moveSearch.length() > 0) {
+        moveSearch = moveSearch.substring(0, moveSearch.length()-1);
+        moveSearch = "";
+      } else {
+        moveSearch = "";
+      }
+    }
+    MOVESLIDER.i_y = moveSliderStartY;
+    validMoveSearch = new StringList();
+    for (int i = 0; i <= 4; i++) {
+      for (int j = 0; j <= names_moves.get(num_names.get(pokeNum))[i].length; j++) {
+        if (moveSearch.length() <= names_moves.get(num_names.get(pokeNum))[i][j].length()) {
+          if (moveSearch.equals(names_moves.get(num_names.get(pokeNum))[i][j].substring(0, moveSearch.length()))) {
+            validMoveSearch.append(names_moves.get(num_names.get(pokeNum))[i][j]);
+          }
+        }
+      }
+    }
   }
 }
 
