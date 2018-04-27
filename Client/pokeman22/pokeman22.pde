@@ -635,7 +635,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     fill(0, 0, 0, 150);
     stroke(255);
     strokeWeight(1);
-    draw_rect(940, SELECTSCREENSHIFT_Y + height*499/900 - 15, 200, 30);
+    draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
     fill(255);
     if (moveSearchBool == false) {
       draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
