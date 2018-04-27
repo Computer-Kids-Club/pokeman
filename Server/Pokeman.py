@@ -10,7 +10,7 @@
 from BattleClass import *
 from ClientConnection import *
 from DamageCalculation import *
-
+import os, pwd, grp
 
 
 # GAME ON
@@ -33,11 +33,20 @@ while b_game_on:
     for client in l_clients:
         client = l_clients[client]
         if client.battle == None and client.i_battle_state==READY:
-            tmp_client = init_tmp_client()
-            new_battle = Battle([client,tmp_client])
-            client.battle = new_battle
-            tmp_client.battle = new_battle
-            l_battles.append(new_battle)
+            for client2 in l_clients:
+                client2 = l_clients[client2]
+                if client2.battle == None and client2.i_battle_state == READY and client != client2:
+                    tmp_client = client2
+                    new_battle = Battle([client,tmp_client])
+                    client.battle = new_battle
+                    tmp_client.battle = new_battle
+                    l_battles.append(new_battle)
+                    break
+            #tmp_client = init_tmp_client()
+            #new_battle = Battle([client,tmp_client])
+            #client.battle = new_battle
+            #tmp_client.battle = new_battle
+            #l_battles.append(new_battle)
 
 
 server_socket.close()
