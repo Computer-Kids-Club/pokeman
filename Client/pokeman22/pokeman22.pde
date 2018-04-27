@@ -77,14 +77,17 @@ boolean pokemonSelectScreen = false;
 float mouseWheelChange = 0;
 
 String pokemonSearch = "";
+String moveSearch = "";
 String alphabet_lower = "abcdefghijklmnopqrstuvwxyz";
 String alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 String punctuation = " -:";
 
 boolean pokemonSearchBool = false;
+boolean moveSearchBool = false;
 
 StringList validPokemonSearch;
 StringList allPokeMoves;
+StringList validMoveSearch;
 
 PImage infoButton;
 PImage pokeBall;
@@ -409,7 +412,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
   } else {
     draw_text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   }
-  fill(255);
   textAlign(CENTER);
 
   draw_imageMode(CORNER);
@@ -629,7 +631,17 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35 + textWidth("60")/2, SELECTSCREENSHIFT_Y + height*499/900);
     draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
     textAlign(LEFT);
+
+    fill(0, 0, 0, 150);
+    stroke(255);
+    strokeWeight(1);
+    draw_rect(940, SELECTSCREENSHIFT_Y + height*499/900 - 15, 200, 30);
     fill(255);
+    if (moveSearchBool == false) {
+      draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
+    } else {
+      draw_text(moveSearch, 950, SELECTSCREENSHIFT_Y + height*499/900);
+    }
     //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
 
     if (moveSliderFollow == true) {

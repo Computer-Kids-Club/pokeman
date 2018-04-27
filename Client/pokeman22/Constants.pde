@@ -94,7 +94,7 @@ void init_constants() {
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
-  SEARCH_BUTTON = new Rect(width/7 + 10 + SELECTSCREENSHIFT_X, 10 + SELECTSCREENSHIFT_Y, 200, 30);
+  SEARCH_BUTTON = new Rect(width*3/20 + SELECTSCREENSHIFT_X, height/90 + SELECTSCREENSHIFT_Y, width/7, height/30);
 
   POKE_ME_RECT = new Rect(150, 400+3*40);
   POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-150, 50+3*40);
