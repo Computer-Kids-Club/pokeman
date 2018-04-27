@@ -1188,8 +1188,8 @@ void draw() {
     }
   }
 
-  for (int i=0; i<100; i++) {
-    if (random(100)<10) {
+  for (int i=0; i<1; i++) {
+    if (random(100)<50) {
       String new_text = num_names.get(int(random(1, 808)));
       add_text_effect(new_text, int(random(width)), int(random(height)), TYPE_COLOURS.get(names_types.get(new_text)[0]));
     }

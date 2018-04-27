@@ -230,7 +230,7 @@ class Battle(object):
                 other_player.send_data(SELECT_POKE + json.dumps({"availpoke": other_player.get_available_pokes()}))
                 #self.send_delay()
 
-                return
+                continue
 
         # after turn heal / damage
         for player in l_move_queue:
@@ -257,6 +257,8 @@ class Battle(object):
                 player.active_poke.i_hp = 0
                 player.active_poke.b_fainted = True
 
+            self.send_players_pokes()
+
             # the moving poke is dead !?!?
             if not player.active_poke.is_usable():
                 player.i_turn_readiness = NOT_READY
@@ -272,9 +274,7 @@ class Battle(object):
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 # self.send_delay()
 
-                return
-
-            self.send_players_pokes()
+                continue
 
             #self.send_delay()
 

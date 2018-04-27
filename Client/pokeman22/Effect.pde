@@ -17,7 +17,8 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
 
   Effect new_effect = new Effect(i_x, i_y, random(-2, 2), random(-2, 2));
 
-  new_effect.b_fade = true;
+  new_effect.b_fade_in = true;
+  new_effect.b_fade_out = true;
 
   new_effect.i_alpha = 0;
 
@@ -26,7 +27,7 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
   new_effect.i_text_red = (int)red(text_clr);
   new_effect.i_text_green = (int)green(text_clr);
   new_effect.i_text_blue = (int)blue(text_clr);
-  new_effect.i_text_alpha = (int)alpha(text_clr);
+  new_effect.i_text_alpha = 30;
 
   l_effects.add(new_effect);
 }
@@ -45,7 +46,7 @@ class Effect {
 
   int i_lifetime, i_life;
 
-  boolean b_fade;
+  boolean b_fade_in, b_fade_out;
 
   Effect(float f_x1, float f_y1, float f_dx1, float f_dy1, float f_scale1, float f_dscale1, float f_rot1, float f_drot1) {
     f_x = f_x1;
@@ -72,10 +73,11 @@ class Effect {
     img = null;
     anime = null;
 
-    i_lifetime = 50;
+    i_lifetime = 60;
     i_life = i_lifetime;
 
-    b_fade = false;
+    b_fade_in = false;
+    b_fade_out = false;
   }
 
   Effect(float f_x1, float f_y1, float f_dx1, float f_dy1, float f_scale1, float f_dscale1) {
@@ -129,11 +131,16 @@ class Effect {
 
     scale(f_scale);
 
-    float i_usable_alpha = 255;
+    float i_usable_alpha = 1;
 
-    if (b_fade) {
-      i_usable_alpha = (float)i_life/i_lifetime;
+    if (b_fade_out && i_life < i_lifetime/3) {
+      i_usable_alpha = (float)i_life/i_lifetime*3.0;
     }
+    if (b_fade_in && i_life > i_lifetime - i_lifetime/3) {
+      i_usable_alpha = (float)(i_lifetime - i_life)/i_lifetime*3.0;
+    }
+    
+    //println(i_usable_alpha);
 
     if (str_text != null) {
 
@@ -145,7 +152,7 @@ class Effect {
 
       draw_rect(1, -4, round(textWidth(str_text))+4, 14);
 
-      fill(i_text_red, i_text_green, i_text_blue, i_usable_alpha*i_text_alpha);
+      fill(i_text_red, i_text_green, i_text_blue, round(i_usable_alpha*i_text_alpha));
 
       draw_text(str_text, 0, 0);
     }

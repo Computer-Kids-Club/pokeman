@@ -52,7 +52,7 @@ void draw_health_bar(int x, int y, float p, float op) {
   
   textAlign(CENTER, CENTER);
   fill(0);
-  draw_text(round(100*p)+"%", x-HEALTH_BAR_WIDTH/2-20, y-70-7/2);
+  draw_text(round(100*p)+"%", x-HEALTH_BAR_WIDTH/2-20, y-70+7/2);
 }
 
 void draw_battling_poke(Pokemon poke, int me_or_other) {
@@ -84,8 +84,8 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
   pushMatrix();
   translate(-HEALTH_BAR_WIDTH/2, 0);
   for (int i=0; i<poke.text_status_effects.size(); i++) {
+    draw_text(poke.text_status_effects.get(i), 0, -50);
     translate(textWidth(poke.text_status_effects.get(i))+5, 0);
-    draw_text(poke.text_status_effects.get(i), 0, -55);
   }
   popMatrix();
   
