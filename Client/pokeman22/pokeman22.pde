@@ -639,6 +639,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
       textAlign(LEFT);
 
+      println(i);
+      if (mousePressed && mousePressValid == true) {
+        if (mouseX < width*6/7 - MOVESLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*521/900 + (i+1)*gridSize + SELECTSCREENSHIFT_Y && mouseY > height*521/900 + i*gridSize + SELECTSCREENSHIFT_Y && moveSliderFollow == false) {
+          selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
+          moveSelect = false;
+        }
+      }
+
       fill(0, 0, 0, 150);
       stroke(255);
       strokeWeight(1);
@@ -918,6 +926,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (selectedGender == "") {
           selectedGender = "Male";
         }
+        moveSearch = "";
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
         pokemonSelectScreen = false;
         moveSelectScreen = false;
@@ -1006,6 +1015,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
             moveSelect = false;
           }
+          moveSearch = "";
         }
       }
     }
