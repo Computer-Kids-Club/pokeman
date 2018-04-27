@@ -12,7 +12,7 @@ from random import randint
 str_prv_mov = ''
 
 
-def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
+def attack(atk_poke, def_poke, move, field, b_last, atk_player=None, def_player=None):
     global str_prv_mov
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
