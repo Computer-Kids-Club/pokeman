@@ -182,7 +182,6 @@ class Battle(object):
                     if (other_player.active_poke.i_hp <= 0):
                         other_player.active_poke.i_hp = 0
                         other_player.active_poke.b_fainted = True
-                        break
 
                     # send updated pokes
                     self.send_players_pokes()

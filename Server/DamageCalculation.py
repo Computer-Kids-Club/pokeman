@@ -115,20 +115,21 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         else:
             i_ability_buff = 1
     if i_type > 1:
-        if str_def_ability == 'filter' or str_def_ability == 'prison-armor' or str_def_ability =='solid-rock':
+        if str_def_ability == 'filter' or str_def_ability == 'prism-armor' or str_def_ability =='solid-rock':
             i_ability_buff = 0.75
 
-    i_def_hp = def_poke.i_hp
-    if i_def_hp == def_poke.usable_stats.i_hp:
-        if str_def_ability == 'multi-scale' or str_def_ability == 'shadow-shield':
+    i_def_hp = def_poke.base_stats.i_hp
+    if i_def_hp == def_poke.get_usable_stats().get_hp():
+        if str_def_ability == 'multiscale' or str_def_ability == 'shadow-shield':
             i_ability_buff = 0.5
     if str_atk_ability == 'tinted-lens':
         if i_type < 1:
             i_type = i_type*2
 
     i_rand = 1
-    print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn, i_ability_buff, i_move_buff)
-    i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn * i_ability_buff * i_move_buff
+    i_other = i_other * i_ability_buff * i_move_buff
+    print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
+    i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
     str_prv_mov = str_mov_name
     return i_damage
@@ -143,6 +144,7 @@ poke1.base_stats.i_spe = 259
 poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
 poke1.type_2 = None
+#poke1.str_ability = "tough-claws"
 #poke1.str_status = 'burn'
 
 poke2 = Pokeman()
@@ -155,8 +157,8 @@ poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 poke2.type_2 = None
-
-move = Move("tackle")
+poke2.str_ability = "multiscale"
+move = Move("dark-pulse")
 
 field = Field()
 field.terrain = Terrain.ELECTRIC
@@ -164,6 +166,6 @@ field.terrain = Terrain.ELECTRIC
 print(attack(poke1, poke2, move, field))
 print(str_prv_mov)
 
-move = Move("stomping-tantrum")
+move = Move("body-slam")
 print(attack(poke2, poke1, move, field))
 print(str_prv_mov)
