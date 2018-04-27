@@ -873,9 +873,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
   fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
-  draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10 + int(textWidth("Types :")), height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
+  rectMode(CORNER);
+  draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
   fill(255);
-  draw_text(names_types.get(num_names.get(pokeNum))[0], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
   if (names_types.get(num_names.get(pokeNum))[1] != null) {
     fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
     draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
