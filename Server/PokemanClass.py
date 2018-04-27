@@ -88,6 +88,14 @@ class Pokeman(object):
 
         self.b_fainted = False
 
+        # ad hoc variables
+
+        self.b_disguise_broke = False
+
+        self.b_recharging = False
+        self.b_charging = False
+
+
     def get_moves(self):
         return self.l_moves
 
