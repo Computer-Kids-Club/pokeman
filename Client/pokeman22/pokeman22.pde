@@ -950,7 +950,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
         chooseAbility = true;
-      } else {
+      } else if (mouseX > width*53/140 || mouseX < width*31/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180){
         chooseAbility = false;
       }
       if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
