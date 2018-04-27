@@ -12,15 +12,27 @@ from random import randint
 str_prv_mov = ''
 
 
-def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
+def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, def_player = None):
     global str_prv_mov
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
+    i_ability_buff = 1
+    i_weather = 1
+    i_terrain = 1
+    str_mov_name = move.str_name
+    str_status = atk_poke.str_status
+    i_other = 1
+    i_move_buff = 1
+    i_burn = 1
+    b_contact = move.flag_contact
+    i_def_hp = def_poke.base_stats.i_hp
     str_atk_ability = atk_poke.str_ability
     str_def_ability = def_poke.str_ability
+    str_weather = field.get_weather()
+    str_terrain = field.get_terrain()
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -31,6 +43,14 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     if (str_pok_type_1 == str_mov_type) or (str_pok_type_2 == str_mov_type):
         i_stab = 1.5
 
+    if i_stab > 1:
+        if str_atk_ability == "adaptability":
+            i_stab = 2
+
+    if str_mov_type == 'normal':
+        if str_atk_ability == 'aerilate' or str_atk_ability == 'pixilate' or str_atk_ability == 'refrigerate':
+            i_ability_buff = 1.2
+
     i_goal = randint(1, 16)
     if i_goal == 1:
         i_crit = 1.5
@@ -38,12 +58,10 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     if i_crit == 1.5:
         if str_atk_ability == 'sniper':
             i_crit = i_crit*1.5
+
     i_type = move.type.getAtkEff(def_poke.type_1, def_poke.type_2)
     print('type multiplier', i_type)
-    str_weather = field.get_weather()
-    str_terrain = field.get_terrain()
 
-    i_weather = 1
     if str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'fire':
         i_weather = 1.5
     elif str_weather == Weather.RAIN and str_mov_type == 'water':
@@ -53,7 +71,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     elif str_weather == Weather.RAIN and str_mov_type == 'fire':
         i_weather = 0.5
 
-    i_terrain = 1
     if str_terrain == Terrain.GRASSY and str_mov_type == 'grass':
         i_terrain = 1.5
     elif str_terrain == Terrain.MISTY and str_mov_type == 'fairy':
@@ -63,14 +80,9 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
     elif str_terrain == Terrain.PSYCHIC and str_mov_type == 'psychic':
         i_terrain = 1.5
 
-    str_mov_name = move.str_name
     if (str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude') and str_terrain == 'grassy':
         i_terrain = 0.5
 
-    str_status = atk_poke.str_status
-    i_other = 1
-    i_move_buff = 1
-    i_burn = 1
     print(move.str_cat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
@@ -99,8 +111,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         if str_mov_name == 'surf' or str_mov_name == 'whirlpool':
             i_move_buff = 2
 
-    i_ability_buff = 1
-    b_contact = move.flag_contact
     if str_atk_ability == 'tough-claws':
         if b_contact:
             i_ability_buff = 1.3
@@ -118,7 +128,6 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
         if str_def_ability == 'filter' or str_def_ability == 'prism-armor' or str_def_ability =='solid-rock':
             i_ability_buff = 0.75
 
-    i_def_hp = def_poke.base_stats.i_hp
     if i_def_hp == def_poke.get_usable_stats().get_hp():
         if str_def_ability == 'multiscale' or str_def_ability == 'shadow-shield':
             i_ability_buff = 0.5
@@ -127,6 +136,10 @@ def attack(atk_poke, def_poke, move, field, atk_player=None, def_player=None):
             i_type = i_type*2
 
     i_rand = 1
+    b_ballistic = move.flag_ballistics
+    if b_ballistic:
+        if str_def_ability == 'bulletproof':
+            i_ability_buff = 0
     i_other = i_other * i_ability_buff * i_move_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn

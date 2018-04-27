@@ -50,7 +50,7 @@ ArrayList<Pokemon> pokemons;
 Gif loopingGif;
 Gif nonLoopingGif;
 boolean pause = false;
-
+boolean drawSettingScreen=false;
 int idx = 1;
 
 JSONObject curr_json;
@@ -144,6 +144,7 @@ boolean shinyBool = false;
 int pokemonSlotNumber;
 int pokemonNumber;
 
+
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
 PImage[][] loadPokemon(JSONObject file, boolean shiny) {
@@ -215,6 +216,13 @@ void drawMove(String move_name) {
 
   textAlign(LEFT);
 }
+void drawSettingScreen() {
+  fill(150);
+  draw_rect(0, 0, width, height);
+  if (mousePressed) {
+    drawSettingScreen=false;
+  }
+}
 
 void drawStartScreen() {
   //backgroundImg.resize(width, height);
@@ -259,6 +267,9 @@ void drawStartScreen() {
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
         mousePressValid = false;
+      }
+      if (dist(mouseX, mouseY, (width/140)*137, height/30)<=dist((width/140)*137-width/56, height/30-height/36, (width/140)*137, height/30)) {
+        drawSettingScreen=true;
       }
       if (dist(mouseX, mouseY, INFO_BUTTON.i_x + i*POKEMON_BUTTON.i_w, INFO_BUTTON.i_y) <= height/60) {
         pokemonSlotNumber = i;
@@ -1090,8 +1101,9 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  size(1400, 900, P2D);
+  //size(1400, 900, P2D);
   //fullScreen();
+  size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
@@ -1228,6 +1240,8 @@ void draw() {
       drawPokemonInformationScreen(pokemonSlotNumber, pokemonNumber, gridSize);
     } else if (pokemonSelectScreen == true) {
       drawPokemonSelectionScreen(pokemonChangeNumber);
+    } else if (drawSettingScreen) {
+      drawSettingScreen();
     }
     if (i_battle_state == SEARCHING) {
       fill(50, 50);
