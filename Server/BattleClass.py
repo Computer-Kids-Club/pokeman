@@ -108,6 +108,8 @@ class Battle(object):
             else:
                 l_move_queue.append(player)
 
+        b_last = False
+
         # move according to queue
         for player in l_move_queue:
 
@@ -151,7 +153,7 @@ class Battle(object):
 
                     # calculate damage
 
-                    i_dmg = attack(player.active_poke, other_player.active_poke, cur_move, self.field, player, other_player)
+                    i_dmg = attack(player.active_poke, other_player.active_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1)
 
                     # if the move is not status, tell everyone the damage
                     if cur_move.str_cat != "status":
