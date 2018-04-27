@@ -49,7 +49,7 @@ void draw_health_bar(int x, int y, float p, float op) {
   stroke(0);
   noFill();
   draw_rect(x-HEALTH_BAR_WIDTH/2, y-70, HEALTH_BAR_WIDTH, 7);
-  
+
   textAlign(CENTER, CENTER);
   fill(0);
   draw_text(round(100*p)+"%", x-HEALTH_BAR_WIDTH/2-20, y-70+7/2);
@@ -61,13 +61,15 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 
   if (me_or_other==ME) {
     drawPokemon(poke.animationBack, 0, 0);
-    if (i_healthing_direction == -1) {
+    if (i_healthing_direction == -1 && i_healthing>0 ) {
       b_cur_poke_hp_anime = true;
+      add_dmg_text_effect(POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
     }
   } else {
     drawPokemon(poke.animation, 0, 0);
-    if (i_healthing_direction == 1) {
+    if (i_healthing_direction == 1 && i_healthing>0 ) {
       b_cur_poke_hp_anime = true;
+      add_dmg_text_effect(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
     }
   }
 
@@ -88,7 +90,7 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     translate(textWidth(poke.text_status_effects.get(i))+5, 0);
   }
   popMatrix();
-  
+
   textAlign(CENTER, CENTER);
   draw_text(poke.name, 0, -80);
 }
