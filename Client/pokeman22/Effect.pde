@@ -50,7 +50,7 @@ void add_dmg_text_effect(int i_x, int i_y) {
   new_effect.add_text("-1%HP", 0, 200, 100);
 
   new_effect.i_text_red = 255;
-  new_effect.i_text_green = 255;
+  new_effect.i_text_green = 100;
   new_effect.i_text_blue = 255;
   new_effect.i_text_alpha = 255;
 
