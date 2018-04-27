@@ -37,13 +37,13 @@ void add_dmg_text_effect(int i_x, int i_y) {
   i_x += random(-20, 20);
   i_y += random(-20, 20);
   
-  Effect new_effect = new Effect(i_x, i_y, 0, random(-2, -4));
+  Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
   
   new_effect.rect_radius = 3;
 
   new_effect.b_fade_out = true;
   
-  new_effect.f_ay = -1;
+  new_effect.f_ay = -0.5;
 
   new_effect.i_alpha = 255;
 
