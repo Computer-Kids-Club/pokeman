@@ -77,14 +77,17 @@ boolean pokemonSelectScreen = false;
 float mouseWheelChange = 0;
 
 String pokemonSearch = "";
+String moveSearch = "";
 String alphabet_lower = "abcdefghijklmnopqrstuvwxyz";
 String alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 String punctuation = " -:";
 
 boolean pokemonSearchBool = false;
+boolean moveSearchBool = false;
 
 StringList validPokemonSearch;
 StringList allPokeMoves;
+StringList validMoveSearch;
 
 PImage infoButton;
 PImage pokeBall;
@@ -420,7 +423,6 @@ void drawPokemonSelectionScreen(int slotNumber) {
   } else {
     draw_text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   }
-  fill(255);
   textAlign(CENTER);
 
   draw_imageMode(CORNER);
@@ -600,62 +602,80 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   strokeWeight(1);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
   if (moveSelect) {
+    if (moveSearch == "" && validMoveSearch.size()!= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length) {
+      for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < names_moves.get(num_names.get(pokemonNumber))[i].length; j++) {
+          validMoveSearch.append(names_moves.get(num_names.get(pokemonNumber))[i][j]);
+        }
+      }
+    }
     //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 248, width*5/7 - SELECTSCREENSHIFT_X*2, 44);
     //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 291, width*5/7 - SELECTSCREENSHIFT_X*2, 224);
     stroke(255);
     draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75);
     fill(255);
     draw_rect(MOVESLIDER.i_x, MOVESLIDER.i_y, MOVESLIDER.i_w, MOVESLIDER.i_h);
-    for (int i = 0; i < MOVES_PER_PAGE; i++) {
-      if (i < allPokeMoves.size()) {
-        if (allPokeMoves.size() > MOVES_PER_PAGE) {
-          offsetMoves = int((MOVESLIDER.i_y - moveSliderStartY)*(allPokeMoves.size()-MOVES_PER_PAGE)/((height - SELECTSCREENSHIFT_Y - moveSliderStartY)-MOVESLIDER.i_h));
+    for (int i = 0; i < MOVES_PER_PAGE && i + 1 + offsetMoves <= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length; i++) {
+      if (i < validMoveSearch.size()) {
+        if (validMoveSearch.size() > MOVES_PER_PAGE) {
+          offsetMoves = int((MOVESLIDER.i_y - moveSliderStartY)*(validMoveSearch.size()-MOVES_PER_PAGE)/((height - SELECTSCREENSHIFT_Y - moveSliderStartY)-MOVESLIDER.i_h));
         } else {
           offsetMoves = 0;
         }
-      }
-      draw_text(allPokeMoves.get(i + offsetMoves).replaceAll("-", " "), width*43/280 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[0], width*43/280 + SELECTSCREENSHIFT_X + width*3/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[1], width*43/280 + SELECTSCREENSHIFT_X + width*9/70, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[2], width*43/280 + SELECTSCREENSHIFT_X + width*6/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[3], width*43/280 + SELECTSCREENSHIFT_X + width/5, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[4], width*43/280 + SELECTSCREENSHIFT_X + width*8/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      if (textWidth(moves_data.get(allPokeMoves.get(i + offsetMoves))[6]) < textRestrain) {
-        draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[6], width*43/280 + SELECTSCREENSHIFT_X + width*9/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-      } else {
-        for (int j = moves_data.get(allPokeMoves.get(i + offsetMoves))[6].length(); j > 0; j--) {
-          if (textWidth(moves_data.get(allPokeMoves.get(i + offsetMoves))[6].substring(0, j) + "...") < textRestrain) {
-            draw_text(moves_data.get(allPokeMoves.get(i + offsetMoves))[6].substring(0, j) + "...", width*43/280 + SELECTSCREENSHIFT_X + width*9/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
-            break;
+
+        draw_text(validMoveSearch.get(i + offsetMoves).replaceAll("-", " "), width*43/280 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[0], width*43/280 + SELECTSCREENSHIFT_X + width*3/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[1], width*43/280 + SELECTSCREENSHIFT_X + width*9/70, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[2], width*43/280 + SELECTSCREENSHIFT_X + width*6/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[3], width*43/280 + SELECTSCREENSHIFT_X + width/5, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[4], width*43/280 + SELECTSCREENSHIFT_X + width*8/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        if (textWidth(moves_data.get(validMoveSearch.get(i + offsetMoves))[6]) < textRestrain) {
+          draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[6], width*43/280 + SELECTSCREENSHIFT_X + width*9/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        } else {
+          for (int j = moves_data.get(validMoveSearch.get(i + offsetMoves))[6].length(); j > 0; j--) {
+            if (textWidth(moves_data.get(validMoveSearch.get(i + offsetMoves))[6].substring(0, j) + "...") < textRestrain) {
+              draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[6].substring(0, j) + "...", width*43/280 + SELECTSCREENSHIFT_X + width*9/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+              break;
+            }
           }
         }
       }
-    }
-    textAlign(CENTER);
-    draw_text("Move Name", width*43/280 + SELECTSCREENSHIFT_X + moveScreenNamePos/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("Type", width*43/280 + SELECTSCREENSHIFT_X + width*3/35 + textWidth("fighting")/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("Category", width*43/280 + SELECTSCREENSHIFT_X + width*9/70 + textWidth("physical")/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("Pow", width*43/280 + SELECTSCREENSHIFT_X + width*6/35 + textWidth("150")/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("Acc", width*43/280 + SELECTSCREENSHIFT_X + width/5 + textWidth("100")/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35 + textWidth("60")/2, SELECTSCREENSHIFT_Y + height*499/900);
-    draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
-    textAlign(LEFT);
-    fill(255);
-    //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
+      textAlign(CENTER);
+      draw_text("Move Name", width*43/280 + SELECTSCREENSHIFT_X + moveScreenNamePos/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Type", width*43/280 + SELECTSCREENSHIFT_X + width*3/35 + textWidth("fighting")/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Category", width*43/280 + SELECTSCREENSHIFT_X + width*9/70 + textWidth("physical")/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Pow", width*43/280 + SELECTSCREENSHIFT_X + width*6/35 + textWidth("150")/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Acc", width*43/280 + SELECTSCREENSHIFT_X + width/5 + textWidth("100")/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35 + textWidth("60")/2, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
+      textAlign(LEFT);
 
-    if (moveSliderFollow == true) {
-      if (mouseY >= SELECTSCREENSHIFT_Y + height*43/75 && mouseY <= height - MOVESLIDER.i_h/2 - SELECTSCREENSHIFT_Y) {
-        MOVESLIDER.i_y = mouseY - MOVESLIDER.i_h/2;
-      } else if (mouseY <= SELECTSCREENSHIFT_Y + height*43/75) {
-        MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
-      } else if (mouseY >= height - SELECTSCREENSHIFT_Y - MOVESLIDER.i_h) {
-        MOVESLIDER.i_y = height - SELECTSCREENSHIFT_Y - MOVESLIDER.i_h;
+      fill(0, 0, 0, 150);
+      stroke(255);
+      strokeWeight(1);
+      draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
+      fill(255);
+      if (moveSearchBool == false) {
+        draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
+      } else {
+        draw_text(moveSearch, 950, SELECTSCREENSHIFT_Y + height*499/900);
       }
-    }
-    if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
-      MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
-    } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
-      MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
+      //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
+
+      if (moveSliderFollow == true) {
+        if (mouseY >= SELECTSCREENSHIFT_Y + height*43/75 && mouseY <= height - MOVESLIDER.i_h/2 - SELECTSCREENSHIFT_Y) {
+          MOVESLIDER.i_y = mouseY - MOVESLIDER.i_h/2;
+        } else if (mouseY <= SELECTSCREENSHIFT_Y + height*43/75) {
+          MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
+        } else if (mouseY >= height - SELECTSCREENSHIFT_Y - MOVESLIDER.i_h) {
+          MOVESLIDER.i_y = height - SELECTSCREENSHIFT_Y - MOVESLIDER.i_h;
+        }
+      }
+      if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+        MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
+      } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
+        MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
+      }
     }
   } else if (statSelect == true) {
     fill(255);
@@ -922,15 +942,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
         chooseAbility = true;
+      } else {
+        chooseAbility = false;
       }
       if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
         if (mouseX <= width*7/20 + SELECTSCREENSHIFT_X && mouseX >= width*39/140 + SELECTSCREENSHIFT_X && mouseY <= height*187/450 + height/30 && mouseY >= height*187/450) {
           chooseGender = true;
         }
       }
-    }
-    if (mouseX < width*31/140 || mouseX > width*53/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180) {
-      chooseAbility = false;
     }
     if (chooseGender == false) {
       if (mouseX < width*39/140 + SELECTSCREENSHIFT_X || mouseX > width*7/20 + SELECTSCREENSHIFT_X || mouseY > height*187/450 + height/30 || mouseY < height*187/450) {
@@ -989,16 +1008,26 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
     }
     if (moveSelect == true && moveSliderFollow == false && chooseAbility == false) {
-      for (int i = 0; i < MOVES_PER_PAGE; i++) {
+      for (int i = 0; i < MOVES_PER_PAGE && i + 1 + offsetMoves <= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length; i++) {
         if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - MOVESLIDER.i_w && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height*137/225 + i*gridsize && mouseY >= SELECTSCREENSHIFT_Y + height*43/75 + i*gridsize) {
-          selectedMoves[moveSlot] = allPokeMoves.get(i + offsetMoves);
-          moveSelect = false;
+          if (validMoveSearch.size() >= MOVES_PER_PAGE) {
+            selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
+            moveSelect = false;
+          } else if (i < validMoveSearch.size()) {
+            selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
+            moveSelect = false;
+          }
         }
       }
     }
     if (moveSelect) {
       if (mouseX >= MOVESLIDER.i_x && mouseX <= MOVESLIDER.i_x + MOVESLIDER.i_w && mouseY >= MOVESLIDER.i_y && mouseY <= MOVESLIDER.i_y + MOVESLIDER.i_h) {
         moveSliderFollow = true;
+      }    
+      if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
+        moveSearchBool = true;
+      } else {
+        moveSearchBool = false;
       }
     } else if (statSelect) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
@@ -1078,6 +1107,7 @@ void setup() {
   Gif.tmpPath = dataPath("");
 
   validPokemonSearch = new StringList();
+  validMoveSearch = new StringList();
 
   infoButton = loadImage("infoButton.png");
   pokeBall = loadImage("Pokeball.png");

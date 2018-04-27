@@ -32,10 +32,36 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
   l_effects.add(new_effect);
 }
 
+void add_dmg_text_effect(int i_x, int i_y) {
+  
+  i_x += random(-20, 20);
+  i_y += random(-20, 20);
+  
+  Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
+  
+  new_effect.rect_radius = 3;
+
+  new_effect.b_fade_out = true;
+  
+  new_effect.f_ay = -0.5;
+
+  new_effect.i_alpha = 255;
+
+  new_effect.add_text("-1%HP", 0, 200, 100);
+
+  new_effect.i_text_red = 255;
+  new_effect.i_text_green = 255;
+  new_effect.i_text_blue = 255;
+  new_effect.i_text_alpha = 255;
+
+  l_effects.add(new_effect);
+}
+
 class Effect {
 
   float f_x, f_y, f_dx, f_dy;
   float f_scale, f_dscale, f_rot, f_drot;
+  float f_ax, f_ay;
 
   String str_text;
   Rect rect;
@@ -43,6 +69,8 @@ class Effect {
   int i_text_red, i_text_green, i_text_blue, i_text_alpha;
   PImage img;
   PImage[] anime;
+  
+  int rect_radius;
 
   int i_lifetime, i_life;
 
@@ -120,6 +148,8 @@ class Effect {
 
     f_x += f_dx;
     f_y += f_dy;
+    f_dx += f_ax;
+    f_dy += f_ay;
     f_scale *= f_dscale;
     f_rot += f_drot;
 
@@ -150,7 +180,7 @@ class Effect {
       fill(i_red, i_green, i_blue, i_usable_alpha*i_alpha);
       noStroke();
 
-      draw_rect(1, -4, round(textWidth(str_text))+4, 14);
+      draw_rect(1, -4, round(textWidth(str_text))+4, 14, rect_radius);
 
       fill(i_text_red, i_text_green, i_text_blue, round(i_usable_alpha*i_text_alpha));
 
@@ -160,7 +190,7 @@ class Effect {
       draw_rectMode(CENTER);
       noStroke();
       fill(i_red, i_green, i_blue, i_usable_alpha*i_alpha);
-      draw_rect(0, 0, rect.i_w, rect.i_h);
+      draw_rect(0, 0, rect.i_w, rect.i_h, rect_radius);
     }
     if (img != null) {
       draw_imageMode(CENTER);
