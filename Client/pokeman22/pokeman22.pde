@@ -635,7 +635,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     fill(0, 0, 0, 150);
     stroke(255);
     strokeWeight(1);
-    draw_rect(940, SELECTSCREENSHIFT_Y + height*499/900 - 15, 200, 30);
+    draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
     fill(255);
     if (moveSearchBool == false) {
       draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
@@ -923,15 +923,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       }
       if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
         chooseAbility = true;
+      } else {
+        chooseAbility = false;
       }
       if (maleBool == false && femaleBool == false && unspecifiedBool == false) {
         if (mouseX <= width*7/20 + SELECTSCREENSHIFT_X && mouseX >= width*39/140 + SELECTSCREENSHIFT_X && mouseY <= height*187/450 + height/30 && mouseY >= height*187/450) {
           chooseGender = true;
         }
       }
-    }
-    if (mouseX < width*31/140 || mouseX > width*53/140 || mouseY > height*103/180 + (height/30)*(abilityCount+1) || mouseY < height*103/180) {
-      chooseAbility = false;
     }
     if (chooseGender == false) {
       if (mouseX < width*39/140 + SELECTSCREENSHIFT_X || mouseX > width*7/20 + SELECTSCREENSHIFT_X || mouseY > height*187/450 + height/30 || mouseY < height*187/450) {
@@ -1000,6 +999,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     if (moveSelect) {
       if (mouseX >= MOVESLIDER.i_x && mouseX <= MOVESLIDER.i_x + MOVESLIDER.i_w && mouseY >= MOVESLIDER.i_y && mouseY <= MOVESLIDER.i_y + MOVESLIDER.i_h) {
         moveSliderFollow = true;
+      }    
+      if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
+        moveSearchBool = true;
+      } else {
+        moveSearchBool = false;
       }
     } else if (statSelect) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
