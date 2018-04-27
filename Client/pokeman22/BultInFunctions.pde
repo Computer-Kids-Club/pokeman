@@ -164,7 +164,7 @@ void keyPressed() {
       }
     }
     if (key == BACKSPACE) {
-      if (pokemonmoveSearchSearch.length() > 1) {
+      if (moveSearch.length() > 1) {
         moveSearch = moveSearch.substring(0, moveSearch.length()-1);
       } else if (moveSearch.length() > 0) {
         moveSearch = moveSearch.substring(0, moveSearch.length()-1);
@@ -176,10 +176,10 @@ void keyPressed() {
     MOVESLIDER.i_y = moveSliderStartY;
     validMoveSearch = new StringList();
     for (int i = 0; i <= 4; i++) {
-      for (int j = 0; j <= names_moves.get(num_names.get(pokeNum))[i].length; j++) {
-        if (moveSearch.length() <= names_moves.get(num_names.get(pokeNum))[i][j].length()) {
-          if (moveSearch.equals(names_moves.get(num_names.get(pokeNum))[i][j].substring(0, moveSearch.length()))) {
-            validMoveSearch.append(names_moves.get(num_names.get(pokeNum))[i][j]);
+      for (int j = 0; j <= names_moves.get(num_names.get(pokemonNumber))[i].length; j++) {
+        if (moveSearch.length() <= names_moves.get(num_names.get(pokemonNumber))[i][j].length()) {
+          if (moveSearch.equals(names_moves.get(num_names.get(pokemonNumber))[i][j].substring(0, moveSearch.length()))) {
+            validMoveSearch.append(names_moves.get(num_names.get(pokemonNumber))[i][j]);
           }
         }
       }
