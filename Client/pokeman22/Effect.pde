@@ -34,8 +34,8 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
 
 void add_dmg_text_effect(int i_x, int i_y) {
   
-  i_x += random(-20, 20);
-  i_y += random(-20, 20);
+  i_x += random(-35, 35);
+  i_y += random(-35, 35);
   
   Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
   
