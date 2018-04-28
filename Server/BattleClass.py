@@ -113,6 +113,8 @@ class Battle(object):
         # move according to queue
         for player in l_move_queue:
 
+            #print("susu",player.active_poke.is_usable())
+
             if not player.active_poke.is_usable():
                 continue
 
@@ -202,7 +204,7 @@ class Battle(object):
                     self.send_players_pokes()
 
                     if not other_player.active_poke.is_usable():
-                        continue
+                        break
 
                     # implement status effect
 
@@ -241,11 +243,11 @@ class Battle(object):
                     self.b_gameover = True
                     other_player.send_data(DISPLAY_LOSE)
                     player.send_data(DISPLAY_WIN)
-                    #self.send_delay()
+                    # self.send_delay()
                     return
 
-                other_player.send_data(SELECT_POKE + json.dumps({"availpoke": other_player.get_available_pokes()}))
-                #self.send_delay()
+                #other_player.send_data(SELECT_POKE + json.dumps({"availpoke": other_player.get_available_pokes()}))
+                # self.send_delay()
 
                 continue
 
@@ -288,15 +290,22 @@ class Battle(object):
                     # self.send_delay()
                     return
 
-                player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
+                #player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 # self.send_delay()
 
                 continue
 
             #self.send_delay()
 
-        if (not self.everyone_ready() or self.b_gameover):
-            return
+        #if (not self.everyone_ready() or self.b_gameover):
+        #    return
+
+        # check if pokes are dead
+        for player in self.l_players:
+            other_player = self.get_other_player(player)
+            if not player.active_poke.is_usable():
+                player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
+                return
 
         # send updated info to players
         for player in self.l_players:

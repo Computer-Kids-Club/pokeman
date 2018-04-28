@@ -13,6 +13,8 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.Channels;
 import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 // Note the HashMap's "key" is a String and "value" is an Integer
 
@@ -1196,10 +1198,33 @@ void setup() {
     };
     String[] movelistPoke = new String[4];
     String[][] l_possible_moves = names_moves.get(num_names.get(pokemonNumber));
-    for (int j=0; j<movelistPoke.length; j++) {
-      int i_rand_cat_move = int(random(l_possible_moves.length));
-      movelistPoke[j] = l_possible_moves[i_rand_cat_move][int(random(l_possible_moves[i_rand_cat_move].length))];
+    // generate ranbo moves
+
+    Set<String> l_possible_moves_condensed = new HashSet<String>();
+    for (int k=0; k<l_possible_moves.length; k++) {
+      for (int j=0; j<l_possible_moves[k].length; j++) {
+        l_possible_moves_condensed.add(l_possible_moves[k][j]);
+      }
     }
+    l_possible_moves_condensed.remove("error");
+
+    for (int j=0; j<movelistPoke.length && l_possible_moves_condensed.size()>0; j++) {
+      int item = int(random(l_possible_moves_condensed.size()));
+      int k = 0;
+      for (String cur_move : l_possible_moves_condensed)
+      {
+        if (k == item) {
+          movelistPoke[j] = cur_move;
+          l_possible_moves_condensed.remove(cur_move);
+          break;
+        }
+        k++;
+      }
+
+      //int i_rand_cat_move = int(random(l_possible_moves_condensed.size()));
+      //movelistPoke[j] = l_possible_moves_condensed.get(i_rand_cat_move);
+    }
+
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
   }
   for (int i = 0; i < male.length; i++) {
