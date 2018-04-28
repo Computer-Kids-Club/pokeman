@@ -1108,7 +1108,7 @@ void setup() {
   noSmooth();
   colorMode(HSB);
 
-  myClient = new Client(this, "127.0.0.1", PORT);
+  myClient = new Client(this, IPv4, PORT);
 
   init_constants();
 

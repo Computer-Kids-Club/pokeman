@@ -13,7 +13,7 @@ int i_cur_animation_frames_left = 0;
 boolean reconnect() {
   if (!myClient.active()) {
 
-    myClient = new Client(this, "127.0.0.1", PORT);
+    myClient = new Client(this, IPv4, PORT);
   }
   return myClient.active();
 }
