@@ -165,6 +165,9 @@ class Pokeman(object):
         return self.str_name
 
     def is_usable(self):
+        if self.i_hp < 0:
+            self.i_hp = 0
+            self.b_fainted = True
         return not self.b_fainted
 
     def is_trapped(self):
