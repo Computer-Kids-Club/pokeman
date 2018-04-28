@@ -27,7 +27,6 @@ while b_game_on:
             l_battles.pop(b)
             continue
 
-
     recieve_connection()
 
     for client in l_clients:
