@@ -201,6 +201,9 @@ class Battle(object):
                     # send updated pokes
                     self.send_players_pokes()
 
+                    if not other_player.active_poke.is_usable():
+                        continue
+
                     # implement status effect
 
                     str_eff = status_effect(player.active_poke, other_player.active_poke, cur_move)
