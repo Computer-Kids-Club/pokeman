@@ -64,6 +64,22 @@ class Move(object):
         self.flag_non_sky_battle = dic_move['flag_non-sky-battle']
         self.flag_dance = dic_move['flag_dance']
 
+        self.str_anime_style = self.str_cat
+        if self.flag_punch:
+            self.str_anime_style = "flag_punch"
+        if self.flag_sound:
+            self.str_anime_style = "flag_sound"
+        if self.flag_powder:
+            self.str_anime_style = "flag_powder"
+        if self.flag_bite:
+            self.str_anime_style = "flag_bite"
+        if self.flag_pulse:
+            self.str_anime_style = "flag_pulse"
+        if self.flag_ballistics:
+            self.str_anime_style = "flag_ballistics"
+        if self.flag_dance:
+            self.str_anime_style = "flag_dance"
+
         self.b_stat_change = False
         if 'stacha' in dic_move:
             self.b_stat_change = True
@@ -93,6 +109,8 @@ class Move(object):
 
         move_dic["pp"] = self.i_pp
         move_dic["maxpp"] = self.i_max_pp
+
+        move_dic["anime"] = self.str_anime_style
 
         return move_dic
 

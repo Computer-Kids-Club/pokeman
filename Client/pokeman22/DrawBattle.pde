@@ -29,6 +29,7 @@ int i_health_text_effecting = 0;
 
 String str_cur_move_type = "";
 String str_cur_move_cat = "";
+String str_cur_move_anime_style = "";
 
 void stop_battle() {
   i_battle_state = NOT_READY;
@@ -143,7 +144,7 @@ void draw_battle() {
   }
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
 
-    if (i_moving>0 && str_cur_move_cat.equals("physical") && i_moving_direction == -1) {
+    if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == -1) {
 
       int tmp_move = i_moving * 2;
 
@@ -177,7 +178,7 @@ void draw_battle() {
   }
   if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
 
-    if (i_moving>0 && str_cur_move_cat.equals("physical") && i_moving_direction == 1) {
+    if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == 1) {
 
       int tmp_move = i_moving * 2;
 
@@ -201,8 +202,8 @@ void draw_battle() {
   if (i_moving>0) {
     i_moving--;
 
-    //println(str_cur_move_cat);
-    if (str_cur_move_cat.equals("special")) {
+    //println(str_cur_move_anime_style);
+    if (str_cur_move_anime_style.equals("special")) {
       pushMatrix();
 
       int tmp_move = i_moving;
