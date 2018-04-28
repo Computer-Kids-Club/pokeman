@@ -136,6 +136,13 @@ class Battle(object):
                     player.active_poke.str_status = "none"
                     self.send_broadcast(player.active_poke.str_name.capitalize() + " thawed out!")
 
+            if player.active_poke.str_status == "sleep":
+                if player.active_poke.i_sleep_counter <= 0:
+                    # woke
+                    player.active_poke.str_status = "none"
+                    self.send_broadcast(player.active_poke.str_name.capitalize() + " woke up!")
+                player.active_poke.i_sleep_counter -= 1
+
             if b_para_immo:
 
                 # paralysed, can't move
@@ -254,8 +261,8 @@ class Battle(object):
             elif player.active_poke.str_status == "poison":
                 player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 8)
             elif player.active_poke.str_status == "toxic":
-                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16 * player.active_poke.toxic_idx)
-                player.active_poke.toxic_idx += 1
+                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16 * player.active_poke.i_toxic_idx)
+                player.active_poke.i_toxic_idx += 1
 
             player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
 
