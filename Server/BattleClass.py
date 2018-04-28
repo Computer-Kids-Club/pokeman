@@ -130,6 +130,12 @@ class Battle(object):
                 if randint(0,99) < 25:
                     b_para_immo = True
 
+            if player.active_poke.str_status == "freeze":
+                if randint(0,99) < 20:
+                    # thawed
+                    player.active_poke.str_status = "none"
+                    self.send_broadcast(player.active_poke.str_name.capitalize() + " thawed out!")
+
             if b_para_immo:
 
                 # paralysed, can't move
