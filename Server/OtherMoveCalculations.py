@@ -78,6 +78,8 @@ def status_effect(atk_poke, def_poke, move):
         def_poke.i_toxic_idx = 1
     elif str_eff == 'sleep':
         def_poke.i_sleep_counter = randint(1,3)
+    elif str_eff == 'confuse':
+        def_poke.i_confusion_counter = randint(1,4)
 
     return str_eff
 

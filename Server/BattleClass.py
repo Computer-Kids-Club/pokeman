@@ -7,7 +7,7 @@ from Constants import *
 from FieldClass import Field
 from random import randint
 from ClientConnection import Client
-from DamageCalculation import attack
+from DamageCalculation import attack, confusion_attack
 from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
 import json
 
@@ -145,6 +145,15 @@ class Battle(object):
                     self.send_broadcast(player.active_poke.str_name.capitalize() + " woke up!")
                 player.active_poke.i_sleep_counter -= 1
 
+            if player.active_poke.str_status == "confuse":
+                if player.active_poke.i_confusion_counter <= 0:
+                    # snapped out of confusion
+                    player.active_poke.str_status = "none"
+                    self.send_broadcast(player.active_poke.str_name.capitalize() + " snapped out of confusion!")
+                player.active_poke.i_confusion_counter -= 1
+
+            # check if moving is possible
+
             if b_para_immo:
 
                 # paralysed, can't move
@@ -155,6 +164,23 @@ class Battle(object):
 
                 # frozen, can't move
                 self.send_broadcast(player.active_poke.str_name.capitalize() + " is frozen solid!")
+
+            elif player.active_poke.str_status == "sleep":
+
+                # asleep, can't move
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " is fast asleep!")
+
+            elif player.active_poke.str_status == "confuse" and randint(0, 99) < 33:
+
+                # confused, hurt it self
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " hurt itself in confusion!")
+
+                # calculate confusion damage
+                i_dmg = confusion_attack(player.active_poke)
+
+                self.send_broadcast(player.active_poke.str_name.capitalize() + " lost " + str(i_dmg / player.active_poke.get_usable_stats().i_hp * 100) + "% HP.")
+
+                player.active_poke.i_hp -= i_dmg
 
             elif b_hit:
 
@@ -297,15 +323,16 @@ class Battle(object):
 
             #self.send_delay()
 
-        #if (not self.everyone_ready() or self.b_gameover):
-        #    return
-
         # check if pokes are dead
         for player in self.l_players:
             other_player = self.get_other_player(player)
             if not player.active_poke.is_usable():
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 return
+
+
+        if (not self.everyone_ready() or self.b_gameover):
+            return
 
         # send updated info to players
         for player in self.l_players:
