@@ -31,6 +31,32 @@ String str_cur_move_type = "";
 String str_cur_move_cat = "";
 String str_cur_move_anime_style = "";
 
+PImage img_flag_bite;
+PImage img_flag_ballistics;
+PImage img_flag_dance;
+PImage img_flag_powder;
+PImage img_flag_pulse;
+PImage img_flag_punch;
+PImage img_flag_sound;
+
+void init_battle_screen() {
+  img_flag_bite = loadImage("MoveAnimations/bite.png");
+  img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
+  img_flag_dance = loadImage("MoveAnimations/dance.png");
+  img_flag_powder = loadImage("MoveAnimations/powder.png");
+  img_flag_pulse = loadImage("MoveAnimations/pulse.png");
+  img_flag_punch = loadImage("MoveAnimations/punch.png");
+  img_flag_sound = loadImage("MoveAnimations/sound.png");
+
+  img_flag_bite.resize(150, 0);
+  img_flag_ballistics.resize(150, 0);
+  img_flag_dance.resize(150, 0);
+  img_flag_powder.resize(150, 0);
+  img_flag_pulse.resize(150, 0);
+  img_flag_punch.resize(150, 0);
+  img_flag_sound.resize(150, 0);
+}
+
 void stop_battle() {
   i_battle_state = NOT_READY;
 
@@ -204,37 +230,65 @@ void draw_battle() {
 
     int tmp_move = i_moving;
 
+    pushMatrix();
+    
     if (i_moving_direction==-1) {
       tmp_move = i_total_moving-i_moving;
+      //rotate(180);
     }
+    
+    translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+    
+    //rotate((frameCount*20.0)%360);
+    
+    rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
+    if (i_moving_direction==1) {
+      rotate(PI);
+    }
+
+    fill(0, 255, 255);
+    if (str_cur_move_type!="") {
+      //tint(TYPE_COLOURS.get(str_cur_move_type));
+      fill(TYPE_COLOURS.get(str_cur_move_type));
+    }
+
+    noStroke();
+
+    draw_imageMode(CENTER);
 
     //println(str_cur_move_anime_style);
     if (str_cur_move_anime_style.equals("special")) {
-      
-      pushMatrix();
-      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
-      rotate((frameCount*20.0)%360);
+
       fill(0, 255, 255);
       if (str_cur_move_type!="")
         fill(TYPE_COLOURS.get(str_cur_move_type));
-      noStroke();
+
       draw_rect(0, 0, 50, 50);
-      popMatrix();
-      
-    } else if (str_cur_move_anime_style.equals("flag_ballistics")) {
-      
-      pushMatrix();
-      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
-      rotate((frameCount*20.0)%360);
-      fill(0, 255, 255);
-      if (str_cur_move_type!="")
-        fill(TYPE_COLOURS.get(str_cur_move_type));
-      noStroke();
-      ellipseMode(CENTER);
-      ellipse(0, 0, 50, 50);
-      popMatrix();
-      
+    } else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
+
+      draw_image(img_flag_bite, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_ballistics")) { // --------------------------------------------------------- ballistics
+
+      draw_image(img_flag_ballistics, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_dance")) { // --------------------------------------------------------- dance
+
+      draw_image(img_flag_dance, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_powder")) { // --------------------------------------------------------- powder
+
+      draw_image(img_flag_powder, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_pulse")) { // --------------------------------------------------------- pulse
+
+      draw_image(img_flag_pulse, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_punch")) { // --------------------------------------------------------- punch
+
+      draw_image(img_flag_punch, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
+
+      draw_image(img_flag_sound, 0, 0);
     }
+
+    noTint();
+    popMatrix();
   }
 
   draw_imageMode(CORNER);

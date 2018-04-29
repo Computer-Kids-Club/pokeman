@@ -1246,6 +1246,7 @@ void setup() {
    println(names_moves.get("bulbasaur")[1]);*/
 
   init_console();
+  init_battle_screen();
 }
 
 void draw() {
