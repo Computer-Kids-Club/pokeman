@@ -39,6 +39,8 @@ PImage img_flag_pulse;
 PImage img_flag_punch;
 PImage img_flag_sound;
 
+HashMap<String, PImage> TYPE_MOVE_IMG = new HashMap<String, PImage>();
+
 void init_battle_screen() {
   img_flag_bite = loadImage("MoveAnimations/bite.png");
   img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
@@ -55,6 +57,13 @@ void init_battle_screen() {
   img_flag_pulse.resize(150, 0);
   img_flag_punch.resize(150, 0);
   img_flag_sound.resize(150, 0);
+
+  for (String str_type : TYPE_COLOURS.keySet()) {
+    // ...
+    PImage new_img = loadImage("MoveAnimations/"+str_type+".png");
+    new_img.resize(150, 0);
+    TYPE_MOVE_IMG.put(str_type, new_img);
+  }
 }
 
 void stop_battle() {
@@ -117,8 +126,8 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP, (float)poke.old_hp/poke.HP);
   }
 
+  draw_rectMode(CENTER);
   if (poke.protect) {
-    draw_rectMode(CENTER);
     stroke(225, 100, 255, 150);
     fill(225, 100, 255, 100);
     draw_rect(0, 0, 150, 100);
@@ -270,6 +279,9 @@ void draw_battle() {
         fill(TYPE_COLOURS.get(str_cur_move_type));
 
       draw_rect(0, 0, 50, 50);
+      
+      draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
+      
     } else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
       draw_image(img_flag_bite, 0, 0);
