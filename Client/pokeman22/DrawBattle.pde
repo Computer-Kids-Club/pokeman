@@ -110,12 +110,18 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     }
   }
 
-
   if (i_healthing>0 && b_cur_poke_hp_anime) {
     i_healthing--;
     draw_health_bar(0, 0, (float)(interpolate(i_healthing_original, poke.cur_hp, i_total_healthing-i_healthing, i_total_healthing))/poke.HP, (float)poke.old_hp/poke.HP);
   } else {
     draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP, (float)poke.old_hp/poke.HP);
+  }
+
+  if (poke.protect) {
+    draw_rectMode(CENTER);
+    stroke(225, 100, 255, 150);
+    fill(225, 100, 255, 100);
+    draw_rect(0, 0, 150, 100);
   }
 
   textAlign(LEFT);
@@ -231,16 +237,16 @@ void draw_battle() {
     int tmp_move = i_moving;
 
     pushMatrix();
-    
+
     if (i_moving_direction==-1) {
       tmp_move = i_total_moving-i_moving;
       //rotate(180);
     }
-    
+
     translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
-    
+
     //rotate((frameCount*20.0)%360);
-    
+
     rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
     if (i_moving_direction==1) {
       rotate(PI);

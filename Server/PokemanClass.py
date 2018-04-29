@@ -164,6 +164,8 @@ class Pokeman(object):
 
         dic_poke['faint'] = self.b_fainted
 
+        dic_poke['protect'] = self.b_protected
+
         return dic_poke
 
     # overriding str method
