@@ -68,6 +68,11 @@ def multi_hit(move):
 def status_effect(atk_poke, def_poke, move):
     str_eff = "none"
 
+    if def_poke.str_status == 'poison' and move.b_status_effect == 'poison':
+        def_poke.str_status = 'toxic'
+        def_poke.i_toxic_idx = 1
+        return 'toxic'
+
     if def_poke.str_status != "none" or not move.b_status_effect:
         return str_eff
 

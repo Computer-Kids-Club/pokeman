@@ -22,7 +22,7 @@ dic_battles = {}
 class Battle(object):
     def __init__(self, l_new_players=[]):
 
-        self.field = Field()
+        self.field = Field(l_new_players[0],l_new_players[1])
 
         self.l_players = l_new_players
 
