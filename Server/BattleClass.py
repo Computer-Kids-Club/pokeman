@@ -9,6 +9,7 @@ from random import randint
 from ClientConnection import Client
 from DamageCalculation import attack, confusion_attack
 from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
+from MoveAdHoc import move_ad_hoc_during, move_ad_hoc_after_turn
 import json
 
 # master dictionary of all the ongoing battles
@@ -65,11 +66,13 @@ class Battle(object):
 
         # send updated info to players
         for player in self.l_players:
+            atk_poke = player.active_poke
             other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
 
-            player.send_data(DISPLAY_POKES + json.dumps({"player": ME, "pokeidx": player.i_active_poke_idx, "poke": player.active_poke.to_dic()}))
+            player.send_data(DISPLAY_POKES + json.dumps({"player": ME, "pokeidx": player.i_active_poke_idx, "poke": atk_poke.to_dic()}))
 
-            player.send_data(DISPLAY_POKES + json.dumps({"player": OTHER, "pokeidx": other_player.i_active_poke_idx, "poke": other_player.active_poke.to_dic()}))
+            player.send_data(DISPLAY_POKES + json.dumps({"player": OTHER, "pokeidx": other_player.i_active_poke_idx, "poke": def_poke.to_dic()}))
 
     def send_delay(self):
         for player in self.l_players:
@@ -100,10 +103,14 @@ class Battle(object):
 
         # add moves to queue according to speed
         for player in self.l_players:
+            atk_poke = player.active_poke
+            other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
+
             if (player.i_active_move_idx == -1):
                 continue
 
-            if len(l_move_queue)>=1 and player.active_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
+            if len(l_move_queue)>=1 and atk_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
                 l_move_queue.insert(0,player)
             else:
                 l_move_queue.append(player)
@@ -112,81 +119,87 @@ class Battle(object):
 
         # move according to queue
         for player in l_move_queue:
+            atk_poke = player.active_poke
+            other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
 
-            #print("susu",player.active_poke.is_usable())
+            #print("susu",atk_poke.is_usable())
 
-            if not player.active_poke.is_usable():
+            if not atk_poke.is_usable():
                 continue
 
             other_player = self.get_other_player(player)
 
-            cur_move = player.active_poke.get_moves()[player.i_active_move_idx]
+            cur_move = atk_poke.get_moves()[player.i_active_move_idx]
 
-            print(player.active_poke, "used move", cur_move)
+            print(atk_poke, "used move", cur_move)
 
             # check if move hit
-            b_hit = accuracy(player.active_poke, other_player.active_poke, cur_move)
+            b_hit = accuracy(atk_poke, def_poke, cur_move)
 
             b_para_immo = False
-            if player.active_poke.str_status == "paralyze":
+            if atk_poke.str_status == "paralyze":
                 if randint(0,99) < 25:
                     b_para_immo = True
 
-            if player.active_poke.str_status == "freeze":
+            if atk_poke.str_status == "freeze":
                 if randint(0,99) < 20:
                     # thawed
-                    player.active_poke.str_status = "none"
-                    self.send_broadcast(player.active_poke.str_name.capitalize() + " thawed out!")
+                    atk_poke.str_status = "none"
+                    self.send_broadcast(atk_poke.str_name.capitalize() + " thawed out!")
 
-            if player.active_poke.str_status == "sleep":
-                if player.active_poke.i_sleep_counter <= 0:
+            if atk_poke.str_status == "sleep":
+                if atk_poke.i_sleep_counter <= 0:
                     # woke
-                    player.active_poke.str_status = "none"
-                    self.send_broadcast(player.active_poke.str_name.capitalize() + " woke up!")
-                player.active_poke.i_sleep_counter -= 1
+                    atk_poke.str_status = "none"
+                    self.send_broadcast(atk_poke.str_name.capitalize() + " woke up!")
+                atk_poke.i_sleep_counter -= 1
 
-            if player.active_poke.str_status == "confuse":
-                if player.active_poke.i_confusion_counter <= 0:
+            if atk_poke.str_status == "confuse":
+                if atk_poke.i_confusion_counter <= 0:
                     # snapped out of confusion
-                    player.active_poke.str_status = "none"
-                    self.send_broadcast(player.active_poke.str_name.capitalize() + " snapped out of confusion!")
-                player.active_poke.i_confusion_counter -= 1
+                    atk_poke.str_status = "none"
+                    self.send_broadcast(atk_poke.str_name.capitalize() + " snapped out of confusion!")
+                atk_poke.i_confusion_counter -= 1
 
             # check if moving is possible
 
             if b_para_immo:
 
                 # paralysed, can't move
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " is paralyzed!")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " is paralyzed!")
                 self.send_broadcast("It can't move!")
 
-            elif player.active_poke.str_status == "freeze":
+            elif atk_poke.str_status == "freeze":
 
                 # frozen, can't move
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " is frozen solid!")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " is frozen solid!")
 
-            elif player.active_poke.str_status == "sleep":
+            elif atk_poke.str_status == "sleep":
 
                 # asleep, can't move
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " is fast asleep!")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " is fast asleep!")
 
-            elif player.active_poke.str_status == "confuse" and randint(0, 99) < 33:
+            elif atk_poke.str_status == "confuse" and randint(0, 99) < 33:
 
                 # confused, hurt it self
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " hurt itself in confusion!")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " hurt itself in confusion!")
 
                 # calculate confusion damage
-                i_dmg = confusion_attack(player.active_poke)
+                i_dmg = confusion_attack(atk_poke)
 
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " lost " + str(i_dmg / player.active_poke.get_usable_stats().i_hp * 100) + "% HP.")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " lost " + str(i_dmg / atk_poke.get_usable_stats().i_hp * 100) + "% HP.")
 
-                player.active_poke.i_hp -= i_dmg
+                atk_poke.i_hp -= i_dmg
 
             elif b_hit:
 
                 # woah, the move hit
-                self.send_broadcast(player.active_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
+                self.send_broadcast(atk_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
                 self.send_move(player, cur_move)
+
+                if not move_ad_hoc_during(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1):
+                    self.send_broadcast("It failed!")
 
                 # some moves hit more than one time
                 i_hits = multi_hit(cur_move)
@@ -194,12 +207,19 @@ class Battle(object):
 
                     # calculate damage
 
-                    i_dmg = attack(player.active_poke, other_player.active_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1)
+                    i_dmg = attack(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1)
+
+                    # move ad hoc
+
+                    if def_poke.b_protected and cur_move.flag_protect:
+                        # protected
+                        self.send_broadcast(def_poke.str_name.capitalize() + " protected itself.")
+                        continue
 
                     # if the move is not status, tell everyone the damage
                     if cur_move.str_cat != "status":
 
-                        i_tmp_eff = cur_move.type.getAtkEff(other_player.active_poke.type_1, other_player.active_poke.type_2)
+                        i_tmp_eff = cur_move.type.getAtkEff(def_poke.type_1, def_poke.type_2)
 
                         if i_tmp_eff == 0:
                             self.send_broadcast("It had no effect!")
@@ -212,41 +232,41 @@ class Battle(object):
                         elif i_tmp_eff == 4:
                             self.send_broadcast("It is super super effective!")
 
-                        # self.send_broadcast(str(other_player.active_poke.i_hp) + " - " + str(i_dmg) + " = " + str(other_player.active_poke.i_hp - i_dmg))
-                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " lost " + str(i_dmg / other_player.active_poke.get_usable_stats().i_hp * 100) + "% HP.")
+                        # self.send_broadcast(str(def_poke.i_hp) + " - " + str(i_dmg) + " = " + str(def_poke.i_hp - i_dmg))
+                        self.send_broadcast(def_poke.str_name.capitalize() + " lost " + str(i_dmg / def_poke.get_usable_stats().i_hp * 100) + "% HP.")
 
                     # actually take damage
 
-                    other_player.active_poke.i_hp -= i_dmg
+                    def_poke.i_hp -= i_dmg
 
                     player.i_active_move_idx = -1
 
                     # is it dead???
-                    if (other_player.active_poke.i_hp <= 0):
-                        other_player.active_poke.i_hp = 0
-                        other_player.active_poke.b_fainted = True
+                    if (def_poke.i_hp <= 0):
+                        def_poke.i_hp = 0
+                        def_poke.b_fainted = True
 
                     # send updated pokes
                     self.send_players_pokes()
 
-                    if not other_player.active_poke.is_usable():
+                    if not def_poke.is_usable():
                         break
 
                     # implement status effect
 
-                    str_eff = status_effect(player.active_poke, other_player.active_poke, cur_move)
+                    str_eff = status_effect(atk_poke, def_poke, cur_move)
 
                     if str_eff != 'none':
-                        self.send_broadcast(other_player.active_poke.str_name.capitalize() + " is " + str_eff + ".")
+                        self.send_broadcast(def_poke.str_name.capitalize() + " is " + str_eff + ".")
 
                     self.send_players_pokes()
 
                     # implement stat change
 
-                    str_eff = stat_change(player.active_poke, other_player.active_poke, cur_move)
+                    str_eff = stat_change(atk_poke, def_poke, cur_move)
 
                     if str_eff != 'none':
-                        self.send_broadcast("Its " + str(player.active_poke.get_usable_stats()) + " stat changed.")
+                        self.send_broadcast("Its " + str(atk_poke.get_usable_stats()) + " stat changed.")
 
                     self.send_players_pokes()
 
@@ -261,7 +281,7 @@ class Battle(object):
             self.send_players_pokes()
 
             # the moving poke is dead !?!?
-            if not other_player.active_poke.is_usable():
+            if not def_poke.is_usable():
                 other_player.i_turn_readiness = NOT_READY
                 other_player.i_active_move_idx = -1
 
@@ -279,33 +299,36 @@ class Battle(object):
 
         # after turn heal / damage
         for player in l_move_queue:
+            atk_poke = player.active_poke
+            other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
 
-            if not player.active_poke.is_usable():
+            if not atk_poke.is_usable():
                 continue
 
-            #player.active_poke.i_hp += int(player.active_poke.get_usable_stats().i_hp / 13)
+            #atk_poke.i_hp += int(atk_poke.get_usable_stats().i_hp / 13)
 
             #self.send_broadcast("It regained 7.69230769231% hp.")
 
-            if player.active_poke.str_status == "burn":
-                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16)
-            elif player.active_poke.str_status == "poison":
-                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 8)
-            elif player.active_poke.str_status == "toxic":
-                player.active_poke.i_hp -= int(player.active_poke.get_usable_stats().i_hp / 16 * player.active_poke.i_toxic_idx)
-                player.active_poke.i_toxic_idx += 1
+            if atk_poke.str_status == "burn":
+                atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 16)
+            elif atk_poke.str_status == "poison":
+                atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 8)
+            elif atk_poke.str_status == "toxic":
+                atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 16 * atk_poke.i_toxic_idx)
+                atk_poke.i_toxic_idx += 1
 
-            player.active_poke.i_hp = min(player.active_poke.i_hp, player.active_poke.get_usable_stats().i_hp)
+            atk_poke.i_hp = min(atk_poke.i_hp, atk_poke.get_usable_stats().i_hp)
 
             # is it dead???
-            if (player.active_poke.i_hp <= 0):
-                player.active_poke.i_hp = 0
-                player.active_poke.b_fainted = True
+            if (atk_poke.i_hp <= 0):
+                atk_poke.i_hp = 0
+                atk_poke.b_fainted = True
 
             self.send_players_pokes()
 
             # the moving poke is dead !?!?
-            if not player.active_poke.is_usable():
+            if not atk_poke.is_usable():
                 player.i_turn_readiness = NOT_READY
                 player.i_active_move_idx = -1
 
@@ -325,18 +348,33 @@ class Battle(object):
 
         # check if pokes are dead
         for player in self.l_players:
+            atk_poke = player.active_poke
             other_player = self.get_other_player(player)
-            if not player.active_poke.is_usable():
+            def_poke = other_player.active_poke
+
+            if not atk_poke.is_usable():
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 return
 
+        # after turn move reset
+        for player in l_move_queue:
+            atk_poke = player.active_poke
+            other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
+
+            if not atk_poke.is_usable():
+                continue
+
+            move_ad_hoc_after_turn(atk_poke, def_poke, self.field, player, other_player)
 
         if (not self.everyone_ready() or self.b_gameover):
             return
 
         # send updated info to players
         for player in self.l_players:
+            atk_poke = player.active_poke
             other_player = self.get_other_player(player)
+            def_poke = other_player.active_poke
 
             player.i_turn_readiness = NOT_READY
             #player.i_active_move_idx = -1
@@ -346,9 +384,9 @@ class Battle(object):
 
             self.send_players_pokes()
 
-            if player.active_poke.is_usable():
+            if atk_poke.is_usable():
                 player.send_data(SELECT_POKE_OR_MOVE + json.dumps({"availpoke": player.get_available_pokes()}))
-            elif player.active_poke.is_trapped():
+            elif atk_poke.is_trapped():
                 player.send_data(SELECT_MOVE)
             else:
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))

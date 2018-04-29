@@ -38,6 +38,7 @@ class Pokeman(object):
         self.str_nature = "error"
         self.str_item = "error"
 
+        # status effect variables
         self.str_status = 'none'
         self.i_toxic_idx = 1
         self.i_sleep_counter = 0
@@ -96,6 +97,9 @@ class Pokeman(object):
 
         self.b_recharging = False
         self.b_charging = False
+
+        self.b_protected = False
+        self.i_protect_counter = 0
 
 
     def get_moves(self):
