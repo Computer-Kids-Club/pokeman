@@ -202,16 +202,16 @@ void draw_battle() {
   if (i_moving>0) {
     i_moving--;
 
+    int tmp_move = i_moving;
+
+    if (i_moving_direction==-1) {
+      tmp_move = i_total_moving-i_moving;
+    }
+
     //println(str_cur_move_anime_style);
     if (str_cur_move_anime_style.equals("special")) {
+      
       pushMatrix();
-
-      int tmp_move = i_moving;
-
-      if (i_moving_direction==-1) {
-        tmp_move = i_total_moving-i_moving;
-      }
-
       translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
       rotate((frameCount*20.0)%360);
       fill(0, 255, 255);
@@ -220,6 +220,20 @@ void draw_battle() {
       noStroke();
       draw_rect(0, 0, 50, 50);
       popMatrix();
+      
+    } else if (str_cur_move_anime_style.equals("flag_ballistics")) {
+      
+      pushMatrix();
+      translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+      rotate((frameCount*20.0)%360);
+      fill(0, 255, 255);
+      if (str_cur_move_type!="")
+        fill(TYPE_COLOURS.get(str_cur_move_type));
+      noStroke();
+      ellipseMode(CENTER);
+      ellipse(0, 0, 50, 50);
+      popMatrix();
+      
     }
   }
 
