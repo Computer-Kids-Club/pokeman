@@ -196,10 +196,6 @@ class Battle(object):
 
                 # woah, the move hit
                 self.send_broadcast(atk_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
-                self.send_move(player, cur_move)
-
-                if not move_ad_hoc_during(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1):
-                    self.send_broadcast("It failed!")
 
                 # some moves hit more than one time
                 i_hits = multi_hit(cur_move)
@@ -207,7 +203,12 @@ class Battle(object):
 
                     # calculate damage
 
+                    self.send_move(player, cur_move)
+
                     i_dmg = attack(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player)==1)
+
+                    if not move_ad_hoc_during(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player) == 1):
+                        self.send_broadcast("It failed!")
 
                     # move ad hoc
 
@@ -353,6 +354,7 @@ class Battle(object):
             def_poke = other_player.active_poke
 
             if not atk_poke.is_usable():
+                player.i_turn_readiness = NOT_READY
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
                 return
 
