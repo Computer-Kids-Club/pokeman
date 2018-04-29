@@ -47,21 +47,21 @@ class Move(object):
             self.i_priority = 5
         elif self.str_name in ["detect", "magic-coat", "protect", "snatch"]:
             self.i_priority = 4
-        elif self.str_name in ["Crafty Shield, Fake Out, Quick Guard, Wide Guard, Spotlight"]:
+        elif self.str_name in ["crafty-shield", "fake-out", "quick-guard", "wide-guard", "spotlight"]:
             self.i_priority = 3
-        elif self.str_name in ["Ally Switch, Extreme Speed, Feint, First Impression, Follow Me, Rage Powder"]:
+        elif self.str_name in ["ally-switch", "extreme-speed", "feint", "first-impression", "follow-me", "rage-powder"]:
             self.i_priority = 2
-        elif self.str_name in ["Accelerock, Aqua Jet, Baby-Doll Eyes, Bide, Bullet Punch, Ice Shard, Ion Deluge, Mach Punch, Powder, Quick Attack, Shadow Sneak, Sucker Punch, Vacuum Wave, Water Shuriken"]:
+        elif self.str_name in ["accelerock", "aqua-jet", "baby-doll-eyes", "bide", "bullet-punch", "ice-shard", "ion-deluge", "mach-punch", "powder", "quick-attack", "shadow-sneak", "sucker-punch", "vacuum-wave", "water-shuriken"]:
             self.i_priority = 1
-        elif self.str_name in ["Vital Throw"]:
+        elif self.str_name in ["vital-throw"]:
             self.i_priority = -1
-        elif self.str_name in ["Beak Blast, Focus Punch, Shell Trap"]:
+        elif self.str_name in ["beak-blast", "focus-punch", "shell-trap"]:
             self.i_priority = -3
-        elif self.str_name in ["Avalanche, Revenge"]:
+        elif self.str_name in ["avalanche", "revenge"]:
             self.i_priority = -4
-        elif self.str_name in ["Counter, Mirror Coat"]:
+        elif self.str_name in ["counter", "mirror-coat"]:
             self.i_priority = -5
-        elif self.str_name in ["Circle Throw, Dragon Tail, Roar, Whirlwind"]:
+        elif self.str_name in ["circle-throw", "dragon-tail", "roar", "whirlwind"]:
             self.i_priority = -6
         elif self.str_name in ["trick-room"]:
             self.i_priority = -7
