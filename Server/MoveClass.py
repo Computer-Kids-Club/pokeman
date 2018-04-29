@@ -41,6 +41,31 @@ class Move(object):
 
         self.i_prob = parse_move_json(dic_move['prob'])
 
+        self.i_priority = 0
+
+        if self.str_name in ["helping-hand"]:
+            self.i_priority = 5
+        elif self.str_name in ["detect", "magic-coat", "protect", "snatch"]:
+            self.i_priority = 4
+        elif self.str_name in ["Crafty Shield, Fake Out, Quick Guard, Wide Guard, Spotlight"]:
+            self.i_priority = 3
+        elif self.str_name in ["Ally Switch, Extreme Speed, Feint, First Impression, Follow Me, Rage Powder"]:
+            self.i_priority = 2
+        elif self.str_name in ["Accelerock, Aqua Jet, Baby-Doll Eyes, Bide, Bullet Punch, Ice Shard, Ion Deluge, Mach Punch, Powder, Quick Attack, Shadow Sneak, Sucker Punch, Vacuum Wave, Water Shuriken"]:
+            self.i_priority = 1
+        elif self.str_name in ["Vital Throw"]:
+            self.i_priority = -1
+        elif self.str_name in ["Beak Blast, Focus Punch, Shell Trap"]:
+            self.i_priority = -3
+        elif self.str_name in ["Avalanche, Revenge"]:
+            self.i_priority = -4
+        elif self.str_name in ["Counter, Mirror Coat"]:
+            self.i_priority = -5
+        elif self.str_name in ["Circle Throw, Dragon Tail, Roar, Whirlwind"]:
+            self.i_priority = -6
+        elif self.str_name in ["trick-room"]:
+            self.i_priority = -7
+
         print(name)
         self.flag_contact = dic_move['flag_contact']
         self.flag_charge = dic_move['flag_charge']
