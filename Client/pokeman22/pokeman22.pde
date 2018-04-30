@@ -254,6 +254,8 @@ void drawSettingScreen() {
     draw_text("OFF", width/4*3, height/4*(1+i-3));
   }
   textSize(20);
+  fill(255);
+  ellipse(width/8,height/2,width/15,width/15);
   fill(0);
   draw_text("BACK", width/8, height/2);
   fill(255);
@@ -271,32 +273,35 @@ void drawSettingScreen() {
     buttonLst[0]=100;
     buttonLst[3]=0;
   }
-  if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
+  else if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
     sound=false;
     print("lol");
     buttonLst[0]=0;
     buttonLst[3]=255;
   }
-  if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
+  else if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
     soundFX=true;
     buttonLst[1]=100;
     buttonLst[4]=0;
   }
-  if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
+  else if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
     soundFX=false;
     buttonLst[1]=0;
     buttonLst[4]=255;
   }
-  if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
+  else if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
     comicSans=true;
     buttonLst[2]=100;
     buttonLst[5]=0;
   }
-  if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
+  else if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
     comicSans=false;
     buttonLst[2]=0;
     buttonLst[5]=255;
-  }}
+  }
+  else if (dist(mouseX,mouseY,width/8,height/2)<=width/30){
+  drawSettingScreen=false;}
+}
 }
 
 void drawStartScreen() {
