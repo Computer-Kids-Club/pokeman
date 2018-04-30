@@ -1215,9 +1215,11 @@ void setup() {
   draw_imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
+  noSmooth();
 
-  PFont font = createFont("PokemonSolid.ttf", 16);
+  PFont font = createFont("PokemonSolid.ttf", 128);
   textFont(font);
+  textSize(16);
 
   myClient = new Client(this, IPv4, PORT);
 
