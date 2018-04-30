@@ -151,6 +151,23 @@ class Move(object):
 
         return i_recoil_ratio
 
+    def get_heal_hp(self, i_dmg, atk_poke):
+        i_heal_hp = 0
+
+        if self.str_name == "dream-eater" and atk_poke.str_status == "sleep":
+            i_heal_hp = i_dmg * 1/2
+        elif self.str_name in ["absorb", "drain-punch", "giga-drain", "horn-leech", "leech-life", "mega-drain"]:
+            i_heal_hp = i_dmg * 1/2
+        elif self.str_name in ["heal-order", "heal-pulse", "milk-drink"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 2
+        elif self.str_name in ["recover", "roost", "slack-off", "softboiled"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 2
+        elif self.str_name in ["rest"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 1
+            atk_poke.str_status = "none"
+
+        return i_heal_hp
+
     # overriding str method
     def __str__(self):
         return self.str_name.capitalize()

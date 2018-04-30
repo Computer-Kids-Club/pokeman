@@ -274,6 +274,12 @@ class Battle(object):
                         atk_poke.i_hp = 0
                         atk_poke.b_fainted = True
 
+                    # healing health
+
+                    i_heal_hp = cur_move.get_heal_hp(i_dmg, atk_poke)
+
+                    atk_poke.i_hp = min(atk_poke.i_hp + i_heal_hp, atk_poke.get_usable_stats().i_hp)
+
                     # send updated pokes
                     self.send_players_pokes()
 
