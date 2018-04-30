@@ -253,6 +253,26 @@ class Battle(object):
                     if (def_poke.i_hp <= 0):
                         def_poke.i_hp = 0
                         def_poke.b_fainted = True
+                        i_dmg -= def_poke.i_hp
+
+                    # send updated pokes
+                    self.send_players_pokes()
+
+                    # recoil damage
+
+                    i_recoil_dmg = cur_move.get_recoil_ratio() * i_dmg
+
+                    if cur_move.str_name == "struggle":
+                        i_recoil_dmg = atk_poke.get_usable_stats().i_hp * 1/4
+                    if cur_move.str_name == "shadow-end":
+                        i_recoil_dmg = atk_poke.i_hp * 1/2
+
+                    atk_poke.i_hp -= i_recoil_dmg
+
+                    # is it dead???
+                    if (atk_poke.i_hp <= 0):
+                        atk_poke.i_hp = 0
+                        atk_poke.b_fainted = True
 
                     # send updated pokes
                     self.send_players_pokes()
@@ -281,6 +301,18 @@ class Battle(object):
             else:
                 # the move missed
                 self.send_broadcast("It missed.")
+
+                i_recoil_dmg = 0
+
+                if cur_move.str_name in ["jump-kick", "high-jump-kick"]:
+                    i_recoil_dmg = atk_poke.get_usable_stats().i_hp//2
+
+                atk_poke.i_hp -= i_recoil_dmg
+
+                # is it dead???
+                if (atk_poke.i_hp <= 0):
+                    atk_poke.i_hp = 0
+                    atk_poke.b_fainted = True
 
             # make a new line to look more organised
             self.send_broadcast("")
@@ -362,8 +394,13 @@ class Battle(object):
 
             if not atk_poke.is_usable():
                 player.i_turn_readiness = NOT_READY
+                if len(player.get_available_pokes()) <= 0:
+                    self.b_gameover = True
+                    player.send_data(DISPLAY_LOSE)
+                    other_player.send_data(DISPLAY_WIN)
+                    # self.send_delay()
+                    return
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
-                return
 
         # after turn move reset
         for player in l_move_queue:
@@ -375,6 +412,12 @@ class Battle(object):
                 continue
 
             move_ad_hoc_after_turn(atk_poke, def_poke, self.field, player, other_player)
+
+        # if a poke is dead, then no turn 4 u
+        for player in self.l_players:
+            atk_poke = player.active_poke
+            if not atk_poke.is_usable():
+                return
 
         if (not self.everyone_ready() or self.b_gameover):
             return

@@ -139,6 +139,18 @@ class Move(object):
 
         return move_dic
 
+    def get_recoil_ratio(self):
+        i_recoil_ratio = 0
+
+        if self.str_name in ["take-down", "submission", "wild-charge", "head-charge", "shadow-rush"]:
+            i_recoil_ratio = 1/4
+        elif self.str_name in ["double-edge", "volt-tackle", "flare-blitz", "brave-bird", "wood-hammer"]:
+            i_recoil_ratio = 1/3
+        elif self.str_name in ["head-smash", "light-of-ruin"]:
+            i_recoil_ratio = 1/2
+
+        return i_recoil_ratio
+
     # overriding str method
     def __str__(self):
         return self.str_name.capitalize()
