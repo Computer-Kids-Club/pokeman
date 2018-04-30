@@ -115,7 +115,8 @@ void process_data(String dataIn) {
       if(i_healthing_original != new_poke.cur_hp && i_cur_animation_frames_left == 0) {
         i_cur_animation_frames_left = 30;
         i_healthing = i_total_healthing;
-        i_health_text_effecting = round(float(i_healthing_original-new_poke.cur_hp)*100/new_poke.HP);
+        i_dmg_text_effecting = round(float(i_healthing_original-new_poke.cur_hp)*100/new_poke.HP);
+        i_heal_text_effecting = round(float(new_poke.cur_hp-i_healthing_original)*100/new_poke.HP);
       }
     }
   } else if (dataIn.charAt(0)==DISPLAY_WIN) {

@@ -57,6 +57,31 @@ void add_dmg_text_effect(int i_x, int i_y) {
   l_effects.add(new_effect);
 }
 
+void add_heal_text_effect(int i_x, int i_y) {
+  
+  i_x += random(-35, 35);
+  i_y += random(-35, 35);
+  
+  Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
+  
+  new_effect.rect_radius = 3;
+
+  new_effect.b_fade_out = true;
+  
+  new_effect.f_ay = -0.5;
+
+  new_effect.i_alpha = 255;
+
+  new_effect.add_text("+1%HP", 100, 200, 200);
+
+  new_effect.i_text_red = 100;
+  new_effect.i_text_green = 100;
+  new_effect.i_text_blue = 255;
+  new_effect.i_text_alpha = 255;
+
+  l_effects.add(new_effect);
+}
+
 class Effect {
 
   float f_x, f_y, f_dx, f_dy;

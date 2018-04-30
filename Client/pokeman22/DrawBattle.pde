@@ -25,7 +25,8 @@ int i_total_healthing = 30;
 int i_healthing = 0;
 int i_healthing_direction = 1;
 
-int i_health_text_effecting = 0;
+int i_dmg_text_effecting = 0;
+int i_heal_text_effecting = 0;
 
 String str_cur_move_type = "";
 String str_cur_move_cat = "";
@@ -102,9 +103,12 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     if (i_healthing_direction == -1 && i_healthing>0 ) {
       b_cur_poke_hp_anime = true;
       for (int i=0; i<3; i++) {
-        if (i_health_text_effecting>0)
+        if (i_dmg_text_effecting>0)
           add_dmg_text_effect(POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
-        i_health_text_effecting = max(i_health_text_effecting-1, 0);
+        if (i_heal_text_effecting>0)
+          add_heal_text_effect(POKE_ME_RECT.i_x, POKE_ME_RECT.i_y);
+        i_dmg_text_effecting = max(i_dmg_text_effecting-1, 0);
+        i_heal_text_effecting = max(i_heal_text_effecting-1, 0);
       }
     }
   } else {
@@ -112,9 +116,12 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     if (i_healthing_direction == 1 && i_healthing>0 ) {
       b_cur_poke_hp_anime = true;
       for (int i=0; i<3; i++) {
-        if (i_health_text_effecting>0)
+        if (i_dmg_text_effecting>0)
           add_dmg_text_effect(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
-        i_health_text_effecting = max(i_health_text_effecting-1, 0);
+        if (i_heal_text_effecting>0)
+          add_heal_text_effect(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
+        i_dmg_text_effecting = max(i_dmg_text_effecting-1, 0);
+        i_heal_text_effecting = max(i_heal_text_effecting-1, 0);
       }
     }
   }
