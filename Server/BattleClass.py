@@ -7,6 +7,7 @@ from Constants import *
 from FieldClass import Field
 from random import randint
 from ClientConnection import Client
+from TypeClass import Type
 from DamageCalculation import attack, confusion_attack
 from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
 from MoveAdHoc import move_ad_hoc_during, move_ad_hoc_after_turn
@@ -64,7 +65,15 @@ class Battle(object):
                 atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/4
 
             if self.field.count_entry_hazards(player, "stealth-rock") >= 1:
-                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/8
+                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 0.125 * Type("Rock").getAtkEff(atk_poke.type_1, atk_poke.type_2)
+
+            if self.field.count_entry_hazards(player, "sticky-web") >= 1:
+                atk_poke.modifier_stats.i_spe -= 1
+
+            if self.field.count_entry_hazards(player, "toxic-spikes") == 1:
+                atk_poke.str_status = "poison"
+            elif self.field.count_entry_hazards(player, "toxic-spikes") == 2:
+                atk_poke.str_status = "toxic"
 
             pass
         elif dic_data["battlestate"] == "selectmove":
