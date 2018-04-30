@@ -151,9 +151,11 @@ void process_data(String dataIn) {
     i_terrain = json.getInt("terrain");
     JSONArray json_arr_me_hazards = json.getJSONArray("mehazards");
     JSONArray json_arr_other_hazards = json.getJSONArray("otherhazards");
+    l_me_hazards = new ArrayList<String> ();
     for(int i=0;i<json_arr_me_hazards.size();i++) {
       l_me_hazards.add(json_arr_me_hazards.getString(i));
     }
+    l_other_hazards = new ArrayList<String> ();
     for(int i=0;i<json_arr_other_hazards.size();i++) {
       l_other_hazards.add(json_arr_other_hazards.getString(i));
     }

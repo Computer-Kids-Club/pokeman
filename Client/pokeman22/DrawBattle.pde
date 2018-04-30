@@ -47,6 +47,9 @@ ArrayList<String> l_me_hazards = new ArrayList<String> ();
 ArrayList<String> l_other_hazards = new ArrayList<String> ();
 
 HashMap<String, PImage> TYPE_MOVE_IMG = new HashMap<String, PImage>();
+HashMap<String, PImage> ENTRY_HAZARD_IMG = new HashMap<String, PImage>();
+
+String [] str_entry_hazards = {"spikes", "toxic-spikes", "stealth-rock", "sticky-web"};
 
 void init_battle_screen() {
   img_flag_bite = loadImage("MoveAnimations/bite.png");
@@ -70,6 +73,12 @@ void init_battle_screen() {
     PImage new_img = loadImage("MoveAnimations/"+str_type+".png");
     new_img.resize(150, 0);
     TYPE_MOVE_IMG.put(str_type, new_img);
+  }
+
+  for (int i=0; i<str_entry_hazards.length; i++) {
+    PImage new_img = loadImage(str_entry_hazards[i]+".png");
+    new_img.resize(50, 0);
+    ENTRY_HAZARD_IMG.put(str_entry_hazards[i], new_img);
   }
 }
 
@@ -139,12 +148,35 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
     draw_health_bar(0, 0, (float)poke.cur_hp/poke.HP, (float)poke.old_hp/poke.HP);
   }
 
+  // protect
+
   draw_rectMode(CENTER);
   if (poke.protect) {
     stroke(225, 100, 255, 150);
     fill(225, 100, 255, 100);
     draw_rect(0, 0, 150, 100);
   }
+
+  // hazards
+
+  draw_imageMode(CENTER);
+  tint(255, 150);
+  pushMatrix();
+  if (me_or_other==ME) {
+    translate(-(l_me_hazards.size()-1)*20, 70);
+    for (int i=0; i<l_me_hazards.size(); i++) {
+      draw_image(ENTRY_HAZARD_IMG.get(l_me_hazards.get(i)), 0, 0);
+      translate(40, -((i*2)-1)*20);
+    }
+  } else {
+    translate(-(l_other_hazards.size()-1)*20, 70);
+    for (int i=0; i<l_other_hazards.size(); i++) {
+      draw_image(ENTRY_HAZARD_IMG.get(l_other_hazards.get(i)), 0, 0);
+      translate(40, -((i*2)-1)*20);
+    }
+  }
+  popMatrix();
+  noTint();
 
   textAlign(LEFT);
   fill(0);
@@ -270,7 +302,7 @@ void draw_battle() {
     //rotate((frameCount*20.0)%360);
 
     rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
-    scale(1,-1*i_moving_direction);
+    scale(1, -1*i_moving_direction);
     if (i_moving_direction==1) {
       rotate(PI);
     }
@@ -293,9 +325,8 @@ void draw_battle() {
         fill(TYPE_COLOURS.get(str_cur_move_type));
 
       draw_rect(0, 0, 50, 50);
-      
+
       draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
-      
     } else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
       draw_image(img_flag_bite, 0, 0);

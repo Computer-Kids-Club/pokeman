@@ -26,6 +26,7 @@ class Field(object):
         self.dic_entry_hazards[player] = []
 
     def count_entry_hazards(self, player, str_hazard):
+        #print(self.dic_entry_hazards[player].count(str_hazard))
         return self.dic_entry_hazards[player].count(str_hazard)
 
     def add_entry_hazard(self, player, str_hazard):
