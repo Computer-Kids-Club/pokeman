@@ -104,6 +104,8 @@ class Move(object):
             self.str_anime_style = "flag_ballistics"
         if self.flag_dance:
             self.str_anime_style = "flag_dance"
+        if self.str_name in ["spikes", "stealth-rock", "toxic-spikes", "sticky-web"]:
+            self.str_anime_style = self.str_name
 
         self.b_stat_change = False
         if 'stacha' in dic_move:
