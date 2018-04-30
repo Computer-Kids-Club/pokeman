@@ -10,7 +10,7 @@
 from BattleClass import *
 from ClientConnection import *
 from DamageCalculation import *
-import os, pwd, grp
+#import os, pwd, grp
 
 
 # GAME ON
