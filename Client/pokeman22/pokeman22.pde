@@ -616,11 +616,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     stroke(255);
     draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75);
     fill(255);
-      if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
-        MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
-      } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
-        MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
-      }
+    if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
+      MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
+    }
     draw_rect(MOVESLIDER.i_x, MOVESLIDER.i_y, MOVESLIDER.i_w, MOVESLIDER.i_h);
     for (int i = 0; i < MOVES_PER_PAGE && i + 1 + offsetMoves <= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length; i++) {
       if (i < validMoveSearch.size()) {
@@ -701,7 +701,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, 268);    
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188 + 45, 170, 223);
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 45);
-    
+
     if (NATURESLIDER.i_y + NATURESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
       NATURESLIDER.i_y = height - NATURESLIDER.i_h - SELECTSCREENSHIFT_Y;
     } else if (NATURESLIDER.i_y < natureSliderStartY) {
@@ -735,6 +735,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("Nature", width/2, height*29/45);
     textAlign(LEFT, CENTER);
     for (int i = 0; i < NATURES_PER_PAGE; i++) {
+      offsetNature = max(0, offsetNature);
       natureString = natureName[i + offsetNature];
       if (natureStat[i + offsetNature].length > 0) {
         natureString += " (+" + natureStat[i + offsetNature][0] + ", -" + natureStat[i + offsetNature][1] + ")";
