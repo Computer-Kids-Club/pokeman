@@ -1,5 +1,6 @@
 
 from random import randint
+from FieldClass import Field
 
 def move_ad_hoc_during(atk_poke, def_poke, move, field, b_last = False, atk_player = None, def_player = None):
 
@@ -10,6 +11,31 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, b_last = False, atk_play
         else:
             atk_poke.i_protect_counter = 0
             return False
+    elif move.str_name == "stealth-rock":
+        if field.count_entry_hazards(def_player, "stealth-rock") <= 0:
+            field.add_entry_hazard(def_player,"stealth-rock")
+        else:
+            return False
+    elif move.str_name == "spikes":
+        if field.count_entry_hazards(def_player, "spikes") < 3:
+            field.add_entry_hazard(def_player,"spikes")
+        else:
+            return False
+    elif move.str_name == "sticky-web":
+        if field.count_entry_hazards(def_player, "sticky-web") <= 0:
+            field.add_entry_hazard(def_player,"sticky-web")
+        else:
+            return False
+    elif move.str_name == "toxic-spikes":
+        if field.count_entry_hazards(def_player, "toxic-spikes") < 2:
+            field.add_entry_hazard(def_player,"toxic-spikes")
+        else:
+            return False
+    elif move.str_name == "rapid-spin":
+        field.remove_entry_hazards(atk_player)
+    elif move.str_name == "defog":
+        field.remove_entry_hazards(atk_player)
+        field.remove_entry_hazards(def_player)
 
     return True
 
