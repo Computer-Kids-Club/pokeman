@@ -48,6 +48,24 @@ class Battle(object):
         if dic_data["battlestate"] == "pokes":
             pass
         elif dic_data["battlestate"] == "selectpoke":
+
+            atk_poke = player.active_poke
+            def_poke = other_player.active_poke
+
+            self.send_players_pokes()
+
+            # entry hazards
+
+            if self.field.count_entry_hazards(player, "spikes") == 1:
+                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/8
+            elif self.field.count_entry_hazards(player, "spikes") == 2:
+                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/6
+            elif self.field.count_entry_hazards(player, "spikes") == 3:
+                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/4
+
+            if self.field.count_entry_hazards(player, "stealth-rock") >= 1:
+                atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp * 1/8
+
             pass
         elif dic_data["battlestate"] == "selectmove":
             pass
