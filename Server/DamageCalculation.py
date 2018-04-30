@@ -240,7 +240,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'levitate':
         if str_mov_type == 'ground':
-            i_ability_buff == 0
+            i_ability_buff = 0
 
     if str_def_ability == 'lightningrod' and str_def_ability == 'motor-drive' and str_def_ability == 'volt-absorb':
         if str_mov_type == 'electric':
