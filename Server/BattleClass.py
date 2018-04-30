@@ -110,8 +110,15 @@ class Battle(object):
             if (player.i_active_move_idx == -1):
                 continue
 
-            if len(l_move_queue)>=1 and atk_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
-                l_move_queue.insert(0,player)
+            if len(l_move_queue)>=1:
+                if atk_poke.get_moves()[player.i_active_move_idx].i_priority > def_poke.get_moves()[other_player.i_active_move_idx].i_priority:
+                    l_move_queue.insert(0, player)
+                elif atk_poke.get_moves()[player.i_active_move_idx].i_priority < def_poke.get_moves()[other_player.i_active_move_idx].i_priority:
+                    l_move_queue.append(player)
+                elif atk_poke.get_usable_stats().i_spe > l_move_queue[0].active_poke.get_usable_stats().i_spe:
+                    l_move_queue.insert(0, player)
+                else:
+                    l_move_queue.append(player)
             else:
                 l_move_queue.append(player)
 
