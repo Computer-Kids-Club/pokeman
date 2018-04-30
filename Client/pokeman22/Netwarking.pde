@@ -12,8 +12,7 @@ int i_cur_animation_frames_left = 0;
 
 boolean reconnect() {
   if (!myClient.active()) {
-
-    myClient = new Client(this, "127.0.0.1", PORT);
+    myClient = new Client(this, IPv4, PORT);
   }
   return myClient.active();
 }
@@ -115,6 +114,8 @@ void process_data(String dataIn) {
       if(i_healthing_original != new_poke.cur_hp && i_cur_animation_frames_left == 0) {
         i_cur_animation_frames_left = 30;
         i_healthing = i_total_healthing;
+        i_dmg_text_effecting = round(float(i_healthing_original-new_poke.cur_hp)*100/new_poke.HP);
+        i_heal_text_effecting = round(float(new_poke.cur_hp-i_healthing_original)*100/new_poke.HP);
       }
     }
   } else if (dataIn.charAt(0)==DISPLAY_WIN) {
@@ -141,6 +142,7 @@ void process_data(String dataIn) {
     str_cur_move_type = json_move.getString("type");
     //println(json_move+" "+json_move.getString("cat"));
     str_cur_move_cat = json_move.getString("cat");
+    str_cur_move_anime_style = json_move.getString("anime");
   } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
     i_cur_animation_frames_left = 30;
   }
