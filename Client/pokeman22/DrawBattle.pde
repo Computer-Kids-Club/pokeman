@@ -243,7 +243,7 @@ void draw_battle() {
     }
 
     if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == -1) {
-
+  
       int tmp_move = i_moving * 2;
 
       if (tmp_move<i_total_moving) {
