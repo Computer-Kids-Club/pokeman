@@ -42,9 +42,9 @@ HashMap<String, String[]> names_abilities = new HashMap<String, String[]>();
 HashMap<String, String[][]> names_moves = new HashMap<String, String[][]>();
 
 HashMap<String, PImage> type_image = new HashMap<String, PImage>();
-String[] types = {"bug", "dark", "dragon", "electric", "error", "fairy", "fighting", "fire", "flying", 
-  "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"};
-PImage tempImage;
+
+//String[] types = {
+
 
 HashMap<String, String[]> moves_data = new HashMap<String, String[]>();
 
@@ -57,10 +57,6 @@ Gif loopingGif;
 Gif nonLoopingGif;
 boolean pause = false;
 boolean drawSettingScreen=false;
-boolean sound=true;
-boolean soundFX=true;
-boolean comicSans=true;
-int[] buttonLst={100, 100, 100, 0, 0, 0};
 int idx = 1;
 
 JSONObject curr_json;
@@ -115,7 +111,6 @@ boolean tempAnimationLoad = true;
 boolean moveSelect = false;
 boolean statSelect = true;
 boolean moveScreenReset = true;
-boolean moveScreenReload = false;
 boolean moveSelectScreen = false;
 
 int moveSlot;
@@ -229,74 +224,11 @@ void drawMove(String move_name) {
   textAlign(LEFT);
 }
 void drawSettingScreen() {
-  textAlign(CENTER,CENTER);
-  textSize(40);
-  fill(0);
+  fill(150);
   draw_rect(0, 0, width, height);
-  for (int i=0; i<3; i++) {
-    if (buttonLst[i]==0) {
-      fill(150);
-    } else {
-      fill(buttonLst[i], 255, 255);
-    }
-    ellipse(width/4, height/4*(1+i), width/8, width/8);
-    fill(0);
-    draw_text("ON", width/4, height/4*(1+i));
+  if (mousePressed) {
+    drawSettingScreen=false;
   }
-  for (int i=3; i<6; i++) {
-    if (buttonLst[i]==0) {
-      fill(150);
-    } else {
-      fill(buttonLst[i], 255, 255);
-    }
-    ellipse(width/4*3, height/4*(1+i-3), width/8, width/8);
-    fill(0);
-    draw_text("OFF", width/4*3, height/4*(1+i-3));
-  }
-  textSize(20);
-  fill(0);
-  draw_text("BACK", width/8, height/2);
-  fill(255);
-  textSize(40);
-  ellipse(width/8,height/2,width/15,width/15);
-  draw_text("Music", width/2, height/4);
-  draw_text("Sound Effects", width/2, height/4*2);
-  draw_text("Comic Sans", width/2, height/4*3);
-  textSize(80);
-  draw_text("SETTINGS", width/2, height/8);
-  textSize(12);
-  if (mousePressed){
-  if (dist(mouseX,mouseY,width/4,height/4)<=width/16){
-    sound=true;
-    buttonLst[0]=100;
-    buttonLst[3]=0;
-  }
-  if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
-    sound=false;
-    print("lol");
-    buttonLst[0]=0;
-    buttonLst[3]=255;
-  }
-  if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
-    soundFX=true;
-    buttonLst[1]=100;
-    buttonLst[4]=0;
-  }
-  if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
-    soundFX=false;
-    buttonLst[1]=0;
-    buttonLst[4]=255;
-  }
-  if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
-    comicSans=true;
-    buttonLst[2]=100;
-    buttonLst[5]=0;
-  }
-  if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
-    comicSans=false;
-    buttonLst[2]=0;
-    buttonLst[5]=255;
-  }}
 }
 
 void drawStartScreen() {
@@ -336,7 +268,7 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false) {
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
@@ -350,8 +282,7 @@ void drawStartScreen() {
         pokemonSlotNumber = i;
         pokemonNumber = pokemons.get(i).number;
         moveSelectScreen = true;
-        //moveScreenReset = true;
-        moveScreenReload = true;
+        moveScreenReset = true;
         tempAnimationLoad = true;
         mousePressValid = false;
       }
@@ -612,9 +543,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
 
     moveScreenReset = false;
-  } else if (moveScreenReload == true) {
-    moveScreenReload = false;
-  }
+  }    
   stats[0] = ((((2*names_stats.get(num_names.get(pokeNum))[0] + IV[0] + int(EV[0]/4))*level))/100 + level + 10);
   stats[1] = (((2*names_stats.get(num_names.get(pokeNum))[1] + IV[1] + int(EV[1]/4))*level)/100 + 5);
   stats[2] = (((2*names_stats.get(num_names.get(pokeNum))[2] + IV[2] + int(EV[2]/4))*level)/100 + 5);
@@ -729,11 +658,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (mousePressed && mousePressValid == true) {
           if (mouseX < width*6/7 - MOVESLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*521/900 + (i+1)*gridSize + SELECTSCREENSHIFT_Y && mouseY > height*521/900 + i*gridSize + SELECTSCREENSHIFT_Y && moveSliderFollow == false) {
             selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
-            MOVESLIDER.i_y = moveSliderStartY;
             validMoveSearch = new StringList();
             moveSelect = false;
             moveSearch = "";
-            mousePressValid = false;
           }
         }
       }
@@ -967,22 +894,17 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
-  draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[0]), width*3/20 + SELECTSCREENSHIFT_X + 50, height*221/450 - height*17/1200);
-  draw_text(names_types.get(num_names.get(pokeNum))[0], width*3/20 + SELECTSCREENSHIFT_X + 53, height*221/450);
-  if (names_types.get(num_names.get(pokeNum))[1] != null) {
-    draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[1]), width*3/20 + SELECTSCREENSHIFT_X + 60 + int(textWidth(names_types.get(num_names.get(pokeNum))[0])), height*221/450 - height*17/1200);
-    draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 63 + int(textWidth(names_types.get(num_names.get(pokeNum))[0])), height*221/450);
-  }
+  
   //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
   //rectMode(CORNER);
   ///draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
   //fill(255);
   //draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
   //if (names_types.get(num_names.get(pokeNum))[1] != null) {
-  //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
-  //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
-  //fill(255);
-  //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+    //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
+    //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
+    //fill(255);
+    //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
   //}
 
   if (maleBool) {
@@ -1054,7 +976,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
         pokemonSelectScreen = false;
         moveSelectScreen = false;
-        //moveScreenReset = true;
+        moveScreenReset = true;
         tempAnimationLoad = true;
         mousePressValid = false;
       }
@@ -1138,7 +1060,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       } else {
         moveSearchBool = false;
       }
-    } else if (statSelect && moveSelect == false) {
+    } else if (statSelect) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
           if (mouseX <= width*157/280 - NATURESLIDER.i_w && mouseX >= width*123/280 && mouseY <= natureSliderStartY + (i+1)*(height/45) && mouseY >= natureSliderStartY + i*(height/45)) {
@@ -1238,11 +1160,7 @@ void setup() {
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
 
-  for (int i = 0; i < types.length; i++) {
-    tempImage = loadImage(types[i] + ".png");
-    tempImage.resize(int(textWidth(types[i]) + 6), height/50);
-    type_image.put(types[i], tempImage);
-  }
+
 
   for (int i = 1; i <= 807; i++) {
     JSONObject file = loadJSONObject(POKEINFO_PATH+"pokemon/"+i+".txt");

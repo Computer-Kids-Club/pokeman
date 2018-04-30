@@ -54,6 +54,8 @@ class Pokeman(object):
         for dic_move in dic_poke["tmmoves"]:
             self.l_possible_moves.append(dic_move["move"])
         self.l_possible_moves = list(set(self.l_possible_moves))
+        if "error" in self.l_possible_moves:
+            self.l_possible_moves.remove("error")
 
         self.l_moves = [Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves)),Move(choice(self.l_possible_moves))]
 
