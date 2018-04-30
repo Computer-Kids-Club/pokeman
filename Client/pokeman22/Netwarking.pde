@@ -13,7 +13,11 @@ int i_cur_animation_frames_left = 0;
 boolean reconnect() {
   if (!myClient.active()) {
 
+<<<<<<< HEAD
+    myClient = new Client(this, "10.243.211.4", PORT);
+=======
     myClient = new Client(this, IPv4, PORT);
+>>>>>>> 1832e8a1316ad7431bc6ef84b81910b69297aa4a
   }
   return myClient.active();
 }
