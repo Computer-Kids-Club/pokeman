@@ -1144,6 +1144,9 @@ void setup() {
   noSmooth();
   colorMode(HSB);
 
+  PFont font = createFont("PokemonHollow.ttf", 32);
+  textFont(font);
+
   myClient = new Client(this, IPv4, PORT);
 
   init_constants();
