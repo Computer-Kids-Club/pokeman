@@ -42,8 +42,8 @@ HashMap<String, String[]> names_abilities = new HashMap<String, String[]>();
 HashMap<String, String[][]> names_moves = new HashMap<String, String[][]>();
 
 HashMap<String, PImage> type_image = new HashMap<String, PImage>();
-String[] types = {"bug", "dark", "dragon", "electric", "error", "fairy", "fighting", "fire", "flying",
-                  "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"};
+String[] types = {"bug", "dark", "dragon", "electric", "error", "fairy", "fighting", "fire", "flying", 
+  "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"};
 PImage tempImage;
 
 HashMap<String, String[]> moves_data = new HashMap<String, String[]>();
@@ -545,7 +545,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     }
 
     moveScreenReset = false;
-  } else if (moveScreenReload == true){
+  } else if (moveScreenReload == true) {
     moveScreenReload = false;
   }
   stats[0] = ((((2*names_stats.get(num_names.get(pokeNum))[0] + IV[0] + int(EV[0]/4))*level))/100 + level + 10);
@@ -898,18 +898,22 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
-  draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[0]), width*3/20 + SELECTSCREENSHIFT_X + 50, height*221/450 - 40);
-  draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[1]), width*3/20 + SELECTSCREENSHIFT_X + 350, height*221/450 - 40);
+  draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[0]), width*3/20 + SELECTSCREENSHIFT_X + 50, height*221/450 - height/80);
+  draw_text(names_types.get(num_names.get(pokeNum))[0], width*3/20 + SELECTSCREENSHIFT_X + 53, height*221/450);
+  if (names_types.get(num_names.get(pokeNum))[1] != null) {
+    draw_image(type_image.get(names_types.get(num_names.get(pokeNum))[1]), width*3/20 + SELECTSCREENSHIFT_X + 60 + int(textWidth(names_types.get(num_names.get(pokeNum))[0])), height*221/450 - height/80);
+    draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 63 + int(textWidth(names_types.get(num_names.get(pokeNum))[0])), height*221/450);
+  }
   //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
   //rectMode(CORNER);
   ///draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
   //fill(255);
   //draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
   //if (names_types.get(num_names.get(pokeNum))[1] != null) {
-    //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
-    //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
-    //fill(255);
-    //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
+  //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
+  //fill(255);
+  //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
   //}
 
   if (maleBool) {
@@ -1165,9 +1169,9 @@ void setup() {
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
 
-  for (int i = 0; i < types.length; i++){
+  for (int i = 0; i < types.length; i++) {
     tempImage = loadImage(types[i] + ".png");
-    tempImage.resize(int(textWidth(types[i]) + 6),height/60);
+    tempImage.resize(int(textWidth(types[i]) + 6), height/60);
     type_image.put(types[i], tempImage);
   }
 
