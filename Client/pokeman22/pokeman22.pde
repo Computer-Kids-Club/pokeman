@@ -624,6 +624,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         } else {
           offsetMoves = 0;
         }
+        if (offsetMoves < 0) {
+          offsetMoves = 0;
+        }
 
         draw_text(validMoveSearch.get(i + offsetMoves).replaceAll("-", " "), width*43/280 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
         draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[0], width*43/280 + SELECTSCREENSHIFT_X + width*3/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
