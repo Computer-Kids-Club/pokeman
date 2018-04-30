@@ -6,7 +6,7 @@ class Pokemon {
   String name, type1, type2, species, h, weight, ability, gender, item, status;
   int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion;
   int cur_hp, old_hp;
-  Boolean shiny;
+  Boolean shiny, protect;
   ArrayList<String> text_status_effects;
   String[][] possible_moves;
   PImage[] animation;
@@ -92,6 +92,8 @@ class Pokemon {
     HP = max(HP, 1);
     cur_hp = json.getInt("hp");
     //println(cur_hp);
+    
+    protect = json.getBoolean("protect");
   }
 
   void init_with_json(JSONObject json) {
