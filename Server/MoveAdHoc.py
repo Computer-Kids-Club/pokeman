@@ -2,7 +2,7 @@
 from random import randint
 from FieldClass import Field
 
-def move_ad_hoc_during(atk_poke, def_poke, move, field, b_last = False, atk_player = None, def_player = None):
+def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
 
     if move.str_name == "protect":
         if randint(0, 99) < 1/(3**atk_poke.i_protect_counter)*100:
@@ -39,7 +39,7 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, b_last = False, atk_play
 
     return True
 
-def move_ad_hoc_being_attacked(atk_poke, def_poke, move, field, b_last = False, atk_player = None, def_player = None):
+def move_ad_hoc_being_attacked(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
 
     if def_poke.b_protected:
         return True

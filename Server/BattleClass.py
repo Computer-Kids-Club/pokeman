@@ -75,6 +75,8 @@ class Battle(object):
             elif self.field.count_entry_hazards(player, "toxic-spikes") == 2:
                 atk_poke.str_status = "toxic"
 
+            self.send_players_pokes()
+
             pass
         elif dic_data["battlestate"] == "selectmove":
             pass
