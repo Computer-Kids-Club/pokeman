@@ -16,6 +16,8 @@ from DamageCalculation import *
 # GAME ON
 b_game_on = True
 
+b_multiplayer = False
+
 while b_game_on:
     for b in range(len(l_battles)-1,-1,-1):
         battle = l_battles[b]
@@ -32,20 +34,22 @@ while b_game_on:
     for client in l_clients:
         client = l_clients[client]
         if client.battle == None and client.i_battle_state==READY:
-            # for client2 in l_clients:
-            #     client2 = l_clients[client2]
-            #     if client2.battle == None and client2.i_battle_state == READY and client != client2:
-            #         tmp_client = client2
-            #         new_battle = Battle([client,tmp_client])
-            #         client.battle = new_battle
-            #         tmp_client.battle = new_battle
-            #         l_battles.append(new_battle)
-            #         break
-            tmp_client = init_tmp_client()
-            new_battle = Battle([client,tmp_client])
-            client.battle = new_battle
-            tmp_client.battle = new_battle
-            l_battles.append(new_battle)
+            if b_multiplayer:
+                for client2 in l_clients:
+                    client2 = l_clients[client2]
+                    if client2.battle == None and client2.i_battle_state == READY and client != client2:
+                        tmp_client = client2
+                        new_battle = Battle([client,tmp_client])
+                        client.battle = new_battle
+                        tmp_client.battle = new_battle
+                        l_battles.append(new_battle)
+                        break
+            else:
+                tmp_client = init_tmp_client()
+                new_battle = Battle([client,tmp_client])
+                client.battle = new_battle
+                tmp_client.battle = new_battle
+                l_battles.append(new_battle)
 
 
 server_socket.close()
