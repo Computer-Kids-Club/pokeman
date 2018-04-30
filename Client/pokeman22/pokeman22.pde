@@ -53,6 +53,10 @@ Gif loopingGif;
 Gif nonLoopingGif;
 boolean pause = false;
 boolean drawSettingScreen=false;
+boolean sound=true;
+boolean soundFX=true;
+boolean comicSans=true;
+int[] buttonLst={100, 100, 100, 0, 0, 0};
 int idx = 1;
 
 JSONObject curr_json;
@@ -219,11 +223,74 @@ void drawMove(String move_name) {
   textAlign(LEFT);
 }
 void drawSettingScreen() {
-  fill(150);
+  textAlign(CENTER,CENTER);
+  textSize(40);
+  fill(0);
   draw_rect(0, 0, width, height);
-  if (mousePressed) {
-    drawSettingScreen=false;
+  for (int i=0; i<3; i++) {
+    if (buttonLst[i]==0) {
+      fill(150);
+    } else {
+      fill(buttonLst[i], 255, 255);
+    }
+    ellipse(width/4, height/4*(1+i), width/8, width/8);
+    fill(0);
+    draw_text("ON", width/4, height/4*(1+i));
   }
+  for (int i=3; i<6; i++) {
+    if (buttonLst[i]==0) {
+      fill(150);
+    } else {
+      fill(buttonLst[i], 255, 255);
+    }
+    ellipse(width/4*3, height/4*(1+i-3), width/8, width/8);
+    fill(0);
+    draw_text("OFF", width/4*3, height/4*(1+i-3));
+  }
+  textSize(20);
+  fill(0);
+  draw_text("BACK", width/8, height/2);
+  fill(255);
+  textSize(40);
+  ellipse(width/8,height/2,width/15,width/15);
+  draw_text("Music", width/2, height/4);
+  draw_text("Sound Effects", width/2, height/4*2);
+  draw_text("Comic Sans", width/2, height/4*3);
+  textSize(80);
+  draw_text("SETTINGS", width/2, height/8);
+  textSize(12);
+  if (mousePressed){
+  if (dist(mouseX,mouseY,width/4,height/4)<=width/16){
+    sound=true;
+    buttonLst[0]=100;
+    buttonLst[3]=0;
+  }
+  if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
+    sound=false;
+    print("lol");
+    buttonLst[0]=0;
+    buttonLst[3]=255;
+  }
+  if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
+    soundFX=true;
+    buttonLst[1]=100;
+    buttonLst[4]=0;
+  }
+  if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
+    soundFX=false;
+    buttonLst[1]=0;
+    buttonLst[4]=255;
+  }
+  if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
+    comicSans=true;
+    buttonLst[2]=100;
+    buttonLst[5]=0;
+  }
+  if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
+    comicSans=false;
+    buttonLst[2]=0;
+    buttonLst[5]=255;
+  }}
 }
 
 void drawStartScreen() {
@@ -263,7 +330,7 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
