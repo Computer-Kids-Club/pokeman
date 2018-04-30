@@ -63,6 +63,7 @@ char DISPLAY_POKES = 'P';
 char DISPLAY_NONE = 'N';
 char DISPLAY_MOVE = 'M';
 char DISPLAY_DELAY = 'D';
+char DISPLAY_FIELD = 'F';
 
 char DISPLAY_WIN = 'W';
 char DISPLAY_LOSE = 'L';

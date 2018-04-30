@@ -40,6 +40,12 @@ PImage img_flag_pulse;
 PImage img_flag_punch;
 PImage img_flag_sound;
 
+int i_weather = 0;
+int i_terrain = 0;
+
+ArrayList<String> l_me_hazards = new ArrayList<String> ();
+ArrayList<String> l_other_hazards = new ArrayList<String> ();
+
 HashMap<String, PImage> TYPE_MOVE_IMG = new HashMap<String, PImage>();
 
 void init_battle_screen() {

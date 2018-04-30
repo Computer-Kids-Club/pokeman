@@ -37,8 +37,8 @@ class Field(object):
         move_dic["weather"] = self.weather
         move_dic["terrain"] = self.terrain
 
-        move_dic["mehazards"] = self.l_entry_hazards[player]
-        move_dic["otherhazards"] = self.l_entry_hazards[other_player]
+        move_dic["mehazards"] = self.dic_entry_hazards[player]
+        move_dic["otherhazards"] = self.dic_entry_hazards[other_player]
 
         return move_dic
 

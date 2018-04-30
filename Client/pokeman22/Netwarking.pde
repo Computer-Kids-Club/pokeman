@@ -145,6 +145,18 @@ void process_data(String dataIn) {
     str_cur_move_anime_style = json_move.getString("anime");
   } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
     i_cur_animation_frames_left = 30;
+  } else if (dataIn.charAt(0)==DISPLAY_FIELD) {
+    JSONObject json = parseJSONObject(dataIn.substring(1));
+    i_weather = json.getInt("weather");
+    i_terrain = json.getInt("terrain");
+    JSONArray json_arr_me_hazards = json.getJSONArray("mehazards");
+    JSONArray json_arr_other_hazards = json.getJSONArray("otherhazards");
+    for(int i=0;i<json_arr_me_hazards.size();i++) {
+      l_me_hazards.add(json_arr_me_hazards.getString(i));
+    }
+    for(int i=0;i<json_arr_other_hazards.size();i++) {
+      l_other_hazards.add(json_arr_other_hazards.getString(i));
+    }
   }
 }
 

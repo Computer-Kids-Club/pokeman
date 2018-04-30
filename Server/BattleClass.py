@@ -116,6 +116,11 @@ class Battle(object):
         player.send_data(DISPLAY_MOVE+json.dumps({"player": ME, "move": move.to_dic()}))
         other_player.send_data(DISPLAY_MOVE+json.dumps({"player": OTHER, "move": move.to_dic()}))
 
+    def send_field(self):
+        for player in self.l_players:
+            other_player = self.get_other_player(player)
+            player.send_data(DISPLAY_FIELD+json.dumps(self.field.to_dic(player, other_player)))
+
     def run(self):
         # Log.info("battle running")
 
@@ -245,6 +250,8 @@ class Battle(object):
 
                     if not move_ad_hoc_during(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player) == 1):
                         self.send_broadcast("It failed!")
+
+                    self.send_field()
 
                     # move ad hoc
 
