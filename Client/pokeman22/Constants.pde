@@ -127,7 +127,7 @@ void init_constants() {
   TYPE_COLOURS.put("dark", color(#705848));
   TYPE_COLOURS.put("fairy", color(#EE99AC));
   TYPE_COLOURS.put("error", color(#555555));
-  TYPE_COLOURS.put("???", color(#555555));
+  //TYPE_COLOURS.put("???", color(#555555));
 }
 
 class Rect {
