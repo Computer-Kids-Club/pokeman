@@ -41,6 +41,31 @@ class Move(object):
 
         self.i_prob = parse_move_json(dic_move['prob'])
 
+        self.i_priority = 0
+
+        if self.str_name in ["helping-hand"]:
+            self.i_priority = 5
+        elif self.str_name in ["detect", "magic-coat", "protect", "snatch"]:
+            self.i_priority = 4
+        elif self.str_name in ["crafty-shield", "fake-out", "quick-guard", "wide-guard", "spotlight"]:
+            self.i_priority = 3
+        elif self.str_name in ["ally-switch", "extreme-speed", "feint", "first-impression", "follow-me", "rage-powder"]:
+            self.i_priority = 2
+        elif self.str_name in ["accelerock", "aqua-jet", "baby-doll-eyes", "bide", "bullet-punch", "ice-shard", "ion-deluge", "mach-punch", "powder", "quick-attack", "shadow-sneak", "sucker-punch", "vacuum-wave", "water-shuriken"]:
+            self.i_priority = 1
+        elif self.str_name in ["vital-throw"]:
+            self.i_priority = -1
+        elif self.str_name in ["beak-blast", "focus-punch", "shell-trap"]:
+            self.i_priority = -3
+        elif self.str_name in ["avalanche", "revenge"]:
+            self.i_priority = -4
+        elif self.str_name in ["counter", "mirror-coat"]:
+            self.i_priority = -5
+        elif self.str_name in ["circle-throw", "dragon-tail", "roar", "whirlwind"]:
+            self.i_priority = -6
+        elif self.str_name in ["trick-room"]:
+            self.i_priority = -7
+
         print(name)
         self.flag_contact = dic_move['flag_contact']
         self.flag_charge = dic_move['flag_charge']
@@ -63,6 +88,22 @@ class Move(object):
         self.flag_mental = dic_move['flag_mental']
         self.flag_non_sky_battle = dic_move['flag_non-sky-battle']
         self.flag_dance = dic_move['flag_dance']
+
+        self.str_anime_style = self.str_cat
+        if self.flag_punch:
+            self.str_anime_style = "flag_punch"
+        if self.flag_sound:
+            self.str_anime_style = "flag_sound"
+        if self.flag_powder:
+            self.str_anime_style = "flag_powder"
+        if self.flag_bite:
+            self.str_anime_style = "flag_bite"
+        if self.flag_pulse:
+            self.str_anime_style = "flag_pulse"
+        if self.flag_ballistics:
+            self.str_anime_style = "flag_ballistics"
+        if self.flag_dance:
+            self.str_anime_style = "flag_dance"
 
         self.b_stat_change = False
         if 'stacha' in dic_move:
@@ -94,7 +135,38 @@ class Move(object):
         move_dic["pp"] = self.i_pp
         move_dic["maxpp"] = self.i_max_pp
 
+        move_dic["anime"] = self.str_anime_style
+
         return move_dic
+
+    def get_recoil_ratio(self):
+        i_recoil_ratio = 0
+
+        if self.str_name in ["take-down", "submission", "wild-charge", "head-charge", "shadow-rush"]:
+            i_recoil_ratio = 1/4
+        elif self.str_name in ["double-edge", "volt-tackle", "flare-blitz", "brave-bird", "wood-hammer"]:
+            i_recoil_ratio = 1/3
+        elif self.str_name in ["head-smash", "light-of-ruin"]:
+            i_recoil_ratio = 1/2
+
+        return i_recoil_ratio
+
+    def get_heal_hp(self, i_dmg, atk_poke):
+        i_heal_hp = 0
+
+        if self.str_name == "dream-eater" and atk_poke.str_status == "sleep":
+            i_heal_hp = i_dmg * 1/2
+        elif self.str_name in ["absorb", "drain-punch", "giga-drain", "horn-leech", "leech-life", "mega-drain"]:
+            i_heal_hp = i_dmg * 1/2
+        elif self.str_name in ["heal-order", "heal-pulse", "milk-drink"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 2
+        elif self.str_name in ["recover", "roost", "slack-off", "softboiled"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 2
+        elif self.str_name in ["rest"]:
+            i_heal_hp = atk_poke.get_usable_stats().i_hp * 1 / 1
+            atk_poke.str_status = "none"
+
+        return i_heal_hp
 
     # overriding str method
     def __str__(self):

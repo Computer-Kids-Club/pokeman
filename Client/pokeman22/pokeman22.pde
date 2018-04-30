@@ -13,6 +13,8 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.Channels;
 import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 // Note the HashMap's "key" is a String and "value" is an Integer
 
@@ -144,6 +146,7 @@ boolean shinyBool = false;
 int pokemonSlotNumber;
 int pokemonNumber;
 
+int selectedNature = 0;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -495,6 +498,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     maleBool = false;
     femaleBool = false;
     unspecifiedBool = false;
+    selectedNature = 0;
 
     if (num_male.get(pokeNum) != null) {
       selectedGender = genders[0];
@@ -614,12 +618,20 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     stroke(255);
     draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*43/75);
     fill(255);
+    if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
+      MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
+    }
     draw_rect(MOVESLIDER.i_x, MOVESLIDER.i_y, MOVESLIDER.i_w, MOVESLIDER.i_h);
     for (int i = 0; i < MOVES_PER_PAGE && i + 1 + offsetMoves <= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length; i++) {
       if (i < validMoveSearch.size()) {
         if (validMoveSearch.size() > MOVES_PER_PAGE) {
           offsetMoves = int((MOVESLIDER.i_y - moveSliderStartY)*(validMoveSearch.size()-MOVES_PER_PAGE)/((height - SELECTSCREENSHIFT_Y - moveSliderStartY)-MOVESLIDER.i_h));
         } else {
+          offsetMoves = 0;
+        }
+        if (offsetMoves < 0) {
           offsetMoves = 0;
         }
 
@@ -642,6 +654,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (mousePressed && mousePressValid == true) {
           if (mouseX < width*6/7 - MOVESLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*521/900 + (i+1)*gridSize + SELECTSCREENSHIFT_Y && mouseY > height*521/900 + i*gridSize + SELECTSCREENSHIFT_Y && moveSliderFollow == false) {
             selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
+            validMoveSearch = new StringList();
             moveSelect = false;
             moveSearch = "";
           }
@@ -678,11 +691,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
           MOVESLIDER.i_y = height - SELECTSCREENSHIFT_Y - MOVESLIDER.i_h;
         }
       }
-      if (MOVESLIDER.i_y + MOVESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
-        MOVESLIDER.i_y = height - MOVESLIDER.i_h - SELECTSCREENSHIFT_Y;
-      } else if (MOVESLIDER.i_y < SELECTSCREENSHIFT_Y + height*43/75) {
-        MOVESLIDER.i_y = SELECTSCREENSHIFT_Y + height*43/75;
-      }
     }
   } else if (statSelect == true) {
     fill(255);
@@ -695,6 +703,12 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, 268);    
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188 + 45, 170, 223);
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (width*5/7 - SELECTSCREENSHIFT_X*2)/2 - 85, SELECTSCREENSHIFT_Y + height/4 + 60 + 188, 170, 45);
+
+    if (NATURESLIDER.i_y + NATURESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
+      NATURESLIDER.i_y = height - NATURESLIDER.i_h - SELECTSCREENSHIFT_Y;
+    } else if (NATURESLIDER.i_y < natureSliderStartY) {
+      NATURESLIDER.i_y = natureSliderStartY;
+    }
     draw_rect(NATURESLIDER.i_x, NATURESLIDER.i_y, NATURESLIDER.i_w, NATURESLIDER.i_h);
     fill(255);
     textAlign(RIGHT, CENTER);
@@ -705,6 +719,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("Sp. Def.", width*9/40, height*73/90);
     draw_text("Speed", width*9/40, height*76/90);
 
+    textAlign(LEFT, CENTER);
+    natureString = natureName[selectedNature];
+    if (natureStat[selectedNature].length > 0) {
+      natureString += " (+" + natureStat[selectedNature][0] + ", -" + natureStat[selectedNature][1] + ")";
+    }
+    draw_text("Nature : " + natureString, width*9/40, height*80/90);
+
+    textAlign(RIGHT, CENTER);
     draw_text("Base", width/4, height*29/45);
     for (int i = 0; i < 6; i++) {
       fill(255);
@@ -723,6 +745,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("Nature", width/2, height*29/45);
     textAlign(LEFT, CENTER);
     for (int i = 0; i < NATURES_PER_PAGE; i++) {
+      offsetNature = max(0, offsetNature);
       natureString = natureName[i + offsetNature];
       if (natureStat[i + offsetNature].length > 0) {
         natureString += " (+" + natureStat[i + offsetNature][0] + ", -" + natureStat[i + offsetNature][1] + ")";
@@ -796,11 +819,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         NATURESLIDER.i_y = height - SELECTSCREENSHIFT_Y - NATURESLIDER.i_h;
       }
     }
-    if (NATURESLIDER.i_y + NATURESLIDER.i_h > height - SELECTSCREENSHIFT_Y) {
-      NATURESLIDER.i_y = height - NATURESLIDER.i_h - SELECTSCREENSHIFT_Y;
-    } else if (NATURESLIDER.i_y < natureSliderStartY) {
-      NATURESLIDER.i_y = natureSliderStartY;
-    }
   } else {
     fill(0, 0, 0, 150);
     draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*473/900, width*5/7 - SELECTSCREENSHIFT_X*2, height*67/225);
@@ -872,17 +890,17 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
-  fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
-  rectMode(CORNER);
-  draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
-  fill(255);
-  draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
-  if (names_types.get(num_names.get(pokeNum))[1] != null) {
-    fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
-    draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
-    fill(255);
-    draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
-  }
+  //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
+  //rectMode(CORNER);
+  ///draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
+  //fill(255);
+  //draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
+  //if (names_types.get(num_names.get(pokeNum))[1] != null) {
+    //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
+    //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
+    //fill(255);
+    //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  //}
 
   if (maleBool) {
     draw_text("Male", width*79/280 + SELECTSCREENSHIFT_X, height*79/180);
@@ -1041,6 +1059,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
           if (mouseX <= width*157/280 - NATURESLIDER.i_w && mouseX >= width*123/280 && mouseY <= natureSliderStartY + (i+1)*(height/45) && mouseY >= natureSliderStartY + i*(height/45)) {
+            selectedNature = i + offsetNature;
             if (natureStat[i + offsetNature].length > 0) {
               for (int j = 0; j < 5; j++) {
                 if (natureStat[i + offsetNature][0] == natureAbility[j]) {
@@ -1056,6 +1075,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
                 nature[j] = 0;
               }
             }
+            mousePressValid = false;
           }
         }
       }
@@ -1100,15 +1120,15 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  //size(1400, 900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
-  size(displayWidth, displayHeight, P2D);
+  //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
 
-  myClient = new Client(this, "127.0.0.1", PORT);
+  myClient = new Client(this, IPv4, PORT);
 
   init_constants();
 
@@ -1196,10 +1216,33 @@ void setup() {
     };
     String[] movelistPoke = new String[4];
     String[][] l_possible_moves = names_moves.get(num_names.get(pokemonNumber));
-    for (int j=0; j<movelistPoke.length; j++) {
-      int i_rand_cat_move = int(random(l_possible_moves.length));
-      movelistPoke[j] = l_possible_moves[i_rand_cat_move][int(random(l_possible_moves[i_rand_cat_move].length))];
+    // generate ranbo moves
+
+    Set<String> l_possible_moves_condensed = new HashSet<String>();
+    for (int k=0; k<l_possible_moves.length; k++) {
+      for (int j=0; j<l_possible_moves[k].length; j++) {
+        l_possible_moves_condensed.add(l_possible_moves[k][j]);
+      }
     }
+    l_possible_moves_condensed.remove("error");
+
+    for (int j=0; j<movelistPoke.length && l_possible_moves_condensed.size()>0; j++) {
+      int item = int(random(l_possible_moves_condensed.size()));
+      int k = 0;
+      for (String cur_move : l_possible_moves_condensed)
+      {
+        if (k == item) {
+          movelistPoke[j] = cur_move;
+          l_possible_moves_condensed.remove(cur_move);
+          break;
+        }
+        k++;
+      }
+
+      //int i_rand_cat_move = int(random(l_possible_moves_condensed.size()));
+      //movelistPoke[j] = l_possible_moves_condensed.get(i_rand_cat_move);
+    }
+
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
   }
   for (int i = 0; i < male.length; i++) {
@@ -1221,6 +1264,7 @@ void setup() {
    println(names_moves.get("bulbasaur")[1]);*/
 
   init_console();
+  init_battle_screen();
 }
 
 void draw() {

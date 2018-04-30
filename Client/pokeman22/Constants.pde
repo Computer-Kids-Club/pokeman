@@ -40,7 +40,12 @@ int SELECTSCREENSHIFT_X;
 int ME = 0;
 int OTHER = 1;
 
+<<<<<<< HEAD
 int PORT = 80;
+=======
+String IPv4 = "127.0.0.1";
+int PORT = 4004;
+>>>>>>> 1832e8a1316ad7431bc6ef84b81910b69297aa4a
 
 char TERMINATING_CHAR = '`';
 
@@ -126,7 +131,7 @@ void init_constants() {
   TYPE_COLOURS.put("dark", color(#705848));
   TYPE_COLOURS.put("fairy", color(#EE99AC));
   TYPE_COLOURS.put("error", color(#555555));
-  TYPE_COLOURS.put("???", color(#555555));
+  //TYPE_COLOURS.put("???", color(#555555));
 }
 
 class Rect {

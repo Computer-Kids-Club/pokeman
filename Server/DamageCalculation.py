@@ -11,6 +11,15 @@ from Constants import *
 from random import randint
 str_prv_mov = ''
 
+def confusion_attack(def_poke):
+
+    confusion_move = Move()
+    confusion_move.i_pow = 40
+    confusion_move.str_type = "confusion"
+
+    i_dmg = attack(def_poke, def_poke, confusion_move, Field())
+
+    return i_dmg
 
 def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, def_player = None):
     global str_prv_mov
