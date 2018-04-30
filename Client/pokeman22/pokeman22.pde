@@ -146,6 +146,7 @@ boolean shinyBool = false;
 int pokemonSlotNumber;
 int pokemonNumber;
 
+int selectedNature = 0;
 
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
@@ -497,6 +498,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     maleBool = false;
     femaleBool = false;
     unspecifiedBool = false;
+    selectedNature = 0;
 
     if (num_male.get(pokeNum) != null) {
       selectedGender = genders[0];
@@ -717,6 +719,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     draw_text("Sp. Def.", width*9/40, height*73/90);
     draw_text("Speed", width*9/40, height*76/90);
 
+    textAlign(LEFT, CENTER);
+    natureString = natureName[selectedNature];
+    if (natureStat[selectedNature].length > 0) {
+      natureString += " (+" + natureStat[selectedNature][0] + ", -" + natureStat[selectedNature][1] + ")";
+    }
+    draw_text("Nature : " + natureString, width*9/40, height*80/90);
+
+    textAlign(RIGHT, CENTER);
     draw_text("Base", width/4, height*29/45);
     for (int i = 0; i < 6; i++) {
       fill(255);
@@ -880,17 +890,17 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_text("Level :", width*3/20 + SELECTSCREENSHIFT_X, height*163/300);
   draw_text("Ability :", width*3/20 + SELECTSCREENSHIFT_X, height*134/225);
 
-  fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
-  rectMode(CORNER);
-  draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
-  fill(255);
-  draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
-  if (names_types.get(num_names.get(pokeNum))[1] != null) {
-    fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
-    draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
-    fill(255);
-    draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
-  }
+  //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[0]));
+  //rectMode(CORNER);
+  ///draw_rect(width/7 + SELECTSCREENSHIFT_X + 200, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[0])+4), 14);
+  //fill(255);
+  //draw_text(names_types.get(num_names.get(pokeNum))[0], width/7 + SELECTSCREENSHIFT_X + 200, height*221/450 + 7);
+  //if (names_types.get(num_names.get(pokeNum))[1] != null) {
+    //fill(TYPE_COLOURS.get(names_types.get(num_names.get(pokeNum))[1]));
+    //draw_rect(width*3/20 + SELECTSCREENSHIFT_X + 10, height*221/450, int(textWidth(names_types.get(num_names.get(pokeNum))[1])+4), 14);
+    //fill(255);
+    //draw_text(names_types.get(num_names.get(pokeNum))[1], width*3/20 + SELECTSCREENSHIFT_X + 8 + 100, height*221/450);
+  //}
 
   if (maleBool) {
     draw_text("Male", width*79/280 + SELECTSCREENSHIFT_X, height*79/180);
@@ -1049,6 +1059,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
           if (mouseX <= width*157/280 - NATURESLIDER.i_w && mouseX >= width*123/280 && mouseY <= natureSliderStartY + (i+1)*(height/45) && mouseY >= natureSliderStartY + i*(height/45)) {
+            selectedNature = i + offsetNature;
             if (natureStat[i + offsetNature].length > 0) {
               for (int j = 0; j < 5; j++) {
                 if (natureStat[i + offsetNature][0] == natureAbility[j]) {
@@ -1064,6 +1075,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
                 nature[j] = 0;
               }
             }
+            mousePressValid = false;
           }
         }
       }
@@ -1108,9 +1120,9 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  //size(1400, 900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
-  size(displayWidth, displayHeight, P2D);
+  //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
