@@ -40,7 +40,7 @@ int SELECTSCREENSHIFT_X;
 int ME = 0;
 int OTHER = 1;
 
-int PORT = 17171;
+int PORT = 80;
 
 char TERMINATING_CHAR = '`';
 
