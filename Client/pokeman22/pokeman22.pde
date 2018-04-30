@@ -1203,15 +1203,15 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 void setup() {
-  size(1400, 900, P2D);
+  //size(1400, 900, P2D);
   //fullScreen();
-  //size(displayWidth, displayHeight, P2D);
+  size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
   colorMode(HSB);
 
-  PFont font = createFont("PokemonHollow.ttf", 32);
+  PFont font = createFont("PokemonSolid.ttf", 16);
   textFont(font);
 
   myClient = new Client(this, IPv4, PORT);
