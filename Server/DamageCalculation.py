@@ -31,7 +31,8 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
-    i_ability_buff = 1
+    i_atk_buff = 1
+    i_def_buff = 1
     i_weather = 1
     i_terrain = 1
     str_mov_name = move.str_name
@@ -122,6 +123,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if (str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude') and str_terrain == 'grassy':
         i_terrain = 0.5
 
+    #---------------#
+    # MOVE CATEGORY #
+    #---------------#
     print(move.str_cat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
@@ -158,127 +162,131 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #--------------------#
     if str_atk_ability == 'water-bubble':
         if str_mov_type == 'water':
-            i_ability_buff = 2
+            i_atk_buff = 2
 
     if str_atk_ability == 'flare-boost':
         if str_status == 'burn':
             if move.str_cat == 'special':
-                i_ability_buff = 1.5
+                i_atk_buff = 1.5
 
     if str_atk_ability == 'iron-fist':
         if b_punch:
-            i_ability_buff = 1.2
+            i_atk_buff = 1.2
 
     if str_atk_ability == 'mega-launcher':
         if b_pulse:
-            i_ability_buff = 1.5
+            i_atk_buff = 1.5
 
     if str_atk_ability == 'normalize':
         str_mov_type = 'normal'
-        i_ability_buff = 1.2
+        i_atk_buff = 1.2
 
     if str_atk_ability == 'reckless':
         if str_mov_name in ["jump-kick", "high-jump-kick"] or i_recoil > 0:
-            i_ability_buff = 1.2
+            i_atk_buff = 1.2
 
     if str_atk_ability == 'rivalry':
         if str_def_gen != 'unspecified' or str_atk_gen != 'unspecified':
             if str_atk_gen == str_def_gen:
-                i_ability_buff = 1.25
+                i_atk_buff = 1.25
             else:
-                i_ability_buff = 0.75
+                i_atk_buff = 0.75
 
     if str_atk_ability == 'sand-force':
         if str_weather == Weather.SANDSTORM:
-            i_ability_buff = 1.3
+            i_atk_buff = 1.3
 
     if str_atk_ability == 'sheer-force':
         if b_stat_change or b_status:
-            i_ability_buff = 1.3
+            i_atk_buff = 1.3
 
     if str_atk_ability == 'tough-claws':
         if b_contact:
-            i_ability_buff = 1.3
+            i_atk_buff = 1.3
+
+    if str_atk_ability == 'steelworker':
+        if str_mov_type == 'steel':
+            i_atk_buff = 1.5
 
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
     if str_def_ability == 'fluffy' and b_contact:
         if str_mov_type == 'fire':
-            i_ability_buff = 1
+            i_def_buff = 1
         else:
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
     elif str_def_ability == 'fluffy' and b_contact == False:
         if str_mov_type == 'fire':
-            i_ability_buff = 2
+            i_def_buff = 2
         else:
-            i_ability_buff = 1
+            i_def_buff = 1
     if i_type > 1:
         if str_def_ability == 'filter' or str_def_ability == 'prism-armor' or str_def_ability =='solid-rock':
-            i_ability_buff = 0.75
+            i_def_buff = 0.75
 
     if i_def_hp == def_poke.get_usable_stats().get_hp():
         if str_def_ability == 'multiscale' or str_def_ability == 'shadow-shield':
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
     if str_atk_ability == 'tinted-lens':
         if i_type < 1:
             i_type = i_type*2
 
     if str_def_ability == 'dry-skin':
         if str_mov_type == 'water':
-            i_ability_buff = 0
+            i_def_buff = 0
         elif str_mov_type == 'fire':
-            i_ability_buff = 1.25
+            i_def_buff = 1.25
 
     if str_def_ability == 'fur-coat':
         if move.str_cat == 'physical':
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
 
     if str_def_ability == 'heatproof':
         if str_mov_type == 'fire':
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
 
     if str_def_ability == 'levitate':
         if str_mov_type == 'ground':
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if str_def_ability == 'lightningrod' and str_def_ability == 'motor-drive' and str_def_ability == 'volt-absorb':
         if str_mov_type == 'electric':
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if str_def_ability == 'sap-sipper':
         if str_mov_type == 'grass':
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if str_def_ability == 'soundproof':
         if b_sound:
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if str_def_ability == 'storm-drain' and str_def_ability == 'water-absorb':
         if str_mov_type == 'water':
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if str_def_ability == 'thick-fat':
         if str_mov_type == 'ice' or str_mov_type == 'fire':
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
 
     if str_def_ability == 'water-bubble':
         if str_mov_type == 'fire':
-            i_ability_buff = 0.5
+            i_def_buff = 0.5
 
     if str_def_ability == 'wonder-guard':
         if i_type < 2:
-            i_ability_buff = 0
+            i_def_buff = 0
 
     if b_ballistic:
         if str_def_ability == 'bulletproof':
-            i_ability_buff = 0
+            i_def_buff = 0
 
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
     #i_rand = 1
-    i_other = i_other * i_ability_buff * i_move_buff
+    i_other = i_other * i_def_buff * i_atk_buff * i_move_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
