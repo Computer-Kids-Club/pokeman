@@ -1217,9 +1217,8 @@ void setup() {
   colorMode(HSB);
   noSmooth();
 
-  PFont font = createFont("PokemonSolid.ttf", 128);
+  PFont font = createFont("Pocket Monk.otf", 128);
   textFont(font);
-  textSize(16);
 
   myClient = new Client(this, IPv4, PORT);
 
@@ -1365,6 +1364,8 @@ void setup() {
 }
 
 void draw() {
+    
+  textSize(22);
 
   recieve_data();
 
