@@ -265,6 +265,9 @@ class Battle(object):
                     else:
                         if other_player.b_active_poke_is_new:
                             self.hazard_dmg(other_player)
+                        elif player.i_turn_readiness == NOT_READY:
+                            player
+                            return
 
                     self.send_field()
 

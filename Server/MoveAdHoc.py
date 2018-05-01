@@ -1,6 +1,8 @@
 
 from random import randint, choice
 from FieldClass import Field
+from Constants import *
+import json
 
 def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
 
@@ -41,6 +43,13 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
             def_player.i_active_poke_idx = choice(def_player.get_available_pokes())
             def_player.active_poke = def_player.team[def_player.i_active_poke_idx]
             def_player.b_active_poke_is_new = True
+        else:
+            return False
+    elif move.str_name in ["baton-pass", "parting-shot", "u-turn", "volt-switch"]:
+        if len(atk_player.get_available_pokes()):
+            atk_player.send_data(SELECT_POKE + json.dumps({"availpoke": atk_player.get_available_pokes()}))
+            atk_player.i_turn_readiness = NOT_READY
+            atk_player.i_active_move_idx = -1
         else:
             return False
 
