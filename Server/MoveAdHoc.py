@@ -2,6 +2,7 @@
 from random import randint, choice
 from FieldClass import Field
 from Constants import *
+from TypeClass import Type
 import json
 
 def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
@@ -52,6 +53,29 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
             atk_player.i_active_move_idx = -1
         else:
             return False
+    elif move.str_name == "aromatherapy":
+        for poke in atk_player.team:
+            poke.str_status = 'none'
+    elif move.str_name == "baneful-bunker":
+        atk_poke.b_baneful_bunker = True
+        atk_poke.b_protected = True
+    elif move.str_name in ["block"]:
+        def_poke.b_trapped = True
+    elif move.str_name in ["camouflage"]:
+        atk_poke.type2 = None
+        if field.terrain == Terrain.NO:
+            atk_poke.type1 = Type("normal")
+        elif field.terrain == Terrain.ELECTRIC:
+            atk_poke.type1 = Type("electric")
+        elif field.terrain == Terrain.GRASSY:
+            atk_poke.type1 = Type("grassy")
+        elif field.terrain == Terrain.MISTY:
+            atk_poke.type1 = Type("misty")
+        elif field.terrain == Terrain.PSYCHIC:
+            atk_poke.type1 = Type("psychic")
+    elif move.str_name in ["conversion"]:
+        atk_poke.type2 = None
+        atk_poke.type1 = choice(atk_poke.l_moves).type
 
     return True
 

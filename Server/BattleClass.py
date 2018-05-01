@@ -266,7 +266,6 @@ class Battle(object):
                         if other_player.b_active_poke_is_new:
                             self.hazard_dmg(other_player)
                         elif player.i_turn_readiness == NOT_READY:
-                            player
                             return
 
                     self.send_field()
@@ -367,7 +366,9 @@ class Battle(object):
                 i_recoil_dmg = 0
 
                 if cur_move.str_name in ["jump-kick", "high-jump-kick"]:
-                    i_recoil_dmg = atk_poke.get_usable_stats().i_hp//2
+                    i_recoil_dmg = atk_poke.get_usable_stats().i_hp // 2
+                elif cur_move.str_name in ["belly-drum"]:
+                    i_recoil_dmg = atk_poke.get_usable_stats().i_hp // 2
 
                 atk_poke.i_hp -= i_recoil_dmg
 
@@ -408,9 +409,18 @@ class Battle(object):
             if not atk_poke.is_usable():
                 continue
 
+            if atk_poke.b_aqua_ring:
+                atk_poke.i_hp += int(atk_poke.get_usable_stats().i_hp / 16)
+
+            atk_poke.i_hp = min(atk_poke.i_hp, atk_poke.get_usable_stats().i_hp)
+
+            self.send_players_pokes()
+
             #atk_poke.i_hp += int(atk_poke.get_usable_stats().i_hp / 13)
 
             #self.send_broadcast("It regained 7.69230769231% hp.")
+
+            # status effect damage
 
             if atk_poke.str_status == "burn":
                 atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 16)

@@ -102,8 +102,13 @@ class Pokeman(object):
 
         self.b_protected = False
         self.i_protect_counter = 0
+        self.b_baneful_bunker = False
 
         self.b_need_to_switch = False
+
+        self.b_aqua_ring = False
+
+        self.b_trapped = False
 
 
     def get_moves(self):
@@ -183,4 +188,4 @@ class Pokeman(object):
         return not self.b_fainted
 
     def is_trapped(self):
-        return False
+        return self.b_trapped
