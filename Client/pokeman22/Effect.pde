@@ -334,7 +334,7 @@ class Effect {
       }
 
       textFont(font_plain);
-      textSize(18);
+      textSize(i_plain_font_size);
     }
     if (rect != null) {
       draw_rectMode(CENTER);

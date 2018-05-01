@@ -1213,6 +1213,8 @@ PFont font_plain;
 PFont font_big_solid;
 PFont font_big_hollow;
 
+int i_plain_font_size = 10;
+
 void setup() {
   //size(1400, 900, P2D);
   //fullScreen();
@@ -1223,7 +1225,7 @@ void setup() {
   colorMode(HSB);
   noSmooth();
 
-  font_plain = createFont("Pocket Monk.otf", 128);
+  font_plain = createFont("WhiteRabbit.otf", 128);
   font_big_solid = createFont("Pokemon Solid.ttf", 128);
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   textFont(font_plain);
@@ -1374,7 +1376,7 @@ void setup() {
 void draw() {
 
   textFont(font_plain);
-  textSize(18);
+  textSize(i_plain_font_size);
 
   recieve_data();
 
