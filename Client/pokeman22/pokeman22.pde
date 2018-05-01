@@ -229,7 +229,7 @@ void drawMove(String move_name) {
   textAlign(LEFT);
 }
 void drawSettingScreen() {
-  textAlign(CENTER,CENTER);
+  textAlign(CENTER, CENTER);
   textSize(40);
   fill(0);
   draw_rect(0, 0, width, height);
@@ -255,7 +255,7 @@ void drawSettingScreen() {
   }
   textSize(20);
   fill(255);
-  ellipse(width/8,height/2,width/15,width/15);
+  ellipse(width/8, height/2, width/15, width/15);
   fill(0);
   draw_text("BACK", width/8, height/2);
   fill(255);
@@ -266,41 +266,36 @@ void drawSettingScreen() {
   textSize(80);
   draw_text("SETTINGS", width/2, height/8);
   textSize(12);
-  if (mousePressed){
-  if (dist(mouseX,mouseY,width/4,height/4)<=width/16){
-    sound=true;
-    buttonLst[0]=100;
-    buttonLst[3]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
-    sound=false;
-    print("lol");
-    buttonLst[0]=0;
-    buttonLst[3]=255;
-  }
-  else if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
-    soundFX=true;
-    buttonLst[1]=100;
-    buttonLst[4]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
-    soundFX=false;
-    buttonLst[1]=0;
-    buttonLst[4]=255;
-  }
-  else if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
-    game=true;
-    buttonLst[2]=100;
-    buttonLst[5]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
-    game=false;
-    buttonLst[2]=0;
-    buttonLst[5]=255;
-    exit();
-  }
-  else if (dist(mouseX,mouseY,width/8,height/2)<=width/30){
-  drawSettingScreen=false;}
+  if (mousePressed) {
+    if (dist(mouseX, mouseY, width/4, height/4)<=width/16) {
+      sound=true;
+      buttonLst[0]=100;
+      buttonLst[3]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4)<=width/16) {
+      sound=false;
+      print("lol");
+      buttonLst[0]=0;
+      buttonLst[3]=255;
+    } else if (dist(mouseX, mouseY, width/4, height/4*2)<=width/16) {
+      soundFX=true;
+      buttonLst[1]=100;
+      buttonLst[4]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4*2)<=width/16) {
+      soundFX=false;
+      buttonLst[1]=0;
+      buttonLst[4]=255;
+    } else if (dist(mouseX, mouseY, width/4, height/4*3)<=width/16) {
+      game=true;
+      buttonLst[2]=100;
+      buttonLst[5]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4*3)<=width/16) {
+      game=false;
+      buttonLst[2]=0;
+      buttonLst[5]=255;
+      exit();
+    } else if (dist(mouseX, mouseY, width/8, height/2)<=width/30) {
+      drawSettingScreen=false;
+    }
   }
 }
 
@@ -1207,6 +1202,10 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
   drawPokemon(pAnimation, x, y, 1);
 }
 
+PFont font_plain;
+PFont font_big_solid;
+PFont font_big_hollow;
+
 void setup() {
   //size(1400, 900, P2D);
   //fullScreen();
@@ -1217,8 +1216,10 @@ void setup() {
   colorMode(HSB);
   noSmooth();
 
-  PFont font = createFont("Pocket Monk.otf", 128);
-  textFont(font);
+  font_plain = createFont("Pocket Monk.otf", 128);
+  font_big_solid = createFont("Pokemon Solid.ttf", 128);
+  font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
+  textFont(font_plain);
 
   myClient = new Client(this, IPv4, PORT);
 
@@ -1364,8 +1365,9 @@ void setup() {
 }
 
 void draw() {
-    
-  textSize(22);
+
+  textFont(font_plain);
+  textSize(18);
 
   recieve_data();
 

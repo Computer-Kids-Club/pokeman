@@ -300,6 +300,10 @@ void draw_battle() {
 
   if (i_moving>0) {
     i_moving--;
+    
+    /*if(i_moving == 0) {
+      add_effect_text_effect("WOW", width/2, height/2, TYPE_COLOURS.get(str_cur_move_type));
+    }*/
 
     int tmp_move = i_moving;
 

@@ -64,6 +64,7 @@ char DISPLAY_NONE = 'N';
 char DISPLAY_MOVE = 'M';
 char DISPLAY_DELAY = 'D';
 char DISPLAY_FIELD = 'F';
+char DISPLAY_AD_HOC_TEXT = 'A';
 
 char DISPLAY_WIN = 'W';
 char DISPLAY_LOSE = 'L';

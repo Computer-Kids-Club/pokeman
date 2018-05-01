@@ -121,6 +121,11 @@ class Battle(object):
             other_player = self.get_other_player(player)
             player.send_data(DISPLAY_FIELD+json.dumps(self.field.to_dic(player, other_player)))
 
+    def send_ad_hoc_text(self, player, str_text):
+        other_player = self.get_other_player(player)
+        player.send_data(DISPLAY_AD_HOC_TEXT+json.dumps({"player": ME, "move": str_text}))
+        other_player.send_data(DISPLAY_AD_HOC_TEXT+json.dumps({"player": OTHER, "move": str_text}))
+
     def run(self):
         # Log.info("battle running")
 
@@ -215,6 +220,7 @@ class Battle(object):
 
                 # frozen, can't move
                 self.send_broadcast(atk_poke.str_name.capitalize() + " is frozen solid!")
+                self.send_ad_hoc_text(player, "frozen")
 
             elif atk_poke.str_status == "sleep":
 
@@ -250,6 +256,7 @@ class Battle(object):
 
                     if not move_ad_hoc_during(atk_poke, def_poke, cur_move, self.field, player, other_player, l_move_queue.index(player) == 1):
                         self.send_broadcast("It failed!")
+                        self.send_ad_hoc_text(player, "failed")
 
                     self.send_field()
 
@@ -258,6 +265,7 @@ class Battle(object):
                     if def_poke.b_protected and cur_move.flag_protect:
                         # protected
                         self.send_broadcast(def_poke.str_name.capitalize() + " protected itself.")
+                        self.send_ad_hoc_text(other_player, "protected")
                         continue
 
                     # if the move is not status, tell everyone the damage
@@ -343,6 +351,7 @@ class Battle(object):
             else:
                 # the move missed
                 self.send_broadcast("It missed.")
+                self.send_ad_hoc_text(player, "missed")
 
                 i_recoil_dmg = 0
 
@@ -394,10 +403,13 @@ class Battle(object):
 
             if atk_poke.str_status == "burn":
                 atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 16)
+                self.send_ad_hoc_text(player, "burn")
             elif atk_poke.str_status == "poison":
                 atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 8)
+                self.send_ad_hoc_text(player, "poison")
             elif atk_poke.str_status == "toxic":
                 atk_poke.i_hp -= int(atk_poke.get_usable_stats().i_hp / 16 * atk_poke.i_toxic_idx)
+                self.send_ad_hoc_text(player, "toxic")
                 atk_poke.i_toxic_idx += 1
 
             atk_poke.i_hp = min(atk_poke.i_hp, atk_poke.get_usable_stats().i_hp)

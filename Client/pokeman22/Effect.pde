@@ -33,16 +33,16 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
 }
 
 void add_dmg_text_effect(int i_x, int i_y) {
-  
+
   i_x += random(-35, 35);
   i_y += random(-35, 35);
-  
+
   Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
-  
+
   new_effect.rect_radius = 3;
 
   new_effect.b_fade_out = true;
-  
+
   new_effect.f_ay = -0.5;
 
   new_effect.i_alpha = 255;
@@ -58,16 +58,16 @@ void add_dmg_text_effect(int i_x, int i_y) {
 }
 
 void add_heal_text_effect(int i_x, int i_y) {
-  
+
   i_x += random(-35, 35);
   i_y += random(-35, 35);
-  
+
   Effect new_effect = new Effect(i_x, i_y, 0, random(-1, -2));
-  
+
   new_effect.rect_radius = 3;
 
   new_effect.b_fade_out = true;
-  
+
   new_effect.f_ay = -0.5;
 
   new_effect.i_alpha = 255;
@@ -78,6 +78,66 @@ void add_heal_text_effect(int i_x, int i_y) {
   new_effect.i_text_green = 100;
   new_effect.i_text_blue = 255;
   new_effect.i_text_alpha = 255;
+
+  l_effects.add(new_effect);
+}
+
+void add_effect_text_effect(String str_effect, int i_x, int i_y, color clr) {
+
+  Effect new_effect = new Effect(i_x, i_y, 0, 0);
+
+  new_effect.b_fade_out = true;
+
+  new_effect.f_scale = 0.05;
+  new_effect.f_dscale = 0.02;
+
+  new_effect.i_alpha = 0;
+
+  new_effect.add_text(str_effect, 100, 200, 200);
+
+  new_effect.change_life(25);
+
+  new_effect.i_text_red = (int)hue(clr);
+  new_effect.i_text_green = (int)saturation(clr);
+  new_effect.i_text_blue = 255;
+  new_effect.i_text_alpha = 255;
+
+  new_effect.b_big_text = true;
+  new_effect.i_text_size = 56;
+  new_effect.f_dy = new_effect.i_text_size*0.00;
+
+  l_effects.add(new_effect);
+}
+
+void add_ad_hoc_text_effect(String str_effect, int me_or_other, color clr) {
+  
+  int i_x = POKE_OTHER_RECT.i_x; 
+  int i_y = POKE_OTHER_RECT.i_y;
+  
+  if (me_or_other == ME) {
+    i_x = POKE_ME_RECT.i_x; 
+    i_y = POKE_ME_RECT.i_y;
+  }
+
+  Effect new_effect = new Effect(i_x, i_y, 0, 0);
+
+  new_effect.b_fade_out = true;
+
+  new_effect.f_scale = 0.05;
+  new_effect.f_dscale = 0.02;
+
+  new_effect.add_text(str_effect, 100, 200, 200);
+
+  new_effect.change_life(25);
+
+  new_effect.i_text_red = (int)hue(clr);
+  new_effect.i_text_green = (int)saturation(clr);
+  new_effect.i_text_blue = 255;
+  new_effect.i_text_alpha = 255;
+
+  new_effect.b_big_text = true;
+  new_effect.i_text_size = 56;
+  new_effect.f_dy = new_effect.i_text_size*0.00;
 
   l_effects.add(new_effect);
 }
@@ -94,7 +154,10 @@ class Effect {
   int i_text_red, i_text_green, i_text_blue, i_text_alpha;
   PImage img;
   PImage[] anime;
-  
+
+  boolean b_big_text;
+  int i_text_size;
+
   int rect_radius;
 
   int i_lifetime, i_life;
@@ -110,6 +173,9 @@ class Effect {
     f_dscale = f_dscale1;
     f_rot = f_rot1;
     f_drot = f_drot1;
+
+    b_big_text = false;
+    i_text_size = 18;
 
     i_red = 255;
     i_green = 255;
@@ -138,11 +204,11 @@ class Effect {
   }
 
   Effect(float f_x1, float f_y1, float f_dx1, float f_dy1) {
-    this(f_x1, f_y1, f_dx1, f_dy1, 1, 1, 0, 0);
+    this(f_x1, f_y1, f_dx1, f_dy1, 1, 0, 0, 0);
   }
 
   Effect(float f_x1, float f_y1) {
-    this(f_x1, f_y1, 0, 0, 1, 1, 0, 0);
+    this(f_x1, f_y1, 0, 0, 1, 0, 0, 0);
   }
 
   void add_text(String str_text1, int r1, int g1, int b1) {
@@ -167,6 +233,11 @@ class Effect {
     anime = anime1;
   }
 
+  void change_life(int i_lifetime1) {
+    i_lifetime = i_lifetime1;
+    i_life = i_lifetime;
+  }
+
   void draw_effect() {
 
     i_life--;
@@ -175,7 +246,7 @@ class Effect {
     f_y += f_dy;
     f_dx += f_ax;
     f_dy += f_ay;
-    f_scale *= f_dscale;
+    f_scale += f_dscale;
     f_rot += f_drot;
 
     pushMatrix();
@@ -194,7 +265,7 @@ class Effect {
     if (b_fade_in && i_life > i_lifetime - i_lifetime/3) {
       i_usable_alpha = (float)(i_lifetime - i_life)/i_lifetime*3.0;
     }
-    
+
     //println(i_usable_alpha);
 
     if (str_text != null) {
@@ -206,10 +277,24 @@ class Effect {
       noStroke();
 
       draw_rect(1, -4, round(textWidth(str_text))+4, 14, rect_radius);
+      textSize(i_text_size);
 
       fill(i_text_red, i_text_green, i_text_blue, round(i_usable_alpha*i_text_alpha));
+      if (b_big_text) {
 
-      draw_text(str_text, 0, 0);
+        textFont(font_big_solid);
+        draw_text(str_text, 0, 0);
+
+        fill(i_text_red, 50, i_text_blue, round(i_usable_alpha*i_text_alpha));
+        textFont(font_big_hollow);
+        draw_text(str_text, 0, 0);
+      } else {
+
+        draw_text(str_text, 0, 0);
+      }
+
+      textFont(font_plain);
+      textSize(18);
     }
     if (rect != null) {
       draw_rectMode(CENTER);
