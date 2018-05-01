@@ -255,7 +255,7 @@ void draw_battle() {
       translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
       translate(-POKE_ME_RECT.i_x, -POKE_ME_RECT.i_y);
     }
-    tint(frameCount%255,255,255);
+    //tint(frameCount%255,255,255);
     drawPokemon(pokemons.get(c_my_display_poke).animationBack, 0, 0);
     noTint();
     
@@ -292,7 +292,7 @@ void draw_battle() {
       translate_interpolation(POKE_OTHER_RECT, POKE_ME_RECT, tmp_move, i_total_moving);
       translate(-POKE_OTHER_RECT.i_x, -POKE_OTHER_RECT.i_y);
     }
-    tint(frameCount%255,255,255);
+    //tint(frameCount%255,255,255);
     drawPokemon(other_pokemons.get(c_other_display_poke).animation, 0, 0);
     noTint();
     
