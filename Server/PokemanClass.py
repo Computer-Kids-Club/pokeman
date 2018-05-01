@@ -103,6 +103,8 @@ class Pokeman(object):
         self.b_protected = False
         self.i_protect_counter = 0
 
+        self.b_need_to_switch = False
+
 
     def get_moves(self):
         return self.l_moves

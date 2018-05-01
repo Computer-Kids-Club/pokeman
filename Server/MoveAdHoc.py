@@ -1,5 +1,5 @@
 
-from random import randint
+from random import randint, choice
 from FieldClass import Field
 
 def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
@@ -36,6 +36,13 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
     elif move.str_name == "defog":
         field.remove_entry_hazards(atk_player)
         field.remove_entry_hazards(def_player)
+    elif move.str_name in ["roar", "whirlwind"]:
+        if len(def_player.get_available_pokes()):
+            def_player.i_active_poke_idx = choice(def_player.get_available_pokes())
+            def_player.active_poke = def_player.team[def_player.i_active_poke_idx]
+            def_player.b_active_poke_is_new = True
+        else:
+            return False
 
     return True
 
