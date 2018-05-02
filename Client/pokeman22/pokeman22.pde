@@ -107,6 +107,7 @@ PImage startButton;
 PImage pokedex;
 PImage back;
 PImage confirm;
+PImage loginBack;
 
 int i_battle_state = 0;
 
@@ -188,7 +189,8 @@ String[] getMoveData(String move_name) {
   String[] data = {move_json.getString("type"), move_json.getString("cat"), move_json.getString("power"), move_json.getString("acc"), move_json.getString("pp"), move_json.getString("prob"), move_json.getString("effect")};
   return data;
 }
-
+String username="", password="", current="";
+Boolean login=true;
 void drawMove(String move_name) {
 
   JSONObject move_json = loadJSONObject(POKEINFO_PATH+"move/"+move_name+".txt");
@@ -228,8 +230,53 @@ void drawMove(String move_name) {
 
   textAlign(LEFT);
 }
-void drawSettingScreen() {
+void login() {
+  fill(255);
+  draw_rect(0, 0, width, height);
+  imageMode(CORNER);
+  draw_image(loginBack, 0, 0);
+  textSize(100);
   textAlign(CENTER,CENTER);
+  fill(0);
+  draw_text("Login", width/2, 100);
+  textSize(40);
+  fill(255);
+  rectMode(CENTER);
+  draw_rect(width/2, height/5*2, width-300, 60);
+  draw_rect(width/2, height/5*3, width-300, 60);
+  if (username==""){
+    fill(150);
+    draw_text("Username", width/2, height/5*2);}
+  if (password==""){
+    fill(150);
+    draw_text("Password", width/2, height/5*3);}
+  
+  if (mousePressed) {
+    if (mouseX>=width/2-(width-300)/2 && mouseX<=width/2+(width-300)/2) {
+      if (mouseY>=height/5*2-30 && mouseY<=height/5*2+30) {
+        current="username";
+      } else if (mouseY>=height/5*3-30 && mouseY<=height/5*3+60) {
+        current="password";
+      }
+      else{
+        current="";}
+    }
+    else{
+        current="";}
+  }
+  
+  fill(0);
+  draw_text(username,width/2,height/5*2-10);
+  String coded="";
+  for(int i=0;i<password.length();i++){
+    coded+="*";}
+  draw_text(coded,width/2,height/5*3);
+  if (keyPressed && (key == RETURN||key==ENTER)){
+    login=false;
+  }
+}
+void drawSettingScreen() {
+  textAlign(CENTER, CENTER);
   textSize(40);
   fill(0);
   draw_rect(0, 0, width, height);
@@ -255,7 +302,7 @@ void drawSettingScreen() {
   }
   textSize(20);
   fill(255);
-  ellipse(width/8,height/2,width/15,width/15);
+  ellipse(width/8, height/2, width/15, width/15);
   fill(0);
   draw_text("BACK", width/8, height/2);
   fill(255);
@@ -266,41 +313,35 @@ void drawSettingScreen() {
   textSize(80);
   draw_text("SETTINGS", width/2, height/8);
   textSize(12);
-  if (mousePressed){
-  if (dist(mouseX,mouseY,width/4,height/4)<=width/16){
-    sound=true;
-    buttonLst[0]=100;
-    buttonLst[3]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4)<=width/16){
-    sound=false;
-    print("lol");
-    buttonLst[0]=0;
-    buttonLst[3]=255;
-  }
-  else if (dist(mouseX,mouseY,width/4,height/4*2)<=width/16){
-    soundFX=true;
-    buttonLst[1]=100;
-    buttonLst[4]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4*2)<=width/16){
-    soundFX=false;
-    buttonLst[1]=0;
-    buttonLst[4]=255;
-  }
-  else if (dist(mouseX,mouseY,width/4,height/4*3)<=width/16){
-    game=true;
-    buttonLst[2]=100;
-    buttonLst[5]=0;
-  }
-  else if (dist(mouseX,mouseY,width/4*3,height/4*3)<=width/16){
-    game=false;
-    buttonLst[2]=0;
-    buttonLst[5]=255;
-    exit();
-  }
-  else if (dist(mouseX,mouseY,width/8,height/2)<=width/30){
-  drawSettingScreen=false;}
+  if (mousePressed) {
+    if (dist(mouseX, mouseY, width/4, height/4)<=width/16) {
+      sound=true;
+      buttonLst[0]=100;
+      buttonLst[3]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4)<=width/16) {
+      sound=false;
+      buttonLst[0]=0;
+      buttonLst[3]=255;
+    } else if (dist(mouseX, mouseY, width/4, height/4*2)<=width/16) {
+      soundFX=true;
+      buttonLst[1]=100;
+      buttonLst[4]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4*2)<=width/16) {
+      soundFX=false;
+      buttonLst[1]=0;
+      buttonLst[4]=255;
+    } else if (dist(mouseX, mouseY, width/4, height/4*3)<=width/16) {
+      game=true;
+      buttonLst[2]=100;
+      buttonLst[5]=0;
+    } else if (dist(mouseX, mouseY, width/4*3, height/4*3)<=width/16) {
+      game=false;
+      buttonLst[2]=0;
+      buttonLst[5]=255;
+      exit();
+    } else if (dist(mouseX, mouseY, width/8, height/2)<=width/30) {
+      drawSettingScreen=false;
+    }
   }
 }
 
@@ -439,7 +480,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
         draw_text(names_stats.get(validPokemonSearch.get(i + offset))[j], width*13/20 + j*(width/35) - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
       }
       draw_text(BST, width*115/140 - SELECTSCREENSHIFT_X, textHight + (i+1)*gridSize);
-      if (mousePressed && mousePressValid == true) {
+      if (mousePressed && mousePressValid == true && drawSettingScreen==false) {
         if (mouseX < width*6/7 - SLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*7/45 + i*gridSize + SELECTSCREENSHIFT_Y && mouseY > height/9 + i*gridSize + SELECTSCREENSHIFT_Y && sliderFollow == false) {
           //pokemons.set(pokemonChangeNumber, new Pokemon(names_num.get(validPokemonSearch.get(i + offset)), boolean(int(random(0, 2)))));
           pokemonSlotNumber = slotNumber;
@@ -512,7 +553,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   //println(sliderFollow);
   //draw_image(back, 1048, 90);
 
-  if (mousePressed && mousePressValid == true) {   
+  if (mousePressed && mousePressValid == true && drawSettingScreen==false) {   
     if (mouseX <= width*6/7 - SELECTSCREENSHIFT_X - 10 && mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY <= SEARCH_BUTTON.i_y + height/18 && mouseY >= SEARCH_BUTTON.i_y) {
       //if (mouseX >= width*6/7 - SELECTSCREENSHIFT_X - width*23/350 - 10 && mouseY >= SEARCH_BUTTON.i_y) {
       //moveSelectScreen = false;
@@ -731,7 +772,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
             }
           }
         }
-        if (mousePressed && mousePressValid == true) {
+        if (mousePressed && mousePressValid == true && drawSettingScreen==false) {
           if (mouseX < width*6/7 - MOVESLIDER.i_w - SELECTSCREENSHIFT_X && mouseX >= width/7 + SELECTSCREENSHIFT_X && mouseY < height*521/900 + (i+1)*gridSize + SELECTSCREENSHIFT_Y && mouseY > height*521/900 + i*gridSize + SELECTSCREENSHIFT_Y && moveSliderFollow == false) {
             selectedMoves[moveSlot] = validMoveSearch.get(i + offsetMoves);
             MOVESLIDER.i_y = moveSliderStartY;
@@ -1042,7 +1083,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   textAlign(LEFT);
   fill(255);
 
-  if (mousePressed && mousePressValid == true) {
+  if (mousePressed && mousePressValid == true && drawSettingScreen==false) {
     if (moveSliderFollow == false && natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
       if (mouseX <= width*19/35 && mouseX >= width*16/35 && mouseY <= SELECTSCREENSHIFT_Y + height*139/450 && mouseY >= SELECTSCREENSHIFT_Y + height*58/225) {
         shinyBool = !shinyBool;
@@ -1238,6 +1279,7 @@ void setup() {
   pokedex = loadImage("pokedex2.png");
   back = loadImage("back.png");
   confirm = loadImage("Confirm.png");
+  loginBack = loadImage("loginBackground.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize(height/30, height/30);
@@ -1247,6 +1289,7 @@ void setup() {
   pokedex.resize(width, height);
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
+  loginBack.resize(width, height);
 
   for (int i = 0; i < types.length; i++) {
     tempImage = loadImage(types[i] + ".png");
@@ -1374,7 +1417,6 @@ void draw() {
   if (i_battle_state == BATTLING) {
     draw_battle();
   } else {
-
     drawStartScreen();
     if (moveSelectScreen == true) {
       drawPokemonInformationScreen(pokemonSlotNumber, pokemonNumber, gridSize);
@@ -1388,6 +1430,8 @@ void draw() {
       draw_rect(0, 0, width, height);
     }
   }
+if (login=true){
+      login();}
 
   for (int i=0; i<1; i++) {
     if (random(100)<50) {

@@ -184,6 +184,45 @@ void keyPressed() {
         }
       }
     }
+  } else if (login=true) {
+    for (int i = 0; i < 26; i++) {
+      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
+        if (current=="username") {
+          if (username == "") {
+            username = str(key);
+            break;
+          } else if (username.length()<=30) {
+            username += key;
+            break;
+          }
+        } else if (current=="password") {
+          if (password == "") {
+            password = str(key);
+            break;
+          } else if(password.length()<=30) {
+            password += key;
+            break;
+          }
+        }
+      }
+    }
+    if (key == BACKSPACE) {
+      if (current=="username") {
+        if (username.length() > 1) {
+          username = username.substring(0, username.length()-1);
+        } else if (username.length() > 0) {
+          username = username.substring(0, username.length()-1);
+          username = "";
+        }
+      } else if (current=="password") {
+        if (password.length() > 1) {
+          password = password.substring(0, password.length()-1);
+        } else if (password.length() > 0) {
+          password = password.substring(0, password.length()-1);
+          password = "";
+        }
+      }
+    }
   }
 }
 
