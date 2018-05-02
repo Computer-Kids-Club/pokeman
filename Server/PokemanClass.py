@@ -133,6 +133,10 @@ class Pokeman(object):
 
         self.b_kings_shield = False
 
+        self.b_laser_focus = False
+
+        self.b_lock_on = False
+
     def get_moves(self):
         return self.l_moves
 

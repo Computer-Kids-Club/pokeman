@@ -134,9 +134,13 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         atk_poke.modifier_stats, def_poke.modifier_stats = def_poke.modifier_stats, atk_poke.modifier_stats
     elif move.str_name in ["instruct"]:
         def_poke.b_instruct = True
-    elif move.str_name in ["kings+shield"]:
+    elif move.str_name in ["kings-shield"]:
         atk_poke.b_protected = True
         atk_poke.b_kings_shield = True
+    elif move.str_name in ["laser-focus"]:
+        atk_poke.b_laser_focus = True
+    elif move.str_name in ["lock-on"]:
+        atk_poke.b_lock_on = True
 
 
 
