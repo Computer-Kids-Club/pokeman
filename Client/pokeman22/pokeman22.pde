@@ -1213,7 +1213,7 @@ PFont font_plain;
 PFont font_big_solid;
 PFont font_big_hollow;
 
-int i_plain_font_size = 10;
+int i_plain_font_size = 12;
 
 void setup() {
   //size(1400, 900, P2D);
@@ -1225,10 +1225,14 @@ void setup() {
   colorMode(HSB);
   noSmooth();
 
-  font_plain = createFont("WhiteRabbit.otf", 128);
+  //font_plain = createFont("andalemo.ttf", 128);
+  font_plain = createFont("SourceCodePro-Regular.otf", 128);
   font_big_solid = createFont("Pokemon Solid.ttf", 128);
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
-  textFont(font_plain);
+  //textFont(font_plain);
+
+  String[] fontList = PFont.list();
+  printArray(fontList);
 
   myClient = new Client(this, IPv4, PORT);
 
