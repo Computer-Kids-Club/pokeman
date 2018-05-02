@@ -139,7 +139,7 @@ boolean[] statSliderFollow = {false, false, false, false, false, false};
 
 String[] natureName = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest", "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"};
 String[][] natureStat = {{}, {"Atk", "Def"}, {"Atk", "Spe"}, {"Atk", "SpA"}, {"Atk", "SpD"}, {"Def", "Atk"}, {}, {"Def", "Spe"}, {"Def", "SpA"}, {"Def", "SpD"}, {"Spe", "Atk"}, {"Spe", "Def"}, {}, {"Spe", "SpA"}, {"Spe", "SpD"}, {"SpA", "Atk"}, {"SpA", "Def"}, {"SpA", "Spe"}, 
-  {}, {"SpA", "SpD"}, {"SpD", "Atk"}, {"SpD", "Def"}, {"SpD", "Spe"}, {"SpD", "Spa"}, {}};
+  {}, {"SpA", "SpD"}, {"SpD", "Atk"}, {"SpD", "Def"}, {"SpD", "Spe"}, {"SpD", "SpA"}, {}};
 String[] natureAbility = {"Atk", "Def", "SpA", "SpD", "Spe"};
 
 String selectedAbility = "";
@@ -656,13 +656,14 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4);
   draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*19/60, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*19/60);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*5/7 - SELECTSCREENSHIFT_X*2, 60);
-  //draw_image(back, width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
-  draw_rect(width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
-  draw_rect(width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
+  draw_image(back, width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
+  draw_image(confirm, width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
+  //draw_rect(width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
+  //draw_rect(width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
   textAlign(CENTER, CENTER);
   fill(255);
-  draw_text("Back", width*3/20 + SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
-  draw_text("Confirm", width*549/700 - SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
+  //draw_text("Back", width*3/20 + SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
+  //draw_text("Confirm", width*549/700 - SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
   //draw_image(confirm, width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
 
   fill(0, 0, 0, 150);
@@ -1217,9 +1218,9 @@ PFont font_big_hollow;
 int i_plain_font_size = 12;
 
 void setup() {
-  //size(1400, 900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
-  size(displayWidth, displayHeight, P2D);
+  //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
