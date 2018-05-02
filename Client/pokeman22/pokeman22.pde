@@ -148,6 +148,7 @@ String selectedGender = "";
 boolean chooseGender = false;
 
 String[] genders = {"Male", "Female", "Unspecified"};
+String[] pictureType = {"Normal-Front", "Normal-Back", "Shiny-Front", "Shiny-Back"};
 int abilityCount = 0;
 
 boolean shinyBool = false;
@@ -644,13 +645,16 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   fill(0, 0, 0, 150);
   draw_rect(0, 0, width, height);
   stroke(255);
+  textAlign(CENTER, CENTER);
+  fill(255);
   for (int i = 0; i < 4; i++) {
     //draw_rect(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, height/4, height/4);
     if (i > 0) {
-      draw_line(width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y, width/7 + SELECTSCREENSHIFT_X + (height/4)*i, SELECTSCREENSHIFT_Y + height/4);
+      draw_line(width/7 + SELECTSCREENSHIFT_X + (width*9/56)*i, SELECTSCREENSHIFT_Y, width/7 + SELECTSCREENSHIFT_X + (width*9/56)*i, SELECTSCREENSHIFT_Y + height/4);
     }
+    draw_text(pictureType[i], width/7 + SELECTSCREENSHIFT_X + (width*9/56)*i + width*9/112, SELECTSCREENSHIFT_Y + height*41/180);
     draw_imageMode(CENTER);
-    drawPokemon(tempAnimations[i], width/7 + SELECTSCREENSHIFT_X + (height/4)*i + height/8, SELECTSCREENSHIFT_Y + height/8);
+    drawPokemon(tempAnimations[i], width/7 + SELECTSCREENSHIFT_X + (width*9/56)*i + width*9/112, SELECTSCREENSHIFT_Y + height/8);
     draw_imageMode(CORNER);
   }
   draw_line(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4, width*6/7 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height/4);
@@ -660,8 +664,6 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_image(confirm, width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
   //draw_rect(width*3/20 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
   //draw_rect(width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90, width*23/350, height/18);
-  textAlign(CENTER, CENTER);
-  fill(255);
   //draw_text("Back", width*3/20 + SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
   //draw_text("Confirm", width*549/700 - SELECTSCREENSHIFT_X + width*23/700, SELECTSCREENSHIFT_Y + height*23/90 + height/36);
   //draw_image(confirm, width*549/700 - SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*23/90);
@@ -1218,7 +1220,7 @@ PFont font_big_hollow;
 int i_plain_font_size = 12;
 
 void setup() {
-  size(1400, 900, P2D);
+  size(1400,900, P2D);
   //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
