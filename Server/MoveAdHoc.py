@@ -76,6 +76,69 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
     elif move.str_name in ["conversion"]:
         atk_poke.type2 = None
         atk_poke.type1 = choice(atk_poke.l_moves).type
+    elif move.str_name in ["curse"]:
+        if atk_poke.is_type("ghost"):
+            atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp // 2
+            def_poke.b_cursed = True
+        else:
+            atk_poke.modifier_stats.i_spe -= 1
+            atk_poke.modifier_stats.i_atk += 1
+            atk_poke.modifier_stats.i_def += 1
+    elif move.str_name in ["destiny-bond"]:
+        def_poke.b_destiny_bonded = True
+    elif move.str_name in ["detect"]:
+        atk_poke.b_protected = True
+    elif move.str_name in ["doom-desire"]:
+        atk_poke.i_doom_desire_idx = 2
+    elif move.str_name in ["electrify"]:
+        def_poke.forced_move_type = Type("electric")
+    elif move.str_name in ["encore"]:
+        def_poke.i_encore_idx = 3
+    elif move.str_name in ["endure"]:
+        atk_poke.b_endure_idx = True
+    elif move.str_name in ["entrainment"]:
+        def_poke.str_ability = atk_poke.str_ability
+    elif move.str_name in ["flower-shield"]:
+        if atk_poke.is_type("grass"):
+            atk_poke.modifier_stats.i_def += 1
+        if def_poke.is_type("grass"):
+            def_poke.modifier_stats.i_def += 1
+    elif move.str_name in ["focus-energy"]:
+        atk_poke.f_critical_hit += 2
+    elif move.str_name in ["forests-curse"]:
+        if not def_poke.is_type("grass"):
+            if def_poke.type_2 == None:
+                def_poke.type_2 = Type("grass")
+            else:
+                def_poke.type_3 = Type("grass")
+    elif move.str_name in ["gastro-acid"]:
+        def_poke.str_ability = "nullified"
+    elif move.str_name in ["future-sight"]:
+        atk_poke.i_future_sight_idx = 2
+    elif move.str_name in ["grudge"]:
+        atk_poke.b_grudge = True
+    elif move.str_name in ["guard-split"]:
+        i_avg_def = (atk_poke.usable_stats.i_def + def_poke.usable_stats.i_def) // 2
+        i_avg_spd = (atk_poke.usable_stats.i_spd + def_poke.usable_stats.i_spd) // 2
+        atk_poke.usable_stats.i_def = i_avg_def
+        def_poke.usable_stats.i_def = i_avg_def
+        atk_poke.usable_stats.i_spd = i_avg_spd
+        def_poke.usable_stats.i_spd = i_avg_spd
+    elif move.str_name in ["guard-swap"]:
+        atk_poke.modifier_stats.i_def, def_poke.modifier_stats.i_def = def_poke.modifier_stats.i_def, atk_poke.modifier_stats.i_def
+        atk_poke.modifier_stats.i_spd, def_poke.modifier_stats.i_spd = def_poke.modifier_stats.i_spd, atk_poke.modifier_stats.i_spd
+    elif move.str_name in ["heal-bell"]:
+        for poke in atk_player.team:
+            poke.str_status = "none"
+    elif move.str_name in ["heart-swap"]:
+        atk_poke.modifier_stats, def_poke.modifier_stats = def_poke.modifier_stats, atk_poke.modifier_stats
+    elif move.str_name in ["instruct"]:
+        def_poke.b_instruct = True
+    elif move.str_name in ["kings+shield"]:
+        atk_poke.b_protected = True
+        atk_poke.b_kings_shield = True
+
+
 
     return True
 
