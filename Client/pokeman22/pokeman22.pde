@@ -616,23 +616,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   } else if (moveScreenReload == true) {
     maxEV = 508;
     EVRemaining = maxEV;
-    level = pokemons.get(pokeNum).level;
-    selectedAbility = pokemons.get(pokeNum).ability;
-    selectedGender = pokemons.get(pokeNum).gender;
-    selectedNature = pokemons.get(pokeNum).natureNum;
-    shinyBool = pokemons.get(pokeNum).shiny;
-    nature = pokemons.get(pokeNum).nature;
+    level = pokemons.get(slotNumber).level;
+    selectedAbility = pokemons.get(slotNumber).ability;
+    selectedGender = pokemons.get(slotNumber).gender;
+    selectedNature = pokemons.get(slotNumber).natureNum;
+    shinyBool = pokemons.get(slotNumber).shiny;
+    nature = pokemons.get(slotNumber).nature;
 
     EV = new int[6];
     for (int i = 0; i < 6; i++) {
-      EV[i] = pokemons.get(pokeNum).EV[i];
-      EVRemaining -= pokemons.get(pokeNum).EV[i];
-      statSliders.get(i).i_x = pokemons.get(pokeNum).sliderPos[i];
+      EV[i] = pokemons.get(slotNumber).EV[i];
+      EVRemaining -= pokemons.get(slotNumber).EV[i];
+      statSliders.get(i).i_x = pokemons.get(slotNumber).sliderPos[i];
     }
 
     selectedMoves = new String[4];
-      for (int i = 0; i < 4; i++) {
-      selectedMoves[i] = pokemons.get(pokeNum).moves[i];
+    for (int i = 0; i < 4; i++) {
+      selectedMoves[i] = pokemons.get(slotNumber).moves[i];
     }
 
     allPokeMoves = new StringList();
@@ -642,6 +642,12 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     maleBool = false;
     femaleBool = false;
     unspecifiedBool = false;
+
+    for (int i = 0; i < names_abilities.get(num_names.get(pokeNum)).length; i++) {
+      if (names_abilities.get(num_names.get(pokeNum))[i] != null) {
+        abilityCount++;
+      }
+    }
 
     if (num_male.get(pokeNum) != null) {
       selectedGender = genders[0];
@@ -1122,7 +1128,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         }
         moveSearch = "";
         int[] sliderPositions = new int[6];
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
           sliderPositions[i] = statSliders.get(i).i_x;
         }
         pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves, selectedGender, selectedNature, nature, EV, sliderPositions));
@@ -1421,8 +1427,8 @@ void setup() {
       //int i_rand_cat_move = int(random(l_possible_moves_condensed.size()));
       //movelistPoke[j] = l_possible_moves_condensed.get(i_rand_cat_move);
     }
-
-    pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke));
+    int[] sliderStartingPosition = {width*169/280, width*169/280, width*169/280, width*169/280, width*169/280, width*169/280};
+    pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke, "Male", 0, new int[5], new int[6], sliderStartingPosition));
   }
   for (int i = 0; i < male.length; i++) {
     num_male.put(names_num.get(male[i]), male[i]);
