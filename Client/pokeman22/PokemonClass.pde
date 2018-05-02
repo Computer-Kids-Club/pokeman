@@ -4,7 +4,7 @@ ArrayList<Pokemon> other_pokemons;
 
 class Pokemon {
   String name, type1, type2, species, h, weight, ability, gender, item, status;
-  int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion;
+  int number, HP, ATK, DEF, SPA, SPD, SPE, happiness, level, evasion, natureNum;
   int cur_hp, old_hp;
   Boolean shiny, protect;
   ArrayList<String> text_status_effects;
@@ -13,15 +13,24 @@ class Pokemon {
   String[] moves;
   PImage[] animationBack;
   String[] move_types;
-  Pokemon (int num, Boolean s, int lvl, String abil, int[] statList, String[] moveList) {
+  int[] EV;
+  int[] sliderPos;
+  int[] nature;
+  Pokemon (int num, Boolean s, int lvl, String abil, int[] statList, String[] moveList, String gend, int natureNumber, int[] natureList, int[] EVs, int[] sliders) {
 
     moves = new String[4];
     move_types = new String[4];
+    EV = new int[6];
+    sliderPos = new int[6];
 
     number = num;
     shiny = s;
     level = lvl;
     ability = abil;
+    gender = gend;
+
+    natureNum = natureNumber;
+    nature = natureList;
 
     init_with_json(loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt"));
 
@@ -35,6 +44,18 @@ class Pokemon {
     moves[1] = moveList[1];
     moves[2] = moveList[2];
     moves[3] = moveList[3];
+    EV[0] = EVs[0];
+    EV[1] = EVs[1];
+    EV[2] = EVs[2];
+    EV[3] = EVs[3];
+    EV[4] = EVs[4];
+    EV[5] = EVs[5];
+    sliderPos[0] = sliders[0];
+    sliderPos[1] = sliders[1];
+    sliderPos[2] = sliders[2];
+    sliderPos[3] = sliders[3];
+    sliderPos[4] = sliders[4];
+    sliderPos[5] = sliders[5];
   }
 
   Pokemon (JSONObject json) {
@@ -92,7 +113,7 @@ class Pokemon {
     HP = max(HP, 1);
     cur_hp = json.getInt("hp");
     //println(cur_hp);
-    
+
     protect = json.getBoolean("protect");
   }
 
