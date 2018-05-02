@@ -208,6 +208,17 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_mov_type == 'steel':
             i_atk_buff = 1.5
 
+    if b_bite:
+        i_atk_buff = 1.5
+
+    if str_atk_ability == 'technition':
+        if i_pow <= 60:
+            i_pow *= 1.5
+
+    if str_status == 'poisoned':
+        if move.str_cat == 'physical':
+            i_atk_buff = 1.5
+
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -286,7 +297,8 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     # CALCULATING DAMAGE #
     #--------------------#
     #i_rand = 1
-    i_other = i_other * i_def_buff * i_atk_buff * i_move_buff
+    i_pow *= i_atk_buff
+    i_other = i_other * i_def_buff * i_move_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
