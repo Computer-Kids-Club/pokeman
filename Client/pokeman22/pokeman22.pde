@@ -601,7 +601,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
     for (int i = 0; i < 5; i++) {
       nature[i] = 0;
     }
-    textRestrain = 525 - MOVESLIDER.i_w;
+    textRestrain = width*3/8 - MOVESLIDER.i_w;
     for (int i = 0; i < names_moves.get(num_names.get(pokeNum)).length; i++) {
       for (int j = 0; j < names_moves.get(num_names.get(pokeNum))[i].length; j++) {
         allPokeMoves.append(names_moves.get(num_names.get(pokeNum))[i][j]);
@@ -614,6 +614,57 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
     moveScreenReset = false;
   } else if (moveScreenReload == true) {
+    maxEV = 508;
+    EVRemaining = maxEV;
+    level = pokemons.get(pokeNum).level;
+    selectedAbility = pokemons.get(pokeNum).ability;
+    selectedGender = pokemons.get(pokeNum).gender;
+    selectedNature = pokemons.get(pokeNum).natureNum;
+    shinyBool = pokemons.get(pokeNum).shiny;
+    nature = pokemons.get(pokeNum).nature;
+
+    EV = new int[6];
+    for (int i = 0; i < 6; i++) {
+      EV[i] = pokemons.get(pokeNum).EV[i];
+      EVRemaining -= pokemons.get(pokeNum).EV[i];
+      statSliders.get(i).i_x = pokemons.get(pokeNum).sliderPos[i];
+    }
+
+    selectedMoves = new String[4];
+      for (int i = 0; i < 4; i++) {
+      selectedMoves[i] = pokemons.get(pokeNum).moves[i];
+    }
+
+    allPokeMoves = new StringList();
+    chooseAbility = false;
+    abilityCount = 0;
+    chooseGender = false;
+    maleBool = false;
+    femaleBool = false;
+    unspecifiedBool = false;
+
+    if (num_male.get(pokeNum) != null) {
+      selectedGender = genders[0];
+      maleBool = true;
+    } else if (num_female.get(pokeNum) != null) {
+      selectedGender = genders[1];
+      femaleBool = true;
+    } else if (num_unspecified.get(pokeNum) != null) {
+      selectedGender = genders[2];
+      unspecifiedBool = true;
+    }
+
+    textRestrain = width*3/8 - MOVESLIDER.i_w;
+    for (int i = 0; i < names_moves.get(num_names.get(pokeNum)).length; i++) {
+      for (int j = 0; j < names_moves.get(num_names.get(pokeNum))[i].length; j++) {
+        allPokeMoves.append(names_moves.get(num_names.get(pokeNum))[i][j]);
+        if (textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")) > moveScreenNamePos) {
+          moveScreenNamePos = int(textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")));
+        }
+        moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
+      }
+    }
+
     moveScreenReload = false;
   }
   stats[0] = ((((2*names_stats.get(num_names.get(pokeNum))[0] + IV[0] + int(EV[0]/4))*level))/100 + level + 10);
@@ -745,14 +796,23 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
           }
         }
       }
-      textAlign(CENTER);
+      //textAlign(CENTER);
+      draw_text("Move Name", width*43/280 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Type", width*43/280 + SELECTSCREENSHIFT_X + width*3/35, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Category", width*43/280 + SELECTSCREENSHIFT_X + width*9/70, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Pow", width*43/280 + SELECTSCREENSHIFT_X + width*6/35, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Acc", width*43/280 + SELECTSCREENSHIFT_X + width/5, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35, SELECTSCREENSHIFT_Y + height*499/900);
+      draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35, SELECTSCREENSHIFT_Y + height*499/900);
+      /*
       draw_text("Move Name", width*43/280 + SELECTSCREENSHIFT_X + moveScreenNamePos/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("Type", width*43/280 + SELECTSCREENSHIFT_X + width*3/35 + textWidth("fighting")/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("Category", width*43/280 + SELECTSCREENSHIFT_X + width*9/70 + textWidth("physical")/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("Pow", width*43/280 + SELECTSCREENSHIFT_X + width*6/35 + textWidth("150")/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("Acc", width*43/280 + SELECTSCREENSHIFT_X + width/5 + textWidth("100")/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35 + textWidth("60")/2, SELECTSCREENSHIFT_Y + height*499/900);
-      draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("Type", width*43/280 + SELECTSCREENSHIFT_X + width*3/35 + textWidth("fighting")/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("Category", width*43/280 + SELECTSCREENSHIFT_X + width*9/70 + textWidth("physical")/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("Pow", width*43/280 + SELECTSCREENSHIFT_X + width*6/35 + textWidth("150")/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("Acc", width*43/280 + SELECTSCREENSHIFT_X + width/5 + textWidth("100")/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("PP", width*43/280 + SELECTSCREENSHIFT_X + width*8/35 + textWidth("60")/2, SELECTSCREENSHIFT_Y + height*499/900);
+       draw_text("Description", width*43/280 + SELECTSCREENSHIFT_X + width*9/35 + textRestrain/2, SELECTSCREENSHIFT_Y + height*499/900);
+       */
       textAlign(LEFT);
 
       fill(0, 0, 0, 150);
@@ -1061,7 +1121,11 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
           selectedGender = "Male";
         }
         moveSearch = "";
-        pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves));
+        int[] sliderPositions = new int[6];
+        for (int i = 0; i < 6; i++){
+          sliderPositions[i] = statSliders.get(i).i_x;
+        }
+        pokemons.set(slotNumber, new Pokemon(pokeNum, shinyBool, level, selectedAbility, stats, selectedMoves, selectedGender, selectedNature, nature, EV, sliderPositions));
         pokemonSelectScreen = false;
         moveSelectScreen = false;
         //moveScreenReset = true;
@@ -1220,7 +1284,7 @@ PFont font_big_hollow;
 int i_plain_font_size = 12;
 
 void setup() {
-  size(1400,900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
