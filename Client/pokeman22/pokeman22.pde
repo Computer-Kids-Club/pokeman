@@ -1210,6 +1210,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 }
 
 PFont font_plain;
+PFont font_plain_big;
 PFont font_big_solid;
 PFont font_big_hollow;
 
@@ -1226,7 +1227,8 @@ void setup() {
   noSmooth();
 
   //font_plain = createFont("andalemo.ttf", 128);
-  font_plain = createFont("SourceCodePro-Regular.otf", 128);
+  font_plain = createFont("SansSerif", 12);
+  font_plain_big = createFont("SansSerif", 128);
   font_big_solid = createFont("Pokemon Solid.ttf", 128);
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   //textFont(font_plain);
@@ -1397,7 +1399,11 @@ void draw() {
     } else if (pokemonSelectScreen == true) {
       drawPokemonSelectionScreen(pokemonChangeNumber);
     } else if (drawSettingScreen) {
+      textFont(font_plain_big);
+      textSize(i_plain_font_size);
       drawSettingScreen();
+      textFont(font_plain);
+      textSize(i_plain_font_size);
     }
     if (i_battle_state == SEARCHING) {
       fill(50, 50);
