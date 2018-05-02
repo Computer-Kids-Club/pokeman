@@ -13,6 +13,29 @@ void draw_all_effects() {
   }
 }
 
+void add_searching_text_effect() {
+
+  Effect new_effect = new Effect(-200, int(random(height)), random(3, 7), 0);
+
+  new_effect.add_text("Searching...", 100, 200, 200);
+
+  new_effect.change_life(25);
+  
+  new_effect.i_alpha = 0;
+
+  new_effect.i_text_red = int(random(255));
+  new_effect.i_text_green = 255;
+  new_effect.i_text_blue = 255;
+  new_effect.i_text_alpha = 255;
+  
+  new_effect.b_die_from_right = true;
+
+  new_effect.b_big_text = true;
+  new_effect.i_text_size = int(random(12, 72));
+
+  l_effects.add(new_effect);
+}
+
 void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
 
   Effect new_effect = new Effect(i_x, i_y, random(-2, 2), random(-2, 2));
@@ -109,15 +132,7 @@ void add_effect_text_effect(String str_effect, int i_x, int i_y, color clr) {
   l_effects.add(new_effect);
 }
 
-void add_ad_hoc_text_effect(String str_effect, int me_or_other, color clr) {
-  
-  int i_x = POKE_OTHER_RECT.i_x; 
-  int i_y = POKE_OTHER_RECT.i_y;
-  
-  if (me_or_other == ME) {
-    i_x = POKE_ME_RECT.i_x; 
-    i_y = POKE_ME_RECT.i_y;
-  }
+void add_ad_hoc_text_effect(String str_effect, int i_x, int i_y, color clr) {
 
   Effect new_effect = new Effect(i_x, i_y, 0, 0);
 
@@ -142,6 +157,19 @@ void add_ad_hoc_text_effect(String str_effect, int me_or_other, color clr) {
   l_effects.add(new_effect);
 }
 
+void add_ad_hoc_text_effect(String str_effect, int me_or_other, color clr) {
+
+  int i_x = POKE_OTHER_RECT.i_x; 
+  int i_y = POKE_OTHER_RECT.i_y;
+
+  if (me_or_other == ME) {
+    i_x = POKE_ME_RECT.i_x; 
+    i_y = POKE_ME_RECT.i_y;
+  }
+
+  add_ad_hoc_text_effect(str_effect, i_x, i_y, clr);
+}
+
 class Effect {
 
   float f_x, f_y, f_dx, f_dy;
@@ -163,6 +191,8 @@ class Effect {
   int i_lifetime, i_life;
 
   boolean b_fade_in, b_fade_out;
+  
+  boolean b_die_from_right;
 
   Effect(float f_x1, float f_y1, float f_dx1, float f_dy1, float f_scale1, float f_dscale1, float f_rot1, float f_drot1) {
     f_x = f_x1;
@@ -176,6 +206,8 @@ class Effect {
 
     b_big_text = false;
     i_text_size = 18;
+    
+    b_die_from_right = false;
 
     i_red = 255;
     i_green = 255;
@@ -240,7 +272,13 @@ class Effect {
 
   void draw_effect() {
 
-    i_life--;
+    if(b_die_from_right) {
+      if(f_x > width + 200) {
+        i_life = 0; 
+      }
+    } else {
+      i_life--;
+    }
 
     f_x += f_dx;
     f_y += f_dy;
@@ -283,10 +321,12 @@ class Effect {
       if (b_big_text) {
 
         textFont(font_big_solid);
+        textSize(i_text_size);
         draw_text(str_text, 0, 0);
 
         fill(i_text_red, 50, i_text_blue, round(i_usable_alpha*i_text_alpha));
         textFont(font_big_hollow);
+        textSize(i_text_size);
         draw_text(str_text, 0, 0);
       } else {
 
@@ -294,7 +334,7 @@ class Effect {
       }
 
       textFont(font_plain);
-      textSize(18);
+      textSize(i_plain_font_size);
     }
     if (rect != null) {
       draw_rectMode(CENTER);
