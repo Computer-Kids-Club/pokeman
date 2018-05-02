@@ -26,6 +26,7 @@ class Field(object):
         self.dic_entry_hazards[player] = []
 
     def count_entry_hazards(self, player, str_hazard):
+        #print(self.dic_entry_hazards[player].count(str_hazard))
         return self.dic_entry_hazards[player].count(str_hazard)
 
     def add_entry_hazard(self, player, str_hazard):
@@ -37,8 +38,8 @@ class Field(object):
         move_dic["weather"] = self.weather
         move_dic["terrain"] = self.terrain
 
-        move_dic["mehazards"] = self.l_entry_hazards[player]
-        move_dic["otherhazards"] = self.l_entry_hazards[other_player]
+        move_dic["mehazards"] = self.dic_entry_hazards[player]
+        move_dic["otherhazards"] = self.dic_entry_hazards[other_player]
 
         return move_dic
 

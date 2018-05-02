@@ -27,7 +27,9 @@ void mouseReleased() {
 }
 
 void mouseClicked() {
+  add_ad_hoc_text_effect("Click!", mouseX, mouseY, color(#FFE600));
 }
+
 void mouseWheel(MouseEvent event) {
   mouse_wheel_console();
   if (b_console)
@@ -91,6 +93,9 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
+  
+  add_ad_hoc_text_effect(""+key, int(random(100, width-100)), int(random(100, width-100)), color(int(random(255)),255,255));
+  
   key_pressed_console();
   if (b_console)
     return;

@@ -27,6 +27,7 @@ class Pokeman(object):
         self.type_2 = None
         if "type2" in dic_poke:
             self.type_2 = Type(dic_poke["type2"])
+        self.type_3 = None
 
         self.l_possible_abi = [dic_poke["ability1"]]
         if "ability2" in dic_poke:
@@ -102,7 +103,39 @@ class Pokeman(object):
 
         self.b_protected = False
         self.i_protect_counter = 0
+        self.b_baneful_bunker = False
 
+        self.b_need_to_switch = False
+
+        self.b_aqua_ring = False
+
+        self.b_trapped = False
+
+        self.b_cursed = False
+
+        self.b_destiny_bonded = False
+
+        self.i_doom_desire_idx = -1
+
+        self.forced_move_type = None
+
+        self.i_encore_idx = -1
+
+        self.b_endure_idx = False
+
+        self.f_critical_hit = 1
+
+        self.i_future_sight_idx = -1
+
+        self.b_grudge = False
+
+        self.b_instruct = False
+
+        self.b_kings_shield = False
+
+        self.b_laser_focus = False
+
+        self.b_lock_on = False
 
     def get_moves(self):
         return self.l_moves
@@ -117,6 +150,15 @@ class Pokeman(object):
             actually_usable_stats.i_spe = actually_usable_stats.i_spe//2
 
         return actually_usable_stats
+
+    def is_type(self, str_type):
+        if self.type_1.str_name == str_type:
+            return True
+        if self.type_2 == None:
+            return False
+        if self.type_2.str_name == str_type:
+            return True
+        return False
 
     def to_dic(self):
         dic_poke = {}
@@ -181,4 +223,4 @@ class Pokeman(object):
         return not self.b_fainted
 
     def is_trapped(self):
-        return False
+        return self.b_trapped

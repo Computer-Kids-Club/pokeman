@@ -63,6 +63,8 @@ char DISPLAY_POKES = 'P';
 char DISPLAY_NONE = 'N';
 char DISPLAY_MOVE = 'M';
 char DISPLAY_DELAY = 'D';
+char DISPLAY_FIELD = 'F';
+char DISPLAY_AD_HOC_TEXT = 'A';
 
 char DISPLAY_WIN = 'W';
 char DISPLAY_LOSE = 'L';
@@ -98,7 +100,7 @@ void init_constants() {
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
 
   SEARCH_BUTTON = new Rect(width*3/20 + SELECTSCREENSHIFT_X, height/90 + SELECTSCREENSHIFT_Y, width/7, height/30);
-  MOVE_SEARCH_BUTTON = new Rect(940, SELECTSCREENSHIFT_Y + height*499/900 - 20, 200, 30);
+  MOVE_SEARCH_BUTTON = new Rect(width*47/70, SELECTSCREENSHIFT_Y + height*479/900, width/7, height/30);
 
   POKE_ME_RECT = new Rect(150, 400+3*40);
   POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-150, 50+3*40);

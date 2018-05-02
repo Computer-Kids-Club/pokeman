@@ -111,7 +111,7 @@ void process_data(String dataIn) {
       i_healthing_original = new_poke.cur_hp;
       new_poke.old_hp = new_poke.cur_hp;
       new_poke.update_with_json(json.getJSONObject("poke"));
-      if(i_healthing_original != new_poke.cur_hp && i_cur_animation_frames_left == 0) {
+      if (i_healthing_original != new_poke.cur_hp && i_cur_animation_frames_left == 0) {
         i_cur_animation_frames_left = 30;
         i_healthing = i_total_healthing;
         i_dmg_text_effecting = round(float(i_healthing_original-new_poke.cur_hp)*100/new_poke.HP);
@@ -128,23 +128,58 @@ void process_data(String dataIn) {
     i_cur_animation_frames_left = 30;
     JSONObject json = parseJSONObject(dataIn.substring(1));
     int i_display_player = json.getInt("player");
-    JSONObject json_move = new JSONObject();
-    if (i_display_player==ME) {
-      json_move = json.getJSONObject("move");
-      //text_chat.add(0, "You used "+json_move.getString("name"));
-      i_moving_direction = -1;
-    } else/* if (i_display_player==OTHER)*/ {
-      json_move = json.getJSONObject("move");
-      //text_chat.add(0, "Your opponent used "+json_move.getString("name"));
-      i_moving_direction = 1;
-    }
+    JSONObject json_move = json.getJSONObject("move");
     i_moving = i_total_moving;
     str_cur_move_type = json_move.getString("type");
     //println(json_move+" "+json_move.getString("cat"));
     str_cur_move_cat = json_move.getString("cat");
     str_cur_move_anime_style = json_move.getString("anime");
+    String str_cur_move_name = json_move.getString("name");
+    if (i_display_player==ME) {
+      //text_chat.add(0, "You used "+json_move.getString("name"));
+      add_effect_text_effect(str_cur_move_name, POKE_ME_RECT.i_x, POKE_ME_RECT.i_y, (int)TYPE_COLOURS.get(str_cur_move_type));
+      i_moving_direction = -1;
+    } 
+     else/* if (i_display_player==OTHER)*/ {
+      //text_chat.add(0, "Your opponent used "+json_move.getString("name"));
+      add_effect_text_effect(str_cur_move_name, POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y, (int)TYPE_COLOURS.get(str_cur_move_type));
+      i_moving_direction = 1;
+    }
   } else if (dataIn.charAt(0)==DISPLAY_DELAY) {
     i_cur_animation_frames_left = 30;
+  } else if (dataIn.charAt(0)==DISPLAY_FIELD) {
+    JSONObject json = parseJSONObject(dataIn.substring(1));
+    i_weather = json.getInt("weather");
+    i_terrain = json.getInt("terrain");
+    JSONArray json_arr_me_hazards = json.getJSONArray("mehazards");
+    JSONArray json_arr_other_hazards = json.getJSONArray("otherhazards");
+    l_me_hazards = new ArrayList<String> ();
+    for (int i=0; i<json_arr_me_hazards.size(); i++) {
+      l_me_hazards.add(json_arr_me_hazards.getString(i));
+    }
+    l_other_hazards = new ArrayList<String> ();
+    for (int i=0; i<json_arr_other_hazards.size(); i++) {
+      l_other_hazards.add(json_arr_other_hazards.getString(i));
+    }
+  } else if (dataIn.charAt(0)==DISPLAY_AD_HOC_TEXT) {
+    JSONObject json = parseJSONObject(dataIn.substring(1));
+    String str_move = json.getString("move");
+    int i_display_player = json.getInt("player");
+    if (str_move.equals("failed")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#FF0000));
+    } else if (str_move.equals("missed")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#FF0000));
+    } else if (str_move.equals("frozen")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#98D8D8));
+    } else if (str_move.equals("protected")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#FF8BC1));
+    } else if (str_move.equals("burn")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#F08030));
+    } else if (str_move.equals("poison")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#A040A0));
+    } else if (str_move.equals("toxic")) {
+      add_ad_hoc_text_effect(str_move, i_display_player, color(#A040A0));
+    }
   }
 }
 
