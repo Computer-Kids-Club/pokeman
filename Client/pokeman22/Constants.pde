@@ -73,11 +73,12 @@ HashMap<String, Integer> TYPE_COLOURS = new HashMap<String, Integer>();
 
 HashMap<Character, Integer> KEY_TO_ID = new HashMap<Character, Integer>();
 
-int TEXT_CHAT_DIVIDE = 1000;
+int TEXT_CHAT_DIVIDE;
 
 float gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
 
 void init_constants() {
+  TEXT_CHAT_DIVIDE = height*10/9;
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
   SLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);

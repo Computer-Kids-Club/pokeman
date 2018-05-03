@@ -234,7 +234,7 @@ void drawMove(String move_name) {
 void login() {
   textFont(font_plain_big);
   fill(255);
-  draw_rect(width/2,height/2 , width, height);
+  draw_rect(0, 0, width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
   textSize(100);
@@ -881,9 +881,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
       fill(255);
       if (moveSearchBool == false && moveSearch == "") {
-        draw_text("Search by Move", width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
+        draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
       } else {
-        draw_text(moveSearch, width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
+        draw_text(moveSearch, 950, SELECTSCREENSHIFT_Y + height*499/900);
       }
       //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
 
@@ -1346,9 +1346,9 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  //size(1400, 900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
-  size(displayWidth, displayHeight, P2D);
+  //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
@@ -1513,9 +1513,8 @@ void better_setup() {
 }
 
 void draw() {
-
-  if (loading) {
-    background(int(random(255)), 255, 255);
+  
+  if(loading) {
     loading = false;
     better_setup();
     return;

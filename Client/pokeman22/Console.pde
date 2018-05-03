@@ -54,7 +54,7 @@ void draw_console() {
   if (frameCount%30<15) {
     stroke(255);
     pushMatrix();
-    translate(-rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2 + textWidth(str_console_current.substring(0, i_console_cursor)), rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
+    translate(-rect_console_window.i_w/2 + console_margin_size + textWidth(" ")/2 + textWidth(str_console_current.substring(0, min(i_console_cursor, str_console_current.length()))), rect_console_window.i_h/2 - console_margin_size - console_text_size/2);
     draw_line(0, -7, 0, 7);
     popMatrix();
   }
@@ -130,17 +130,27 @@ void key_pressed_console() {
   }
 
   if (keyCode == BACKSPACE) {
-    if (l_console_current.size()>0) {
-      l_console_current.remove(l_console_current.size()-1);
+    if (l_console_current.size()>0 && i_console_cursor > 0) {
+      l_console_current.remove(i_console_cursor-1);
       i_console_cursor--;
     }
   } else if (keyCode == ENTER || keyCode == RETURN) {
 
     String str_console_current = combine_char_list(l_console_current);
-    l_console.add(0, "\""+str_console_current+"\" is not a valid command.");
-
+    
     l_console_current.clear();
     i_console_cursor = 0;
+    
+    if (str_console_current.length()>3) {
+      if (str_console_current.substring(0, str_console_current.length()-2).equals("r_drawothermodels")) {
+        i_r_drawothermodels = int(str_console_current.charAt(str_console_current.length()-1))-'0';
+        println(i_r_drawothermodels);
+        return;
+      }
+    }
+    
+    l_console.add(0, "\""+str_console_current+"\" is not a valid command.");
+    
   } else if (keyCode == LEFT) {
     i_console_cursor--;
   } else if  (keyCode == RIGHT) {
