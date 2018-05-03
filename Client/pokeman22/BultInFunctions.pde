@@ -189,7 +189,7 @@ void keyPressed() {
         }
       }
     }
-  } else if (login=true) {
+  } else if (login==true) {
     for (int i = 0; i < 26; i++) {
       if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
         if (current=="username") {
