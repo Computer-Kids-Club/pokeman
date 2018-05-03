@@ -232,7 +232,6 @@ void drawMove(String move_name) {
   textAlign(LEFT);
 }
 void login() {
-  textFont(font_plain_big);
   fill(255);
   draw_rect(0, 0, width, height);
   imageMode(CORNER);
@@ -277,7 +276,6 @@ void login() {
   }
   draw_text(coded, width/2, height/5*3);
   if (keyPressed && (key == RETURN||key==ENTER)) {
-    textFont(font_plain);
     login=false;
   }
 }
@@ -1343,8 +1341,6 @@ PFont font_big_hollow;
 
 int i_plain_font_size = 12;
 
-boolean loading = true;
-
 void setup() {
   size(1400, 900, P2D);
   //fullScreen();
@@ -1362,13 +1358,11 @@ void setup() {
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   //textFont(font_plain);
 
-  String[] fontList = PFont.list();
-  printArray(fontList);
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
 
   myClient = new Client(this, IPv4, PORT);
-}
 
-void better_setup() {
   init_constants();
 
   Gif.tmpPath = dataPath("");
@@ -1401,7 +1395,7 @@ void better_setup() {
     tempImage.resize(width*9/224, height/50);
     type_image.put(types[i], tempImage);
   }
-
+println("1");
   for (int i = 1; i <= 807; i++) {
     JSONObject file = loadJSONObject(POKEINFO_PATH+"pokemon/"+i+".txt");
     //JSONObject file = loadJSONObject("https://raw.githubusercontent.com/Komputer-Kids-Klub/pokeman/master/pokeinfo/pokemon/"+i+".txt");
@@ -1448,6 +1442,7 @@ void better_setup() {
     names_moves.put(file.getString("name"), allMoves);
   }
 
+println("2");
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
     int pokemonNumber = int(random(1, 808));
@@ -1462,13 +1457,14 @@ void better_setup() {
     String[] movelistPoke = new String[4];
     String[][] l_possible_moves = names_moves.get(num_names.get(pokemonNumber));
     // generate ranbo moves
-
+println("NOTGAY");
     Set<String> l_possible_moves_condensed = new HashSet<String>();
     for (int k=0; k<l_possible_moves.length; k++) {
       for (int j=0; j<l_possible_moves[k].length; j++) {
         l_possible_moves_condensed.add(l_possible_moves[k][j]);
       }
     }
+    println("gAY");
     l_possible_moves_condensed.remove("error");
 
     for (int j=0; j<movelistPoke.length && l_possible_moves_condensed.size()>0; j++) {
@@ -1490,6 +1486,8 @@ void better_setup() {
     int[] sliderStartingPosition = {width*169/280, width*169/280, width*169/280, width*169/280, width*169/280, width*169/280};
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke, "Male", 0, new int[5], new int[6], sliderStartingPosition));
   }
+  
+println("3");
   for (int i = 0; i < male.length; i++) {
     num_male.put(names_num.get(male[i]), male[i]);
   }
@@ -1499,6 +1497,8 @@ void better_setup() {
   for (int i = 0; i < unspecified.length; i++) {
     num_unspecified.put(names_num.get(unspecified[i]), unspecified[i]);
   }
+  
+println("4");
   /*println(names_stats.get("bulbasaur"));
    println(names_types.get("bulbasaur"));
    println(names_species.get("bulbasaur"));
@@ -1509,17 +1509,13 @@ void better_setup() {
    println(names_moves.get("bulbasaur")[1]);*/
 
   init_console();
+  
+println("5");
   init_battle_screen();
+println("6");
 }
 
 void draw() {
-
-  if (loading) {
-    background(int(random(255)), 255, 255);
-    loading = false;
-    better_setup();
-    return;
-  }
 
   textFont(font_plain);
   textSize(i_plain_font_size);
