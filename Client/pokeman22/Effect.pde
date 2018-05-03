@@ -43,9 +43,9 @@ void add_text_effect(String str_text, int i_x, int i_y, color text_clr) {
   new_effect.b_fade_in = true;
   new_effect.b_fade_out = true;
 
-  new_effect.i_alpha = 0;
-
   new_effect.add_text(str_text, 0, 200, 100);
+  
+  new_effect.i_alpha = 0;
 
   new_effect.i_text_red = (int)red(text_clr);
   new_effect.i_text_green = (int)green(text_clr);
@@ -114,9 +114,9 @@ void add_effect_text_effect(String str_effect, int i_x, int i_y, color clr) {
   new_effect.f_scale = 0.05;
   new_effect.f_dscale = 0.02;
 
-  new_effect.i_alpha = 0;
-
   new_effect.add_text(str_effect, 100, 200, 200);
+  
+  new_effect.i_alpha = 0;
 
   new_effect.change_life(25);
 
@@ -328,6 +328,7 @@ class Effect {
         textFont(font_big_hollow);
         textSize(i_text_size);
         draw_text(str_text, 0, 0);
+        
       } else {
 
         draw_text(str_text, 0, 0);
