@@ -76,7 +76,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_mov_type == 'normal':
         if str_atk_ability == 'aerilate' or str_atk_ability == 'pixilate' or str_atk_ability == 'refrigerate' or str_atk_ability == 'galvanize':
-            i_ability_buff = 1.2
+            i_atk_buff = 1.2
 
     i_goal = randint(1, 16)
     if i_goal == 1:
