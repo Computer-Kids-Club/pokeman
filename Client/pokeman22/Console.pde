@@ -137,10 +137,20 @@ void key_pressed_console() {
   } else if (keyCode == ENTER || keyCode == RETURN) {
 
     String str_console_current = combine_char_list(l_console_current);
-    l_console.add(0, "\""+str_console_current+"\" is not a valid command.");
-
+    
     l_console_current.clear();
     i_console_cursor = 0;
+    
+    if (str_console_current.length()>3) {
+      if (str_console_current.substring(0, str_console_current.length()-2).equals("r_drawothermodels")) {
+        i_r_drawothermodels = int(str_console_current.charAt(str_console_current.length()-1))-'0';
+        println(i_r_drawothermodels);
+        return;
+      }
+    }
+    
+    l_console.add(0, "\""+str_console_current+"\" is not a valid command.");
+    
   } else if (keyCode == LEFT) {
     i_console_cursor--;
   } else if  (keyCode == RIGHT) {

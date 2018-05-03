@@ -316,7 +316,7 @@ class Effect {
       fill(i_red, i_green, i_blue, i_usable_alpha*i_alpha);
       noStroke();
   
-      draw_rect(1, -4, round(textWidth(str_text))+4+100, 14+100, rect_radius);
+      draw_rect(1, -4, round(textWidth(str_text))+4, 14, rect_radius);
       
       textSize(i_text_size);
 
