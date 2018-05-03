@@ -232,6 +232,7 @@ void drawMove(String move_name) {
   textAlign(LEFT);
 }
 void login() {
+  textFont(font_plain_big);
   fill(255);
   draw_rect(0, 0, width, height);
   imageMode(CORNER);
@@ -276,6 +277,7 @@ void login() {
   }
   draw_text(coded, width/2, height/5*3);
   if (keyPressed && (key == RETURN||key==ENTER)) {
+    textFont(font_plain);
     login=false;
   }
 }
