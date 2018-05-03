@@ -1341,6 +1341,8 @@ PFont font_big_hollow;
 
 int i_plain_font_size = 12;
 
+boolean loading = true;
+
 void setup() {
   size(1400, 900, P2D);
   //fullScreen();
@@ -1362,7 +1364,9 @@ void setup() {
   printArray(fontList);
 
   myClient = new Client(this, IPv4, PORT);
+}
 
+void better_setup() {
   init_constants();
 
   Gif.tmpPath = dataPath("");
@@ -1507,6 +1511,12 @@ void setup() {
 }
 
 void draw() {
+  
+  if(loading) {
+    loading = false;
+    better_setup();
+    return;
+  }
 
   textFont(font_plain);
   textSize(i_plain_font_size);
