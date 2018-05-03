@@ -1511,8 +1511,9 @@ void better_setup() {
 }
 
 void draw() {
-  
-  if(loading) {
+
+  if (loading) {
+    background(int(random(255)), 255, 255);
     loading = false;
     better_setup();
     return;
