@@ -142,6 +142,8 @@ void add_ad_hoc_text_effect(String str_effect, int i_x, int i_y, color clr) {
   new_effect.f_dscale = 0.02;
 
   new_effect.add_text(str_effect, 100, 200, 200);
+  
+  new_effect.i_alpha = 0;
 
   new_effect.change_life(25);
 
@@ -313,8 +315,9 @@ class Effect {
 
       fill(i_red, i_green, i_blue, i_usable_alpha*i_alpha);
       noStroke();
-
-      draw_rect(1, -4, round(textWidth(str_text))+4, 14, rect_radius);
+  
+      draw_rect(1, -4, round(textWidth(str_text))+4+100, 14+100, rect_radius);
+      
       textSize(i_text_size);
 
       fill(i_text_red, i_text_green, i_text_blue, round(i_usable_alpha*i_text_alpha));
