@@ -881,9 +881,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
       fill(255);
       if (moveSearchBool == false && moveSearch == "") {
-        draw_text("Search by Move", 950, SELECTSCREENSHIFT_Y + height*499/900);
+        draw_text("Search by Move", width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
       } else {
-        draw_text(moveSearch, 950, SELECTSCREENSHIFT_Y + height*499/900);
+        draw_text(moveSearch, width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
       }
       //println(offsetMoves, allPokeMoves.size(), MOVESLIDER.i_y, offset);
 
