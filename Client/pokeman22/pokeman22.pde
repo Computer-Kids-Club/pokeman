@@ -234,7 +234,7 @@ void drawMove(String move_name) {
 void login() {
   textFont(font_plain_big);
   fill(255);
-  draw_rect(0, 0, width, height);
+  draw_rect(width/2,height/2 , width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
   textSize(100);
@@ -1346,9 +1346,9 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1400, 900, P2D);
+  //size(1400, 900, P2D);
   //fullScreen();
-  //size(displayWidth, displayHeight, P2D);
+  size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
