@@ -231,14 +231,13 @@ void drawMove(String move_name) {
 
   textAlign(LEFT);
 }
-<<<<<<< HEAD
 void login() {
   fill(255);
   draw_rect(0, 0, width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
   textSize(100);
-  textAlign(CENTER,CENTER);
+  textAlign(CENTER, CENTER);
   fill(0);
   draw_text("Login", width/2, 100);
   textSize(40);
@@ -246,39 +245,40 @@ void login() {
   rectMode(CENTER);
   draw_rect(width/2, height/5*2, width-300, 60);
   draw_rect(width/2, height/5*3, width-300, 60);
-  if (username==""){
+  if (username=="") {
     fill(150);
-    draw_text("Username", width/2, height/5*2);}
-  if (password==""){
+    draw_text("Username", width/2, height/5*2);
+  }
+  if (password=="") {
     fill(150);
-    draw_text("Password", width/2, height/5*3);}
-  
+    draw_text("Password", width/2, height/5*3);
+  }
+
   if (mousePressed) {
     if (mouseX>=width/2-(width-300)/2 && mouseX<=width/2+(width-300)/2) {
       if (mouseY>=height/5*2-30 && mouseY<=height/5*2+30) {
         current="username";
       } else if (mouseY>=height/5*3-30 && mouseY<=height/5*3+60) {
         current="password";
+      } else {
+        current="";
       }
-      else{
-        current="";}
+    } else {
+      current="";
     }
-    else{
-        current="";}
   }
-  
+
   fill(0);
-  draw_text(username,width/2,height/5*2-10);
+  draw_text(username, width/2, height/5*2-10);
   String coded="";
-  for(int i=0;i<password.length();i++){
-    coded+="*";}
-  draw_text(coded,width/2,height/5*3);
-  if (keyPressed && (key == RETURN||key==ENTER)){
+  for (int i=0; i<password.length(); i++) {
+    coded+="*";
+  }
+  draw_text(coded, width/2, height/5*3);
+  if (keyPressed && (key == RETURN||key==ENTER)) {
     login=false;
   }
 }
-=======
->>>>>>> d655cb634474946b3e812857eee2b2cacfab6017
 void drawSettingScreen() {
   textAlign(CENTER, CENTER);
   textSize(40);
@@ -324,10 +324,9 @@ void drawSettingScreen() {
       buttonLst[3]=0;
     } else if (dist(mouseX, mouseY, width/4*3, height/4)<=width/16) {
       sound=false;
-<<<<<<< HEAD
-=======
+
+
       print("lol");
->>>>>>> d655cb634474946b3e812857eee2b2cacfab6017
       buttonLst[0]=0;
       buttonLst[3]=255;
     } else if (dist(mouseX, mouseY, width/4, height/4*2)<=width/16) {
@@ -1519,6 +1518,8 @@ void draw() {
 
   if (i_battle_state == BATTLING) {
     draw_battle();
+  } else if (login) {
+    login();
   } else {
     drawStartScreen();
     if (moveSelectScreen == true) {
@@ -1540,8 +1541,6 @@ void draw() {
       }
     }
   }
-if (login=true){
-      login();}
 
   for (int i=0; i<1; i++) {
     if (random(100)<50) {
