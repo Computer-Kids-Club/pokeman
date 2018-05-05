@@ -137,6 +137,14 @@ class Pokeman(object):
 
         self.b_lock_on = False
 
+        self.b_magic_coat = False
+
+        self.b_magnet_rise = False
+
+        self.b_perfect_aim = False
+
+        self.b_powdered = False
+
     def get_moves(self):
         return self.l_moves
 

@@ -141,6 +141,31 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         atk_poke.b_laser_focus = True
     elif move.str_name in ["lock-on"]:
         atk_poke.b_lock_on = True
+    elif move.str_name in ["magic-coat"]:
+        atk_poke.b_magic_coat = True
+    elif move.str_name in ["magnet-rise"]:
+        atk_poke.b_magnet_rise = True
+    elif move.str_name in ["mean-look"]:
+        atk_poke.b_trapped = True
+    elif move.str_name in ["memento"]:
+        atk_poke.i_hp = 0
+    elif move.str_name in ["metronome"]:
+        pass
+    elif move.str_name in ["mimic"]:
+        pass
+    elif move.str_name in ["mind-reader"]:
+        atk_poke.b_perfect_aim = True
+    elif move.str_name in ["mirror-move"]:
+        pass
+    elif move.str_name in ["nature-power"]:
+        pass
+    elif move.str_name in ["pain-split"]:
+        i_avg_hp = (atk_poke.usable_stats.i_hp + def_poke.usable_stats.i_hp) // 2
+        atk_poke.usable_stats.i_hp = i_avg_hp
+        def_poke.usable_stats.i_hp = i_avg_hp
+    elif move.str_name in ["powder"]:
+        def_poke.b_powdered = True
+
 
 
 
