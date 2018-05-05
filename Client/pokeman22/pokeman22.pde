@@ -1362,8 +1362,8 @@ void setup() {
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   //textFont(font_plain);
 
-  String[] fontList = PFont.list();
-  printArray(fontList);
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
 
   myClient = new Client(this, IPv4, PORT);
 }
