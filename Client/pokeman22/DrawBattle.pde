@@ -51,6 +51,14 @@ HashMap<String, PImage> ENTRY_HAZARD_IMG = new HashMap<String, PImage>();
 
 String [] str_entry_hazards = {"spikes", "toxic-spikes", "stealth-rock", "sticky-web"};
 
+boolean getImages = true;
+
+PImage[] clientPokemonImg = new PImage[6];
+PImage[] otherPokemonImg = new PImage[6];
+
+String filename;
+String tempPokeName;
+
 void init_battle_screen() {
   img_flag_bite = loadImage("MoveAnimations/bite.png");
   img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
@@ -194,6 +202,71 @@ void draw_battling_poke(Pokemon poke, int me_or_other) {
 }
 
 void draw_battle() {
+  if (getImages == true && c_display_state==DISPLAY_TEAMS) {
+    for (int i = 0; i < 6; i++) {
+      tempPokeName = pokemons.get(i).name;
+      if (tempPokeName.indexOf("-") > 0) {
+        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+          tempPokeName = tempPokeName.replace("-", "");
+        }
+      }
+      if (pokemons.get(i).shiny == true) {
+        filename = "https://play.pokemonshowdown.com/sprites/bw-shiny/" + tempPokeName + ".png";
+      } else {
+        filename = "https://play.pokemonshowdown.com/sprites/bw/" + tempPokeName + ".png";
+      }
+      if (filename.indexOf(":/") > 0) {
+
+        filename = filename.trim().toLowerCase();
+        try {
+          URL url = new URL(filename);
+          HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+          httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+          ReadableByteChannel rbc = Channels.newChannel(httpcon.getInputStream());
+          FileOutputStream fos = new FileOutputStream(dataPath("")+"/tmp"+"7"+".png");
+          fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        } 
+        catch (IOException e) {
+          // System.out.println("help");
+        }
+        println(pokemons.get(i).name);
+        clientPokemonImg[i] = loadImage(dataPath("")+"/tmp"+"7"+".png");
+        clientPokemonImg[i].resize(40, 40);
+        new File(dataPath("")+"/tmp"+"7"+".png").delete();
+      }
+      tempPokeName = other_pokemons.get(i).name;
+      if (tempPokeName.indexOf("-") > 0) {
+        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+          tempPokeName = tempPokeName.replace("-", "");
+        }
+      }
+      if (other_pokemons.get(i).shiny == true) {
+        filename = "https://play.pokemonshowdown.com/sprites/bw-shiny/" + tempPokeName + ".png";
+      } else {
+        filename = "https://play.pokemonshowdown.com/sprites/bw/" + tempPokeName + ".png";
+      }
+      if (filename.indexOf(":/") > 0) {
+
+        filename = filename.trim().toLowerCase();
+        try {
+          URL url = new URL(filename);
+          HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+          httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+          ReadableByteChannel rbc = Channels.newChannel(httpcon.getInputStream());
+          FileOutputStream fos = new FileOutputStream(dataPath("")+"/tmp"+"7"+".png");
+          fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        } 
+        catch (IOException e) {
+          // System.out.println("help");
+        }
+        println(other_pokemons.get(i).name);
+        otherPokemonImg[i] = loadImage(dataPath("")+"/tmp"+"7"+".png");
+        otherPokemonImg[i].resize(40, 40);
+        new File(dataPath("")+"/tmp"+"7"+".png").delete();
+      }
+    }
+    getImages = false;
+  }
 
   background(0);
 
@@ -201,11 +274,20 @@ void draw_battle() {
   noStroke();
   draw_rectMode(CORNER);
   draw_rect(0, 0, width, height);
+  fill(255);
+  draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height);
+  fill(0, 0, 255, 100);
+  draw_rect(0, 0, 150, height*13/18);
+  draw_rect(TEXT_CHAT_DIVIDE-150, 0, 150, height*13/18);
 
   draw_rectMode(CENTER);
   draw_imageMode(CENTER);
+  textAlign(CORNER, CENTER);
+  fill(100);
+  draw_text("How will you start the battle?", 20, height*13/18 + 10);
+  fill(#3973ED);
+  draw_text("Choose Lead", 20, height*13/18 + 30);
   textAlign(CENTER);
-
   if (c_display_state==DISPLAY_TEAMS) {
     for (int i = 0; i < pokemons.size(); i++) {
       drawPokemon(pokemons.get(i).animationBack, (i+1)*100, 350+i*40);
@@ -243,7 +325,7 @@ void draw_battle() {
     }
 
     if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == -1) {
-  
+
       int tmp_move = i_moving * 2;
 
       if (tmp_move<i_total_moving) {
@@ -258,7 +340,7 @@ void draw_battle() {
     //tint(frameCount%255,255,255);
     drawPokemon(pokemons.get(c_my_display_poke).animationBack, 0, 0);
     noTint();
-    
+
     popMatrix();
 
     draw_battling_poke(pokemons.get(c_my_display_poke), ME);
@@ -295,7 +377,7 @@ void draw_battle() {
     //tint(frameCount%255,255,255);
     drawPokemon(other_pokemons.get(c_other_display_poke).animation, 0, 0);
     noTint();
-    
+
     popMatrix();
 
     draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
@@ -306,10 +388,10 @@ void draw_battle() {
 
   if (i_moving>0) {
     i_moving--;
-    
+
     /*if(i_moving == 0) {
-      add_effect_text_effect("WOW", width/2, height/2, TYPE_COLOURS.get(str_cur_move_type));
-    }*/
+     add_effect_text_effect("WOW", width/2, height/2, TYPE_COLOURS.get(str_cur_move_type));
+     }*/
 
     int tmp_move = i_moving;
 
@@ -407,12 +489,14 @@ void draw_battle() {
 
   // team pokes
   if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+    imageMode(CENTER);
     for (int i=0; i<6; i++) {
       pushMatrix();
       translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
       stroke(50);
       fill(255);
       draw_rect(0, 0, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*119/1500 + 20, 0);
       fill(0);
       draw_text(pokemons.get(i).name, 0, 0);
       popMatrix();
