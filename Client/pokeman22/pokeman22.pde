@@ -108,6 +108,7 @@ PImage pokedex;
 PImage back;
 PImage confirm;
 PImage loginBack;
+PImage loginbutton;
 
 int i_battle_state = 0;
 
@@ -237,6 +238,8 @@ void login() {
   draw_rect(width/2,height/2 , width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
+  imageMode(CENTER);
+  draw_image(loginbutton, width/2,height-height/9);
   textSize(100);
   textAlign(CENTER, CENTER);
   fill(0);
@@ -1385,6 +1388,7 @@ void better_setup() {
   back = loadImage("back.png");
   confirm = loadImage("Confirm.png");
   loginBack = loadImage("loginBackground.png");
+  loginbutton = loadImage("login_register_button.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize(height/30, height/30);
@@ -1395,6 +1399,7 @@ void better_setup() {
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
   loginBack.resize(width, height);
+  loginbutton.resize(width/3, height/18);
 
   for (int i = 0; i < types.length; i++) {
     tempImage = loadImage(types[i] + ".png");
