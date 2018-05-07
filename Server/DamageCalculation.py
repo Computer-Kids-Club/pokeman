@@ -28,6 +28,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     global str_prv_mov
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
+    i_def_atk = def_poke.get_usable_stats().get_atk()
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
@@ -89,28 +90,32 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_type = move.type.getAtkEff(def_poke.type_1, def_poke.type_2)
     print('type multiplier', i_type)
 
-    #-------------#
-    # FEILD BUFFS #
-    #-------------#
-    if str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'fire':
-        i_weather = 1.5
-    elif str_weather == Weather.RAIN and str_mov_type == 'water':
-        i_weather = 1.5
-    elif str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'water':
-        i_weather = 0.5
-    elif str_weather == Weather.RAIN and str_mov_type == 'fire':
-        i_weather = 0.5
-    elif str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT and str_mov_type == 'water':
-        i_weather = 0
-    elif str_weather == Weather.HEAVY_RAIN and str_mov_type == 'fire':
-        i_weather = 0
-    elif str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT and str_mov_type == 'fire':
-        i_weather = 1.5
-    elif str_weather == Weather.HEAVY_RAIN and str_mov_type == 'water':
-        i_weather = 1.5
-    elif str_weather == Weather.MYSTERIOUS_AIR_CURRENT and str_pok_type_2 == 'flying' and i_type > 1:
-        i_type = 1
+    #---------------#
+    # WEATHER BUFFS #
+    #---------------#
+    if str_atk_ability != 'air-lock' or str_def_ability != 'air-lock':
+        if str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'fire':
+            i_weather = 1.5
+        elif str_weather == Weather.RAIN and str_mov_type == 'water':
+            i_weather = 1.5
+        elif str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'water':
+            i_weather = 0.5
+        elif str_weather == Weather.RAIN and str_mov_type == 'fire':
+            i_weather = 0.5
+        elif str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT and str_mov_type == 'water':
+            i_weather = 0
+        elif str_weather == Weather.HEAVY_RAIN and str_mov_type == 'fire':
+            i_weather = 0
+        elif str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT and str_mov_type == 'fire':
+            i_weather = 1.5
+        elif str_weather == Weather.HEAVY_RAIN and str_mov_type == 'water':
+            i_weather = 1.5
+        elif str_weather == Weather.MYSTERIOUS_AIR_CURRENT and str_pok_type_2 == 'flying' and i_type > 1:
+            i_type = 1
 
+    # --------------#
+    # TERRAIN BUFFS #
+    # --------------#
     if str_terrain == Terrain.GRASSY and str_mov_type == 'grass':
         i_terrain = 1.5
     elif str_terrain == Terrain.MISTY and str_mov_type == 'fairy':
@@ -222,6 +227,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
+    if str_def_ability == 'aroma-veil':
+        if str_atk_ability != 'mold-breaker' or str_atk_ability == 'turboblaze' or str_atk_ability == 'teravolt':
+            if str_mov_name == 'taunt' or str_mov_name == 'torment' or str_mov_name == 'encore' or str_mov_name == 'disable' or str_mov_name == 'cursed-body' or str_mov_name == 'heal-block' or str_mov_name == 'infatuation':
+                i_def_buff == 0
+
     if str_def_ability == 'fluffy' and b_contact:
         if str_mov_type == 'fire':
             i_def_buff = 1
@@ -293,6 +303,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_def_ability == 'bulletproof':
             i_def_buff = 0
 
+    if str_def_ability == 'anger-point':
+        if i_crit > 1:
+            i_def_atk += 6
+
+    if str_atk_ability == 'aura-break' or str_def_ability == 'aura-break':
+        pass
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
