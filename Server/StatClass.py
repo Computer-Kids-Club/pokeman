@@ -74,6 +74,9 @@ class Stats(object):
     def get_spe(self):
         return self.i_spe
 
+    def get_copy(self):
+        return Stats(self.i_hp, self.i_atk, self.i_def, self.i_spa, self.i_spd, self.i_spe)
+
     def limit(self, i_lower=-6, i_upper=6):
         self.i_hp = max(i_lower,min(self.i_hp,i_upper))
         self.i_atk = max(i_lower,min(self.i_atk,i_upper))
