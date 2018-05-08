@@ -51,6 +51,8 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
             atk_player.send_data(SELECT_POKE + json.dumps({"availpoke": atk_player.get_available_pokes()}))
             atk_player.i_turn_readiness = NOT_READY
             atk_player.i_active_move_idx = -1
+            if move.str_name == "baton-pass":
+                atk_player.baton_pass_stats = atk_poke.modifier_stats.get_copy()
         else:
             return False
     elif move.str_name == "aromatherapy":

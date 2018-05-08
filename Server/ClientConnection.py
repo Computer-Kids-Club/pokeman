@@ -128,13 +128,14 @@ class Client(object):
         self.i_turn_readiness = NOT_READY
 
         self.active_poke = None
-        self.i_active_poke_idx = 0
 
         self.i_active_move_idx = -1
 
         self.b_active_poke_is_new = False
 
         self.battle = None
+
+        self.baton_pass_stats = Stats()
 
     def send_data(self, str_data):
 
@@ -204,6 +205,8 @@ class Client(object):
             self.i_active_poke_idx = dic_data["poke"]
             self.active_poke = self.team[self.i_active_poke_idx]
             self.b_active_poke_is_new = True
+            self.active_poke.modifier_stats = self.baton_pass_stats.get_copy()
+            self.baton_pass_stats = Stats()
             #print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":
