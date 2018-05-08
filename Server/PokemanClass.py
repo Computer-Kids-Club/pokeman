@@ -94,6 +94,8 @@ class Pokeman(object):
 
         self.b_fainted = False
 
+        self.l_last_move = []
+
         # ad hoc variables
 
         self.b_disguise_broke = False
