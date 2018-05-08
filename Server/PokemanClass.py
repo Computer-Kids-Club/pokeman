@@ -159,6 +159,7 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
+        #print(self.modifier_stats.i_hp,self.modifier_stats.get_modifier_rates().i_hp)
         actually_usable_stats = self.usable_stats*self.modifier_stats.get_modifier_rates()
 
         if self.str_status == "paralyze":
