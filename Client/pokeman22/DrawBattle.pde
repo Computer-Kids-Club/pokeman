@@ -267,7 +267,9 @@ void draw_battle() {
   }
 
   background(0);
-draw_image(backgroundImg, width/2, height/2);
+  imageMode(CORNER);
+draw_image(backgroundImg, 0,0);
+imageMode(CENTER);
   fill(200);
   noStroke();
   draw_rectMode(CORNER);
