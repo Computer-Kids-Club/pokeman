@@ -147,6 +147,11 @@ class Pokeman(object):
 
         self.b_powdered = False
 
+    def get_last_move(self):
+        if len(self.l_last_move) > 1:
+            return self.l_last_move[-1]
+        return Move("tackle")
+
     def get_moves(self):
         return self.l_moves
 

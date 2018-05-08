@@ -80,8 +80,9 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         atk_poke.type1 = choice(atk_poke.l_moves).type
     elif move.str_name in ["conversion-2"]:
         atk_poke.type2 = None
-        l_types = get_atk_types_with_eff_rate(atk_poke.l_last_move[-1].type)
-        atk_poke.type1 = Type(choice())
+        l_types = get_atk_types_with_eff_rate(0, atk_poke.l_last_move[-1].type)
+        l_types.extend(get_atk_types_with_eff_rate(0.5, atk_poke.l_last_move[-1].type))
+        atk_poke.type1 = Type(choice(l_types))
     elif move.str_name in ["curse"]:
         if atk_poke.is_type("ghost"):
             atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp // 2
