@@ -94,6 +94,8 @@ class Pokeman(object):
 
         self.b_fainted = False
 
+        self.l_last_move = []
+
         # ad hoc variables
 
         self.b_disguise_broke = False
@@ -145,6 +147,11 @@ class Pokeman(object):
 
         self.b_powdered = False
 
+    def get_last_move(self):
+        if len(self.l_last_move) > 1:
+            return self.l_last_move[-1]
+        return Move("tackle")
+
     def get_moves(self):
         return self.l_moves
 
@@ -152,6 +159,7 @@ class Pokeman(object):
         return Stats(),Stats()
 
     def get_usable_stats(self):
+        #print(self.modifier_stats.i_hp,self.modifier_stats.get_modifier_rates().i_hp)
         actually_usable_stats = self.usable_stats*self.modifier_stats.get_modifier_rates()
 
         if self.str_status == "paralyze":

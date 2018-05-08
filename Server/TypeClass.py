@@ -5,6 +5,7 @@
 
 from Constants import *
 
+l_typ_long  =  ["normal","fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"]
 l_typ_short  =  "NorFirWatEleGraIceFigPoiGroFlyPsyBugRocGhoDraDarSteFai"
 mat_type_eff = [[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1, 0, 1, 1,-1, 1], # Nor
                 [ 1,-1,-1, 1, 2, 2, 1, 1, 1, 1, 1, 2,-1, 1,-1, 1, 2, 1], # Fir
@@ -60,3 +61,18 @@ class Type(object):
     # overriding str method
     def __str__(self):
         return self.str_name.capitalize()
+
+
+def get_def_types_with_eff_rate(f_eff_rate, def_type_1, def_type_2=None):
+    l_types = []
+    for type in l_typ_long:
+        if Type(type).getAtkEff(def_type_1, def_type_2) == f_eff_rate:
+            l_types.append(type)
+    return l_types
+
+def get_atk_types_with_eff_rate(f_eff_rate, atk_type):
+    l_types = []
+    for type in l_typ_long:
+        if Type(atk_type).getAtkEff(type) == f_eff_rate:
+            l_types.append(type)
+    return l_types

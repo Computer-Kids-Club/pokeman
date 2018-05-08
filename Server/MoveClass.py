@@ -66,7 +66,7 @@ class Move(object):
         elif self.str_name in ["trick-room"]:
             self.i_priority = -7
 
-        print(name)
+        #print(name)
         self.flag_contact = dic_move['flag_contact']
         self.flag_charge = dic_move['flag_charge']
         self.flag_recharge = dic_move['flag_recharge']

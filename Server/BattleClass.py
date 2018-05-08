@@ -183,6 +183,9 @@ class Battle(object):
 
             cur_move = atk_poke.get_moves()[player.i_active_move_idx]
 
+            if cur_move.str_name in ["copycat", "mirror-move"]:
+                cur_move = def_poke.get_last_move()
+
             print(atk_poke, "used move", cur_move)
 
             # check if move hit
@@ -369,6 +372,7 @@ class Battle(object):
                     i_recoil_dmg = atk_poke.get_usable_stats().i_hp // 2
                 elif cur_move.str_name in ["belly-drum"]:
                     i_recoil_dmg = atk_poke.get_usable_stats().i_hp // 2
+
 
                 atk_poke.i_hp -= i_recoil_dmg
 

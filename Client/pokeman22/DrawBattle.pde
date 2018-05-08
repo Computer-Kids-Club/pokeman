@@ -229,9 +229,8 @@ void draw_battle() {
         catch (IOException e) {
           // System.out.println("help");
         }
-        println(pokemons.get(i).name);
         clientPokemonImg[i] = loadImage(dataPath("")+"/tmp"+"7"+".png");
-        clientPokemonImg[i].resize(40, 40);
+        clientPokemonImg[i].resize(50, 50);
         new File(dataPath("")+"/tmp"+"7"+".png").delete();
       }
       tempPokeName = other_pokemons.get(i).name;
@@ -259,9 +258,8 @@ void draw_battle() {
         catch (IOException e) {
           // System.out.println("help");
         }
-        println(other_pokemons.get(i).name);
         otherPokemonImg[i] = loadImage(dataPath("")+"/tmp"+"7"+".png");
-        otherPokemonImg[i].resize(40, 40);
+        otherPokemonImg[i].resize(50, 50);
         new File(dataPath("")+"/tmp"+"7"+".png").delete();
       }
     }
@@ -269,31 +267,44 @@ void draw_battle() {
   }
 
   background(0);
-
+draw_image(backgroundImg, width/2, height/2);
   fill(200);
   noStroke();
   draw_rectMode(CORNER);
-  draw_rect(0, 0, width, height);
-  fill(255);
-  draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height);
+  //draw_rect(0, 0, TEXT_CHAT_DIVIDE, height*13/18);
+  fill(0,0,0,150);
+  draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height - height*13/18);
   fill(0, 0, 255, 100);
   draw_rect(0, 0, 150, height*13/18);
   draw_rect(TEXT_CHAT_DIVIDE-150, 0, 150, height*13/18);
 
   draw_rectMode(CENTER);
   draw_imageMode(CENTER);
-  textAlign(CORNER, CENTER);
-  fill(100);
-  draw_text("How will you start the battle?", 20, height*13/18 + 10);
-  fill(#3973ED);
-  draw_text("Choose Lead", 20, height*13/18 + 30);
-  textAlign(CENTER);
+  if (c_display_state == DISPLAY_TEAMS) {
+    textAlign(CORNER, CENTER);
+    fill(100);
+    draw_text("How will you start the battle?", 20, height*13/18 + 10);
+    fill(#3973ED);
+    draw_text("Choose Lead", 20, height*13/18 + 30);
+    textAlign(CENTER);
+  }
+
+  if (c_display_state == DISPLAY_TEAMS || c_display_state == DISPLAY_POKES) {
+    for (int i = 0; i < 3; i++) {
+      draw_image(clientPokemonImg[i], 25 + i*50, 500);
+      draw_image(clientPokemonImg[i+3], 25 + i*50, 550);
+
+      draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
+      draw_image(otherPokemonImg[i+3], TEXT_CHAT_DIVIDE - 125 + i*50, 550);
+    }
+  }
+
   if (c_display_state==DISPLAY_TEAMS) {
     for (int i = 0; i < pokemons.size(); i++) {
-      drawPokemon(pokemons.get(i).animationBack, (i+1)*100, 350+i*40);
+      drawPokemon(pokemons.get(i).animationBack, 200 + i*80, 430 + i*30);
     }
     for (int i = 0; i < other_pokemons.size(); i++) {
-      drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE-(i+1)*100, 250-i*40);
+      drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE -200 - i*80, 220 - i*30);
     }
   }
 
@@ -479,9 +490,9 @@ void draw_battle() {
       translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
       stroke(50);
       fill(TYPE_COLOURS.get(pokemons.get(c_my_display_poke).move_types[i]));
-      draw_rect(0, 0, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+      draw_rect(0, 70, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
       fill(255);
-      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 0);
+      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 70);
       //draw_text(pokemons.get(c_my_display_poke).move_types[i], 0, 30);
       popMatrix();
     }
@@ -495,10 +506,10 @@ void draw_battle() {
       translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
       stroke(50);
       fill(255);
-      draw_rect(0, 0, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
-      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*119/1500 + 20, 0);
+      draw_rect(0, 90, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*11/200, 90);
       fill(0);
-      draw_text(pokemons.get(i).name, 0, 0);
+      draw_text(pokemons.get(i).name, 0, 90);
       popMatrix();
     }
   }

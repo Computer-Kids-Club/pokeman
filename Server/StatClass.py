@@ -4,6 +4,7 @@
 ## -------------------------------------- ##
 
 def get_stat_stage_changes(i_stage):
+
     if i_stage == -6:
         return 2/8
     if i_stage == -5:
@@ -32,7 +33,7 @@ def get_stat_stage_changes(i_stage):
         return 8/2
 
 class Stats(object):
-    def __init__(self, i_hp=30, i_atk=30, i_def=30, i_spa=30, i_spd=30, i_spe=30):
+    def __init__(self, i_hp=0, i_atk=0, i_def=0, i_spa=0, i_spd=0, i_spe=0):
         self.i_hp = i_hp
         self.i_atk = i_atk
         self.i_def = i_def
