@@ -267,8 +267,7 @@ void draw_battle() {
   }
 
   background(0);
-  draw_image(backgroundImg, 0, 0);
-
+draw_image(backgroundImg, 0, 0);
   fill(200);
   noStroke();
   draw_rectMode(CORNER);
@@ -305,7 +304,7 @@ void draw_battle() {
       drawPokemon(pokemons.get(i).animationBack, 200 + i*80, 430 + i*30);
     }
     for (int i = 0; i < other_pokemons.size(); i++) {
-      drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE - 200 - i*80, 220 - i*30);
+      drawPokemon(other_pokemons.get(i).animation, TEXT_CHAT_DIVIDE -200 - i*80, 220 - i*30);
     }
   }
 
