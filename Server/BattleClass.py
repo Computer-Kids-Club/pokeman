@@ -370,6 +370,7 @@ class Battle(object):
                 elif cur_move.str_name in ["belly-drum"]:
                     i_recoil_dmg = atk_poke.get_usable_stats().i_hp // 2
 
+
                 atk_poke.i_hp -= i_recoil_dmg
 
                 # is it dead???

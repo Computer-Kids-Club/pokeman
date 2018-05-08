@@ -51,6 +51,8 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
             atk_player.send_data(SELECT_POKE + json.dumps({"availpoke": atk_player.get_available_pokes()}))
             atk_player.i_turn_readiness = NOT_READY
             atk_player.i_active_move_idx = -1
+            if move.str_name == "baton-pass":
+                atk_player.baton_pass_stats = atk_poke.modifier_stats.get_copy()
         else:
             return False
     elif move.str_name == "aromatherapy":
@@ -165,9 +167,75 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         def_poke.usable_stats.i_hp = i_avg_hp
     elif move.str_name in ["powder"]:
         def_poke.b_powdered = True
-
-
-
+    elif move.str_name in ["power-split"]:
+        i_avg_atk = (atk_poke.usable_stats.i_atk + def_poke.usable_stats.i_atk) // 2
+        atk_poke.usable_stats.i_atk = i_avg_atk
+        def_poke.usable_stats.i_atk = i_avg_atk
+        i_avg_spa = (atk_poke.usable_stats.i_spa + def_poke.usable_stats.i_spa) // 2
+        atk_poke.usable_stats.i_spa = i_avg_spa
+        def_poke.usable_stats.i_spa = i_avg_spa
+    elif move.str_name in ["power-swap"]:
+        atk_poke.usable_stats.i_atk, def_poke.usable_stats.i_atk = def_poke.usable_stats.i_atk, atk_poke.usable_stats.i_atk
+        atk_poke.usable_stats.i_spa, def_poke.usable_stats.i_spa = def_poke.usable_stats.i_spa, atk_poke.usable_stats.i_spa
+    elif move.str_name in ["power-trick"]:
+        atk_poke.usable_stats.i_atk, atk_poke.usable_stats.i_def = atk_poke.usable_stats.i_def, atk_poke.usable_stats.i_atk
+        atk_poke.usable_stats.i_spa, atk_poke.usable_stats.i_spd = atk_poke.usable_stats.i_spd, atk_poke.usable_stats.i_spa
+    elif move.str_name in ["psycho-shift"]:
+        def_poke.str_status = atk_poke.str_status
+        atk_poke.str_status = "none"
+    elif move.str_name in ["psych-up"]:
+        atk_poke.modifier_stats = def_poke.modifier_stats.get_copy()
+    elif move.str_name in ["purify"]:
+        def_poke.str_status = "none"
+        atk_poke.i_hp += atk_poke.get_usable_stats().i_hp // 2
+    elif move.str_name in ["reflect-type"]:
+        atk_poke.type1 = def_poke.type1
+        atk_poke.type2 = def_poke.type2
+    elif move.str_name in ["refresh"]:
+        if atk_poke.str_status in ["burn", "paralyse", "poison", "toxic"]:
+            atk_poke.str_status = "none"
+    elif move.str_name in ["role-play"]:
+        atk_poke.str_ability = def_poke.str_ability
+    elif move.str_name in ["shell-smash"]:
+        atk_poke.modifier_stats.i_atk += 2
+        atk_poke.modifier_stats.i_spa += 2
+        atk_poke.modifier_stats.i_spe += 2
+        atk_poke.modifier_stats.i_def -= 1
+        atk_poke.modifier_stats.i_spd -= 1
+    elif move.str_name in ["simple-beam"]:
+        def_poke.str_ability = "simple"
+    elif move.str_name in ["sketch"]:
+        pass
+    elif move.str_name in ["skill-swap"]:
+        atk_poke.str_ability, def_poke.str_ability = def_poke.str_ability, atk_poke.str_ability
+    elif move.str_name in ["soak"]:
+        atk_poke.type1 = Type("water")
+        atk_poke.type2 = None
+    elif move.str_name in ["speed-swap"]:
+        atk_poke.usable_stats.i_spe, def_poke.usable_stats.i_spe = def_poke.usable_stats.i_spe, atk_poke.usable_stats.i_spe
+    elif move.str_name in ["spider-web"]:
+        atk_poke.b_trapped = True
+    elif move.str_name in ["spite"]:
+        pass
+    elif move.str_name in ["strength-sap"]:
+        if def_poke.modifier_stats.i_atk > 0:
+            atk_poke.i_hp += atk_poke.get_usable_stats().i_hp // 8 * def_poke.modifier_stats.i_atk
+            def_poke.modifier_stats.i_atk -= 1
+    elif move.str_name in ["topsy-turvy"]:
+        def_poke.modifier_stats.i_hp *= -1
+        def_poke.modifier_stats.i_atk *= -1
+        def_poke.modifier_stats.i_def *= -1
+        def_poke.modifier_stats.i_spa *= -1
+        def_poke.modifier_stats.i_spd *= -1
+        def_poke.modifier_stats.i_spe *= -1
+    elif move.str_name in ["trick-or-treat"]:
+        if not def_poke.is_type("ghost"):
+            if def_poke.type_2 == None:
+                def_poke.type_2 = Type("ghost")
+            else:
+                def_poke.type_3 = Type("ghost")
+    elif move.str_name in ["worry-seed"]:
+        def_poke.str_ability = "insomnia"
 
     return True
 
