@@ -308,11 +308,14 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_def_atk += 6
 
     if str_atk_ability == 'aura-break' or str_def_ability == 'aura-break':
-        pass
+        if str_mov_type == 'fairy' or str_mov_type == 'dark':
+            i_pow //= 1.33
+
+    if str_def_ability == 'battle-armor':
+        i_crit = 1
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
-    #i_rand = 1
     i_pow *= i_atk_buff
     i_other = i_other * i_def_buff * i_move_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)

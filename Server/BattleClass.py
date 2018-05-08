@@ -183,6 +183,9 @@ class Battle(object):
 
             cur_move = atk_poke.get_moves()[player.i_active_move_idx]
 
+            if cur_move.str_name in ["copycat", "mirror-move"]:
+                cur_move = def_poke.get_last_move()
+
             print(atk_poke, "used move", cur_move)
 
             # check if move hit
