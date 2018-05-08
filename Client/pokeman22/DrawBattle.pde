@@ -268,13 +268,13 @@ void draw_battle() {
 
   background(0);
   imageMode(CORNER);
-draw_image(backgroundImg, 0,0);
-imageMode(CENTER);
+  draw_image(backgroundImg, 0, 0);
+  imageMode(CENTER);
   fill(200);
   noStroke();
   draw_rectMode(CORNER);
   //draw_rect(0, 0, TEXT_CHAT_DIVIDE, height*13/18);
-  fill(0,0,0,150);
+  fill(0, 0, 0, 150);
   draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height - height*13/18);
   fill(0, 0, 255, 100);
   draw_rect(0, 0, 150, height*13/18);
@@ -484,19 +484,15 @@ imageMode(CENTER);
   draw_text(i_cur_animation_frames_left, 50, 50);
 
   // moves
-  draw_rectMode(CENTER);
+  draw_rectMode(CORNER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<4; i++) {
-      pushMatrix();
-      translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
       stroke(50);
       fill(TYPE_COLOURS.get(pokemons.get(c_my_display_poke).move_types[i]));
-      draw_rect(0, 70, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+      draw_rect(4 + 250*i, 694, 242, 72, 10);
       fill(255);
-      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 70);
-      //draw_text(pokemons.get(c_my_display_poke).move_types[i], 0, 30);
-      popMatrix();
+      draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
     }
   }
 
@@ -504,15 +500,12 @@ imageMode(CENTER);
   if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     imageMode(CENTER);
     for (int i=0; i<6; i++) {
-      pushMatrix();
-      translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
       stroke(50);
       fill(255);
-      draw_rect(0, 90, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
-      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*11/200, 90);
+      draw_rect(4 + i*167, 794, 159, 52, 10);
+      draw_image(clientPokemonImg[i], 4 + i*167 + 159/2 - 55, 820);
       fill(0);
-      draw_text(pokemons.get(i).name, 0, 90);
-      popMatrix();
+      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, 820);
     }
   }
 
