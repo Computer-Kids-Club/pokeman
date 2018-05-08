@@ -275,7 +275,6 @@ void draw_image(PImage img, int x, int y) {
     draw_rectMode(i_tmp_rect_mode);
     return;
   }
-
   image(img, x, y);
 }
 
