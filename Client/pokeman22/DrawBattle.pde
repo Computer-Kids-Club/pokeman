@@ -267,11 +267,11 @@ void draw_battle() {
   }
 
   background(0);
-draw_image(backgroundImg, 0, 0);
+draw_image(backgroundImg, width/2, height/2);
   fill(200);
   noStroke();
   draw_rectMode(CORNER);
-  draw_rect(0, 0, width, height);
+  //draw_rect(0, 0, TEXT_CHAT_DIVIDE, height*13/18);
   fill(0,0,0,150);
   draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height - height*13/18);
   fill(0, 0, 255, 100);
@@ -490,9 +490,9 @@ draw_image(backgroundImg, 0, 0);
       translate((1+2*i)*TEXT_CHAT_DIVIDE/8, 660);
       stroke(50);
       fill(TYPE_COLOURS.get(pokemons.get(c_my_display_poke).move_types[i]));
-      draw_rect(0, 40, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
+      draw_rect(0, 70, TEXT_CHAT_DIVIDE/4-8, 80-8, 10);
       fill(255);
-      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 40);
+      draw_text(pokemons.get(c_my_display_poke).moves[i], 0, 70);
       //draw_text(pokemons.get(c_my_display_poke).move_types[i], 0, 30);
       popMatrix();
     }
@@ -506,10 +506,10 @@ draw_image(backgroundImg, 0, 0);
       translate((1+2*i)*TEXT_CHAT_DIVIDE/12, 730);
       stroke(50);
       fill(255);
-      draw_rect(0, 40, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
-      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*11/200, 40);
+      draw_rect(0, 90, TEXT_CHAT_DIVIDE/6-8, 60-8, 10);
+      draw_image(clientPokemonImg[i], -TEXT_CHAT_DIVIDE*11/200, 90);
       fill(0);
-      draw_text(pokemons.get(i).name, 0, 40);
+      draw_text(pokemons.get(i).name, 0, 90);
       popMatrix();
     }
   }
