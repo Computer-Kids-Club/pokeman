@@ -167,6 +167,10 @@ class Client(object):
             l_poke_data.append(poke.to_dic())
         self.send_data(SENDING_POKE+json.dumps({"pokes":l_poke_data}))
 
+    def pre_turn(self):
+        for poke in self.team:
+            poke.pre_turn()
+
     def recieved_data(self, str_data):
 
         try:
