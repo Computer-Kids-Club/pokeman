@@ -294,12 +294,27 @@ void draw_battle() {
   }
 
   if (c_display_state == DISPLAY_TEAMS || c_display_state == DISPLAY_POKES) {
-    for (int i = 0; i < 3; i++) {
-      draw_image(clientPokemonImg[i], 25 + i*50, 500);
-      draw_image(clientPokemonImg[i+3], 25 + i*50, 550);
-
+    for (int i = 0; i < 6; i++) {
+      if (pokemons.get(i).HP <= 0) {
+        tint(255, 0, 100);
+      }
+      if (i > 2) {
+        draw_image(clientPokemonImg[i], 25 + (i-3)*50, 550);
+      } else {
+        draw_image(clientPokemonImg[i], 25 + i*50, 500);
+      }
+      //noTint();
+      
+      
+      if (other_pokemons.get(i).HP <= 0) {
+        tint(255, 0, 100);
+      }
+      if (i > 2){
+      draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + (i-3)*50, 550);
+      } else {
       draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
-      draw_image(otherPokemonImg[i+3], TEXT_CHAT_DIVIDE - 125 + i*50, 550);
+      }
+      //noTint();
     }
   }
 
@@ -497,7 +512,7 @@ void draw_battle() {
       draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
     }
   }
-  
+
   // team pokes
   if (c_display_state == DISPLAY_TEAMS) {
     imageMode(CENTER);
