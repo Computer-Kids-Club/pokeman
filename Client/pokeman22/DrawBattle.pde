@@ -206,7 +206,8 @@ void draw_battle() {
     for (int i = 0; i < 6; i++) {
       tempPokeName = pokemons.get(i).name;
       if (tempPokeName.indexOf("-") > 0) {
-        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+        if (tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "f."
+          && tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "m.") {
           tempPokeName = tempPokeName.replace("-", "");
         }
       }
@@ -235,7 +236,8 @@ void draw_battle() {
       }
       tempPokeName = other_pokemons.get(i).name;
       if (tempPokeName.indexOf("-") > 0) {
-        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+        if (tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "f."
+          && tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "m.") {
           tempPokeName = tempPokeName.replace("-", "");
         }
       }
@@ -495,9 +497,20 @@ void draw_battle() {
       draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
     }
   }
-
+  
   // team pokes
-  if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+  if (c_display_state == DISPLAY_TEAMS) {
+    imageMode(CENTER);
+    for (int i=0; i<6; i++) {
+      stroke(50);
+      fill(255);
+      draw_rect(4 + i*167, height*13/18 + 50, 159, 52, 10);
+      draw_image(clientPokemonImg[i], 4 + i*167 + 159/2 - 55, height*13/18 + 76);
+      //height*13/18 + 10      660     26
+      fill(0);
+      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, height*13/18 + 76);
+    }
+  } else if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     imageMode(CENTER);
     for (int i=0; i<6; i++) {
       stroke(50);
@@ -519,6 +532,32 @@ void draw_battle() {
   fill(0);
   for (int i=0; i<text_chat.size() && height - i*30 > 30; i++) {
     draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+10, height - i*30 - 30);
+  }
+
+  if (mousePressed && mousePressValid == true) {
+    if (c_display_state == DISPLAY_TEAMS) {
+      for (int i = 0; i < 6; i++) {
+        if (mouseX <= 4 + i*167 + 159 && mouseX >= 4 + i*167 && mouseY <= height*13/18 + 50 + 52 && mouseY >= height*13/18 + 50) {
+          select_poke(i);
+          mousePressValid = false;
+        }
+      }
+    } else if (i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE) {
+      for (int i = 0; i < 6; i++) {
+        if (mouseX <= 4 + i*167 + 159 && mouseX >= 4 + i*167 && mouseY <= 794 + 52 && mouseY >= 794) {
+          select_poke(i);
+          mousePressValid = false;
+        }
+      }
+      if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
+        for (int i = 0; i < 4; i++) {
+          if (mouseX <= 4 + 250*i + 242 && mouseX >= 4 + 250*i && mouseY <= 694 + 72 && mouseY >= 694) {
+            select_move(i);
+            mousePressValid = false;
+          }
+        }
+      }
+    }
   }
 }
 

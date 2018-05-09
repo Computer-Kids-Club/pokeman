@@ -95,6 +95,8 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         def_poke.b_destiny_bonded = True
     elif move.str_name in ["detect"]:
         atk_poke.b_protected = True
+    elif move.str_name in ["disable"]:
+        def_poke.get_last_move().i_disable_idx = 4
     elif move.str_name in ["doom-desire"]:
         atk_poke.i_doom_desire_idx = 2
     elif move.str_name in ["electrify"]:

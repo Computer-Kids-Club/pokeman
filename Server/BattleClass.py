@@ -12,6 +12,7 @@ from DamageCalculation import attack, confusion_attack
 from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
 from MoveAdHoc import move_ad_hoc_during, move_ad_hoc_after_turn
 import json
+import copy
 
 # master dictionary of all the ongoing battles
 l_battles = []
@@ -131,6 +132,30 @@ class Battle(object):
         player.send_data(DISPLAY_AD_HOC_TEXT+json.dumps({"player": ME, "move": str_text}))
         other_player.send_data(DISPLAY_AD_HOC_TEXT+json.dumps({"player": OTHER, "move": str_text}))
 
+    def player_poke_fainted(self, player):
+        atk_poke = player.active_poke
+        other_player = self.get_other_player(player)
+        def_poke = other_player.active_poke
+
+        player.i_turn_readiness = NOT_READY
+        player.i_active_move_idx = -1
+
+        if def_poke.b_destiny_bonded:
+            def_poke.b_destiny_bonded = False
+            def_poke.i_hp = 0
+            def_poke.is_usable()
+            self.player_poke_fainted(other_player)
+
+        if len(player.get_available_pokes()) <= 0:
+            self.b_gameover = True
+            player.send_data(DISPLAY_LOSE)
+            other_player.send_data(DISPLAY_WIN)
+            # self.send_delay()
+            return True
+
+        return False
+
+
     def run(self):
         # Log.info("battle running")
 
@@ -141,7 +166,10 @@ class Battle(object):
 
         self.send_players_pokes()
 
-        # calculate damage
+        for player in self.l_players:
+            player.pre_turn()
+
+        # calculate damages
 
         l_move_queue= []
 
@@ -182,6 +210,13 @@ class Battle(object):
             other_player = self.get_other_player(player)
 
             cur_move = atk_poke.get_moves()[player.i_active_move_idx]
+
+            if not cur_move.use_move():
+                if cur_move.i_pp <= 0:
+                    self.send_broadcast(cur_move.str_name.capitalize() + " has no PP left!")
+                if cur_move.i_disable_idx > 0:
+                    self.send_broadcast(cur_move.str_name.capitalize() + " is disabled!")
+                continue
 
             if cur_move.str_name in ["copycat", "mirror-move"]:
                 cur_move = def_poke.get_last_move()
@@ -251,6 +286,12 @@ class Battle(object):
 
                 # woah, the move hit
                 self.send_broadcast(atk_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
+
+                # electrify
+                if def_poke.forced_move_type != None:
+                    cur_move = copy.deepcopy(cur_move)
+                    cur_move.type = def_poke.forced_move_type
+                    def_poke.forced_move_type = None
 
                 # some moves hit more than one time
                 i_hits = multi_hit(cur_move)
@@ -389,19 +430,8 @@ class Battle(object):
 
             # the moving poke is dead !?!?
             if not def_poke.is_usable():
-                other_player.i_turn_readiness = NOT_READY
-                other_player.i_active_move_idx = -1
-
-                if len(other_player.get_available_pokes()) <= 0:
-                    self.b_gameover = True
-                    other_player.send_data(DISPLAY_LOSE)
-                    player.send_data(DISPLAY_WIN)
-                    # self.send_delay()
+                if self.player_poke_fainted(other_player):
                     return
-
-                #other_player.send_data(SELECT_POKE + json.dumps({"availpoke": other_player.get_available_pokes()}))
-                # self.send_delay()
-
                 continue
 
         # after turn heal / damage
@@ -448,19 +478,8 @@ class Battle(object):
 
             # the moving poke is dead !?!?
             if not atk_poke.is_usable():
-                player.i_turn_readiness = NOT_READY
-                player.i_active_move_idx = -1
-
-                if len(player.get_available_pokes()) <= 0:
-                    self.b_gameover = True
-                    player.send_data(DISPLAY_LOSE)
-                    other_player.send_data(DISPLAY_WIN)
-                    # self.send_delay()
+                if self.player_poke_fainted(player):
                     return
-
-                #player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
-                # self.send_delay()
-
                 continue
 
             #self.send_delay()
@@ -472,12 +491,7 @@ class Battle(object):
             def_poke = other_player.active_poke
 
             if not atk_poke.is_usable():
-                player.i_turn_readiness = NOT_READY
-                if len(player.get_available_pokes()) <= 0:
-                    self.b_gameover = True
-                    player.send_data(DISPLAY_LOSE)
-                    other_player.send_data(DISPLAY_WIN)
-                    # self.send_delay()
+                if self.player_poke_fainted(player):
                     return
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
 
