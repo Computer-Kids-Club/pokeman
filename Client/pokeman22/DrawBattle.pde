@@ -495,9 +495,20 @@ void draw_battle() {
       draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
     }
   }
-
+  println(i_selection_stage, c_display_state);
   // team pokes
-  if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+  if (c_display_state == DISPLAY_TEAMS) {
+    imageMode(CENTER);
+    for (int i=0; i<6; i++) {
+      stroke(50);
+      fill(255);
+      draw_rect(4 + i*167, height*13/18 + 50, 159, 52, 10);
+      draw_image(clientPokemonImg[i], 4 + i*167 + 159/2 - 55, height*13/18 + 76);
+      //height*13/18 + 10      660     26
+      fill(0);
+      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, height*13/18 + 76);
+    }
+  } else if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     imageMode(CENTER);
     for (int i=0; i<6; i++) {
       stroke(50);
