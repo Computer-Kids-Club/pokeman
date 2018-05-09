@@ -295,7 +295,7 @@ void draw_battle() {
 
   if (c_display_state == DISPLAY_TEAMS || c_display_state == DISPLAY_POKES) {
     for (int i = 0; i < 6; i++) {
-      if (pokemons.get(i).HP <= 0) {
+      if (pokemons.get(i).cur_hp <= 0) {
         tint(255, 0, 100);
       }
       if (i > 2) {
@@ -303,10 +303,10 @@ void draw_battle() {
       } else {
         draw_image(clientPokemonImg[i], 25 + i*50, 500);
       }
-      //noTint();
+      noTint();
       
       
-      if (other_pokemons.get(i).HP <= 0) {
+      if (other_pokemons.get(i).cur_hp <= 0) {
         tint(255, 0, 100);
       }
       if (i > 2){
@@ -314,7 +314,7 @@ void draw_battle() {
       } else {
       draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
       }
-      //noTint();
+      noTint();
     }
   }
 
