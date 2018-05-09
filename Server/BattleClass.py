@@ -146,6 +146,9 @@ class Battle(object):
             def_poke.is_usable()
             self.player_poke_fainted(other_player)
 
+        if atk_poke.b_grudge:
+            def_poke.get_last_move().i_pp = 0
+
         if len(player.get_available_pokes()) <= 0:
             self.b_gameover = True
             player.send_data(DISPLAY_LOSE)
