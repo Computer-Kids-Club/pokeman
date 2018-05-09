@@ -206,7 +206,8 @@ void draw_battle() {
     for (int i = 0; i < 6; i++) {
       tempPokeName = pokemons.get(i).name;
       if (tempPokeName.indexOf("-") > 0) {
-        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+        if (tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "f."
+          && tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "m.") {
           tempPokeName = tempPokeName.replace("-", "");
         }
       }
@@ -235,7 +236,8 @@ void draw_battle() {
       }
       tempPokeName = other_pokemons.get(i).name;
       if (tempPokeName.indexOf("-") > 0) {
-        if (tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'f' && tempPokeName.charAt(tempPokeName.indexOf("-") + 1) != 'm') {
+        if (tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "f."
+          && tempPokeName.substring(tempPokeName.indexOf("-") + 1, tempPokeName.indexOf("-") + 2) != "m.") {
           tempPokeName = tempPokeName.replace("-", "");
         }
       }
