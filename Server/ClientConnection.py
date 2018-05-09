@@ -128,6 +128,7 @@ class Client(object):
         self.i_turn_readiness = NOT_READY
 
         self.active_poke = None
+        self.i_active_poke_idx = 0
 
         self.i_active_move_idx = -1
 
