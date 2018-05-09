@@ -123,6 +123,21 @@ class Move(object):
             self.i_status_effect_chance = dic_move['effcha']
             self.str_status_effect = dic_move['eff']
 
+        self.i_disable_idx = 0
+
+    def use_move(self):
+
+        if self.i_disable_idx > 0:
+            self.i_disable_idx -= 1
+            return False
+
+        if self.i_pp <= 0:
+            return False
+
+        self.i_pp -= 1
+
+        return True
+
     def to_dic(self):
         move_dic = {}
 
