@@ -207,6 +207,13 @@ class Battle(object):
 
             cur_move = atk_poke.get_moves()[player.i_active_move_idx]
 
+            if not cur_move.use_move():
+                if cur_move.i_pp <= 0:
+                    self.send_broadcast(cur_move.str_name.capitalize() + " has no PP left!")
+                if cur_move.i_disable_idx > 0:
+                    self.send_broadcast(cur_move.str_name.capitalize() + " is disabled!")
+                continue
+
             if cur_move.str_name in ["copycat", "mirror-move"]:
                 cur_move = def_poke.get_last_move()
 
