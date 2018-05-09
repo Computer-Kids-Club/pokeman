@@ -128,7 +128,6 @@ class Move(object):
     def use_move(self):
 
         if self.i_disable_idx > 0:
-            self.i_disable_idx -= 1
             return False
 
         if self.i_pp <= 0:
