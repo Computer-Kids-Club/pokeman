@@ -171,16 +171,19 @@ PImage[][] loadPokemon(JSONObject file, boolean shiny) {
     tempFileName = file.getString("gifs");
     tempFileName = tempFileName.replace("xyani-shiny", "helloworld");
     if (tempFileName.indexOf("-") > 0) {
-      if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+      if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+        && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
         tempFileName = tempFileName.replace("-", "");
       }
     }
     tempFileName = tempFileName.replace("helloworld", "xyani-shiny");
     animations[0] = Gif.getPImages(this, tempFileName);
+
     tempFileName = file.getString("gifbs");
     tempFileName = tempFileName.replace("xyani-back-shiny", "helloworld");
     if (tempFileName.indexOf("-") > 0) {
-      if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+      if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+        && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
         tempFileName = tempFileName.replace("-", "");
       }
     }
@@ -190,16 +193,19 @@ PImage[][] loadPokemon(JSONObject file, boolean shiny) {
     tempFileName = file.getString("gif");
     tempFileName = tempFileName.replace("xyani", "helloworld");
     if (tempFileName.indexOf("-") > 0) {
-      if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+      if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+        && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
         tempFileName = tempFileName.replace("-", "");
       }
     }
     tempFileName = tempFileName.replace("helloworld", "xyani");
     animations[0] = Gif.getPImages(this, tempFileName);
+
     tempFileName = file.getString("gifb");
     tempFileName = tempFileName.replace("xyani-back", "helloworld");
     if (tempFileName.indexOf("-") > 0) {
-      if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+      if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+        && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
         tempFileName = tempFileName.replace("-", "");
       }
     }
@@ -216,7 +222,8 @@ PImage[][] loadPokemonAll(JSONObject file) {
   tempFileName = file.getString("gif");
   tempFileName = tempFileName.replace("xyani", "helloworld");
   if (tempFileName.indexOf("-") > 0) {
-    if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+    if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+      && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
       tempFileName = tempFileName.replace("-", "");
     }
   }
@@ -226,7 +233,8 @@ PImage[][] loadPokemonAll(JSONObject file) {
   tempFileName = file.getString("gifb");
   tempFileName = tempFileName.replace("xyani-back", "helloworld");
   if (tempFileName.indexOf("-") > 0) {
-    if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+    if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+      && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
       tempFileName = tempFileName.replace("-", "");
     }
   }
@@ -236,7 +244,8 @@ PImage[][] loadPokemonAll(JSONObject file) {
   tempFileName = file.getString("gifs");
   tempFileName = tempFileName.replace("xyani-shiny", "helloworld");
   if (tempFileName.indexOf("-") > 0) {
-    if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+    if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+      && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
       tempFileName = tempFileName.replace("-", "");
     }
   }
@@ -246,7 +255,8 @@ PImage[][] loadPokemonAll(JSONObject file) {
   tempFileName = file.getString("gifbs");
   tempFileName = tempFileName.replace("xyani-back-shiny", "helloworld");
   if (tempFileName.indexOf("-") > 0) {
-    if (tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'f' && tempFileName.charAt(tempFileName.indexOf("-") + 1) != 'm') {
+    if (tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "f."
+      && tempFileName.substring(tempFileName.indexOf("-") + 1, tempFileName.indexOf("-") + 2) != "m.") {
       tempFileName = tempFileName.replace("-", "");
     }
   }
@@ -1296,9 +1306,9 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1400, 900, P2D);
+  //size(1400, 900, P2D);
   //fullScreen();
-  //size(displayWidth, displayHeight, P2D);
+  size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
