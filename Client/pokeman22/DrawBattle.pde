@@ -304,15 +304,15 @@ void draw_battle() {
         draw_image(clientPokemonImg[i], 25 + i*50, 500);
       }
       noTint();
-      
-      
+
+
       if (other_pokemons.get(i).cur_hp <= 0) {
         tint(255, 0, 100);
       }
-      if (i > 2){
-      draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + (i-3)*50, 550);
+      if (i > 2) {
+        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + (i-3)*50, 550);
       } else {
-      draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
+        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
       }
       noTint();
     }
@@ -504,12 +504,12 @@ void draw_battle() {
   draw_rectMode(CORNER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<json_avail_moves_array.size(); i++) {
       stroke(50);
-      fill(TYPE_COLOURS.get(pokemons.get(c_my_display_poke).move_types[i]));
+      fill(TYPE_COLOURS.get(json_avail_moves_array.getJSONObject(i).getString("type")));
       draw_rect(4 + 250*i, 694, 242, 72, 10);
       fill(255);
-      draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
+      draw_text(json_avail_moves_array.getJSONObject(i).getString("name"), 4 + 250*i + 121, 730);
     }
   }
 
@@ -527,13 +527,13 @@ void draw_battle() {
     }
   } else if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     imageMode(CENTER);
-    for (int i=0; i<6; i++) {
+    for (int i=0; i<json_avail_pokes_array.size(); i++) {
       stroke(50);
       fill(255);
-      draw_rect(4 + i*167, 794, 159, 52, 10);
-      draw_image(clientPokemonImg[i], 4 + i*167 + 159/2 - 55, 820);
+      draw_rect(4 + json_avail_pokes_array.getInt(i)*167, 794, 159, 52, 10);
+      draw_image(clientPokemonImg[json_avail_pokes_array.getInt(i)], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 55, 820);
       fill(0);
-      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, 820);
+      draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).name, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2, 820);
     }
   }
 
@@ -554,20 +554,23 @@ void draw_battle() {
       for (int i = 0; i < 6; i++) {
         if (mouseX <= 4 + i*167 + 159 && mouseX >= 4 + i*167 && mouseY <= height*13/18 + 50 + 52 && mouseY >= height*13/18 + 50) {
           select_poke(i);
+          i_selection_stage = 77;
           mousePressValid = false;
         }
       }
     } else if (i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE) {
-      for (int i = 0; i < 6; i++) {
-        if (mouseX <= 4 + i*167 + 159 && mouseX >= 4 + i*167 && mouseY <= 794 + 52 && mouseY >= 794) {
-          select_poke(i);
+      for (int i = 0; i < json_avail_pokes_array.size(); i++) {
+        if (mouseX <= 4 + json_avail_pokes_array.getInt(i)*167 + 159 && mouseX >= 4 + json_avail_pokes_array.getInt(i)*167 && mouseY <= 794 + 52 && mouseY >= 794) {
+          select_poke(json_avail_pokes_array.getInt(i));
+          i_selection_stage = 77;
           mousePressValid = false;
         }
       }
       if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < json_avail_moves_array.size(); i++) {
           if (mouseX <= 4 + 250*i + 242 && mouseX >= 4 + 250*i && mouseY <= 694 + 72 && mouseY >= 694) {
             select_move(i);
+            i_selection_stage = 77;
             mousePressValid = false;
           }
         }

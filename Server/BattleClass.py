@@ -533,9 +533,9 @@ class Battle(object):
             self.send_players_pokes()
 
             if atk_poke.is_usable():
-                player.send_data(SELECT_POKE_OR_MOVE + json.dumps({"availpoke": player.get_available_pokes()}))
+                player.send_data(SELECT_POKE_OR_MOVE + json.dumps({"availpoke": player.get_available_pokes(),"availmove": atk_poke.get_move_dic()}))
             elif atk_poke.is_trapped():
-                player.send_data(SELECT_MOVE)
+                player.send_data(SELECT_MOVE + json.dumps({"availmove": atk_poke.get_move_dic()}))
             else:
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
 

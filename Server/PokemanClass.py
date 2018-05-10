@@ -163,9 +163,10 @@ class Pokeman(object):
         l_possible_moves = []
 
         for move in self.l_moves:
+            #print(move.i_disable_idx,move.i_pp)
             if move.i_disable_idx > 0:
                 continue
-            if move.i_pp > 0:
+            if move.i_pp <= 0:
                 continue
             l_possible_moves.append(move)
 
@@ -173,6 +174,13 @@ class Pokeman(object):
             l_possible_moves = [self.get_last_move()]
 
         return l_possible_moves
+
+    def get_move_dic(self):
+        l_possible_moves = self.get_moves()
+        dic_moves = []
+        for move in l_possible_moves:
+            dic_moves.append(move.to_dic())
+        return dic_moves
 
     def get_stats_range(self):
         return Stats(),Stats()
