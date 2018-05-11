@@ -627,9 +627,9 @@ void draw_battle() {
       if (mouseX >= 4 + json_avail_pokes_array.getInt(i)*167 && mouseX <= 4 + json_avail_pokes_array.getInt(i)*167 + 159 && mouseY >= 794 && mouseY <= 794 + 52) {
         textAlign(LEFT, CENTER);
         pushMatrix();
-        if (i == 0) {
+        if (json_avail_pokes_array.getInt(i) == 0) {
           translate(85, 0);
-        } else if (i == 5) {
+        } else if (json_avail_pokes_array.getInt(i) == 5) {
           translate(-85, 0);
         }
         fill(0, 0, 255, 200);
