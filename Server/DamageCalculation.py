@@ -164,7 +164,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_move_buff = 2
 
     #--------------------#
-    # ATACKING ABILITIES #
+    # ATTACKING ABILITIES #
     #--------------------#
     if str_atk_ability == 'water-bubble':
         if str_mov_type == 'water':
@@ -227,6 +227,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
+    if str_def_ability == 'water-bubble':
+        if str_mov_type == 'fire':
+            i_def_buff = 0.5
+
     if str_def_ability == 'aroma-veil':
         if str_atk_ability != 'mold-breaker' or str_atk_ability == 'turboblaze' or str_atk_ability == 'teravolt':
             if str_mov_name == 'taunt' or str_mov_name == 'torment' or str_mov_name == 'encore' or str_mov_name == 'disable' or str_mov_name == 'cursed-body' or str_mov_name == 'heal-block' or str_mov_name == 'infatuation':
@@ -316,8 +320,6 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
-    #i_pow *= i_atk_buff
-    i_rand = 1
     i_other = i_other * i_def_buff * i_move_buff * i_atk_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
