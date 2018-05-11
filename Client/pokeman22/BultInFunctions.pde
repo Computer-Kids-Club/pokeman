@@ -93,9 +93,9 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
-  
-  add_ad_hoc_text_effect(""+key, int(random(100, width-100)), int(random(100, width-100)), color(int(random(255)),255,255));
-  
+
+  add_ad_hoc_text_effect(""+key, int(random(100, width-100)), int(random(100, width-100)), color(int(random(255)), 255, 255));
+
   key_pressed_console();
   if (b_console)
     return;
@@ -204,7 +204,7 @@ void keyPressed() {
           if (password == "") {
             password = str(key);
             break;
-          } else if(password.length()<=30) {
+          } else if (password.length()<=30) {
             password += key;
             break;
           }
@@ -255,6 +255,26 @@ void draw_rect(int x, int y, int w, int h, int r) {
   }
 
   rect(x, y, w, h, r);
+}
+
+void draw_triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+  if (i_r_drawothermodels==2) {
+    noFill();
+    strokeWeight(1);
+    stroke(#00EDDB);
+    if (i_rect_mode==CORNER) {
+      //line(x, y, x+w, y+h);
+      //line(x, y+h, x+w, y);
+      triangle(x1, y1, x2, y2, x3, y3);
+    } else {
+      //line(x-w/2, y-h/2, x+w/2, y+h/2);
+      //line(x-w/2, y+h/2, x+w/2, y-h/2);
+      triangle(x1, y1, x2, y2, x3, y3);
+    }
+    return;
+  }
+
+  triangle(x1, y1, x2, y2, x3, y3);
 }
 
 void draw_text(String str, int x, int y) {

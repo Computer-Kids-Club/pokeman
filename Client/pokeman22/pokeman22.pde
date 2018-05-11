@@ -1475,7 +1475,7 @@ void better_setup() {
 }
 
 void draw() {
-  
+  //println(mouseX, mouseY);
   //tint(255,0,100);
 
   if (loading) {

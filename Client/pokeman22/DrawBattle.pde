@@ -56,6 +56,11 @@ boolean getImages = true;
 PImage[] clientPokemonImg = new PImage[6];
 PImage[] otherPokemonImg = new PImage[6];
 
+PImage battleScreenBackground;
+
+PImage clientTrainer;
+PImage otherTrainer;
+
 String filename;
 String tempPokeName;
 
@@ -88,6 +93,49 @@ void init_battle_screen() {
     new_img.resize(50, 0);
     ENTRY_HAZARD_IMG.put(str_entry_hazards[i], new_img);
   }
+
+
+
+  filename = "https://play.pokemonshowdown.com/sprites/trainers-ordered/" + nf(int(random(1, 295)), 3) + ".png";
+  if (filename.indexOf(":/") > 0) {
+    filename = filename.trim().toLowerCase();
+    try {
+      URL url = new URL(filename);
+      HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+      httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+      ReadableByteChannel rbc = Channels.newChannel(httpcon.getInputStream());
+      FileOutputStream fos = new FileOutputStream(dataPath("")+"/tmp"+"7"+".png");
+      fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+    } 
+    catch (IOException e) {
+      // System.out.println("help");
+    }
+    clientTrainer = loadImage(dataPath("")+"/tmp"+"7"+".png");
+    clientTrainer.resize(int(clientTrainer.width * 1.5), int(clientTrainer.height * 1.5));
+    new File(dataPath("")+"/tmp"+"7"+".png").delete();
+  }
+
+  filename = "https://play.pokemonshowdown.com/sprites/trainers-ordered/" + nf(int(random(1, 295)), 3) + ".png";
+  if (filename.indexOf(":/") > 0) {
+    filename = filename.trim().toLowerCase();
+    try {
+      URL url = new URL(filename);
+      HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+      httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+      ReadableByteChannel rbc = Channels.newChannel(httpcon.getInputStream());
+      FileOutputStream fos = new FileOutputStream(dataPath("")+"/tmp"+"7"+".png");
+      fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+    } 
+    catch (IOException e) {
+      // System.out.println("help");
+    }
+    otherTrainer = loadImage(dataPath("")+"/tmp"+"7"+".png");
+    otherTrainer.resize(int(otherTrainer.width * 1.5), int(otherTrainer.height * 1.5));
+    new File(dataPath("")+"/tmp"+"7"+".png").delete();
+  }
+
+  battleScreenBackground = loadImage("battlescreen.png");
+  battleScreenBackground.resize(TEXT_CHAT_DIVIDE, height*13/18);
 }
 
 void stop_battle() {
@@ -271,6 +319,16 @@ void draw_battle() {
   background(0);
   imageMode(CORNER);
   draw_image(backgroundImg, 0, 0);
+  draw_image(battleScreenBackground, 0, 0);
+  fill(0, 0, 255, 100);
+  noStroke();
+  draw_triangle(0, 0, 250, 0, 0, 400);
+  draw_triangle(TEXT_CHAT_DIVIDE, 650, TEXT_CHAT_DIVIDE - 250, 650, TEXT_CHAT_DIVIDE, 250);
+  stroke(0);
+  //draw_rect(0, 0, 150, height*13/18);
+  //draw_rect(TEXT_CHAT_DIVIDE-150, 0, 150, height*13/18);
+  draw_image(clientTrainer, 75 - clientTrainer.width/2, 80 + 30);
+  draw_image(otherTrainer, 925 - otherTrainer.width/2, 570 - 30 - otherTrainer.height);
   imageMode(CENTER);
   fill(200);
   noStroke();
@@ -278,9 +336,6 @@ void draw_battle() {
   //draw_rect(0, 0, TEXT_CHAT_DIVIDE, height*13/18);
   fill(0, 0, 0, 150);
   draw_rect(0, height*13/18, TEXT_CHAT_DIVIDE, height - height*13/18);
-  fill(0, 0, 255, 100);
-  draw_rect(0, 0, 150, height*13/18);
-  draw_rect(TEXT_CHAT_DIVIDE-150, 0, 150, height*13/18);
 
   draw_rectMode(CENTER);
   draw_imageMode(CENTER);
@@ -299,9 +354,9 @@ void draw_battle() {
         tint(255, 0, 100);
       }
       if (i > 2) {
-        draw_image(clientPokemonImg[i], 25 + (i-3)*50, 550);
+        draw_image(clientPokemonImg[i], 25 + (i-3)*50, 80);
       } else {
-        draw_image(clientPokemonImg[i], 25 + i*50, 500);
+        draw_image(clientPokemonImg[i], 25 + i*50, 30);
       }
       noTint();
 
@@ -310,9 +365,9 @@ void draw_battle() {
         tint(255, 0, 100);
       }
       if (i > 2) {
-        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + (i-3)*50, 550);
+        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + (i-3)*50, 620);
       } else {
-        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 500);
+        draw_image(otherPokemonImg[i], TEXT_CHAT_DIVIDE - 125 + i*50, 570);
       }
       noTint();
     }

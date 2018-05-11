@@ -103,8 +103,10 @@ void init_constants() {
   SEARCH_BUTTON = new Rect(width*3/20 + SELECTSCREENSHIFT_X, height/90 + SELECTSCREENSHIFT_Y, width/7, height/30);
   MOVE_SEARCH_BUTTON = new Rect(width*47/70, SELECTSCREENSHIFT_Y + height*479/900, width/7, height/30);
 
-  POKE_ME_RECT = new Rect(300, 400+3*40);
-  POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-300 + int(textWidth("100%")), 50+3*40);
+  //POKE_ME_RECT = new Rect(300, 400+3*40);
+  POKE_ME_RECT = new Rect(215, 510);
+  //POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-300 + int(textWidth("100%")), 50+3*40);
+  POKE_OTHER_RECT = new Rect(830,210);
 
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);
