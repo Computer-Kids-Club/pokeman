@@ -74,4 +74,3 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
         if str_weather == Weather.HARSH_SUNLIGHT or str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT:
             def_poke.get_usable_stats().get_spe *= 2
 
-    
