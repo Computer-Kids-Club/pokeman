@@ -141,13 +141,19 @@ class Pokeman(object):
 
         self.b_magic_coat = False
 
-        self.b_magnet_rise = False
+        self.b_magnet_rise = 0
 
         self.b_perfect_aim = False
 
         self.b_powdered = False
 
+        self.b_lunar_dance = False
+
+        self.b_spiky_shield = False
+
     def pre_turn(self):
+        if self.b_magnet_rise > 0:
+            self.b_magnet_rise -= 1
         for move in self.l_moves:
             if move.i_disable_idx > 0:
                 move.i_disable_idx -= 1

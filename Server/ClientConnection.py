@@ -134,6 +134,10 @@ class Client(object):
 
         self.b_active_poke_is_new = False
 
+        self.b_healing_wish = False
+
+        self.b_lunar_dance = False
+
         self.battle = None
 
         self.baton_pass_stats = Stats()
@@ -212,6 +216,13 @@ class Client(object):
             self.b_active_poke_is_new = True
             self.active_poke.modifier_stats = self.baton_pass_stats.get_copy()
             self.baton_pass_stats = Stats()
+
+            if self.b_healing_wish or self.b_lunar_dance:
+                self.b_healing_wish = False
+                self.b_lunar_dance = False
+                self.active_poke.i_hp = self.active_poke.get_usable_stats().i_hp
+                self.str_status = "none"
+
             #print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":

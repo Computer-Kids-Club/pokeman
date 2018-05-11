@@ -139,6 +139,9 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
     elif move.str_name in ["heal-bell"]:
         for poke in atk_player.team:
             poke.str_status = "none"
+    elif move.str_name in ["healing-wish"]:
+        atk_player.b_healing_wish = True
+        atk_poke.i_hp = 0
     elif move.str_name in ["heart-swap"]:
         atk_poke.modifier_stats, def_poke.modifier_stats = def_poke.modifier_stats, atk_poke.modifier_stats
     elif move.str_name in ["instruct"]:
@@ -150,10 +153,13 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         atk_poke.b_laser_focus = True
     elif move.str_name in ["lock-on"]:
         atk_poke.b_lock_on = True
+    elif move.str_name in ["lunar-dance"]:
+        atk_player.b_lunar_dance = True
+        atk_poke.i_hp = 0
     elif move.str_name in ["magic-coat"]:
         atk_poke.b_magic_coat = True
     elif move.str_name in ["magnet-rise"]:
-        atk_poke.b_magnet_rise = True
+        atk_poke.b_magnet_rise = 5
     elif move.str_name in ["mean-look"]:
         atk_poke.b_trapped = True
     elif move.str_name in ["memento"]:
@@ -224,6 +230,9 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
         atk_poke.b_trapped = True
     elif move.str_name in ["spite"]:
         pass
+    elif move.str_name in ["spiky-shield"]:
+        atk_poke.b_protected = True
+        atk_poke.b_spiky_shield = True
     elif move.str_name in ["strength-sap"]:
         if def_poke.modifier_stats.i_atk > 0:
             atk_poke.i_hp += atk_poke.get_usable_stats().i_hp // 8 * def_poke.modifier_stats.i_atk
@@ -248,6 +257,16 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
 
 def move_ad_hoc_being_attacked(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
 
+    if def_poke.b_kings_shield and move.flag_contact:
+        atk_poke.modifier_stats.i_atk -= 2
+
+    if def_poke.b_spiky_shield and move.flag_contact:
+        atk_poke.i_hp -= atk_poke.get_usable_stats().i_hp // 8
+
+    if atk_poke.b_magnet_rise > 0:
+        if move.type.str_name == "ground":
+            return True
+
     if def_poke.b_protected:
         return True
 
@@ -256,6 +275,8 @@ def move_ad_hoc_being_attacked(atk_poke, def_poke, move, field, atk_player = Non
 def move_ad_hoc_after_turn(atk_poke, def_poke, field, atk_player = None, def_player = None):
 
     atk_poke.b_protected = False
+    atk_poke.b_kings_shield = False
+    atk_poke.b_spiky_shield = False
 
     return
 
