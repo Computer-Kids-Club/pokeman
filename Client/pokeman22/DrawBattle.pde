@@ -557,6 +557,7 @@ void draw_battle() {
 
   // moves
   draw_rectMode(CORNER);
+  imageMode(CENTER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<json_avail_moves_array.size(); i++) {
@@ -565,12 +566,14 @@ void draw_battle() {
       draw_rect(4 + 250*i, 694, 242, 72, 10);
       fill(255);
       draw_text(json_avail_moves_array.getJSONObject(i).getString("name"), 4 + 250*i + 121, 730);
+      if (mouseX >= 4 + 250*i && mouseX <= 4 + 250*i + 242 && mouseY >= 694 && mouseY <= 694 + 72) {
+        drawPokeMove(i, json_avail_moves_array.getJSONObject(i), 694);
+      }
     }
   }
 
   // team pokes
   if (c_display_state == DISPLAY_TEAMS) {
-    imageMode(CENTER);
     for (int i=0; i<6; i++) {
       stroke(50);
       fill(255);
@@ -617,7 +620,6 @@ void draw_battle() {
       }
     }
   } else if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-    imageMode(CENTER);
     for (int i=0; i<json_avail_pokes_array.size(); i++) {
       stroke(50);
       fill(255);
@@ -709,35 +711,73 @@ void draw_battle() {
   }
 }
 
-void drawPokeMove(int val, int y) {
+void drawPokeMove(int val, JSONObject move, int y) {
   int lineCount = 0;
+  int subIndex = 0;
+  String description = moves_data.get(move.getString("name"))[6];
+  String[] descList = split(description, ' ');
+  String tempString = "";
+  int tempStringIndex = 0;
+
+  if (subIndex < 0){
+    subIndex = 0;
+  }
+
+  while (textWidth(description.substring(subIndex)) > 320) {
+    while (textWidth(tempString) < 320) {
+      tempString += descList[tempStringIndex] + " ";
+      subIndex += descList[tempStringIndex].length() + 1;
+      tempStringIndex++;
+    }
+    tempString = "";
+    lineCount += 1;
+    descList = splice(descList, "\n", tempStringIndex-1);
+  }
+  description = "";
+  for (int i = 0; i < descList.length; i++) {
+    description += descList[i];
+    if (descList[i] != "\n") {
+      description += " ";
+    }
+  }
+
+  if (description.length() > 0) {
+    lineCount++;
+  }
+
   textAlign(LEFT, CENTER);
   pushMatrix();
-
   if (val == 0) {
     translate(85, 0);
   } else if (val == 3) {
     translate(-85, 0);
   }
 
+  y = y - 88 - lineCount*30;
+
   fill(0, 0, 255, 200);
-  draw_rect(4 + val*167 + 159/2 - 160, y - 190, 320, 180, 10);
+  if (lineCount == 0) {
+    draw_rect(4 + val*167 + 159/2 - 160, y, 320, 78, 10);
+  } else {
+    draw_rect(4 + val*167 + 159/2 - 160, y, 320, 82 + lineCount*30, 10);
+  }
   fill(0);
-  draw_text(pokemons.get(val).name, 4 + val*167 + 159/2 - 155, y - 180);
-  draw_line(4 + val*167 + 159/2 - 160, y - 150, 4 + val*167 + 159/2 + 160, y - 150);
-  draw_text("Base power: ", 4 + val*167 + 159/2 - 155, y - 140);
-  draw_text("Accuracy: " + pokemons.get(val).ability, 4 + val*167 + 159/2 - 155, y - 120);
-  draw_line(4 + val*167 + 159/2 - 160, y - 90, 4 + val*167 + 159/2 + 160, y - 90);
-  draw_text("- " + pokemons.get(val).moves[0], 4 + val*167 + 159/2 - 155, y - 80);
+  draw_text(move.getString("name"), 4 + val*167 + 159/2 - 155, y + 10);
+  draw_line(4 + val*167 + 159/2 - 160, y + 44, 4 + val*167 + 159/2 + 160, y + 44);
+  draw_text("Base power: " + moves_data.get(move.getString("name"))[2], 4 + val*167 + 159/2 - 155, y + 54);
+  draw_text("Accuracy: " + moves_data.get(move.getString("name"))[3], 4 + val*167 + 159/2 - 155, y + 74);
+
+  if (lineCount > 0) {
+    draw_line(4 + val*167 + 159/2 - 160, y + 88, 4 + val*167 + 159/2 + 160, y + 88);
+  }
+
+  textAlign(LEFT, TOP);
+  draw_text(description, 4 + val*167 + 159/2 - 155, y + 92);
 
   textAlign(CENTER);
   fill(255);
-  draw_image(type_image.get(names_types.get(pokemons.get(val).name)[0]), 4 + val*167 + 159/2 - 155 + 25, y - 162);
-  draw_text(names_types.get(pokemons.get(val).name)[0], 4 + val*167 + 159/2 - 155 + 25, y - 162 + height/200);
-  if (names_types.get(pokemons.get(val).name)[1] != null) {
-    draw_image(type_image.get(names_types.get(pokemons.get(val).name)[1]), 4 + val*167 + 159/2 - 155 + 30 + width*9/224, y - 162);
-    draw_text(names_types.get(pokemons.get(val).name)[1], 4 + val*167 + 159/2 - 155 + 30 + width*9/224, y - 162 + height/200);
-  }
+  draw_image(type_image.get(moves_data.get(move.getString("name"))[0]), 4 + val*167 + 159/2 - 155 + 25, y + 32);
+  draw_text(moves_data.get(move.getString("name"))[0], 4 + val*167 + 159/2 - 155 + 25, y + 32 + height/200);
 
   popMatrix();
   textAlign(CENTER, CENTER);
