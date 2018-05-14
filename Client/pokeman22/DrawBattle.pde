@@ -51,6 +51,9 @@ ArrayList<String> l_other_hazards = new ArrayList<String> ();
 
 HashMap<String, PImage> TYPE_MOVE_IMG = new HashMap<String, PImage>();
 HashMap<String, PImage> ENTRY_HAZARD_IMG = new HashMap<String, PImage>();
+HashMap<String, PImage> weather_image = new HashMap<String, PImage>();
+
+String[] weatherNames = {"clear", "harsh", "extreme", "rain", "heavy", "sandstorm", "hail", "air"};
 
 String [] str_entry_hazards = {"spikes", "toxic-spikes", "stealth-rock", "sticky-web"};
 
