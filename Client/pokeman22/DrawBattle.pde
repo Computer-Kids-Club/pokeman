@@ -168,6 +168,19 @@ void draw_health_bar(int x, int y, float p, float op) {
   draw_text(round(100*p)+"%", x-HEALTH_BAR_WIDTH/2-20, y-70+7/2);
 }
 
+void draw_mini_health_bar(int x, int y, int w, int h, int health) {
+  draw_rectMode(CORNER);
+  fill(150);
+  draw_rect(x, y, w, h);
+  noStroke();
+  fill(interpolate(0, 100, int(health*10), 1000), 255, 255);
+  draw_rect(x, y, round(w*health/100), h);
+  stroke(0);
+  noFill();
+  draw_rect(x, y, w, h);
+  fill(0);
+}
+
 void draw_battling_poke(Pokemon poke, int me_or_other) {
 
   boolean b_cur_poke_hp_anime = false;
@@ -584,7 +597,8 @@ void draw_battle() {
       draw_image(clientPokemonImg[i], 4 + i*167 + 159/2 - 55, height*13/18 + 76);
       //height*13/18 + 10      660     26
       fill(0);
-      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, height*13/18 + 76);
+      draw_text(pokemons.get(i).name, 4 + i*167 + 159/2, height*13/18 + 72);
+      draw_mini_health_bar(4 + i*167 + 159/4 + 8, height*13/18 + 88, 159*3/4 - 15, 6, pokemons.get(i).cur_hp*100/pokemons.get(i).HP);
       if (mouseX >= 4 + i*167 && mouseX <= 4 + i*167 + 159 && mouseY >= height*13/18 + 50 && mouseY <= height*13/18 + 102) {
         drawPokeInfo(i, height*13/18 + 50);
         //textAlign(LEFT, CENTER);
@@ -629,7 +643,8 @@ void draw_battle() {
       draw_rect(4 + json_avail_pokes_array.getInt(i)*167, 794, 159, 52, 10);
       draw_image(clientPokemonImg[json_avail_pokes_array.getInt(i)], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 55, 820);
       fill(0);
-      draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).name, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2, 820);
+      draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).name, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2, 816);
+      draw_mini_health_bar(4 + json_avail_pokes_array.getInt(i)*167 + 159/4 + 8, 832, 159*3/4 - 15, 6, pokemons.get(json_avail_pokes_array.getInt(i)).cur_hp*100/pokemons.get(json_avail_pokes_array.getInt(i)).HP);
       if (mouseX >= 4 + json_avail_pokes_array.getInt(i)*167 && mouseX <= 4 + json_avail_pokes_array.getInt(i)*167 + 159 && mouseY >= 794 && mouseY <= 794 + 52) {
         drawPokeInfo(json_avail_pokes_array.getInt(i), 794);
         //textAlign(LEFT, CENTER);
