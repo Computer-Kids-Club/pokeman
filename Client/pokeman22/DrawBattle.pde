@@ -714,10 +714,12 @@ void draw_battle() {
     if (mouseX>=TEXT_CHAT_DIVIDE&&mouseX<=text_chat.size()) {
       if (mouseY<=height - 30 && mouseY>=height - 30-60) {
         chatting=true;
+      } else {
+        chatting=false;
       }
-      else{
-        chatting=false;}
-    }else{chatting=false;}
+    } else {
+      chatting=false;
+    }
   }
 }
 
@@ -751,7 +753,7 @@ void drawPokeMove(int val, JSONObject move, int y) {
       description += " ";
     }
   }
-  println(description.length());
+
   if (description.length() > 1) {
     lineCount++;
   }
