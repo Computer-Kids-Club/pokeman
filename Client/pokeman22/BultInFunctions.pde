@@ -93,9 +93,9 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
-  
-  add_ad_hoc_text_effect(""+key, int(random(100, width-100)), int(random(100, width-100)), color(int(random(255)),255,255));
-  
+
+  add_ad_hoc_text_effect(""+key, int(random(100, width-100)), int(random(100, width-100)), color(int(random(255)), 255, 255));
+
   key_pressed_console();
   if (b_console)
     return;
@@ -112,19 +112,17 @@ void keyPressed() {
     } else if (KEY_TO_ID.get(key)!=null&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
       select_move(KEY_TO_ID.get(key));
       i_selection_stage = AWAITING_SELECTION;
+    } else if (chatting==true) {
+      if (key==ENTER||key==RETURN) {
+        JSONObject json = new JSONObject();
+        json.setString("chat", chat_msg);
+        myClient.write(json.toString());
+        chat_msg="";
+      } else {
+        chat_msg+=key;
+      }
     }
   }
-
-  /*if (key=='h') {
-   send_hey();
-   }
-   if (key=='s') {
-   send_pokes();
-   }*/
-  if (key=='`') {
-    //reconnect();
-  }
-
   if (pokemonSearchBool == true) {
     for (int i = 0; i < 26; i++) {
       if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
@@ -204,7 +202,7 @@ void keyPressed() {
           if (password == "") {
             password = str(key);
             break;
-          } else if(password.length()<=30) {
+          } else if (password.length()<=30) {
             password += key;
             break;
           }

@@ -12,6 +12,9 @@ int c_other_display_poke_tmp_new = DISPLAY_NONE;
 JSONObject json_my_display_poke_tmp_new = null;
 JSONObject json_other_display_poke_tmp_new = null;
 
+boolean chatting=false;
+String chat_msg="";
+
 int i_total_moving = 30;
 int i_moving = 0;
 int i_moving_direction = 1;
@@ -497,7 +500,7 @@ void draw_battle() {
       draw_text(pokemons.get(c_my_display_poke).moves[i], 4 + 250*i + 121, 730);
     }
   }
-  
+
   // team pokes
   if (c_display_state == DISPLAY_TEAMS) {
     imageMode(CENTER);
@@ -558,6 +561,13 @@ void draw_battle() {
         }
       }
     }
+    if (mouseX>=TEXT_CHAT_DIVIDE&&mouseX<=text_chat.size()) {
+      if (mouseY<=height - 30 && mouseY>=height - 30-60) {
+        chatting=true;
+      }
+      else{
+        chatting=false;}
+    }else{chatting=false;}
   }
 }
 
