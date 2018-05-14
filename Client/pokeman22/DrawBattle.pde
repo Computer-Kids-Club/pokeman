@@ -12,6 +12,9 @@ int c_other_display_poke_tmp_new = DISPLAY_NONE;
 JSONObject json_my_display_poke_tmp_new = null;
 JSONObject json_other_display_poke_tmp_new = null;
 
+boolean chatting=false;
+String chat_msg="";
+
 int i_total_moving = 30;
 int i_moving = 0;
 int i_moving_direction = 1;
@@ -708,6 +711,15 @@ void draw_battle() {
         }
       }
     }
+    if (mouseX>=TEXT_CHAT_DIVIDE&&mouseX<=text_chat.size()) {
+      if (mouseY<=height - 30 && mouseY>=height - 30-60) {
+        chatting=true;
+      } else {
+        chatting=false;
+      }
+    } else {
+      chatting=false;
+    }
   }
 }
 
@@ -719,19 +731,20 @@ void drawPokeMove(int val, JSONObject move, int y) {
   String tempString = "";
   int tempStringIndex = 0;
 
-  if (subIndex < 0){
-    subIndex = 0;
-  }
 
-  while (textWidth(description.substring(subIndex)) > 320) {
-    while (textWidth(tempString) < 320) {
+  while (textWidth(description.substring(subIndex)) > 310) {
+    while (textWidth(tempString) < 310) {
       tempString += descList[tempStringIndex] + " ";
       subIndex += descList[tempStringIndex].length() + 1;
       tempStringIndex++;
     }
     tempString = "";
     lineCount += 1;
+    subIndex--;
     descList = splice(descList, "\n", tempStringIndex-1);
+
+    //println(subIndex + " " + description.length() + " ");
+    //print(description.substring(subIndex));
   }
   description = "";
   for (int i = 0; i < descList.length; i++) {
@@ -741,43 +754,45 @@ void drawPokeMove(int val, JSONObject move, int y) {
     }
   }
 
-  if (description.length() > 0) {
+  if (description.length() > 1) {
     lineCount++;
   }
 
+
   textAlign(LEFT, CENTER);
   pushMatrix();
+
   if (val == 0) {
-    translate(85, 0);
+    translate(42, 0);
   } else if (val == 3) {
-    translate(-85, 0);
+    translate(-42, 0);
   }
 
-  y = y - 88 - lineCount*30;
+  y = y - 100 - lineCount*22;
 
   fill(0, 0, 255, 200);
   if (lineCount == 0) {
-    draw_rect(4 + val*167 + 159/2 - 160, y, 320, 78, 10);
+    draw_rect(4 + 250*val + 242/2 - 160, y, 320, 86, 10);
   } else {
-    draw_rect(4 + val*167 + 159/2 - 160, y, 320, 82 + lineCount*30, 10);
+    draw_rect(4 + 250*val + 242/2 - 160, y, 320, 110 + (lineCount-1)*22, 10);
   }
   fill(0);
-  draw_text(move.getString("name"), 4 + val*167 + 159/2 - 155, y + 10);
-  draw_line(4 + val*167 + 159/2 - 160, y + 44, 4 + val*167 + 159/2 + 160, y + 44);
-  draw_text("Base power: " + moves_data.get(move.getString("name"))[2], 4 + val*167 + 159/2 - 155, y + 54);
-  draw_text("Accuracy: " + moves_data.get(move.getString("name"))[3], 4 + val*167 + 159/2 - 155, y + 74);
+  draw_text(move.getString("name"), 4 + 250*val + 242/2 - 155, y + 10);
+  draw_line(4 + 250*val + 242/2 - 160, y + 44, 4 + 250*val + 242/2 + 160, y + 44);
+  draw_text("Base power: " + moves_data.get(move.getString("name"))[2], 4 + 250*val + 242/2 - 155, y + 54);
+  draw_text("Accuracy: " + moves_data.get(move.getString("name"))[3], 4 + 250*val + 242/2 - 155, y + 74);
 
   if (lineCount > 0) {
-    draw_line(4 + val*167 + 159/2 - 160, y + 88, 4 + val*167 + 159/2 + 160, y + 88);
+    draw_line(4 + 250*val + 242/2 - 160, y + 88, 4 + 250*val + 242/2 + 160, y + 88);
   }
 
   textAlign(LEFT, TOP);
-  draw_text(description, 4 + val*167 + 159/2 - 155, y + 92);
+  draw_text(description, 4 + 250*val + 242/2 - 155, y + 92);
 
   textAlign(CENTER);
   fill(255);
-  draw_image(type_image.get(moves_data.get(move.getString("name"))[0]), 4 + val*167 + 159/2 - 155 + 25, y + 32);
-  draw_text(moves_data.get(move.getString("name"))[0], 4 + val*167 + 159/2 - 155 + 25, y + 32 + height/200);
+  draw_image(type_image.get(moves_data.get(move.getString("name"))[0]), 4 + 250*val + 242/2 - 155 + 25, y + 32);
+  draw_text(moves_data.get(move.getString("name"))[0], 4 + 250*val + 242/2 - 155 + 25, y + 32 + height/200);
 
   popMatrix();
   textAlign(CENTER, CENTER);
