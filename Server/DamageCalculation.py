@@ -94,7 +94,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #---------------#
     # WEATHER BUFFS #
     #---------------#
-    if str_atk_ability != 'air-lock' or str_def_ability != 'air-lock':
+    if str_atk_ability != 'air-lock' or str_atk_ability != 'cloud-nine' or str_def_ability != 'air-lock' or str_def_ability != 'cloud-nine':
         if str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'fire':
             i_weather = 1.5
         elif str_weather == Weather.RAIN and str_mov_type == 'water':
@@ -317,6 +317,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'battle-armor':
         i_crit = 1
+
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#

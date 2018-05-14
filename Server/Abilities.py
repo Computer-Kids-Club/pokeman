@@ -33,7 +33,11 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
         i_atk = 0
         i_def = 7
         i_other = 0
-
+    str_pok_type_1 = atk_poke.type_1.getName()
+    if atk_poke.type_2 is not None:
+        str_pok_type_2 = atk_poke.type_2.getName()
+    else:
+        str_pok_type_2 = ''
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -48,6 +52,13 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
     if str_mov_name == 'shell-smash':
         if str_def_ability != 'big-pecs'
             def_poke.get_usable_stats().get_def -= 1
+
+    if str_def_ability == 'color-change':
+        str_pok_type_1 = str_mov_type
+        str_pok_type_2 = None
+
+
+
 
     #--------------------#
     # ATACKING ABILITIES #
