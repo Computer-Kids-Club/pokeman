@@ -35,6 +35,7 @@ class Pokemon {
     init_with_json(loadJSONObject(POKEINFO_PATH+"pokemon/"+num+".txt"));
 
     HP = statList[0];
+    cur_hp = old_hp = HP;
     ATK = statList[1];
     DEF = statList[2];
     SPA = statList[3];
@@ -111,6 +112,7 @@ class Pokemon {
     evasion = json.getInt("eva");
 
     HP = max(HP, 1);
+    //println(cur_hp);
     cur_hp = json.getInt("hp");
     //println(cur_hp);
 
