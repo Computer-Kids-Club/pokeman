@@ -141,11 +141,24 @@ class Pokeman(object):
 
         self.b_magic_coat = False
 
-        self.b_magnet_rise = False
+        self.b_magnet_rise = 0
 
         self.b_perfect_aim = False
 
         self.b_powdered = False
+
+        self.b_lunar_dance = False
+
+        self.b_spiky_shield = False
+
+    def pre_turn(self):
+        if self.b_magnet_rise > 0:
+            self.b_magnet_rise -= 1
+        for move in self.l_moves:
+            if move.i_disable_idx > 0:
+                move.i_disable_idx -= 1
+            if self.i_encore_idx > 0:
+                self.i_encore_idx -= 1
 
     def get_last_move(self):
         if len(self.l_last_move) > 1:
@@ -153,7 +166,27 @@ class Pokeman(object):
         return Move("tackle")
 
     def get_moves(self):
-        return self.l_moves
+        l_possible_moves = []
+
+        for move in self.l_moves:
+            #print(move.i_disable_idx,move.i_pp)
+            if move.i_disable_idx > 0:
+                continue
+            if move.i_pp <= 0:
+                continue
+            l_possible_moves.append(move)
+
+        if self.i_encore_idx > 0:
+            l_possible_moves = [self.get_last_move()]
+
+        return l_possible_moves
+
+    def get_move_dic(self):
+        l_possible_moves = self.get_moves()
+        dic_moves = []
+        for move in l_possible_moves:
+            dic_moves.append(move.to_dic())
+        return dic_moves
 
     def get_stats_range(self):
         return Stats(),Stats()
@@ -233,6 +266,9 @@ class Pokeman(object):
         return self.str_name
 
     def is_usable(self):
+        if self.b_endure_idx and self.i_hp <= 0:
+            self.i_hp = 1
+
         if self.i_hp <= 0:
             self.i_hp = 0
             self.b_fainted = True

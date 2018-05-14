@@ -50,7 +50,8 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_stat_change = move.b_stat_change
     b_status = move.b_status_effect
     i_recoil = move.get_recoil_ratio()
-    i_def_hp = def_poke.base_stats.i_hp
+    i_def_hp = def_poke.get_usable_stats().get_hp()
+    i_atk_hp = atk_poke.get_usable_stats().get_hp()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -163,7 +164,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_move_buff = 2
 
     #--------------------#
-    # ATACKING ABILITIES #
+    # ATTACKING ABILITIES #
     #--------------------#
     if str_atk_ability == 'water-bubble':
         if str_mov_type == 'water':
@@ -223,10 +224,13 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_status == 'poisoned':
         if move.str_cat == 'physical':
             i_atk_buff = 1.5
-
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
+    if str_def_ability == 'water-bubble':
+        if str_mov_type == 'fire':
+            i_def_buff = 0.5
+
     if str_def_ability == 'aroma-veil':
         if str_atk_ability != 'mold-breaker' or str_atk_ability == 'turboblaze' or str_atk_ability == 'teravolt':
             if str_mov_name == 'taunt' or str_mov_name == 'torment' or str_mov_name == 'encore' or str_mov_name == 'disable' or str_mov_name == 'cursed-body' or str_mov_name == 'heal-block' or str_mov_name == 'infatuation':
@@ -246,7 +250,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_def_ability == 'filter' or str_def_ability == 'prism-armor' or str_def_ability =='solid-rock':
             i_def_buff = 0.75
 
-    if i_def_hp == def_poke.get_usable_stats().get_hp():
+    if i_def_hp == def_poke.base_stats.i_hp:
         if str_def_ability == 'multiscale' or str_def_ability == 'shadow-shield':
             i_def_buff = 0.5
     if str_atk_ability == 'tinted-lens':
@@ -316,8 +320,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
-    i_pow *= i_atk_buff
-    i_other = i_other * i_def_buff * i_move_buff
+    i_other = i_other * i_def_buff * i_move_buff * i_atk_buff
     print(i_crit , i_stab , i_type , i_rand , i_weather , i_terrain , i_other , i_burn)
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
@@ -334,7 +337,7 @@ poke1.base_stats.i_spe = 259
 poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
 poke1.type_2 = None
-#poke1.str_ability = "tough-claws"
+poke1.str_ability = "water-bubble"
 #poke1.str_status = 'burn'
 
 poke2 = Pokeman()
@@ -347,8 +350,8 @@ poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 poke2.type_2 = None
-poke2.str_ability = "multiscale"
-move = Move("dark-pulse")
+#poke2.str_ability = "multiscale"
+move = Move("surf")
 
 field = Field()
 field.terrain = Terrain.ELECTRIC

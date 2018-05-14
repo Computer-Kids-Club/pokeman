@@ -134,6 +134,10 @@ class Client(object):
 
         self.b_active_poke_is_new = False
 
+        self.b_healing_wish = False
+
+        self.b_lunar_dance = False
+
         self.battle = None
 
         self.baton_pass_stats = Stats()
@@ -166,6 +170,10 @@ class Client(object):
         for poke in team:
             l_poke_data.append(poke.to_dic())
         self.send_data(SENDING_POKE+json.dumps({"pokes":l_poke_data}))
+
+    def pre_turn(self):
+        for poke in self.team:
+            poke.pre_turn()
 
     def recieved_data(self, str_data):
 
@@ -208,6 +216,13 @@ class Client(object):
             self.b_active_poke_is_new = True
             self.active_poke.modifier_stats = self.baton_pass_stats.get_copy()
             self.baton_pass_stats = Stats()
+
+            if self.b_healing_wish or self.b_lunar_dance:
+                self.b_healing_wish = False
+                self.b_lunar_dance = False
+                self.active_poke.i_hp = self.active_poke.get_usable_stats().i_hp
+                self.str_status = "none"
+
             #print(dic_data["poke"])
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectmove":

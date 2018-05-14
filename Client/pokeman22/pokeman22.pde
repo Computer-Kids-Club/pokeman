@@ -760,7 +760,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   strokeWeight(1);
   //draw_rect(width/7 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + 900/4 + 60, width*5/7 - SELECTSCREENSHIFT_X*2, 187);
   if (moveSelect) {
-    if (moveSearch == "" && validMoveSearch.size()!= names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length) {
+    if (moveSearch == "" && validMoveSearch.size() < names_moves.get(num_names.get(pokemonNumber))[0].length + names_moves.get(num_names.get(pokemonNumber))[1].length + names_moves.get(num_names.get(pokemonNumber))[2].length + names_moves.get(num_names.get(pokemonNumber))[3].length) {
       for (int i = 0; i < 4; i++) {
         for (int j = 0; j < names_moves.get(num_names.get(pokemonNumber))[i].length; j++) {
           validMoveSearch.append(names_moves.get(num_names.get(pokemonNumber))[i][j]);
@@ -790,6 +790,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         }
 
         draw_text(validMoveSearch.get(i + offsetMoves).replaceAll("-", " "), width*43/280 + SELECTSCREENSHIFT_X, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
+        //println(validMoveSearch.get(i + offsetMoves), moves_data.get(validMoveSearch.get(i + offsetMoves))[0]);
+        // println(moves_data.get("rollout"));
         draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[0], width*43/280 + SELECTSCREENSHIFT_X + width*3/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
         draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[1], width*43/280 + SELECTSCREENSHIFT_X + width*9/70, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
         draw_text(moves_data.get(validMoveSearch.get(i + offsetMoves))[2], width*43/280 + SELECTSCREENSHIFT_X + width*6/35, SELECTSCREENSHIFT_Y + height*521/900 + gridsize/2 + i*gridsize);
@@ -1153,6 +1155,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         mousePressValid = false;
       }
       if (mouseX <= width*151/700 + SELECTSCREENSHIFT_X && mouseX >= width*3/20 + SELECTSCREENSHIFT_X && mouseY <= SELECTSCREENSHIFT_Y + height*23/90 + height/18 && mouseY >= SELECTSCREENSHIFT_Y + height*23/90) {
+        MOVESLIDER.i_y = moveSliderStartY;
+        moveSearch = "";
+        moveSelect = false;
         moveSelectScreen = false;
         mousePressValid = false;
       }
@@ -1306,9 +1311,9 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  //size(1400, 900, P2D);
+  size(1400, 900, P2D);
   //fullScreen();
-  size(displayWidth, displayHeight, P2D);
+  //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
   noSmooth();
@@ -1451,6 +1456,10 @@ void better_setup() {
     }
     int[] sliderStartingPosition = {width*169/280, width*169/280, width*169/280, width*169/280, width*169/280, width*169/280};
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke, "Male", 0, new int[5], new int[6], sliderStartingPosition));
+
+    for (int j = 0; j < movelistPoke.length; j++) {
+      moves_data.put(movelistPoke[j], getMoveData(movelistPoke[j]));
+    }
   }
   for (int i = 0; i < male.length; i++) {
     num_male.put(names_num.get(male[i]), male[i]);
@@ -1475,6 +1484,8 @@ void better_setup() {
 }
 
 void draw() {
+  //println(mouseX, mouseY);
+  //tint(255,0,100);
 
   if (loading) {
     background(int(random(255)), 255, 255);

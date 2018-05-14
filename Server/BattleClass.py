@@ -12,6 +12,7 @@ from DamageCalculation import attack, confusion_attack
 from OtherMoveCalculations import accuracy, multi_hit, stat_change, status_effect
 from MoveAdHoc import move_ad_hoc_during, move_ad_hoc_after_turn
 import json
+import copy
 
 # master dictionary of all the ongoing battles
 l_battles = []
@@ -145,6 +146,9 @@ class Battle(object):
             def_poke.is_usable()
             self.player_poke_fainted(other_player)
 
+        if atk_poke.b_grudge:
+            def_poke.get_last_move().i_pp = 0
+
         if len(player.get_available_pokes()) <= 0:
             self.b_gameover = True
             player.send_data(DISPLAY_LOSE)
@@ -165,7 +169,10 @@ class Battle(object):
 
         self.send_players_pokes()
 
-        # calculate damage
+        for player in self.l_players:
+            player.pre_turn()
+
+        # calculate damages
 
         l_move_queue= []
 
@@ -282,6 +289,12 @@ class Battle(object):
 
                 # woah, the move hit
                 self.send_broadcast(atk_poke.str_name.capitalize() + " used " + cur_move.str_name + ".")
+
+                # electrify
+                if def_poke.forced_move_type != None:
+                    cur_move = copy.deepcopy(cur_move)
+                    cur_move.type = def_poke.forced_move_type
+                    def_poke.forced_move_type = None
 
                 # some moves hit more than one time
                 i_hits = multi_hit(cur_move)
@@ -520,9 +533,9 @@ class Battle(object):
             self.send_players_pokes()
 
             if atk_poke.is_usable():
-                player.send_data(SELECT_POKE_OR_MOVE + json.dumps({"availpoke": player.get_available_pokes()}))
+                player.send_data(SELECT_POKE_OR_MOVE + json.dumps({"availpoke": player.get_available_pokes(),"availmove": atk_poke.get_move_dic()}))
             elif atk_poke.is_trapped():
-                player.send_data(SELECT_MOVE)
+                player.send_data(SELECT_MOVE + json.dumps({"availmove": atk_poke.get_move_dic()}))
             else:
                 player.send_data(SELECT_POKE + json.dumps({"availpoke": player.get_available_pokes()}))
 
