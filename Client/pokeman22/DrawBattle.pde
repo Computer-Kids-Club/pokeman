@@ -100,7 +100,9 @@ void init_battle_screen() {
     ENTRY_HAZARD_IMG.put(str_entry_hazards[i], new_img);
   }
 
-
+  for (int i = 0; i < pokemons.size(); i++) {
+    pokemons.get(i).cur_hp = pokemons.get(i).HP;
+  }
 
   filename = "https://play.pokemonshowdown.com/sprites/trainers-ordered/" + nf(int(random(1, 295)), 3) + ".png";
   if (filename.indexOf(":/") > 0) {
