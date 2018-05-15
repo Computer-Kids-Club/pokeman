@@ -341,8 +341,8 @@ void draw_battle() {
   draw_image(battleScreenBackground, 0, 0);
   fill(0, 0, 255, 100);
   noStroke();
-  draw_triangle(0, 0, 250, 0, 0, 400);
-  draw_triangle(TEXT_CHAT_DIVIDE, 650, TEXT_CHAT_DIVIDE - 250, 650, TEXT_CHAT_DIVIDE, 250);
+  draw_triangle(0, 0, 300, 0, 0, 400);
+  draw_triangle(TEXT_CHAT_DIVIDE, 650, TEXT_CHAT_DIVIDE - 300, 650, TEXT_CHAT_DIVIDE, 250);
   stroke(0);
   //draw_rect(0, 0, 150, height*13/18);
   //draw_rect(TEXT_CHAT_DIVIDE-150, 0, 150, height*13/18);
