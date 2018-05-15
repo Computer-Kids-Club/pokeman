@@ -414,6 +414,43 @@ void draw_battle() {
     }
   }
 
+  // OTHER poke
+  pushMatrix();
+  if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
+    translate(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
+    pushMatrix();
+
+    if (i_switching>0 && i_switching_direction == OTHER) {
+      if (i_switching>i_total_switching/2) {
+        translate(interpolate(0, 300, (i_total_switching-i_switching), i_total_switching/2), 0);
+      } else {
+        translate(interpolate(300, 0, (i_total_switching-i_switching)-i_total_switching/2, i_total_switching/2), 0);
+      }
+    }
+
+    if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == 1) {
+
+      int tmp_move = i_moving * 2;
+
+      if (tmp_move<i_total_moving) {
+        tmp_move = tmp_move;
+      } else {
+        tmp_move = 2*i_total_moving-tmp_move;
+      }
+      //println(tmp_move);
+      translate_interpolation(POKE_OTHER_RECT, POKE_ME_RECT, tmp_move, i_total_moving);
+      translate(-POKE_OTHER_RECT.i_x, -POKE_OTHER_RECT.i_y);
+    }
+    //tint(frameCount%255,255,255);
+    drawPokemon(other_pokemons.get(c_other_display_poke).animation, 0, 0);
+    noTint();
+
+    popMatrix();
+
+    draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
+  }
+  popMatrix();
+
   // ME poke
   pushMatrix();
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size()) {
@@ -451,42 +488,6 @@ void draw_battle() {
   }
   popMatrix();
 
-  // OTHER poke
-  pushMatrix();
-  if (c_display_state==DISPLAY_POKES && c_other_display_poke<other_pokemons.size()) {
-    translate(POKE_OTHER_RECT.i_x, POKE_OTHER_RECT.i_y);
-    pushMatrix();
-
-    if (i_switching>0 && i_switching_direction == OTHER) {
-      if (i_switching>i_total_switching/2) {
-        translate(interpolate(0, 300, (i_total_switching-i_switching), i_total_switching/2), 0);
-      } else {
-        translate(interpolate(300, 0, (i_total_switching-i_switching)-i_total_switching/2, i_total_switching/2), 0);
-      }
-    }
-
-    if (i_moving>0 && str_cur_move_anime_style.equals("physical") && i_moving_direction == 1) {
-
-      int tmp_move = i_moving * 2;
-
-      if (tmp_move<i_total_moving) {
-        tmp_move = tmp_move;
-      } else {
-        tmp_move = 2*i_total_moving-tmp_move;
-      }
-      //println(tmp_move);
-      translate_interpolation(POKE_OTHER_RECT, POKE_ME_RECT, tmp_move, i_total_moving);
-      translate(-POKE_OTHER_RECT.i_x, -POKE_OTHER_RECT.i_y);
-    }
-    //tint(frameCount%255,255,255);
-    drawPokemon(other_pokemons.get(c_other_display_poke).animation, 0, 0);
-    noTint();
-
-    popMatrix();
-
-    draw_battling_poke(other_pokemons.get(c_other_display_poke), OTHER);
-  }
-  popMatrix();
 
   draw_rectMode(CENTER);
 
@@ -580,11 +581,16 @@ void draw_battle() {
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
     for (int i=0; i<json_avail_moves_array.size(); i++) {
+      textAlign(CENTER, CENTER);
       stroke(50);
       fill(TYPE_COLOURS.get(json_avail_moves_array.getJSONObject(i).getString("type")));
       draw_rect(4 + 250*i, 694, 242, 72, 10);
       fill(255);
       draw_text(json_avail_moves_array.getJSONObject(i).getString("name"), 4 + 250*i + 121, 730);
+      textAlign(RIGHT, BASELINE);
+      draw_text(json_avail_moves_array.getJSONObject(i).getInt("pp") + "/" + json_avail_moves_array.getJSONObject(i).getInt("maxpp"), 4 + 250*i + 236, 760);
+      textAlign(LEFT, BASELINE);
+      draw_text(json_avail_moves_array.getJSONObject(i).getString("type"), 4 + 250*i + 6, 760);
       if (mouseX >= 4 + 250*i && mouseX <= 4 + 250*i + 242 && mouseY >= 694 && mouseY <= 694 + 72) {
         drawPokeMove(i, json_avail_moves_array.getJSONObject(i), 694);
       }
@@ -592,6 +598,7 @@ void draw_battle() {
   }
 
   // team pokes
+  textAlign(CENTER, CENTER);
   if (c_display_state == DISPLAY_TEAMS) {
     for (int i=0; i<6; i++) {
       stroke(50);
