@@ -22,7 +22,7 @@ Rect MOVE_SEARCH_BUTTON;
 Rect POKE_ME_RECT;
 Rect POKE_OTHER_RECT;
 
-int HEALTH_BAR_WIDTH = 200;
+int HEALTH_BAR_WIDTH;
 
 int POKEMON_PER_PAGE = 20;
 int MOVES_PER_PAGE = 7;
@@ -78,6 +78,7 @@ int TEXT_CHAT_DIVIDE;
 float gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
 
 void init_constants() {
+  HEALTH_BAR_WIDTH = width/7;
   TEXT_CHAT_DIVIDE = height*10/9;
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
