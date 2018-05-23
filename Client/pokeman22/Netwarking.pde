@@ -29,10 +29,9 @@ String json_array_to_string(JSONArray json_arr, char c_split) {
 void newTurn() {
   ArrayList<Integer> tempList = new ArrayList<Integer>();
   tempList.add(TEXT_CHAT_DIVIDE);
-  tempList.add(height - 100);
+  tempList.add(height - height/30);
   tempList.add(turn);
   turnSignals.add(tempList);
-  turn++;
 }
 
 void turnBump() {
@@ -56,8 +55,7 @@ void process_data(String dataIn) {
     println("FOUND BATTLE");
     text_chat = new ArrayList<String>();
     text_chat.add(0, "FOUND BATTLE");
-    newTurn();
-    turnBump();
+    turn++;
     i_battle_state = BATTLING;
   } else if (dataIn.charAt(0)==NEXT_TURN) {
     println("NEXT TURN");
@@ -68,7 +66,7 @@ void process_data(String dataIn) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_pokes_array = json.getJSONArray("availpoke");
       text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
-      turnBump();
+      text_chat.add(0, "");
     }
   } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
     i_selection_stage = SELECT_POKE_OR_MOVE;
@@ -77,7 +75,6 @@ void process_data(String dataIn) {
       json_avail_pokes_array = json.getJSONArray("availpoke");
       json_avail_moves_array = json.getJSONArray("availmove");
       text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
-      turnBump();
     }
   } else if (dataIn.charAt(0)==SELECT_MOVE) {
     i_selection_stage = SELECT_MOVE;
@@ -85,18 +82,14 @@ void process_data(String dataIn) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_moves_array = json.getJSONArray("availmove");
       text_chat.add(0, "Select a move with keys: q,w,e,r");
-      turnBump();
     }
   } else if (dataIn.charAt(0)==AWAITING_SELECTION) {
     i_selection_stage = AWAITING_SELECTION;
     text_chat.add(0, "FOUND BATTLE");
-    turnBump();
   } else if (dataIn.charAt(0)==DISPLAY_TEXT) {
     if (dataIn.substring(1).equals("")) {
-      println("HERE");
-      newTurn();
+      turn++;
       text_chat.add(0, dataIn.substring(1));
-      turnBump();
     }
     text_chat.add(0, dataIn.substring(1));
   } else if (dataIn.charAt(0)==SENDING_POKE) {
@@ -219,6 +212,15 @@ void process_data(String dataIn) {
       add_ad_hoc_text_effect(str_move, i_display_player, color(#A040A0));
     } else if (str_move.equals("toxic")) {
       add_ad_hoc_text_effect(str_move, i_display_player, color(#A040A0));
+    }
+  } else if (dataIn.charAt(0)=='L') {
+    if (dataIn.substring(1).equals("true")) {
+      textFont(font_plain);
+      login=false;
+    } else {
+      username="";
+      password="";
+      current="";
     }
   }
 }
