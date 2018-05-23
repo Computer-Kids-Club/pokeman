@@ -29,10 +29,9 @@ String json_array_to_string(JSONArray json_arr, char c_split) {
 void newTurn() {
   ArrayList<Integer> tempList = new ArrayList<Integer>();
   tempList.add(TEXT_CHAT_DIVIDE);
-  tempList.add(height - 100);
+  tempList.add(height - height/30);
   tempList.add(turn);
   turnSignals.add(tempList);
-  turn++;
 }
 
 void turnBump() {
@@ -56,8 +55,7 @@ void process_data(String dataIn) {
     println("FOUND BATTLE");
     text_chat = new ArrayList<String>();
     text_chat.add(0, "FOUND BATTLE");
-    newTurn();
-    turnBump();
+    turn++;
     i_battle_state = BATTLING;
   } else if (dataIn.charAt(0)==NEXT_TURN) {
     println("NEXT TURN");
@@ -94,7 +92,7 @@ void process_data(String dataIn) {
   } else if (dataIn.charAt(0)==DISPLAY_TEXT) {
     if (dataIn.substring(1).equals("")) {
       println("HERE");
-      newTurn();
+      turn++;
       text_chat.add(0, dataIn.substring(1));
       turnBump();
     }

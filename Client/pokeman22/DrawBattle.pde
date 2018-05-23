@@ -719,15 +719,17 @@ void draw_battle() {
   textAlign(LEFT, CENTER);
   fill(0);
   for (int i=0; i<text_chat.size() && height - i*(height/30) > height/30; i++) {
-    draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
-  }
-
-  textAlign(CENTER, CENTER);
-  for (int i = 0; i < turnSignals.size(); i++) {
-    fill(255);
-    draw_rect(turnSignals.get(i).get(0), turnSignals.get(i).get(1), width - TEXT_CHAT_DIVIDE, 20);
-    fill(0);
-    draw_text(turnSignals.get(i).get(2), turnSignals.get(i).get(0) + (width - TEXT_CHAT_DIVIDE)/2, turnSignals.get(i).get(1) + 10);
+    if (text_chat.get(i).equals("")) {
+      fill(255);
+      draw_rect(TEXT_CHAT_DIVIDE, height - i*(height/30) - height/30 - 10, width - TEXT_CHAT_DIVIDE, 20);
+      textAlign(CENTER, CENTER);
+      fill(0);
+      draw_text(turn - (turn-i), TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height/30);
+    } else {
+      fill(0);
+      textAlign(LEFT, CENTER);
+      draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
+    }
   }
 
   if (mousePressed && mousePressValid == true) {
