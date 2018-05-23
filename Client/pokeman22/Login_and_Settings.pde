@@ -36,9 +36,11 @@ void login() {
     }
     if (mouseX>=width/2-width/6 &&mouseX<=width/2) {
       if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
-        //myClient.write(username);
-        textFont(font_plain);
-        login=false;
+        JSONObject json = new JSONObject();
+        json.setString("username", username);
+        json.setString("password", password);
+        json.setString("battlestate", "login");
+        myClient.write(json.toString());
       }
     } else if (mouseX>=width/2 &&mouseX<=width/2+width/6) { 
       if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
@@ -59,8 +61,11 @@ void login() {
   }
   draw_text(coded, width/2, height/5*3);
   if (keyPressed && (key == RETURN||key==ENTER)) {
-    textFont(font_plain);
-    login=false;
+    JSONObject json = new JSONObject();
+    json.setString("username", username);
+    json.setString("password", password);
+    json.setString("battlestate", "login");
+    myClient.write(json.toString());
   }
 }
 
@@ -104,8 +109,12 @@ void register() {
     }
     if (mouseX>=width/2-width/6 &&mouseX<=width/2+width/6) {
       if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
-        //myClient.write(username);
-        //textFont(font_plain);
+        JSONObject json = new JSONObject();
+        json.setString("username", username);
+        json.setString("password", password);
+        json.setString("battlestate", "login");
+        myClient.write(json.toString());
+        textFont(font_plain);
         //register=false;
       }
     }
@@ -119,6 +128,11 @@ void register() {
   }
   draw_text(coded, width/2, height/5*3);
   if (keyPressed && (key == RETURN||key==ENTER)) {
+    JSONObject json = new JSONObject();
+    json.setString("username", username);
+    json.setString("password", password);
+    json.setString("battlestate", "login");
+    myClient.write(json.toString());
     textFont(font_plain);
     register=false;
   }

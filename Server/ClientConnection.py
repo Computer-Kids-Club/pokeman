@@ -230,6 +230,27 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
+        elif dic_data["battlestate"] == "login":
+            file_in = open('usernames.txt','r')     # readlines()
+            usernamelst = file_in.readlines()   # Returns a list with each line as an element. 
+            file_in.close()
+            file_in = open('passwords.txt','r')     # readlines()
+            passwordlst = file_in.readlines()   # Returns a list with each line as an element. 
+            file_in.close()
+            try:
+                if usernamelst.index(dic_data['username'])==passworlst.index(dic_data['password']):
+                    self.send_data('Ltrue')
+                else:
+                    self.send_data('Lfalse')
+            except:
+                self.send_data('Lfalse')
+        elif dic_data["battlestate"] == "register":
+            file_out = open('usernames.txt', "w")
+            file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
+            file_out.close()
+            file_out = open('passwords.txt', "w")
+            file_out.write(dic_data['password'])  # 2. Convert the info to string and write in the file
+            file_out.close()
 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
