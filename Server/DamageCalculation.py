@@ -58,6 +58,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     str_def_ability = def_poke.str_ability
     str_weather = field.get_weather()
     str_terrain = field.get_terrain()
+    l_atk_low_mov = ['aurora-beam', 'baby-doll-eyes', 'charm', 'feather-dance', 'growl', 'lunge', 'memento', 'nobal-roar', 'parting-shot', 'play-nice', 'play-rough', 'secret-power', 'strength-sap', 'tearful-look', 'tickle', 'trop-kick', 'venom-drench']
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -317,6 +318,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'battle-armor':
         i_crit = 1
+
+    if str_def_ability == 'comatose':
+        i_burn = 1
 
     #--------------------#
     # CALCULATING DAMAGE #

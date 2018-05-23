@@ -19,6 +19,13 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
     str_weather = field.get_weather()
     str_mov_type = move.type.getName()
     str_mov_name = move.str_name
+    i_atk_stat = atk_poke.get_usable_stats().get_atk += 1
+    i_def_stat = atk_poke.get_usable_stats().get_def += 1
+    i_spa_stat = atk_poke.get_usable_stats().get_spa += 1
+    i_spd_stat = atk_poke.get_usable_stats().get_spd += 1
+    i_spe_stat = atk_poke.get_usable_stats().get_spe += 1
+    l_stat = [i_atk_stat, i_def_stat, i_spa_stat, i_spd_stat, i_spe_stat]
+    i_max_stat = max(l_stat)
     if move.str_cat == 'physical':
         i_atk = atk_poke.get_usable_stats().get_atk()
         i_def = def_poke.get_usable_stats().get_def()
@@ -45,8 +52,9 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
         if i_def_hp == 0 and str_def_ability == 'aftermath' and b_contact:
             i_atk_hp -= (i_atk_hp / 4)
 
-    if i_def_hp < (def_poke.base_stats.i_hp)//2:
-        if str_mov_name != 'leach-seed':
+    if str_def_ability == 'berserk':
+        if i_def_hp < (def_poke.base_stats.i_hp)//2:
+            if str_mov_name != 'leach-seed':
                 def_poke.get_usable_stats().get_spa += 1
 
     if str_mov_name == 'shell-smash':
@@ -66,22 +74,15 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
     if str_atk_ability == 'beast-boost':
         if i_damage >= i_def_hp:
             if i_count < 6:
-                atk_poke.get_usable_stats().get_atk += 1
-                atk_poke.get_usable_stats().get_def += 1
-                atk_poke.get_usable_stats().get_spa += 1
-                atk_poke.get_usable_stats().get_spd += 1
-                atk_poke.get_usable_stats().get_spe += 1
+                i_max_stat += 1
                 i_count += 1
 
     if str_atk_ability == 'blaze':
         if i_atk_hp <= (atk_poke.base_states.i_hp)//3
             i_atk += i_atk//2
 
-    if str_atk_ability == 'chlorophyll':
+    if str_atk_ability == 'chlorophyll' or str_def_ability == 'chlorophyll':
         if str_weather == Weather.HARSH_SUNLIGHT or str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT:
             atk_poke.get_usable_stats().get_spe *= 2
 
-    if str_def_ability == 'chlorophyll':
-        if str_weather == Weather.HARSH_SUNLIGHT or str_weather == Weather.EXTREMELY_HARSH_SUNLIGHT:
-            def_poke.get_usable_stats().get_spe *= 2
 
