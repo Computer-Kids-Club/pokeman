@@ -55,7 +55,6 @@ HashMap<String, PImage> weather_image = new HashMap<String, PImage>();
 
 String[] weatherNames = {"clear", "harsh", "rain", "sandstorm", "hail"};
 String[] weatherPictureNames = {"battlescreen", "sun", "rain", "darude", "hail"};
-String weather = "clear";
 
 String [] str_entry_hazards = {"spikes", "toxic-spikes", "stealth-rock", "sticky-web"};
 
@@ -351,7 +350,7 @@ void draw_battle() {
   background(0);
   imageMode(CORNER);
   draw_image(backgroundImg, 0, 0);
-  draw_image(weather_image.get(weather), 0, 0);
+  draw_image(weather_image.get(weatherNames[i_weather]), 0, 0);
   fill(0, 0, 255, 100);
   noStroke();
   draw_triangle(0, 0, width*3/14, 0, 0, height*4/9);

@@ -343,7 +343,7 @@ class Battle(object):
 
                         # self.send_broadcast(str(def_poke.i_hp) + " - " + str(i_dmg) + " = " + str(def_poke.i_hp - i_dmg))
                         self.send_broadcast(def_poke.str_name.capitalize() + " lost " + str(i_dmg / def_poke.get_usable_stats().i_hp * 100) + "% HP.")
-
+                        
                     # actually take damage
 
                     def_poke.i_hp -= i_dmg
