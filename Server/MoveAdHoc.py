@@ -6,7 +6,7 @@ from TypeClass import Type, get_atk_types_with_eff_rate, get_def_types_with_eff_
 import json
 
 def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_player = None, b_last = False):
-
+    print(move.str_name)
     if move.str_name == "protect":
         if randint(0, 99) < 1/(3**atk_poke.i_protect_counter)*100:
             atk_poke.b_protected = True
@@ -39,6 +39,18 @@ def move_ad_hoc_during(atk_poke, def_poke, move, field, atk_player = None, def_p
     elif move.str_name == "defog":
         field.remove_entry_hazards(atk_player)
         field.remove_entry_hazards(def_player)
+    elif move.str_name in ["sunny-day"]:
+        field.weather = Weather.HARSH_SUNLIGHT
+        field.i_weather_counter = 5
+    elif move.str_name in ["rain-dance"]:
+        field.weather = Weather.RAIN
+        field.i_weather_counter = 5
+    elif move.str_name in ["hail"]:
+        field.weather = Weather.HAIL
+        field.i_weather_counter = 5
+    elif move.str_name in ["sandstorm"]:
+        field.weather = Weather.SANDSTORM
+        field.i_weather_counter = 5
     elif move.str_name in ["roar", "whirlwind"]:
         if len(def_player.get_available_pokes()):
             def_player.i_active_poke_idx = choice(def_player.get_available_pokes())

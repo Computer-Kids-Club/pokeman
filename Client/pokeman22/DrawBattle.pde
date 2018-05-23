@@ -351,6 +351,7 @@ void draw_battle() {
   imageMode(CORNER);
   draw_image(backgroundImg, 0, 0);
   draw_image(weather_image.get(weatherNames[i_weather]), 0, 0);
+  println(weatherNames[i_weather], i_weather);
   fill(0, 0, 255, 100);
   noStroke();
   draw_triangle(0, 0, width*3/14, 0, 0, height*4/9);

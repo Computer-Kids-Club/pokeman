@@ -167,6 +167,12 @@ class Battle(object):
         if (not self.everyone_ready() or self.b_gameover):
             return
 
+        if self.field.i_weather_counter > 0:
+            self.field.i_weather_counter -= 1
+            
+        if self.field.i_weather_counter == 0:
+            self.field.weather = Weather.CLEAR_SKIES
+
         self.send_players_pokes()
 
         for player in self.l_players:

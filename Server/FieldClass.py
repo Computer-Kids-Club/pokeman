@@ -12,6 +12,7 @@ class Field(object):
         self.dic_entry_hazards = {}
         self.dic_entry_hazards[player] = []
         self.dic_entry_hazards[other_player] = []
+        self.i_weather_counter = 0
 
     def get_weather(self):
         return self.weather
