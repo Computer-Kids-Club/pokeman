@@ -53,7 +53,8 @@ HashMap<String, PImage> TYPE_MOVE_IMG = new HashMap<String, PImage>();
 HashMap<String, PImage> ENTRY_HAZARD_IMG = new HashMap<String, PImage>();
 HashMap<String, PImage> weather_image = new HashMap<String, PImage>();
 
-String[] weatherNames = {"clear", "harsh", "extreme", "rain", "heavy", "sandstorm", "hail", "air"};
+String[] weatherNames = {"clear", "harsh", "rain", "sandstorm", "hail"};
+String[] weatherPictureNames = {"battlescreen", "sun", "rain", "darude", "hail"};
 
 String [] str_entry_hazards = {"spikes", "toxic-spikes", "stealth-rock", "sticky-web"};
 
@@ -69,6 +70,9 @@ PImage otherTrainer;
 
 String filename;
 String tempPokeName;
+
+ArrayList<ArrayList<Integer>> turnSignals = new ArrayList<ArrayList<Integer>>();
+int turn = 1;
 
 void init_battle_screen() {
   img_flag_bite = loadImage("MoveAnimations/bite.png");
@@ -86,6 +90,12 @@ void init_battle_screen() {
   img_flag_pulse.resize(150, 0);
   img_flag_punch.resize(150, 0);
   img_flag_sound.resize(150, 0);
+
+  for (int i = 0; i < 5; i++) {
+    tempImage = loadImage(weatherPictureNames[i] + ".png");
+    tempImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    weather_image.put(weatherNames[i], tempImage);
+  }
 
   for (String str_type : TYPE_COLOURS.keySet()) {
     // ...
@@ -340,7 +350,8 @@ void draw_battle() {
   background(0);
   imageMode(CORNER);
   draw_image(backgroundImg, 0, 0);
-  draw_image(battleScreenBackground, 0, 0);
+  draw_image(weather_image.get(weatherNames[i_weather]), 0, 0);
+  println(weatherNames[i_weather], i_weather);
   fill(0, 0, 255, 100);
   noStroke();
   draw_triangle(0, 0, width*3/14, 0, 0, height*4/9);
@@ -708,7 +719,17 @@ void draw_battle() {
   textAlign(LEFT, CENTER);
   fill(0);
   for (int i=0; i<text_chat.size() && height - i*(height/30) > height/30; i++) {
-    draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
+    if (text_chat.get(i).equals("")) {
+      fill(255);
+      draw_rect(TEXT_CHAT_DIVIDE, height - i*(height/30) - height/30 - 10, width - TEXT_CHAT_DIVIDE, 20);
+      textAlign(CENTER, CENTER);
+      fill(0);
+      draw_text(turn - (turn-i), TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height/30);
+    } else {
+      fill(0);
+      textAlign(LEFT, CENTER);
+      draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
+    }
   }
 
   if (mousePressed && mousePressValid == true) {

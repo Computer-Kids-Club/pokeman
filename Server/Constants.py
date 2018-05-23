@@ -13,12 +13,12 @@ print(dir_path)
 class Weather(object):
     CLEAR_SKIES = 0
     HARSH_SUNLIGHT = 1
-    EXTREMELY_HARSH_SUNLIGHT = 2
-    RAIN = 3
-    HEAVY_RAIN = 4
-    SANDSTORM = 5
-    HAIL = 6
-    MYSTERIOUS_AIR_CURRENT = 7
+    RAIN = 2
+    SANDSTORM = 3
+    HAIL = 4
+    MYSTERIOUS_AIR_CURRENT = 5
+    EXTREMELY_HARSH_SUNLIGHT = 6
+    HEAVY_RAIN = 7
 
 # terrain constants
 class Terrain(object):
