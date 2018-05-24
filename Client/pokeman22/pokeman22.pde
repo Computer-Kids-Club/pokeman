@@ -1307,6 +1307,7 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 
 PFont font_plain;
 PFont font_plain_big;
+PFont font_plain_mid;
 PFont font_big_solid;
 PFont font_big_hollow;
 
@@ -1327,6 +1328,7 @@ void setup() {
   //font_plain = createFont("andalemo.ttf", 128);
   font_plain = createFont("SansSerif", 12);
   font_plain_big = createFont("SansSerif", 128);
+  font_plain_mid = createFont("SansSerif", 32);
   font_big_solid = createFont("Pokemon Solid.ttf", 128);
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   //textFont(font_plain);

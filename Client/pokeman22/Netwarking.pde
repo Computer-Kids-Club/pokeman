@@ -26,27 +26,6 @@ String json_array_to_string(JSONArray json_arr, char c_split) {
   return str_ret;
 }
 
-void newTurn() {
-  ArrayList<Integer> tempList = new ArrayList<Integer>();
-  tempList.add(TEXT_CHAT_DIVIDE);
-  tempList.add(height - height/30);
-  tempList.add(turn);
-  turnSignals.add(tempList);
-}
-
-void turnBump() {
-  for (int i = turnSignals.size()-1; i >= 0; i--) {  
-    ArrayList<Integer> tempList = new ArrayList<Integer>();
-    tempList.add(TEXT_CHAT_DIVIDE);
-    tempList.add(turnSignals.get(i).get(1) - height/30);
-    tempList.add(turn);
-    turnSignals.set(i, tempList);
-    if (turnSignals.get(i).get(1) + 20 < 0) {
-      turnSignals.remove(i);
-    }
-  }
-}
-
 void process_data(String dataIn) {
 
   i_cur_animation_frames_left = 0;
@@ -120,6 +99,7 @@ void process_data(String dataIn) {
       new_poke = pokemons.get(i_tmp_new_display_poke);
       i_healthing_direction = -1;
       if (c_my_display_poke != i_tmp_new_display_poke) {
+        text_chat.add(0, "Client swapped pokemon to " + pokemons.get(i_tmp_new_display_poke).name);
         i_cur_animation_frames_left = 30;
         i_switching_direction = ME;
         i_switching = i_total_switching;
@@ -132,6 +112,7 @@ void process_data(String dataIn) {
       new_poke = other_pokemons.get(i_tmp_new_display_poke);
       i_healthing_direction = 1;
       if (c_other_display_poke != i_tmp_new_display_poke) {
+        text_chat.add(0, "Server swapped pokemon to " + other_pokemons.get(i_tmp_new_display_poke).name);
         i_cur_animation_frames_left = 30;
         i_switching_direction = OTHER;
         i_switching = i_total_switching;
