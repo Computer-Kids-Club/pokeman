@@ -72,7 +72,7 @@ String filename;
 String tempPokeName;
 
 ArrayList<ArrayList<Integer>> turnSignals = new ArrayList<ArrayList<Integer>>();
-int turn = 1;
+int turn = 0;
 
 void init_battle_screen() {
   img_flag_bite = loadImage("MoveAnimations/bite.png");
@@ -718,17 +718,24 @@ void draw_battle() {
 
   textAlign(LEFT, CENTER);
   fill(0);
+  int turnCounter = turn;
+  boolean emptyTrigger = false;
   for (int i=0; i<text_chat.size() && height - i*(height/30) > height/30; i++) {
-    if (text_chat.get(i).equals("")) {
+    if (text_chat.get(i).equals("") && emptyTrigger == false) {
       fill(255);
       draw_rect(TEXT_CHAT_DIVIDE, height - i*(height/30) - height/30 - 10, width - TEXT_CHAT_DIVIDE, 20);
       textAlign(CENTER, CENTER);
       fill(0);
-      draw_text(turn - (turn-i), TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height/30);
+      draw_text(turnCounter, TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height/30);
+      turnCounter -= 1;
+      emptyTrigger = true;
+    } else if (emptyTrigger){
+      emptyTrigger = false;
     } else {
       fill(0);
       textAlign(LEFT, CENTER);
       draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
+      emptyTrigger = false;
     }
   }
 
