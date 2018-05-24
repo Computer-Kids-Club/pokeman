@@ -720,25 +720,28 @@ void draw_battle() {
   fill(0);
   int turnCounter = turn;
   boolean emptyTrigger = false;
+  draw_rectMode(CENTER);
   for (int i=0; i<text_chat.size() && height - i*(height/30) > height/30; i++) {
     if (text_chat.get(i).equals("") && emptyTrigger == false) {
-      fill(255);
-      draw_rect(TEXT_CHAT_DIVIDE, height - i*(height/30) - height/30 - 10, width - TEXT_CHAT_DIVIDE, 20);
-      textAlign(CENTER, CENTER);
+      fill(150);
+      //noFill();
+      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60, width - TEXT_CHAT_DIVIDE, 50);
       fill(0);
-      draw_text(turnCounter, TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height/30);
+      textFont(font_plain_mid);
+      draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*3/60);
       turnCounter -= 1;
       emptyTrigger = true;
-    } else if (emptyTrigger){
+    } else if (emptyTrigger) {
       emptyTrigger = false;
     } else {
       fill(0);
-      textAlign(LEFT, CENTER);
+      textFont(font_plain);
       draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
       emptyTrigger = false;
     }
   }
 
+  textFont(font_plain);
   if (mousePressed && mousePressValid == true) {
     if (c_display_state == DISPLAY_TEAMS) {
       for (int i = 0; i < 6; i++) {

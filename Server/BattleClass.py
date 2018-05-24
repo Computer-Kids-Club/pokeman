@@ -20,9 +20,9 @@ l_battles = []
 # client to battle
 dic_battles = {}
 
-
 class Battle(object):
     def __init__(self, l_new_players=[]):
+        self.firstRun = True
 
         self.field = Field(l_new_players[0],l_new_players[1])
 
@@ -432,7 +432,7 @@ class Battle(object):
                     atk_poke.b_fainted = True
 
             # make a new line to look more organised
-            self.send_broadcast("")
+ #           self.send_broadcast("")
 
             # send updated pokes
             self.send_players_pokes()
@@ -444,6 +444,10 @@ class Battle(object):
                 continue
 
         # after turn heal / damage
+        if self.firstRun == False:
+            self.send_broadcast("")
+
+        self.firstRun = False
         for player in l_move_queue:
             atk_poke = player.active_poke
             other_player = self.get_other_player(player)
