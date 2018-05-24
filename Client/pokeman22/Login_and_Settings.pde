@@ -112,7 +112,7 @@ void register() {
         JSONObject json = new JSONObject();
         json.setString("username", username);
         json.setString("password", password);
-        json.setString("battlestate", "login");
+        json.setString("battlestate", "register");
         myClient.write(json.toString());
         textFont(font_plain);
         //register=false;
@@ -131,7 +131,7 @@ void register() {
     JSONObject json = new JSONObject();
     json.setString("username", username);
     json.setString("password", password);
-    json.setString("battlestate", "login");
+    json.setString("battlestate", "register");
     myClient.write(json.toString());
     textFont(font_plain);
     register=false;
