@@ -59,6 +59,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     str_weather = field.get_weather()
     str_terrain = field.get_terrain()
     l_atk_low_mov = ['aurora-beam', 'baby-doll-eyes', 'charm', 'feather-dance', 'growl', 'lunge', 'memento', 'nobal-roar', 'parting-shot', 'play-nice', 'play-rough', 'secret-power', 'strength-sap', 'tearful-look', 'tickle', 'trop-kick', 'venom-drench']
+    l_def_low_mov = ['acid', 'crunch', 'crush-claw', 'fire-lash', 'iron-tail', 'leer', 'liquidation', 'razor-shell', 'rock-smash', 'screech', 'secret-power', 'shadow-bone', 'shadow-down', 'tail-whip', 'tickle']
+    l_spa_low_mov = ['captive', 'confide', 'eerie-impulse', 'memento', 'mist-ball', 'moonblast', 'mystical-fire', 'parting-shoot', 'snarl', 'struggle-bug']
+    l_spd_low_mov = ['acid-spray', 'bug-buzz', 'earth-power', 'energy-ball', 'fake-tears', 'flash-cannon', 'focus-blast', 'luster-purge', 'metal-sound', 'psychic', 'seed-flare', 'shadow-ball']
+    l_spe_low_mov = ['bubble', 'bubble-beam', 'bulldoze', 'constrict', 'cotton-spore', 'electroweb', 'glaciate', 'icy-wind', 'low-sweep', 'mud-shot', 'rock-tomb', 'scary-face', 'secret-power', 'sticky-web', 'string-shot', 'toxic-thread']
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
