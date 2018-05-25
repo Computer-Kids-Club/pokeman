@@ -596,7 +596,7 @@ void draw_battle() {
     textAlign(LEFT, CENTER);
     textFont(font_plain_middle);
     fill(#FF2C3A);
-    text("Attack", 10, 672);
+    text("Attack", width/140, height*56/75);
     fill(0);
     textFont(font_plain);
     textAlign(CENTER, CENTER);
@@ -620,13 +620,6 @@ void draw_battle() {
   // team pokes
   textAlign(CENTER, CENTER);
   if (c_display_state == DISPLAY_TEAMS) {
-    textAlign(LEFT, CENTER);
-    textFont(font_plain_middle);
-    fill(212, 99, 99);
-    //text("Choose Lead", 10, height*13/18);
-    fill(0);
-    textFont(font_plain);
-    textAlign(CENTER, CENTER);
     for (int i=0; i<6; i++) {
       stroke(50);
       fill(255);
@@ -643,14 +636,14 @@ void draw_battle() {
     textAlign(LEFT, CENTER);
     textFont(font_plain_middle);
     fill(#322CFF);
-    text("Switch", 10, 776);
+    text("Switch", width/140, height*194/225);
     fill(0);
     textFont(font_plain);
     textAlign(CENTER, CENTER);
     for (int i=0; i<json_avail_pokes_array.size(); i++) {
       stroke(50);
       fill(255);
-      draw_rect(width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400), height*397/450, width*159/1400, 52, height/90);
+      draw_rect(width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400), height*397/450, width*159/1400, height*13/225, height/90);
       draw_image(clientPokemonImg[json_avail_pokes_array.getInt(i)], width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400) + width*7/400, height*41/45);
       fill(0);
       draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).name, width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400) + width*159/2800, height*68/75);
@@ -676,7 +669,7 @@ void draw_battle() {
     if (text_chat.get(i).equals("") && emptyTrigger == false) {
       fill(150);
       //noFill();
-      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60, width - TEXT_CHAT_DIVIDE, 50);
+      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60, width - TEXT_CHAT_DIVIDE, height/18);
       fill(0);
       textFont(font_plain_mid);
       draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*3/60);
@@ -812,35 +805,35 @@ void drawPokeInfo(int val, int y) {
   pushMatrix();
 
   if (val == 0) {
-    translate(85, 0);
+    translate(width*17/280, 0);
   } else if (val == 5) {
-    translate(-85, 0);
+    translate(-(width*17/280), 0);
   }
   fill(0, 0, 255, 200);
-  draw_rect(width/350 + val*167 + 159/2 - 160, y - 190, 320, 180, 10);
+  draw_rect(width/350 + val*(width*167/1400) + width*159/2800 - width*4/35, y - height*19/90, width*8/35, height/5, height/90);
   fill(0);
-  draw_text(pokemons.get(val).name, 4 + val*167 + 159/2 - 155, y - 180);
-  draw_line(width/350 + val*167 + 159/2 - 160, y - 150, width/350 + val*167 + 159/2 + 160, y - 150);
+  draw_text(pokemons.get(val).name, width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - height/5);
+  draw_line(width/350 + val*(width*167/1400) + width*159/2800 - width*4/35, y - height/6, width/350 + val*(width*167/1400) + width*159/2800 + width*4/35, y - height/6);
   draw_text("HP: " + (pokemons.get(val).cur_hp*100/pokemons.get(val).HP) + "% (" + 
-    pokemons.get(val).cur_hp + "/" + pokemons.get(val).HP + ")", width/350 + val*167 + 159/2 - 155, 
-    y - 140);
-  draw_text("Ability: " + pokemons.get(val).ability, width/350 + val*167 + 159/2 - 155, y - 120);
+    pokemons.get(val).cur_hp + "/" + pokemons.get(val).HP + ")", width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, 
+    y - height*7/45);
+  draw_text("Ability: " + pokemons.get(val).ability, width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - height*2/15);
   draw_text(pokemons.get(val).ATK + " Atk / " + pokemons.get(val).DEF + " Def / " + 
     pokemons.get(val).SPA + " SpA / " + pokemons.get(val).SPD + " SpD / " + pokemons.get(val).SPE + 
-    " Spe", width/350 + val*167 + 159/2 - 155, y - 100);
-  draw_line(width/350 + val*167 + 159/2 - 160, y - 90, width/350 + val*167 + 159/2 + 160, y - 90);
-  draw_text("- " + pokemons.get(val).moves[0], width/350 + val*167 + 159/2 - 155, y - 80);
-  draw_text("- " + pokemons.get(val).moves[1], width/350 + val*167 + 159/2 - 155, y - 62);
-  draw_text("- " + pokemons.get(val).moves[2], width/350 + val*167 + 159/2 - 155, y - 44);
-  draw_text("- " + pokemons.get(val).moves[3], width/350 + val*167 + 159/2 - 155, y - 26);
+    " Spe", width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - height/9);
+  draw_line(width/350 + val*(width*167/1400) + width*159/2800 - width*4/35, y - height/10, width/350 + val*(width*167/1400) + width*159/2800 + width*4/35, y - height/10);
+  draw_text("- " + pokemons.get(val).moves[0], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - 80);
+  draw_text("- " + pokemons.get(val).moves[1], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - 62);
+  draw_text("- " + pokemons.get(val).moves[2], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - 44);
+  draw_text("- " + pokemons.get(val).moves[3], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280, y - 26);
 
   textAlign(CENTER);
   fill(255);
-  draw_image(type_image.get(names_types.get(pokemons.get(val).name)[0]), width/350 + val*167 + 159/2 - 155 + 25, y - 162);
-  draw_text(names_types.get(pokemons.get(val).name)[0], width/350 + val*167 + 159/2 - 155 + 25, y - 162 + height/200);
+  draw_image(type_image.get(names_types.get(pokemons.get(val).name)[0]), width/350 + val*(width*167/1400) + width*159/2800 - width*31/280 + width/56, y - height*9/50);
+  draw_text(names_types.get(pokemons.get(val).name)[0], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280 + width/56, y - height*9/50 + height/200);
   if (names_types.get(pokemons.get(val).name)[1] != null) {
-    draw_image(type_image.get(names_types.get(pokemons.get(val).name)[1]), width/350 + val*167 + 159/2 - 155 + 30 + width*9/224, y - 162);
-    draw_text(names_types.get(pokemons.get(val).name)[1], width/350 + val*167 + 159/2 - 155 + 30 + width*9/224, y - 162 + height/200);
+    draw_image(type_image.get(names_types.get(pokemons.get(val).name)[1]), width/350 + val*(width*167/1400) + width*159/2800 - width*31/280 + width*3/140 + width*9/224, y - height*9/50);
+    draw_text(names_types.get(pokemons.get(val).name)[1], width/350 + val*(width*167/1400) + width*159/2800 - width*31/280 + width*3/140 + width*9/224, y - height*9/50 + height/200);
   }
 
   popMatrix();
