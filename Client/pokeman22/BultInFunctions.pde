@@ -11,7 +11,7 @@ void mousePressed() {
    print(" ");
    println(mouseY);*/
   if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
-    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY && !pokemonSelectScreen && !moveSelectScreen && !login) {
+    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY && !pokemonSelectScreen && !moveSelectScreen && !login && !register) {
     send_pokes();
     i_battle_state = SEARCHING;
     println("pressed");
@@ -208,6 +208,21 @@ void keyPressed() {
           }
         }
       }
+    }
+    if (int(key) >= 48 && int(key) <= 57) {        
+        if (current=="username") {
+          if (username == "") {
+            username = str(key);
+          } else if (username.length()<=30) {
+            username += key;
+          }
+        } else if (current=="password") {
+          if (password == "") {
+            password = str(key);
+          } else if (password.length()<=30) {
+            password += key;
+          }
+        }
     }
     if (key == BACKSPACE) {
       if (current=="username") {
