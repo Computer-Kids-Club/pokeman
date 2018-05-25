@@ -209,6 +209,21 @@ void keyPressed() {
         }
       }
     }
+    if (int(key) >= 48 && int(key) <= 57) {        
+        if (current=="username") {
+          if (username == "") {
+            username = str(key);
+          } else if (username.length()<=30) {
+            username += key;
+          }
+        } else if (current=="password") {
+          if (password == "") {
+            password = str(key);
+          } else if (password.length()<=30) {
+            password += key;
+          }
+        }
+    }
     if (key == BACKSPACE) {
       if (current=="username") {
         if (username.length() > 1) {
