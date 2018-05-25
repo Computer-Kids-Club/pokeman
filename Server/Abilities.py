@@ -15,15 +15,16 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
     str_atk_ability = atk_poke.str_ability
     str_def_ability = def_poke.str_ability
+    str_status = atk_poke.str_status
     i_count = 0
     str_weather = field.get_weather()
     str_mov_type = move.type.getName()
     str_mov_name = move.str_name
-    i_atk_stat = atk_poke.get_usable_stats().get_atk += 1
-    i_def_stat = atk_poke.get_usable_stats().get_def += 1
-    i_spa_stat = atk_poke.get_usable_stats().get_spa += 1
-    i_spd_stat = atk_poke.get_usable_stats().get_spd += 1
-    i_spe_stat = atk_poke.get_usable_stats().get_spe += 1
+    i_atk_stat = atk_poke.get_usable_stats().get_atk
+    i_def_stat = atk_poke.get_usable_stats().get_def
+    i_spa_stat = atk_poke.get_usable_stats().get_spa
+    i_spd_stat = atk_poke.get_usable_stats().get_spd
+    i_spe_stat = atk_poke.get_usable_stats().get_spe
     l_stat = [i_atk_stat, i_def_stat, i_spa_stat, i_spd_stat, i_spe_stat]
     i_max_stat = max(l_stat)
     if move.str_cat == 'physical':
@@ -54,12 +55,16 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
 
     if str_def_ability == 'berserk':
         if i_def_hp < (def_poke.base_stats.i_hp)//2:
-            if str_mov_name != 'leach-seed':
+            if str_mov_name != 'leach-seed' and str_atk_ability != 'contrary':
                 def_poke.get_usable_stats().get_spa += 1
+            elif str_mov_name != 'leech-seed':
+                def_poke.get_usable_stats().get_spa -= 1
 
     if str_mov_name == 'shell-smash':
-        if str_def_ability != 'big-pecs'
+        if str_def_ability != 'big-pecs' and str_atk_ability != 'contrary':
             def_poke.get_usable_stats().get_def -= 1
+        elif str_def_ability != 'big-pecs':
+            def_poke.get_usable_stats().get_def += 1
 
     if str_def_ability == 'color-change':
         str_pok_type_1 = str_mov_type

@@ -49,9 +49,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_bite = move.flag_bite
     b_stat_change = move.b_stat_change
     b_status = move.b_status_effect
+    b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
     i_def_hp = def_poke.get_usable_stats().get_hp()
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
+    i_atk_spa = atk_poke.get_usable_stats().get_spa()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -325,6 +327,14 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'comatose':
         i_burn = 1
+
+    if str_def_ability == 'competitive':
+        if move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability != 'contrary':
+            i_atk_spa += 1
+        elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
+            i_atk_spa -= 1
+
+
 
     #--------------------#
     # CALCULATING DAMAGE #
