@@ -593,6 +593,13 @@ void draw_battle() {
   imageMode(CENTER);
   textAlign(CENTER, CENTER);
   if (c_display_state==DISPLAY_POKES && c_my_display_poke<pokemons.size() && (i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+    textAlign(LEFT, CENTER);
+    textFont(font_plain_middle);
+    fill(#FF2C3A);
+    text("Attack", 10, 672);
+    fill(0);
+    textFont(font_plain);
+    textAlign(CENTER, CENTER);
     for (int i=0; i<json_avail_moves_array.size(); i++) {
       textAlign(CENTER, CENTER);
       stroke(50);
@@ -613,53 +620,33 @@ void draw_battle() {
   // team pokes
   textAlign(CENTER, CENTER);
   if (c_display_state == DISPLAY_TEAMS) {
+    textAlign(LEFT, CENTER);
+    textFont(font_plain_middle);
+    fill(212, 99, 99);
+    //text("Choose Lead", 10, height*13/18);
+    fill(0);
+    textFont(font_plain);
+    textAlign(CENTER, CENTER);
     for (int i=0; i<6; i++) {
       stroke(50);
       fill(255);
       draw_rect(width/350 + i*(width*167/1400), height*13/18 + height/18, width*159/1400, height*13/225, height/90);
       draw_image(clientPokemonImg[i], width/350 + i*(width*167/1400) + width*7/400, height*121/150);
-      //height*13/18 + 10      660     26
       fill(0);
       draw_text(pokemons.get(i).name, width/350 + i*(width*167/1400) + width*159/2800, height*13/18 + height*2/25);
       draw_mini_health_bar(width/350 + i*(width*167/1400) + width*191/5600, height*13/18 + height*22/225, width*417/5600, height/150, pokemons.get(i).cur_hp*100/pokemons.get(i).HP);
       if (mouseX >= width/350 + i*(width*167/1400) && mouseX <= width/350 + i*(width*167/1400) + width*159/1400 && mouseY >= height*13/18 + height/18 && mouseY <= height*13/18 + height*17/150) {
         drawPokeInfo(i, height*7/9);
-        //textAlign(LEFT, CENTER);
-        //pushMatrix();
-        //if (i == 0) {
-        //  translate(85, 0);
-        //} else if (i == 5) {
-        //  translate(-85, 0);
-        //}
-        //fill(0, 0, 255, 200);
-        //draw_rect(4 + i*167 + 159/2 - 160, height*13/18 + 50 - 190, 320, 180, 10);
-        //fill(0);
-        //draw_text(pokemons.get(i).name, 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 180);
-        //draw_line(4 + i*167 + 159/2 - 160, height*13/18 + 50 - 150, 4 + i*167 + 159/2 + 160, height*13/18 + 50 - 150);
-        //draw_text("HP: " + (pokemons.get(i).cur_hp*100/pokemons.get(i).HP) + "% (" + pokemons.get(i).cur_hp + "/" + pokemons.get(i).HP + ")", 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 140);
-        //draw_text("Ability: " + pokemons.get(i).ability, 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 120);
-        //draw_text(pokemons.get(i).ATK + " Atk / " + pokemons.get(i).DEF + " Def / " + pokemons.get(i).SPA + " SpA / "
-        //  + pokemons.get(i).SPD + " SpD / " + pokemons.get(i).SPE + " Spe", 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 100);
-        //draw_line(4 + i*167 + 159/2 - 160, height*13/18 + 50 - 90, 4 + i*167 + 159/2 + 160, height*13/18 + 50 - 90);
-        //draw_text("- " + pokemons.get(i).moves[0], 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 80);
-        //draw_text("- " + pokemons.get(i).moves[1], 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 62);
-        //draw_text("- " + pokemons.get(i).moves[2], 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 44);
-        //draw_text("- " + pokemons.get(i).moves[3], 4 + i*167 + 159/2 - 155, height*13/18 + 50 - 26);
-
-        //textAlign(CENTER);
-        //fill(255);
-        //draw_image(type_image.get(names_types.get(pokemons.get(i).name)[0]), 4 + i*167 + 159/2 - 155 + 25, height*13/18 + 50 - 162);
-        //draw_text(names_types.get(pokemons.get(i).name)[0], 4 + i*167 + 159/2 - 155 + 25, height*13/18 + 50 - 162 + height/200);
-        //if (names_types.get(pokemons.get(i).name)[1] != null) {
-        //  draw_image(type_image.get(names_types.get(pokemons.get(i).name)[1]), 4 + i*167 + 159/2 - 155 + 30 + width*9/224, height*13/18 + 50 - 162);
-        //  draw_text(names_types.get(pokemons.get(i).name)[1], 4 + i*167 + 159/2 - 155 + 30 + width*9/224, height*13/18 + 50 - 162 + height/200);
-        //}
-
-        //popMatrix();
-        //textAlign(CENTER, CENTER);
       }
     }
   } else if ((i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
+    textAlign(LEFT, CENTER);
+    textFont(font_plain_middle);
+    fill(#322CFF);
+    text("Switch", 10, 776);
+    fill(0);
+    textFont(font_plain);
+    textAlign(CENTER, CENTER);
     for (int i=0; i<json_avail_pokes_array.size(); i++) {
       stroke(50);
       fill(255);
@@ -670,42 +657,6 @@ void draw_battle() {
       draw_mini_health_bar(width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400) + width*191/5600, height*208/225, width*417/5600, height/150, pokemons.get(json_avail_pokes_array.getInt(i)).cur_hp*100/pokemons.get(json_avail_pokes_array.getInt(i)).HP);
       if (mouseX >= width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400) && mouseX <= width/350 + json_avail_pokes_array.getInt(i)*(width*167/1400) + width*159/1400 && mouseY >= height*397/450 && mouseY <= height*47/50) {
         drawPokeInfo(json_avail_pokes_array.getInt(i), height*397/450);
-        //textAlign(LEFT, CENTER);
-        //pushMatrix();
-        //if (json_avail_pokes_array.getInt(i) == 0) {
-        //  translate(85, 0);
-        //} else if (json_avail_pokes_array.getInt(i) == 5) {
-        //  translate(-85, 0);
-        //}
-        //fill(0, 0, 255, 200);
-        //draw_rect(4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 160, 794 - 190, 320, 180, 10);
-        //fill(0);
-        //draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).name, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 180);
-        //draw_line(4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 160, 794 - 150, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 + 160, 794 - 150);
-        //draw_text("HP: " + (pokemons.get(json_avail_pokes_array.getInt(i)).cur_hp*100/pokemons.get(json_avail_pokes_array.getInt(i)).HP) + "% (" + 
-        //  pokemons.get(json_avail_pokes_array.getInt(i)).cur_hp + "/" + pokemons.get(json_avail_pokes_array.getInt(i)).HP + ")", 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 
-        //  794 - 140);
-        //draw_text("Ability: " + pokemons.get(json_avail_pokes_array.getInt(i)).ability, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 120);
-        //draw_text(pokemons.get(json_avail_pokes_array.getInt(i)).ATK + " Atk / " + pokemons.get(json_avail_pokes_array.getInt(i)).DEF + " Def / " + 
-        //  pokemons.get(json_avail_pokes_array.getInt(i)).SPA + " SpA / " + pokemons.get(json_avail_pokes_array.getInt(i)).SPD + " SpD / " + pokemons.get(json_avail_pokes_array.getInt(i)).SPE + 
-        //  " Spe", 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 100);
-        //draw_line(4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 160, 794 - 90, 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 + 160, 794 - 90);
-        //draw_text("- " + pokemons.get(json_avail_pokes_array.getInt(i)).moves[0], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 80);
-        //draw_text("- " + pokemons.get(json_avail_pokes_array.getInt(i)).moves[1], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 62);
-        //draw_text("- " + pokemons.get(json_avail_pokes_array.getInt(i)).moves[2], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 44);
-        //draw_text("- " + pokemons.get(json_avail_pokes_array.getInt(i)).moves[3], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155, 794 - 26);
-
-        //textAlign(CENTER);
-        //fill(255);
-        //draw_image(type_image.get(names_types.get(pokemons.get(json_avail_pokes_array.getInt(i)).name)[0]), 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155 + 25, 794 - 162);
-        //draw_text(names_types.get(pokemons.get(json_avail_pokes_array.getInt(i)).name)[0], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155 + 25, 794 - 162 + height/200);
-        //if (names_types.get(pokemons.get(json_avail_pokes_array.getInt(i)).name)[1] != null) {
-        //  draw_image(type_image.get(names_types.get(pokemons.get(json_avail_pokes_array.getInt(i)).name)[1]), 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155 + 30 + width*9/224, 794 - 162);
-        //  draw_text(names_types.get(pokemons.get(json_avail_pokes_array.getInt(i)).name)[1], 4 + json_avail_pokes_array.getInt(i)*167 + 159/2 - 155 + 30 + width*9/224, 794 - 162 + height/200);
-        //}
-
-        //popMatrix();
-        //textAlign(CENTER, CENTER);
       }
     }
   }
