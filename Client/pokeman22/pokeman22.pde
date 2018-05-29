@@ -51,6 +51,8 @@ HashMap<String, String[]> moves_data = new HashMap<String, String[]>();
 JSONObject[] pokemon = new JSONObject[6];
 PImage[][] pokemonAnimation = {{}, {}, {}, {}, {}, {}};
 
+HashMap<String, PImage[]> move_animations = new HashMap<String, PImage[]>();
+
 ArrayList<Pokemon> pokemons;
 
 Gif loopingGif;
@@ -1317,8 +1319,8 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  //size(1400, 900, P2D);
-  fullScreen();
+  size(1400, 900, P2D);
+  //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
@@ -1422,6 +1424,13 @@ void better_setup() {
     String[][] allMoves = {levelMoves, eggMoves, tutorMoves, tmMoves};
     names_moves.put(file.getString("name"), allMoves);
   }
+  
+  PImage[] tempMoveAni = new PImage[8];
+  for (int i = 1; i < 9; i++){
+    PImage tempAniImage = loadImage("Normal" + i + ".png");
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations.put("normal", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {

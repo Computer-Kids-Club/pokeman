@@ -522,11 +522,11 @@ void draw_battle() {
       //rotate(180);
     }
 
-    translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, tmp_move, i_total_moving);
+    //translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, 0*tmp_move, i_total_moving);
 
     //rotate((frameCount*20.0)%360);
 
-    rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
+    //rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
     scale(1, -1*i_moving_direction);
     if (i_moving_direction==1) {
       rotate(PI);
@@ -551,7 +551,15 @@ void draw_battle() {
 
       //draw_rect(0, 0, 50, 50);
 
-      draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
+      println(str_cur_move_type);
+      if (str_cur_move_type.equals("normal")) {
+        println("GAT");
+        imageMode(CORNER);
+        draw_image(move_animations.get("normal")[(30-i_moving)*8/31], POKE_ME_RECT.i_x, POKE_OTHER_RECT.i_y);
+        imageMode(CENTER);
+      } else {
+        draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
+      }
     } else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
       draw_image(img_flag_bite, 0, 0);
@@ -718,7 +726,7 @@ void draw_battle() {
     }
   }
 
-draw_rect(TEXT_CHAT_WIDTH, height - height/30, width - TEXT_CHAT_WIDTH, height/30);
+  draw_rect(TEXT_CHAT_DIVIDE, height - height/30, width - TEXT_CHAT_DIVIDE, height/30);
 
   textFont(font_plain);
   if (mousePressed && mousePressValid == true) {

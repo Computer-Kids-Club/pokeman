@@ -40,13 +40,8 @@ int SELECTSCREENSHIFT_X;
 int ME = 0;
 int OTHER = 1;
 
-<<<<<<< HEAD
 //String IPv4 = "10.243.202.242";
 String IPv4 = "127.0.0.1";
-=======
-String IPv4 = "10.243.202.242";
-//String IPv4 = "127.0.0.1";
->>>>>>> 77db0304db2941743ad950fe5b2e6d8e8a345a7a
 int PORT = 4004;
 
 char TERMINATING_CHAR = '`';
