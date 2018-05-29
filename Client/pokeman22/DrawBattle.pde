@@ -718,6 +718,8 @@ void draw_battle() {
     }
   }
 
+draw_rect(TEXT_CHAT_WIDTH, height - height/30, width - TEXT_CHAT_WIDTH, height/30);
+
   textFont(font_plain);
   if (mousePressed && mousePressValid == true) {
     if (c_display_state == DISPLAY_TEAMS) {
@@ -746,12 +748,8 @@ void draw_battle() {
         }
       }
     }
-    if (mouseX>=TEXT_CHAT_DIVIDE&&mouseX<=text_chat.size()) {
-      if (mouseY<=height - 30 && mouseY>=height - 30-60) {
-        chatting=true;
-      } else {
-        chatting=false;
-      }
+    if (mouseX >= TEXT_CHAT_DIVIDE && mouseX <= width && mouseY <= height && mouseY >= height - height/30) {
+      chatting=true;
     } else {
       chatting=false;
     }
