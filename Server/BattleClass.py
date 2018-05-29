@@ -49,6 +49,9 @@ class Battle(object):
         other_player = self.get_other_player(player)
         def_poke = other_player.active_poke
 
+        if atk_poke == None or def_poke == None:
+            return
+
         self.send_players_pokes()
 
         # entry hazards

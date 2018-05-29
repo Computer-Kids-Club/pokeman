@@ -1317,8 +1317,8 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1400, 900, P2D);
-  //fullScreen();
+  //size(1400, 900, P2D);
+  fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
   draw_imageMode(CENTER);
