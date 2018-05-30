@@ -552,8 +552,7 @@ void draw_battle() {
       //draw_rect(0, 0, 50, 50);
 
       println(str_cur_move_type);
-      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire")) {
-        println("GAT");
+      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")) {
         imageMode(CORNER);
         draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
         imageMode(CENTER);
@@ -778,6 +777,7 @@ void draw_battle() {
     }
     if (mouseX >= width - width*27/640 && mouseX <= width - width*27/640 + width*5/128 && mouseY >= height - height/30 + height/180 && mouseY <= height - height/30 + height/180 + height/45) {
       JSONObject json = new JSONObject();
+      json.setString("battlestate", "chat");
       json.setString("chat", chat_msg);
       myClient.write(json.toString());
       chat_msg="";

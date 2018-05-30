@@ -1320,7 +1320,7 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1280, 720, P2D);
+  size(1400,900, P2D);
   //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
@@ -1453,6 +1453,15 @@ void better_setup() {
   }
   move_animations_num.put("sound", 16);
   move_animations.put("sound", tempMoveAni);
+
+  tempMoveAni = new PImage[28];
+  for (int i = 1; i < 29; i++) {
+    PImage tempAniImage = loadImage("Electric" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("electric", 28);
+  move_animations.put("electric", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
