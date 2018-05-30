@@ -712,10 +712,10 @@ void draw_battle() {
     if (text_chat.get(i).equals("") && emptyTrigger == false) {
       fill(150);
       //noFill();
-      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60, width - TEXT_CHAT_DIVIDE, height/18);
+      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60 - height/30, width - TEXT_CHAT_DIVIDE, height/18);
       fill(0);
       textFont(font_plain_mid);
-      draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*3/60);
+      draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*3/60 - height/30);
       turnCounter -= 1;
       emptyTrigger = true;
     } else if (emptyTrigger) {

@@ -115,6 +115,7 @@ void keyPressed() {
     } else if (chatting==true) {
       if (key==ENTER||key==RETURN) {
         JSONObject json = new JSONObject();
+        json.setString("battlestate","chat");
         json.setString("chat", chat_msg);
         myClient.write(json.toString());
         chat_msg="";
