@@ -353,7 +353,7 @@ void draw_battle() {
   imageMode(CORNER);
   draw_image(backgroundImg, 0, 0);
   draw_image(weather_image.get(weatherNames[i_weather]), 0, 0);
-  println(weatherNames[i_weather], i_weather);
+  //println(weatherNames[i_weather], i_weather);
   fill(0, 0, 255, 100);
   noStroke();
   draw_triangle(0, 0, width*3/14, 0, 0, height*4/9);
@@ -552,10 +552,10 @@ void draw_battle() {
       //draw_rect(0, 0, 50, 50);
 
       println(str_cur_move_type);
-      if (str_cur_move_type.equals("normal")) {
+      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire")) {
         println("GAT");
         imageMode(CORNER);
-        draw_image(move_animations.get("normal")[(30-i_moving)*8/31], POKE_ME_RECT.i_x, POKE_OTHER_RECT.i_y);
+        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
         imageMode(CENTER);
       } else {
         draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
@@ -579,8 +579,10 @@ void draw_battle() {
 
       draw_image(img_flag_punch, 0, 0);
     } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
-
-      draw_image(img_flag_sound, 0, 0);
+      imageMode(CORNER);
+      draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], 0, 0);
+      imageMode(CENTER);
+      //draw_image(img_flag_sound, 0, 0);
     } else if (str_cur_move_anime_style.equals("spikes") || str_cur_move_anime_style.equals("stealth-rock")
       || str_cur_move_anime_style.equals("toxic-spikes") || str_cur_move_anime_style.equals("sticky-web")) { // --------------------------------------------------------- entry hazards
 
@@ -706,7 +708,7 @@ void draw_battle() {
   int turnCounter = turn;
   boolean emptyTrigger = false;
   draw_rectMode(CENTER);
-  for (int i=0; i<text_chat.size() && height - i*(height/30) > height/30; i++) {
+  for (int i=0; i<text_chat.size() && height - i*(height/30) > height*2/30; i++) {
     if (text_chat.get(i).equals("") && emptyTrigger == false) {
       fill(150);
       //noFill();
@@ -721,12 +723,25 @@ void draw_battle() {
     } else {
       fill(0);
       textFont(font_plain);
-      draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height/30);
+      draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*2/30);
       emptyTrigger = false;
     }
   }
-
+  rectMode(CORNER);
+  fill(255);
   draw_rect(TEXT_CHAT_DIVIDE, height - height/30, width - TEXT_CHAT_DIVIDE, height/30);
+  fill(200);
+  draw_rect(TEXT_CHAT_DIVIDE + width/320, height - height/30 + height/180, width*209/640, height/45);
+  draw_rect(width - width*27/640, height - height/30 + height/180, width*5/128, height/45);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  draw_text("Send", width - width*27/640 + width*5/256, height - height/30 + height/180 + height/90);
+  textAlign(LEFT, CENTER);
+  if (chat_msg == "") {
+    draw_text("Send a message", TEXT_CHAT_DIVIDE + width*3/640, height - height/30 + height/180 + height/90);
+  } else {
+    draw_text(chat_msg, TEXT_CHAT_DIVIDE + width*3/640, height - height/30 + height/180 + height/90);
+  }
 
   textFont(font_plain);
   if (mousePressed && mousePressValid == true) {
@@ -756,10 +771,18 @@ void draw_battle() {
         }
       }
     }
-    if (mouseX >= TEXT_CHAT_DIVIDE && mouseX <= width && mouseY <= height && mouseY >= height - height/30) {
+    if (mouseX >= TEXT_CHAT_DIVIDE + width/320 && mouseX <= TEXT_CHAT_DIVIDE + width/320 + width*209/640 && mouseY <= height - height/30 + height/180 + height/45&& mouseY >= height - height/30 + height/180) {
       chatting=true;
     } else {
       chatting=false;
+    }
+    if (mouseX >= width - width*27/640 && mouseX <= width - width*27/640 + width*5/128 && mouseY >= height - height/30 + height/180 && mouseY <= height - height/30 + height/180 + height/45) {
+      JSONObject json = new JSONObject();
+      json.setString("chat", chat_msg);
+      myClient.write(json.toString());
+      chat_msg="";
+      chatting = false;
+      mousePressValid = false;
     }
   }
 }

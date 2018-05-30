@@ -89,6 +89,9 @@ class Battle(object):
             pass
         elif dic_data["battlestate"] == "selectmove":
             pass
+        elif "chat" in dic_data:
+            player.send_data(DISPLAY_TEXT+"username : "+dic_data["chat"])
+            other_player.send_data(DISPLAY_TEXT+"username : "+dic_data["chat"])
 
     def everyone_ready(self):
         b_ready = True

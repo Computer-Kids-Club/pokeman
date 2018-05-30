@@ -118,8 +118,20 @@ void keyPressed() {
         json.setString("chat", chat_msg);
         myClient.write(json.toString());
         chat_msg="";
+        chatting = false;
+      } else if (key == BACKSPACE) {
+        if (chat_msg.length() > 1) {
+          chat_msg = chat_msg.substring(0, chat_msg.length()-1);
+        } else if (chat_msg.length() > 0) {
+          chat_msg = chat_msg.substring(0, chat_msg.length()-1);
+          chat_msg = "";
+        } else {
+          chat_msg = "";
+        }
+      } else if (chat_msg == "") {
+        chat_msg = str(key);
       } else {
-        chat_msg+=key;
+        chat_msg += key;
       }
     }
   }
@@ -145,6 +157,7 @@ void keyPressed() {
         pokemonSearch = "";
       }
     }
+
     SLIDER.i_y = sliderStartY;
     validPokemonSearch = new StringList();
     for (int i = 1; i <= 807; i++) {
@@ -210,19 +223,19 @@ void keyPressed() {
       }
     }
     if (int(key) >= 48 && int(key) <= 57) {        
-        if (current=="username") {
-          if (username == "") {
-            username = str(key);
-          } else if (username.length()<=30) {
-            username += key;
-          }
-        } else if (current=="password") {
-          if (password == "") {
-            password = str(key);
-          } else if (password.length()<=30) {
-            password += key;
-          }
+      if (current=="username") {
+        if (username == "") {
+          username = str(key);
+        } else if (username.length()<=30) {
+          username += key;
         }
+      } else if (current=="password") {
+        if (password == "") {
+          password = str(key);
+        } else if (password.length()<=30) {
+          password += key;
+        }
+      }
     }
     if (key == BACKSPACE) {
       if (current=="username") {
