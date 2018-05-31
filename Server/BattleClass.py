@@ -80,7 +80,12 @@ class Battle(object):
 
         other_player = self.get_other_player(player)
 
-        if dic_data["battlestate"] == "pokes":
+        if dic_data["battlestate"] == "chat":
+            print(dic_data)
+            player.send_data(DISPLAY_TEXT+"You : "+dic_data["chat"])
+            other_player.send_data(DISPLAY_TEXT+"Other : "+dic_data["chat"])
+            
+        elif dic_data["battlestate"] == "pokes":
             pass
         elif dic_data["battlestate"] == "selectpoke":
 
@@ -89,6 +94,7 @@ class Battle(object):
             pass
         elif dic_data["battlestate"] == "selectmove":
             pass
+        
 
     def everyone_ready(self):
         b_ready = True
