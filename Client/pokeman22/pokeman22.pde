@@ -359,6 +359,7 @@ void drawStartScreen() {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
+        pokemonSearchBool = true;
         mousePressValid = false;
       }
       if (dist(mouseX, mouseY, (width/140)*137, height/30)<=dist((width/140)*137-width/56, height/30-height/36, (width/140)*137, height/30)) {
@@ -512,7 +513,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   strokeWeight(1);
   draw_rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
-  if (pokemonSearchBool == false && pokemonSearch == "") {
+  if (pokemonSearch == "") {
     draw_text("Search by Name", width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   } else {
     draw_text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
@@ -534,11 +535,11 @@ void drawPokemonSelectionScreen(int slotNumber) {
         pokemonSelectScreen = false;
       }
 
-      if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
-        pokemonSearchBool = true;
-      } else {
-        pokemonSearchBool = false;
-      }
+      //if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
+      //  pokemonSearchBool = true;
+      //} else {
+      //  pokemonSearchBool = false;
+      //}
 
       if (mouseX < width/7 || mouseX >= (width/7)*6) {
         pokemonSelectScreen = false;
@@ -847,7 +848,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       strokeWeight(1);
       draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
       fill(255);
-      if (moveSearchBool == false && moveSearch == "") {
+      if (moveSearch == "") {
         draw_text("Search by Move", width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
       } else {
         draw_text(moveSearch, width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
@@ -1229,6 +1230,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       for (int i = 0; i < 4; i++) {
         if (mouseX <= width*41/70 && mouseX >= width*29/70 && mouseY <= height*17/36 + i*(height*2/45) && mouseY >= height*79/180 + i*(height*2/45)) {
           moveSelect = true;
+          moveSearchBool = true;
           moveSlot = i;
         }
       }
@@ -1237,13 +1239,13 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (mouseX >= MOVESLIDER.i_x && mouseX <= MOVESLIDER.i_x + MOVESLIDER.i_w && mouseY >= MOVESLIDER.i_y && mouseY <= MOVESLIDER.i_y + MOVESLIDER.i_h) {
         moveSliderFollow = true;
       }
-      if (moveSliderFollow == false) {
-        if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
-          moveSearchBool = true;
-        } else {
-          moveSearchBool = false;
-        }
-      }
+      //if (moveSliderFollow == false) {
+      //  if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
+      //    moveSearchBool = true;
+      //  } else {
+      //    moveSearchBool = false;
+      //  }
+      //}
     } else if (statSelect && moveSelect == false) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
@@ -1320,7 +1322,8 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1400,900, P2D);
+  size(1280,720, P2D);
+  //size(1400,900, P2D);
   //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);

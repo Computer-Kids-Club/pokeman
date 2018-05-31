@@ -44,7 +44,7 @@ void process_data(String dataIn) {
     if (dataIn.length()>1) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_pokes_array = json.getJSONArray("availpoke");
-      text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
+      //text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
       text_chat.add(0, "");
     }
   } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
@@ -53,14 +53,14 @@ void process_data(String dataIn) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_pokes_array = json.getJSONArray("availpoke");
       json_avail_moves_array = json.getJSONArray("availmove");
-      text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
+      //text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
     }
   } else if (dataIn.charAt(0)==SELECT_MOVE) {
     i_selection_stage = SELECT_MOVE;
     if (dataIn.length()>1) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_moves_array = json.getJSONArray("availmove");
-      text_chat.add(0, "Select a move with keys: q,w,e,r");
+      //text_chat.add(0, "Select a move with keys: q,w,e,r");
     }
   } else if (dataIn.charAt(0)==AWAITING_SELECTION) {
     i_selection_stage = AWAITING_SELECTION;

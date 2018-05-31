@@ -79,7 +79,7 @@ float gridSize = (height*8/9 - SELECTSCREENSHIFT_Y*2)*1.0f/POKEMON_PER_PAGE;
 
 void init_constants() {
   HEALTH_BAR_WIDTH = width/7;
-  TEXT_CHAT_DIVIDE = height*10/9;
+  TEXT_CHAT_DIVIDE = width*5/7;
   SELECTSCREENSHIFT_Y = height*4/45;
   SELECTSCREENSHIFT_X = width/28;
   SLIDER = new Rect(width*17/20 - SELECTSCREENSHIFT_X, height/9 + SELECTSCREENSHIFT_Y, width/140, height/45);
@@ -105,9 +105,9 @@ void init_constants() {
   MOVE_SEARCH_BUTTON = new Rect(width*47/70, SELECTSCREENSHIFT_Y + height*479/900, width/7, height/30);
 
   //POKE_ME_RECT = new Rect(300, 400+3*40);
-  POKE_ME_RECT = new Rect(215, 510);
+  POKE_ME_RECT = new Rect(width*43/280, height*17/30);
   //POKE_OTHER_RECT = new Rect(TEXT_CHAT_DIVIDE-300 + int(textWidth("100%")), 50+3*40);
-  POKE_OTHER_RECT = new Rect(830,210);
+  POKE_OTHER_RECT = new Rect(width*83/140, height*7/30);
 
   KEY_TO_ID.put('q', 0);
   KEY_TO_ID.put('w', 1);

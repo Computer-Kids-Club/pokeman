@@ -77,6 +77,7 @@ ArrayList<ArrayList<Integer>> turnSignals = new ArrayList<ArrayList<Integer>>();
 int turn = 0;
 
 void init_battle_screen() {
+  chatting = true;
   img_flag_bite = loadImage("MoveAnimations/bite.png");
   img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
   img_flag_dance = loadImage("MoveAnimations/dance.png");
@@ -728,11 +729,12 @@ void draw_battle() {
   }
   rectMode(CORNER);
   fill(255);
-  draw_rect(TEXT_CHAT_DIVIDE, height - height/30, width - TEXT_CHAT_DIVIDE, height/30);
+  draw_rect(TEXT_CHAT_DIVIDE, height - height/30, width - TEXT_CHAT_DIVIDE, height/30);     //336.9375 337/1400    364.28125   width*13/50
   fill(200);
-  draw_rect(TEXT_CHAT_DIVIDE + width/320, height - height/30 + height/180, width*209/640, height/45);
+  draw_rect(TEXT_CHAT_DIVIDE + width/350, height - height/30 + height/180, width*333/1400, height/45);
   draw_rect(width - width*27/640, height - height/30 + height/180, width*5/128, height/45);
   fill(0);
+  textFont(font_plain);
   textAlign(CENTER, CENTER);
   draw_text("Send", width - width*27/640 + width*5/256, height - height/30 + height/180 + height/90);
   textAlign(LEFT, CENTER);
@@ -742,6 +744,7 @@ void draw_battle() {
     draw_text(chat_msg, TEXT_CHAT_DIVIDE + width*3/640, height - height/30 + height/180 + height/90);
   }
 
+//println((width - width*27/640) - (TEXT_CHAT_DIVIDE + width/350) - width/350);
   textFont(font_plain);
   if (mousePressed && mousePressValid == true) {
     if (c_display_state == DISPLAY_TEAMS) {
@@ -770,18 +773,12 @@ void draw_battle() {
         }
       }
     }
-    if (mouseX >= TEXT_CHAT_DIVIDE + width/320 && mouseX <= TEXT_CHAT_DIVIDE + width/320 + width*209/640 && mouseY <= height - height/30 + height/180 + height/45&& mouseY >= height - height/30 + height/180) {
-      chatting=true;
-    } else {
-      chatting=false;
-    }
     if (mouseX >= width - width*27/640 && mouseX <= width - width*27/640 + width*5/128 && mouseY >= height - height/30 + height/180 && mouseY <= height - height/30 + height/180 + height/45) {
       JSONObject json = new JSONObject();
       json.setString("battlestate", "chat");
       json.setString("chat", chat_msg);
       myClient.write(json.toString());
       chat_msg="";
-      chatting = false;
       mousePressValid = false;
     }
   }
