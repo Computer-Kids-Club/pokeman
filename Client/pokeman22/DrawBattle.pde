@@ -555,9 +555,7 @@ void draw_battle() {
       println(str_cur_move_type);
       if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")
       || str_cur_move_type.equals("dragon")) {
-        imageMode(CORNER);
-        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
-        imageMode(CENTER);
+        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], TEXT_CHAT_DIVIDE/2, height*13/36);
       } else {
         draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
       }
@@ -580,9 +578,7 @@ void draw_battle() {
 
       draw_image(img_flag_punch, 0, 0);
     } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
-      imageMode(CORNER);
-      draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], 0, 0);
-      imageMode(CENTER);
+      draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], TEXT_CHAT_DIVIDE/2, height*13/36);
       //draw_image(img_flag_sound, 0, 0);
     } else if (str_cur_move_anime_style.equals("spikes") || str_cur_move_anime_style.equals("stealth-rock")
       || str_cur_move_anime_style.equals("toxic-spikes") || str_cur_move_anime_style.equals("sticky-web")) { // --------------------------------------------------------- entry hazards
