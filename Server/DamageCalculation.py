@@ -330,9 +330,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'competitive':
         if move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability != 'contrary':
-            i_atk_spa += 1
+            i_atk_spa += 2
         elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
-            i_atk_spa -= 1
+            i_atk_spa -= 2
 
 
 
@@ -356,7 +356,7 @@ poke1.base_stats.i_spe = 259
 poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
 poke1.type_2 = None
-poke1.str_ability = "water-bubble"
+poke1.str_ability = "contrary"
 #poke1.str_status = 'burn'
 
 poke2 = Pokeman()
@@ -369,15 +369,15 @@ poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 poke2.type_2 = None
-#poke2.str_ability = "multiscale"
-move = Move("surf")
+poke2.str_ability = "competitive"
+move = Move("feather-dance")
 
 field = Field()
-field.terrain = Terrain.ELECTRIC
+#field.terrain = Terrain.ELECTRIC
 
 print(attack(poke1, poke2, move, field))
 print(str_prv_mov)
 
-move = Move("body-slam")
-print(attack(poke2, poke1, move, field))
-print(str_prv_mov)
+#move = Move("surf")
+#print(attack(poke2, poke1, move, field))
+#print(str_prv_mov)
