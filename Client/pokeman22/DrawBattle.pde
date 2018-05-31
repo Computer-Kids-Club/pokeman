@@ -553,7 +553,8 @@ void draw_battle() {
       //draw_rect(0, 0, 50, 50);
 
       println(str_cur_move_type);
-      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")) {
+      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")
+      || str_cur_move_type.equals("dragon")) {
         imageMode(CORNER);
         draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
         imageMode(CENTER);
