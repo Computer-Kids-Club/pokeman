@@ -531,6 +531,7 @@ void draw_battle() {
     scale(1, -1*i_moving_direction);
     if (i_moving_direction==1) {
       rotate(PI);
+      scale(1,-1);
     }
 
     fill(0, 255, 255);
