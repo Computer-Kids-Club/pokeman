@@ -54,7 +54,7 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
             i_atk_hp -= (i_atk_hp / 4)
 
     if str_def_ability == 'berserk':
-        if i_def_hp < (def_poke.base_stats.i_hp)//2:
+        if i_def_hp < def_poke.base_stats.i_hp//2:
             if str_mov_name != 'leach-seed' and str_atk_ability != 'contrary':
                 def_poke.get_usable_stats().get_spa += 1
             elif str_mov_name != 'leech-seed':
@@ -83,7 +83,7 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
                 i_count += 1
 
     if str_atk_ability == 'blaze':
-        if i_atk_hp <= (atk_poke.base_states.i_hp)//3
+        if i_atk_hp <= atk_poke.base_states.i_hp//3:
             i_atk += i_atk//2
 
     if str_atk_ability == 'chlorophyll' or str_def_ability == 'chlorophyll':

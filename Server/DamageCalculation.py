@@ -28,7 +28,6 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     global str_prv_mov
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
-    i_def_atk = def_poke.get_usable_stats().get_atk()
     i_crit = 1
     i_rand = randint(85, 100) / 100
     i_stab = 1
@@ -51,9 +50,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_status = move.b_status_effect
     b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
+    i_def_atk = def_poke.get_usable_stats().get_atk()
     i_def_hp = def_poke.get_usable_stats().get_hp()
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
     i_atk_spa = atk_poke.get_usable_stats().get_spa()
+    i_def_spa = def_poke.get_usable_stats().get_spa()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -101,6 +102,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #---------------#
     # WEATHER BUFFS #
     #---------------#
+    if (str_def_ability or str_atk_ability) == 'delta-stream':
+        str_weather = Weather.MYSTERIOUS_AIR_CURRENT
+
+    if (str_def_ability or str_atk_ability) == 'desolate-land':
+        str_weather = Weather.HARSH_SUNLIGHT
+
     if str_atk_ability != 'air-lock' or str_atk_ability != 'cloud-nine' or str_def_ability != 'air-lock' or str_def_ability != 'cloud-nine':
         if str_weather == Weather.HARSH_SUNLIGHT and str_mov_type == 'fire':
             i_weather = 1.5
@@ -169,6 +176,14 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_prv_mov == 'dive':
         if str_mov_name == 'surf' or str_mov_name == 'whirlpool':
             i_move_buff = 2
+
+    # -------------------#
+    # GENERAL ABILITIES #
+    # -------------------#
+    if str_atk_ability == 'dark-aura' or str_def_ability == 'dark-aura':
+        i_pow *= 1.33
+
+
 
     #--------------------#
     # ATTACKING ABILITIES #
@@ -334,7 +349,18 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
             i_atk_spa -= 2
 
+    if str_def_ability == 'dazzling':
+        if move.i_priority > 0:
+            i_pow = 0
 
+    if str_def_ability == 'defeatist':
+        if i_def_hp < def_poke.base_stats.i_hp//2:
+            i_def_atk /= 2
+            i_def_spa /= 2
+
+    if str_def_ability == 'defiant':
+        if move.users_stat_changes < 0:
+            i_def_atk += 2
 
     #--------------------#
     # CALCULATING DAMAGE #
