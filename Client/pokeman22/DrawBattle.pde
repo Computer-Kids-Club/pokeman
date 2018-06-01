@@ -526,7 +526,7 @@ void draw_battle() {
     //translate_interpolation(POKE_ME_RECT, POKE_OTHER_RECT, 0*tmp_move, i_total_moving);
 
     //rotate((frameCount*20.0)%360);
-
+    translate(TEXT_CHAT_DIVIDE/2, height*13/36);
     //rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
     scale(1, -1*i_moving_direction);
     if (i_moving_direction==1) {
@@ -554,8 +554,8 @@ void draw_battle() {
 
       println(str_cur_move_type);
       if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")
-      || str_cur_move_type.equals("dragon")) {
-        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], TEXT_CHAT_DIVIDE/2, height*13/36);
+        || str_cur_move_type.equals("dragon")) {
+        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
       } else {
         draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
       }
@@ -578,7 +578,7 @@ void draw_battle() {
 
       draw_image(img_flag_punch, 0, 0);
     } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
-      draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], TEXT_CHAT_DIVIDE/2, height*13/36);
+      draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], 0, 0);
       //draw_image(img_flag_sound, 0, 0);
     } else if (str_cur_move_anime_style.equals("spikes") || str_cur_move_anime_style.equals("stealth-rock")
       || str_cur_move_anime_style.equals("toxic-spikes") || str_cur_move_anime_style.equals("sticky-web")) { // --------------------------------------------------------- entry hazards
@@ -741,7 +741,7 @@ void draw_battle() {
     draw_text(chat_msg, TEXT_CHAT_DIVIDE + width*3/640, height - height/30 + height/180 + height/90);
   }
 
-//println((width - width*27/640) - (TEXT_CHAT_DIVIDE + width/350) - width/350);
+  //println((width - width*27/640) - (TEXT_CHAT_DIVIDE + width/350) - width/350);
   textFont(font_plain);
   if (mousePressed && mousePressValid == true) {
     if (c_display_state == DISPLAY_TEAMS) {
