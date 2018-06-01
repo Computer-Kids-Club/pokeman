@@ -213,8 +213,9 @@ void process_data(String dataIn) {
     } else if (str_move.equals("toxic")) {
       add_ad_hoc_text_effect(str_move, i_display_player, color(#A040A0));
     }
-  } else if (dataIn.charAt(0)=='L') {
+  } else if (dataIn.charAt(0)=='l') {
     if (dataIn.substring(1).equals("true")) {
+      print("data received");
       textFont(font_plain);
       login=false;
     } else {

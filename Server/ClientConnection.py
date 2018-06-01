@@ -232,24 +232,29 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "login":
             file_in = open('usernames.txt','r')     # readlines()
-            usernamelst = file_in.readlines()   # Returns a list with each line as an element. 
+            usernamelst = file_in.read()   # Returns a list with each line as an element.
+            usernamelst=usernamelst.split('*')
             file_in.close()
             file_in = open('passwords.txt','r')     # readlines()
-            passwordlst = file_in.readlines()   # Returns a list with each line as an element. 
+            passwordlst = file_in.read()   # Returns a list with each line as an element.
+            passwordlst=passwordlst.split('*')
             file_in.close()
-            try:
-                if usernamelst.index(dic_data['username'])==passworlst.index(dic_data['password']):
-                    self.send_data('Ltrue')
+            if dic_data['username'] in usernamelst and dic_data['password'] in passwordlst:
+                if usernamelst.index(dic_data['username'])==passwordlst.index(dic_data['password']):
+                    self.send_data('ltrue')
                 else:
-                    self.send_data('Lfalse')
-            except:
-                self.send_data('Lfalse')
+                    self.send_data('lfalse')
+            else:
+                self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
             file_out = open('usernames.txt', "a")
+            file_out.write('*') 
             file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
             file_out.close()
             file_out = open('passwords.txt', "a")
-            file_out.write(dic_data['password'])  # 2. Convert the info to string and write in the file
+            file_out.write('*') 
+            file_out.write(dic_data['password'])# 2. Convert the info to string and write in the file
+
             file_out.close()
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
