@@ -26,27 +26,6 @@ String json_array_to_string(JSONArray json_arr, char c_split) {
   return str_ret;
 }
 
-void newTurn() {
-  ArrayList<Integer> tempList = new ArrayList<Integer>();
-  tempList.add(TEXT_CHAT_DIVIDE);
-  tempList.add(height - height/30);
-  tempList.add(turn);
-  turnSignals.add(tempList);
-}
-
-void turnBump() {
-  for (int i = turnSignals.size()-1; i >= 0; i--) {  
-    ArrayList<Integer> tempList = new ArrayList<Integer>();
-    tempList.add(TEXT_CHAT_DIVIDE);
-    tempList.add(turnSignals.get(i).get(1) - height/30);
-    tempList.add(turn);
-    turnSignals.set(i, tempList);
-    if (turnSignals.get(i).get(1) + 20 < 0) {
-      turnSignals.remove(i);
-    }
-  }
-}
-
 void process_data(String dataIn) {
 
   i_cur_animation_frames_left = 0;
@@ -65,7 +44,7 @@ void process_data(String dataIn) {
     if (dataIn.length()>1) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_pokes_array = json.getJSONArray("availpoke");
-      text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
+      //text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' '));
       text_chat.add(0, "");
     }
   } else if (dataIn.charAt(0)==SELECT_POKE_OR_MOVE) {
@@ -74,14 +53,14 @@ void process_data(String dataIn) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_pokes_array = json.getJSONArray("availpoke");
       json_avail_moves_array = json.getJSONArray("availmove");
-      text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
+      //text_chat.add(0, "Select a pokemon with keys: "+json_array_to_string(json_avail_pokes_array, ' ')+"OR Select a move with keys: q,w,e,r");
     }
   } else if (dataIn.charAt(0)==SELECT_MOVE) {
     i_selection_stage = SELECT_MOVE;
     if (dataIn.length()>1) {
       JSONObject json = parseJSONObject(dataIn.substring(1));
       json_avail_moves_array = json.getJSONArray("availmove");
-      text_chat.add(0, "Select a move with keys: q,w,e,r");
+      //text_chat.add(0, "Select a move with keys: q,w,e,r");
     }
   } else if (dataIn.charAt(0)==AWAITING_SELECTION) {
     i_selection_stage = AWAITING_SELECTION;
@@ -120,6 +99,7 @@ void process_data(String dataIn) {
       new_poke = pokemons.get(i_tmp_new_display_poke);
       i_healthing_direction = -1;
       if (c_my_display_poke != i_tmp_new_display_poke) {
+        text_chat.add(0, "Client swapped pokemon to " + pokemons.get(i_tmp_new_display_poke).name);
         i_cur_animation_frames_left = 30;
         i_switching_direction = ME;
         i_switching = i_total_switching;
@@ -132,6 +112,7 @@ void process_data(String dataIn) {
       new_poke = other_pokemons.get(i_tmp_new_display_poke);
       i_healthing_direction = 1;
       if (c_other_display_poke != i_tmp_new_display_poke) {
+        text_chat.add(0, "Server swapped pokemon to " + other_pokemons.get(i_tmp_new_display_poke).name);
         i_cur_animation_frames_left = 30;
         i_switching_direction = OTHER;
         i_switching = i_total_switching;

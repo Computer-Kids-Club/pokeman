@@ -49,9 +49,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_bite = move.flag_bite
     b_stat_change = move.b_stat_change
     b_status = move.b_status_effect
+    b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
     i_def_hp = def_poke.get_usable_stats().get_hp()
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
+    i_atk_spa = atk_poke.get_usable_stats().get_spa()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -59,6 +61,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     str_weather = field.get_weather()
     str_terrain = field.get_terrain()
     l_atk_low_mov = ['aurora-beam', 'baby-doll-eyes', 'charm', 'feather-dance', 'growl', 'lunge', 'memento', 'nobal-roar', 'parting-shot', 'play-nice', 'play-rough', 'secret-power', 'strength-sap', 'tearful-look', 'tickle', 'trop-kick', 'venom-drench']
+    l_def_low_mov = ['acid', 'crunch', 'crush-claw', 'fire-lash', 'iron-tail', 'leer', 'liquidation', 'razor-shell', 'rock-smash', 'screech', 'secret-power', 'shadow-bone', 'shadow-down', 'tail-whip', 'tickle']
+    l_spa_low_mov = ['captive', 'confide', 'eerie-impulse', 'memento', 'mist-ball', 'moonblast', 'mystical-fire', 'parting-shoot', 'snarl', 'struggle-bug']
+    l_spd_low_mov = ['acid-spray', 'bug-buzz', 'earth-power', 'energy-ball', 'fake-tears', 'flash-cannon', 'focus-blast', 'luster-purge', 'metal-sound', 'psychic', 'seed-flare', 'shadow-ball']
+    l_spe_low_mov = ['bubble', 'bubble-beam', 'bulldoze', 'constrict', 'cotton-spore', 'electroweb', 'glaciate', 'icy-wind', 'low-sweep', 'mud-shot', 'rock-tomb', 'scary-face', 'secret-power', 'sticky-web', 'string-shot', 'toxic-thread']
     str_pok_type_1 = atk_poke.type_1.getName()
     if atk_poke.type_2 is not None:
         str_pok_type_2 = atk_poke.type_2.getName()
@@ -322,6 +328,14 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_def_ability == 'comatose':
         i_burn = 1
 
+    if str_def_ability == 'competitive':
+        if move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability != 'contrary':
+            i_atk_spa += 2
+        elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
+            i_atk_spa -= 2
+
+
+
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
@@ -342,7 +356,7 @@ poke1.base_stats.i_spe = 259
 poke1.usable_stats = poke1.base_stats
 poke1.type_1 = Type("psychic")
 poke1.type_2 = None
-poke1.str_ability = "water-bubble"
+poke1.str_ability = "contrary"
 #poke1.str_status = 'burn'
 
 poke2 = Pokeman()
@@ -355,15 +369,15 @@ poke2.base_stats.i_spe = 259
 poke2.usable_stats = poke2.base_stats
 poke2.type_1 = Type("psychic")
 poke2.type_2 = None
-#poke2.str_ability = "multiscale"
-move = Move("surf")
+poke2.str_ability = "competitive"
+move = Move("feather-dance")
 
 field = Field()
-field.terrain = Terrain.ELECTRIC
+#field.terrain = Terrain.ELECTRIC
 
 print(attack(poke1, poke2, move, field))
 print(str_prv_mov)
 
-move = Move("body-slam")
-print(attack(poke2, poke1, move, field))
-print(str_prv_mov)
+#move = Move("surf")
+#print(attack(poke2, poke1, move, field))
+#print(str_prv_mov)

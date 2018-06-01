@@ -20,9 +20,9 @@ l_battles = []
 # client to battle
 dic_battles = {}
 
-
 class Battle(object):
     def __init__(self, l_new_players=[]):
+        self.firstRun = True
 
         self.field = Field(l_new_players[0],l_new_players[1])
 
@@ -48,6 +48,9 @@ class Battle(object):
         atk_poke = player.active_poke
         other_player = self.get_other_player(player)
         def_poke = other_player.active_poke
+
+        if atk_poke == None or def_poke == None:
+            return
 
         self.send_players_pokes()
 
@@ -77,7 +80,12 @@ class Battle(object):
 
         other_player = self.get_other_player(player)
 
-        if dic_data["battlestate"] == "pokes":
+        if dic_data["battlestate"] == "chat":
+            print(dic_data)
+            player.send_data(DISPLAY_TEXT+"You : "+dic_data["chat"])
+            other_player.send_data(DISPLAY_TEXT+"Other : "+dic_data["chat"])
+            
+        elif dic_data["battlestate"] == "pokes":
             pass
         elif dic_data["battlestate"] == "selectpoke":
 
@@ -86,6 +94,7 @@ class Battle(object):
             pass
         elif dic_data["battlestate"] == "selectmove":
             pass
+        
 
     def everyone_ready(self):
         b_ready = True
@@ -432,7 +441,7 @@ class Battle(object):
                     atk_poke.b_fainted = True
 
             # make a new line to look more organised
-            self.send_broadcast("")
+ #           self.send_broadcast("")
 
             # send updated pokes
             self.send_players_pokes()
@@ -444,6 +453,10 @@ class Battle(object):
                 continue
 
         # after turn heal / damage
+        if self.firstRun == False:
+            self.send_broadcast("")
+
+        self.firstRun = False
         for player in l_move_queue:
             atk_poke = player.active_poke
             other_player = self.get_other_player(player)

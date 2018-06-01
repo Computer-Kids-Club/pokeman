@@ -11,7 +11,7 @@ void mousePressed() {
    print(" ");
    println(mouseY);*/
   if (START_BUTTON.i_x-START_BUTTON.i_w/2<=mouseX && mouseX<=START_BUTTON.i_x+START_BUTTON.i_w/2 &&
-    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY && !pokemonSelectScreen && !moveSelectScreen && !login) {
+    START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY && !pokemonSelectScreen && !moveSelectScreen && !login && !register) {
     send_pokes();
     i_battle_state = SEARCHING;
     println("pressed");
@@ -106,20 +106,26 @@ void keyPressed() {
   //  }
 
   if (i_battle_state == BATTLING) {
-    if ('1'<=key&&key<='6'&&(i_selection_stage == SELECT_POKE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-      select_poke(int(key-'1'));
-      i_selection_stage = AWAITING_SELECTION;
-    } else if (KEY_TO_ID.get(key)!=null&&(i_selection_stage == SELECT_MOVE||i_selection_stage == SELECT_POKE_OR_MOVE)) {
-      select_move(KEY_TO_ID.get(key));
-      i_selection_stage = AWAITING_SELECTION;
-    } else if (chatting==true) {
+    if (chatting==true) {
       if (key==ENTER||key==RETURN) {
         JSONObject json = new JSONObject();
+        json.setString("battlestate", "chat");
         json.setString("chat", chat_msg);
         myClient.write(json.toString());
         chat_msg="";
+      } else if (key == BACKSPACE) {
+        if (chat_msg.length() > 1) {
+          chat_msg = chat_msg.substring(0, chat_msg.length()-1);
+        } else if (chat_msg.length() > 0) {
+          chat_msg = chat_msg.substring(0, chat_msg.length()-1);
+          chat_msg = "";
+        } else {
+          chat_msg = "";
+        }
+      } else if (chat_msg == "") {
+        chat_msg = str(key);
       } else {
-        chat_msg+=key;
+        chat_msg += key;
       }
     }
   }
@@ -145,6 +151,7 @@ void keyPressed() {
         pokemonSearch = "";
       }
     }
+
     SLIDER.i_y = sliderStartY;
     validPokemonSearch = new StringList();
     for (int i = 1; i <= 807; i++) {
@@ -206,6 +213,21 @@ void keyPressed() {
             password += key;
             break;
           }
+        }
+      }
+    }
+    if (int(key) >= 48 && int(key) <= 57) {        
+      if (current=="username") {
+        if (username == "") {
+          username = str(key);
+        } else if (username.length()<=30) {
+          username += key;
+        }
+      } else if (current=="password") {
+        if (password == "") {
+          password = str(key);
+        } else if (password.length()<=30) {
+          password += key;
         }
       }
     }

@@ -51,6 +51,9 @@ HashMap<String, String[]> moves_data = new HashMap<String, String[]>();
 JSONObject[] pokemon = new JSONObject[6];
 PImage[][] pokemonAnimation = {{}, {}, {}, {}, {}, {}};
 
+HashMap<String, PImage[]> move_animations = new HashMap<String, PImage[]>();
+HashMap<String, Integer> move_animations_num = new HashMap<String, Integer>();
+
 ArrayList<Pokemon> pokemons;
 
 Gif loopingGif;
@@ -356,6 +359,7 @@ void drawStartScreen() {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
         pokemonChangeNumber = i;
         pokemonSelectScreen = true;
+        pokemonSearchBool = true;
         mousePressValid = false;
       }
       if (dist(mouseX, mouseY, (width/140)*137, height/30)<=dist((width/140)*137-width/56, height/30-height/36, (width/140)*137, height/30)) {
@@ -509,7 +513,7 @@ void drawPokemonSelectionScreen(int slotNumber) {
   strokeWeight(1);
   draw_rect(SEARCH_BUTTON.i_x, SEARCH_BUTTON.i_y, SEARCH_BUTTON.i_w, SEARCH_BUTTON.i_h);
   fill(255);
-  if (pokemonSearchBool == false && pokemonSearch == "") {
+  if (pokemonSearch == "") {
     draw_text("Search by Name", width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
   } else {
     draw_text(pokemonSearch, width*43/280 + SELECTSCREENSHIFT_X, height/36 + SELECTSCREENSHIFT_Y);
@@ -531,11 +535,11 @@ void drawPokemonSelectionScreen(int slotNumber) {
         pokemonSelectScreen = false;
       }
 
-      if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
-        pokemonSearchBool = true;
-      } else {
-        pokemonSearchBool = false;
-      }
+      //if (mouseX <= SEARCH_BUTTON.i_x + SEARCH_BUTTON.i_w && mouseX >= SEARCH_BUTTON.i_x && mouseY <= SEARCH_BUTTON.i_y + SEARCH_BUTTON.i_h && mouseY >= SEARCH_BUTTON.i_y) {
+      //  pokemonSearchBool = true;
+      //} else {
+      //  pokemonSearchBool = false;
+      //}
 
       if (mouseX < width/7 || mouseX >= (width/7)*6) {
         pokemonSelectScreen = false;
@@ -844,7 +848,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       strokeWeight(1);
       draw_rect(MOVE_SEARCH_BUTTON.i_x, MOVE_SEARCH_BUTTON.i_y, MOVE_SEARCH_BUTTON.i_w, MOVE_SEARCH_BUTTON.i_h);
       fill(255);
-      if (moveSearchBool == false && moveSearch == "") {
+      if (moveSearch == "") {
         draw_text("Search by Move", width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
       } else {
         draw_text(moveSearch, width*19/28, SELECTSCREENSHIFT_Y + height*499/900);
@@ -1226,6 +1230,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       for (int i = 0; i < 4; i++) {
         if (mouseX <= width*41/70 && mouseX >= width*29/70 && mouseY <= height*17/36 + i*(height*2/45) && mouseY >= height*79/180 + i*(height*2/45)) {
           moveSelect = true;
+          moveSearchBool = true;
           moveSlot = i;
         }
       }
@@ -1234,13 +1239,13 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
       if (mouseX >= MOVESLIDER.i_x && mouseX <= MOVESLIDER.i_x + MOVESLIDER.i_w && mouseY >= MOVESLIDER.i_y && mouseY <= MOVESLIDER.i_y + MOVESLIDER.i_h) {
         moveSliderFollow = true;
       }
-      if (moveSliderFollow == false) {
-        if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
-          moveSearchBool = true;
-        } else {
-          moveSearchBool = false;
-        }
-      }
+      //if (moveSliderFollow == false) {
+      //  if (mouseX <= MOVE_SEARCH_BUTTON.i_x + MOVE_SEARCH_BUTTON.i_w && mouseX >= MOVE_SEARCH_BUTTON.i_x && mouseY <= MOVE_SEARCH_BUTTON.i_y + MOVE_SEARCH_BUTTON.i_h && mouseY >= MOVE_SEARCH_BUTTON.i_y) {
+      //    moveSearchBool = true;
+      //  } else {
+      //    moveSearchBool = false;
+      //  }
+      //}
     } else if (statSelect && moveSelect == false) {
       if (natureSliderFollow == false && statSliderFollow[0] == false && statSliderFollow[1] == false && statSliderFollow[2] == false && statSliderFollow[3] == false && statSliderFollow[4] == false && statSliderFollow[5] == false) {
         for (int i = 0; i < NATURES_PER_PAGE; i++) {
@@ -1307,6 +1312,8 @@ void drawPokemon(PImage[] pAnimation, int x, int y) {
 
 PFont font_plain;
 PFont font_plain_big;
+PFont font_plain_mid;
+PFont font_plain_middle;
 PFont font_big_solid;
 PFont font_big_hollow;
 
@@ -1315,7 +1322,8 @@ int i_plain_font_size = 12;
 boolean loading = true;
 
 void setup() {
-  size(1400, 900, P2D);
+  //size(1280, 720, P2D);
+  size(1400,900, P2D);
   //fullScreen();
   //size(displayWidth, displayHeight, P2D);
   frameRate(50);
@@ -1327,6 +1335,8 @@ void setup() {
   //font_plain = createFont("andalemo.ttf", 128);
   font_plain = createFont("SansSerif", 12);
   font_plain_big = createFont("SansSerif", 128);
+  font_plain_mid = createFont("SansSerif", 32);
+  font_plain_middle = createFont("SansSerif", 24);
   font_big_solid = createFont("Pokemon Solid.ttf", 128);
   font_big_hollow = createFont("Pokemon Hollow.ttf", 128);
   //textFont(font_plain);
@@ -1418,6 +1428,52 @@ void better_setup() {
     String[][] allMoves = {levelMoves, eggMoves, tutorMoves, tmMoves};
     names_moves.put(file.getString("name"), allMoves);
   }
+
+
+  PImage[] tempMoveAni = new PImage[8];
+  for (int i = 1; i < 9; i++) {
+    PImage tempAniImage = loadImage("Normal" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("normal", 8);
+  move_animations.put("normal", tempMoveAni);
+
+  tempMoveAni = new PImage[10];
+  for (int i = 1; i < 11; i++) {
+    PImage tempAniImage = loadImage("Fire" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("fire", 10);
+  move_animations.put("fire", tempMoveAni);
+
+  tempMoveAni = new PImage[16];
+  for (int i = 1; i < 17; i++) {
+    PImage tempAniImage = loadImage("Sound" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("sound", 16);
+  move_animations.put("sound", tempMoveAni);
+
+  tempMoveAni = new PImage[28];
+  for (int i = 1; i < 29; i++) {
+    PImage tempAniImage = loadImage("Electric" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("electric", 28);
+  move_animations.put("electric", tempMoveAni);
+
+  tempMoveAni = new PImage[32];
+  for (int i = 1; i < 33; i++) {
+    PImage tempAniImage = loadImage("Dragon" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("dragon", 32);
+  move_animations.put("dragon", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
