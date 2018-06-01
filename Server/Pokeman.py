@@ -16,7 +16,7 @@ from DamageCalculation import *
 # GAME ON
 b_game_on = True
 
-b_multiplayer = False
+b_multiplayer = True
 
 while b_game_on:
     for b in range(len(l_battles)-1,-1,-1):
