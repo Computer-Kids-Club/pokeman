@@ -530,8 +530,9 @@ void draw_battle() {
     //rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
     scale(1, -1*i_moving_direction);
     if (i_moving_direction==1) {
-      rotate(PI);
-      scale(1,-1);
+      //rotate(PI);
+      scale(-1,-1);
+      translate(0,height/30);
     }
 
     fill(0, 255, 255);
