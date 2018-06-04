@@ -187,7 +187,7 @@ class Client(object):
             poke.pre_turn()
 
     def recieved_data(self, str_data):
-        print("getgood")
+        print(":ASDADSASDASD")
 
         try:
             dic_data = json.loads(str_data.decode("utf-8"))
@@ -248,38 +248,39 @@ class Client(object):
             sentPokes = file_in.read()
             file_in.close()
             loaded_pokes = json.loads(sentPokes)
-            
-            pokeList = []
-            for dic_poke in dic_data["pokes"]:
-                poke = Pokeman(dic_poke["num"])
-
-                poke.str_name = dic_poke["name"]
-
-                poke.usable_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
-                                        dic_poke['spa'], dic_poke['spd'], dic_poke['spe'])
-
-                #print(poke.str_name,poke.usable_stats.to_dic({}))
-
-                poke.i_happy = dic_poke['hap']
-                poke.i_lv = dic_poke['lv']
-                poke.b_shiny = dic_poke['shiny']
-
-                poke.l_moves = []
-                for dic_move in dic_poke['moves']:
-                    poke.l_moves.append(Move(dic_move))
-
-                poke.i_hp = poke.get_usable_stats().i_hp
-
-                #print("hey hey hey ", poke.get_usable_stats().i_atk)
-
-                pokeList.append(poke)
-
-            loaded_pokes[dic_data['username']] = pokeList
-            sentPokes = json.dumps(loaded_pokes)
-            print(sentPokes)
-            file_in = open('pokeSave.txt', 'w')
-            file_in.write(sentPokes)
-            file_in.close()
+            print("better")
+##            
+##            pokeList = []
+##            for dic_poke in dic_data["pokes"]:
+##                poke = Pokeman(dic_poke["num"])
+##
+##                poke.str_name = dic_poke["name"]
+##
+##                poke.usable_stats = Stats( dic_poke['hp'], dic_poke['atk'], dic_poke['def'],
+##                                        dic_poke['spa'], dic_poke['spd'], dic_poke['spe'])
+##
+##                #print(poke.str_name,poke.usable_stats.to_dic({}))
+##
+##                poke.i_happy = dic_poke['hap']
+##                poke.i_lv = dic_poke['lv']
+##                poke.b_shiny = dic_poke['shiny']
+##
+##                poke.l_moves = []
+##                for dic_move in dic_poke['moves']:
+##                    poke.l_moves.append(Move(dic_move))
+##
+##                poke.i_hp = poke.get_usable_stats().i_hp
+##
+##                #print("hey hey hey ", poke.get_usable_stats().i_atk)
+##
+##                pokeList.append(poke)
+##
+##            loaded_pokes[dic_data['username']] = pokeList
+##            sentPokes = json.dumps(loaded_pokes)
+##            print(sentPokes)
+##            file_in = open('pokeSave.txt', 'w')
+##            file_in.write(sentPokes)
+##            file_in.close()
             
         elif dic_data["battlestate"] == "pokeread":
             print("good")

@@ -364,6 +364,7 @@ void drawStartScreen() {
       json.setString("battlestate", "pokewrite");
       myClient.write(json.toString());
       println(player_name);
+      mousePressValid = false;
     }
     for (int i = 0; i < 6; i++) {
       if (dist(mouseX, mouseY, POKEBALL.i_x + i*POKEMON_BUTTON.i_w, POKEBALL.i_y) <= height/60) {
