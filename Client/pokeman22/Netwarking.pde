@@ -196,6 +196,11 @@ void process_data(String dataIn) {
     }
   } else if (dataIn.charAt(0)=='l') {
     if (dataIn.substring(1).equals("true")) {
+      JSONObject json = new JSONObject();
+      json.setString("username", username);
+      json.setString("battlestate", "pokeread");
+      myClient.write(json.toString());
+      
       print("data received");
       textFont(font_plain);
       player_name=username;
@@ -205,6 +210,14 @@ void process_data(String dataIn) {
       username="";
       password="";
       current="";
+    }
+  } else if (dataIn.charAt(0) == 'z') {
+    JSONObject json = parseJSONObject(dataIn.substring(1));
+    JSONArray json_pokes_array = json.getJSONArray("pokes");
+    pokemons = new ArrayList<Pokemon>();
+    for (int j = 0; j < json_pokes_array.size(); j++) {
+      pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
+      pokemons.add(new Pokemon(pokemon_jsons[j]));
     }
   }
 }
@@ -246,13 +259,21 @@ void send_hey() {
   }
 }
 
+void send_saving() {
+  send_pokes("pokewrite");
+}
+
 void send_pokes() {
+  send_pokes("pokes");
+}
+
+void send_pokes(String whatthisis) {
 
   JSONObject json = new JSONObject();
 
   JSONArray json_poke_array = new JSONArray();
 
-  json.setString("battlestate", "pokes");
+  json.setString("battlestate", whatthisis);
   /*json.setString("species", "Panthera leo");
    json.setString("name", "Lion");*/
 

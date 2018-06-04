@@ -133,6 +133,7 @@ void register() {
     json.setString("password", password);
     json.setString("battlestate", "register");
     myClient.write(json.toString());
+    register = false;
   }
 }
 
