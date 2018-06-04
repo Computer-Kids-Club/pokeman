@@ -12,6 +12,8 @@ from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
+random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
+mixed_letters='qwertyuiopasdfghjklzxcvbnm'
 
 # from random import randint
 
@@ -23,7 +25,16 @@ l_clients = {}
 
 # message queue
 l_msg = []
-
+def encrypt(password):
+    new_str=''
+    for i in password:
+        new_str+=random_symbols[mixed_letters.index(i)]
+    return new_str
+def decrypt(password):
+    new_str=''
+    for i in password:
+        new_str+=mixed_letters[random_symbols.index(i)]
+    return new_str
 # broadcast chat messages to all connected clients
 def broadcast(server_socket, sock, message):
     # print("broadcasted",message.encode("utf-8"))
@@ -240,9 +251,9 @@ class Client(object):
             passwordlst=passwordlst.split('*')
             file_in.close()
             print(passwordlst)
-            if dic_data['username'] in usernamelst and dic_data['password'] in passwordlst:
+            if dic_data['username'] in usernamelst and encrypt(dic_data['password']) in passwordlst:
                 if len(dic_data['username'])>0 and len(dic_data['password'])>0:                    
-                    if usernamelst.index(dic_data['username'])==passwordlst.index(dic_data['password']):
+                    if usernamelst.index(dic_data['username'])==passwordlst.index(encrypt(dic_data['password'])):
                         self.send_data('ltrue')
                     else:
                         self.send_data('lfalse')
@@ -262,7 +273,7 @@ class Client(object):
                 file_out.close()
                 file_out = open('passwords.txt', "a")
                 file_out.write('*') 
-                file_out.write(dic_data['password'])# 2. Convert the info to string and write in the file
+                file_out.write(encrypt(dic_data['password']))# 2. Convert the info to string and write in the file
                 file_out.close()
                 self.send_data('ltrue')
             else:

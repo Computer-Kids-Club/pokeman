@@ -198,9 +198,9 @@ void process_data(String dataIn) {
     if (dataIn.substring(1).equals("true")) {
       print("data received");
       textFont(font_plain);
+      player_name=username;
       login=false;
       register=false;
-      player_name=username;
     } else {
       username="";
       password="";
