@@ -199,6 +199,8 @@ void process_data(String dataIn) {
       print("data received");
       textFont(font_plain);
       login=false;
+      register=false;
+      player_name=username;
     } else {
       username="";
       password="";

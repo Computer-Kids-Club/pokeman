@@ -251,15 +251,23 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
-            file_out = open('usernames.txt', "a")
-            file_out.write('*') 
-            file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
-            file_out.close()
-            file_out = open('passwords.txt', "a")
-            file_out.write('*') 
-            file_out.write(dic_data['password'])# 2. Convert the info to string and write in the file
-
-            file_out.close()
+            file_in = open('usernames.txt','r')    
+            usernamelst = file_in.read()  
+            usernamelst=usernamelst.split('*')
+            file_in.close()
+            if dic_data['username'] not in usernamelst and len(dic_data['username'])>0:
+                file_out = open('usernames.txt', "a")
+                file_out.write('*') 
+                file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
+                file_out.close()
+                file_out = open('passwords.txt', "a")
+                file_out.write('*') 
+                file_out.write(dic_data['password'])# 2. Convert the info to string and write in the file
+                file_out.close()
+                self.send_data('ltrue')
+            else:
+                self.send_data('lfalse')
+                
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
 

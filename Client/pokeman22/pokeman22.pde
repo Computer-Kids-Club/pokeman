@@ -274,7 +274,7 @@ String[] getMoveData(String move_name) {
   String[] data = {move_json.getString("type"), move_json.getString("cat"), move_json.getString("power"), move_json.getString("acc"), move_json.getString("pp"), move_json.getString("prob"), move_json.getString("effect")};
   return data;
 }
-String username="", password="", current="";
+String username="", password="", current="", player_name="";
 Boolean login=true;
 Boolean register=false;
 void drawMove(String move_name) {

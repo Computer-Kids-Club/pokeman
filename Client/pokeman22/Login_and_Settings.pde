@@ -107,17 +107,17 @@ void register() {
     } else {
       current="";
     }
-    if (mouseX>=width/2-width/6 &&mouseX<=width/2+width/6) {
-      if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
-        JSONObject json = new JSONObject();
-        json.setString("username", username);
-        json.setString("password", password);
-        json.setString("battlestate", "register");
-        myClient.write(json.toString());
-        textFont(font_plain);
-        //register=false;
-      }
-    }
+    //if (mouseX>=width/2-width/6 &&mouseX<=width/2+width/6) {
+    //  if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
+    //    JSONObject json = new JSONObject();
+    //    json.setString("username", username);
+    //    json.setString("password", password);
+    //    json.setString("battlestate", "register");
+    //    myClient.write(json.toString());
+    //    textFont(font_plain);
+    //    //register=false;
+    //  }
+    //}
   }
 
   fill(0);
@@ -133,8 +133,6 @@ void register() {
     json.setString("password", password);
     json.setString("battlestate", "register");
     myClient.write(json.toString());
-    textFont(font_plain);
-    register=false;
   }
 }
 
