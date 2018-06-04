@@ -10,6 +10,7 @@ from MoveClass import Move
 from Constants import *
 from random import randint
 str_prv_mov = ''
+i_disguise_cnt = 1
 
 def confusion_attack(def_poke):
 
@@ -26,6 +27,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     # VARAIBLE INITIALIZATION #
     #-------------------------#
     global str_prv_mov
+    global i_disguise_cnt
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
     i_crit = 1
@@ -50,6 +52,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_status = move.b_status_effect
     b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
+    i_atk_hp = atk_poke.get_usable_stats().get_hp()
     i_def_atk = def_poke.get_usable_stats().get_atk()
     i_def_hp = def_poke.get_usable_stats().get_hp()
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
@@ -128,6 +131,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         elif str_weather == Weather.MYSTERIOUS_AIR_CURRENT and str_pok_type_2 == 'flying' and i_type > 1:
             i_type = 1
 
+    if str_weather == Weather.HARSH_SUNLIGHT:
+        if str_def_ability == 'dry-skin':
+            i_def_hp -= (1/8)*def_poke.base_stats.i_hp
+        elif str_atk_ability == 'dry-skin':
+            i_atk_hp -= (1/8)*atk_poke.base_stats.i_hp
     # --------------#
     # TERRAIN BUFFS #
     # --------------#
@@ -361,6 +369,16 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_def_ability == 'defiant':
         if move.users_stat_changes < 0:
             i_def_atk += 2
+
+    if str_def_ability == 'disguise':
+        if i_disguise_cnt == 1:
+            i_pow = 0
+            i_disguise_cnt = 0
+
+
+
+
+
 
     #--------------------#
     # CALCULATING DAMAGE #
