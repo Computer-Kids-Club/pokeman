@@ -359,10 +359,8 @@ void drawStartScreen() {
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
-      JSONObject json = new JSONObject();
-      json.setString("username", player_name);
-      json.setString("battlestate", "pokewrite");
-      myClient.write(json.toString());
+
+      send_saving();
       println(player_name);
       mousePressValid = false;
     }
