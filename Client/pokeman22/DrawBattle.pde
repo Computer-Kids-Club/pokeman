@@ -529,7 +529,7 @@ void draw_battle() {
     translate(TEXT_CHAT_DIVIDE/2, height*13/36);
     //rotate(atan2(POKE_OTHER_RECT.i_y-POKE_ME_RECT.i_y, POKE_OTHER_RECT.i_x-POKE_ME_RECT.i_x));
     if (i_moving_direction==1) {
-      translate(0,height*2/30);
+      translate(0, height*2/30);
       scale(-1, -1);
     }
 
@@ -705,14 +705,16 @@ void draw_battle() {
   int turnCounter = turn;
   boolean emptyTrigger = false;
   draw_rectMode(CENTER);
+  pushMatrix();
+  int text_offset = 0;
   for (int i=0; i<text_chat.size() && height - i*(height/30) > height*2/30; i++) {
     if (text_chat.get(i).equals("") && emptyTrigger == false) {
       fill(150);
       //noFill();
-      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - height*3/60 - height/30, width - TEXT_CHAT_DIVIDE, height/18);
+      draw_rect(TEXT_CHAT_DIVIDE + (width - TEXT_CHAT_DIVIDE)/2, height - i*(height/30) - text_offset*(height/30) - height*3/60 - height/30, width - TEXT_CHAT_DIVIDE, height/18);
       fill(0);
       textFont(font_plain_mid);
-      draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*3/60 - height/30);
+      draw_text("Turn " + turnCounter, TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - text_offset*(height/30) - height*3/60 - height/30);
       turnCounter -= 1;
       emptyTrigger = true;
     } else if (emptyTrigger) {
@@ -720,10 +722,35 @@ void draw_battle() {
     } else {
       fill(0);
       textFont(font_plain);
-      draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - height*2/30);
+      if (textWidth(text_chat.get(i)) <= width-TEXT_CHAT_DIVIDE) {
+        draw_text(text_chat.get(i), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - text_offset*(height/30) - height*2/30);
+      } else {
+        String printable = "";
+        String chatRn = text_chat.get(i);
+        ArrayList<String> printable_list = new ArrayList<String>();
+        while (chatRn.length()>0) {
+          printable = printable + chatRn.charAt(0);
+          //println(printable);
+          chatRn = chatRn.substring(1);
+          if (textWidth(printable) > width-TEXT_CHAT_DIVIDE) {
+            printable_list.add(printable);
+            text_offset++;
+            printable = "";
+          }
+        }
+        printable_list.add(printable);
+        for (int k=0; k<printable_list.size(); k++) {
+          if (printable_list.get(printable_list.size()-k-1).length()>0) {
+            draw_text(printable_list.get(printable_list.size()-k-1), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - text_offset*(height/30) - height*2/30);
+            text_offset++;
+          }
+        }
+        text_offset-=2;
+      }
       emptyTrigger = false;
     }
   }
+  popMatrix();
   rectMode(CORNER);
   fill(255);
   draw_rect(TEXT_CHAT_DIVIDE, height - height/30, width - TEXT_CHAT_DIVIDE, height/30);     //336.9375 337/1400    364.28125   width*13/50

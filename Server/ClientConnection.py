@@ -268,11 +268,11 @@ class Client(object):
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":
-            file_in = open('usernames.txt','r')    
+            file_in = open(dir_path+'/usernames.txt','r')
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
-            file_in = open('passwords.txt','r')     
+            file_in = open(dir_path+'/passwords.txt','r')
             passwordlst = file_in.read()   
             passwordlst=passwordlst.split('*')
             file_in.close()
@@ -289,17 +289,17 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
-            file_in = open('usernames.txt','r')    
+            file_in = open(dir_path+'/usernames.txt','r')
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
             if dic_data['username'] not in usernamelst and len(dic_data['username'])>0:
-                file_out = open('usernames.txt', "a")
+                file_out = open(dir_path+'/usernames.txt', "a")
                 file_out.write('*') 
                 file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
                 self.str_username = dic_data['username']
                 file_out.close()
-                file_out = open('passwords.txt', "a")
+                file_out = open(dir_path+'/passwords.txt', "a")
                 file_out.write('*') 
                 file_out.write(encrypt(dic_data['password']))# 2. Convert the info to string and write in the file
                 file_out.close()
@@ -307,13 +307,19 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "command":
-            l_words = dic_data["chat"].split()
+            l_words = dic_data["command"].split()
             if l_words[0] == "weakness":
-                str_poke_name = l_words[1]
-                self.send_data(DISPLAY_TEXT+"weak")
+                try:
+                    str_poke_name = l_words[1]
+                    self.send_data(DISPLAY_TEXT+"weak")
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
             elif l_words[0] == "strongness":
-                str_poke_name = l_words[1]
-                self.send_data(DISPLAY_TEXT+"strong")
+                try:
+                    str_poke_name = l_words[1]
+                    self.send_data(DISPLAY_TEXT+"strong")
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3007. Please contact support with the error code at ethanzohar9@gmail.com.")
             else:
                 self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
                 
