@@ -1,5 +1,6 @@
 
 JSONObject[] other_pokemon_jsons = new JSONObject[6];
+JSONObject[] pokemon_jsons = new JSONObject[6];
 ArrayList<Pokemon> other_pokemons;
 
 class Pokemon {
