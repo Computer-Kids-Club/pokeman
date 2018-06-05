@@ -255,16 +255,13 @@ class Client(object):
             file_in.close()
             
         elif dic_data["battlestate"] == "pokeread":
-            print("good")
             file_in = open('pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()
 
             loaded_pokes = json.loads(sentPokes)
-            print(loaded_pokes)
-
             if dic_data['username'] in loaded_pokes:
-                self.send_data("z" + loaded_pokes[dic_data['username']])
+                self.send_data("z" + json.dumps({"pokes":loaded_pokes[dic_data['username']]}))
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":

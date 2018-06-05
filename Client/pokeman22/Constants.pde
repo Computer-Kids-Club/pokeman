@@ -20,6 +20,7 @@ Rect SEARCH_BUTTON;
 Rect MOVE_SEARCH_BUTTON;
 
 Rect SAVE_BUTTON;
+Rect PRESET_BUTTON;
 
 Rect POKE_ME_RECT;
 Rect POKE_OTHER_RECT;
@@ -101,6 +102,7 @@ void init_constants() {
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
   
   SAVE_BUTTON = new Rect(100,100,100,100);
+  PRESET_BUTTON = new Rect(200,200,100,100);
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);

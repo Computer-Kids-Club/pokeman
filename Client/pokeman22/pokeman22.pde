@@ -274,7 +274,7 @@ String[] getMoveData(String move_name) {
   String[] data = {move_json.getString("type"), move_json.getString("cat"), move_json.getString("power"), move_json.getString("acc"), move_json.getString("pp"), move_json.getString("prob"), move_json.getString("effect")};
   return data;
 }
-String username="", password="", current="", player_name="ronisbad";
+String username="", password="", current="", player_name="Spork__";
 Boolean login=true;
 Boolean register=false;
 void drawMove(String move_name) {
@@ -356,12 +356,18 @@ void drawStartScreen() {
 
 
   draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
+  draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
-
       send_saving();
-      println(player_name);
+      mousePressValid = false;
+    }
+    if (mouseX >= PRESET_BUTTON.i_x && mouseX <= PRESET_BUTTON.i_x + PRESET_BUTTON.i_w && mouseY >= PRESET_BUTTON.i_y && mouseY <= PRESET_BUTTON.i_y + PRESET_BUTTON.i_h) {
+      JSONObject json = new JSONObject();
+      json.setString("username", player_name);
+      json.setString("battlestate", "pokeread");
+      myClient.write(json.toString());
       mousePressValid = false;
     }
     for (int i = 0; i < 6; i++) {
@@ -1483,7 +1489,7 @@ void better_setup() {
   }
   move_animations_num.put("dragon", 32);
   move_animations.put("dragon", tempMoveAni);
-  
+
   tempMoveAni = new PImage[24];
   for (int i = 1; i < 25; i++) {
     PImage tempAniImage = loadImage("Ground" + i + ".png");
@@ -1492,7 +1498,7 @@ void better_setup() {
   }
   move_animations_num.put("ground", 24);
   move_animations.put("ground", tempMoveAni);
-    
+
   tempMoveAni = new PImage[28];
   for (int i = 1; i < 29; i++) {
     PImage tempAniImage = loadImage("Flying" + i + ".png");
@@ -1501,7 +1507,7 @@ void better_setup() {
   }
   move_animations_num.put("flying", 28);
   move_animations.put("flying", tempMoveAni);
-    
+
   tempMoveAni = new PImage[22];
   for (int i = 1; i < 23; i++) {
     PImage tempAniImage = loadImage("Ghost" + i + ".png");
