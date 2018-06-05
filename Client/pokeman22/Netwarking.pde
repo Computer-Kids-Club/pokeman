@@ -200,7 +200,7 @@ void process_data(String dataIn) {
       json.setString("username", username);
       json.setString("battlestate", "pokeread");
       myClient.write(json.toString());
-      
+
       print("data received");
       textFont(font_plain);
       player_name=username;
@@ -274,6 +274,8 @@ void send_pokes(String whatthisis) {
   JSONArray json_poke_array = new JSONArray();
 
   json.setString("battlestate", whatthisis);
+
+  json.setString("username", player_name);
   /*json.setString("species", "Panthera leo");
    json.setString("name", "Lion");*/
 
