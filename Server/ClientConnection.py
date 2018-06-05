@@ -306,6 +306,16 @@ class Client(object):
                 self.send_data('ltrue')
             else:
                 self.send_data('lfalse')
+        elif dic_data["battlestate"] == "command":
+            l_words = dic_data["chat"].split()
+            if l_words[0] == "weakness":
+                str_poke_name = l_words[1]
+                self.send_data(DISPLAY_TEXT+"weak")
+            elif l_words[0] == "strongness":
+                str_poke_name = l_words[1]
+                self.send_data(DISPLAY_TEXT+"strong")
+            else:
+                self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
                 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)

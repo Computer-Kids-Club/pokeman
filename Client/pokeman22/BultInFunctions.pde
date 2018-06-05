@@ -107,10 +107,16 @@ void keyPressed() {
 
   if (i_battle_state == BATTLING) {
     if (chatting==true) {
-      if (key==ENTER||key==RETURN) {
+      if ((key==ENTER||key==RETURN)&&chat_msg.length()>0) {
         JSONObject json = new JSONObject();
-        json.setString("battlestate", "chat");
-        json.setString("chat", chat_msg);
+
+        if (chat_msg[0]=='/'&&chat_msg.length()>1) {
+          json.setString("battlestate", "command");
+          json.setString("command", chat_msg.substring(1));
+        } else {
+          json.setString("battlestate", "chat");
+          json.setString("chat", chat_msg);
+        }
         myClient.write(json.toString());
         chat_msg="";
       } else if (key == BACKSPACE) {
