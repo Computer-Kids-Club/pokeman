@@ -201,6 +201,7 @@ void process_data(String dataIn) {
       player_name=username;
       login=false;
       register=false;
+      print("lol");
     } else {
       username="";
       password="";

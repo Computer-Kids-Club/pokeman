@@ -11,8 +11,6 @@ from BattleClass import *
 from ClientConnection import *
 from DamageCalculation import *
 #import os, pwd, grp
-import base64
-from Crypto.Cipher import AES
 
 
 # GAME ON
