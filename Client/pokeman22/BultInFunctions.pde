@@ -110,7 +110,7 @@ void keyPressed() {
       if ((key==ENTER||key==RETURN)&&chat_msg.length()>0) {
         JSONObject json = new JSONObject();
 
-        if (chat_msg[0]=='/'&&chat_msg.length()>1) {
+        if (chat_msg.charAt(0)=='/'&&chat_msg.length()>1) {
           json.setString("battlestate", "command");
           json.setString("command", chat_msg.substring(1));
         } else {
