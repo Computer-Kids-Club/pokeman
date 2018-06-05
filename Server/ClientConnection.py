@@ -153,6 +153,8 @@ class Client(object):
 
         self.baton_pass_stats = Stats()
 
+        self.str_username = ""
+
     def send_data(self, str_data):
 
         if self.b_tmp:
@@ -278,6 +280,7 @@ class Client(object):
             if dic_data['username'] in usernamelst and encrypt(dic_data['password']) in passwordlst:
                 if len(dic_data['username'])>0 and len(dic_data['password'])>0:                    
                     if usernamelst.index(dic_data['username'])==passwordlst.index(encrypt(dic_data['password'])):
+                        self.str_username = dic_data['username']
                         self.send_data('ltrue')
                     else:
                         self.send_data('lfalse')
@@ -294,6 +297,7 @@ class Client(object):
                 file_out = open('usernames.txt', "a")
                 file_out.write('*') 
                 file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
+                self.str_username = dic_data['username']
                 file_out.close()
                 file_out = open('passwords.txt', "a")
                 file_out.write('*') 
