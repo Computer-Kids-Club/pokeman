@@ -554,7 +554,7 @@ void draw_battle() {
 
       println(str_cur_move_type);
       if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")
-        || str_cur_move_type.equals("dragon")) {
+        || str_cur_move_type.equals("dragon") || str_cur_move_type.equals("ground") || str_cur_move_type.equals("flying") || str_cur_move_type.equals("ghost")) {
         draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
       } else {
         draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);

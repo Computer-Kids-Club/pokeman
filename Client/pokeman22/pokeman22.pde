@@ -1483,6 +1483,33 @@ void better_setup() {
   }
   move_animations_num.put("dragon", 32);
   move_animations.put("dragon", tempMoveAni);
+  
+  tempMoveAni = new PImage[24];
+  for (int i = 1; i < 25; i++) {
+    PImage tempAniImage = loadImage("Ground" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("ground", 24);
+  move_animations.put("ground", tempMoveAni);
+    
+  tempMoveAni = new PImage[28];
+  for (int i = 1; i < 29; i++) {
+    PImage tempAniImage = loadImage("Flying" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("flying", 28);
+  move_animations.put("flying", tempMoveAni);
+    
+  tempMoveAni = new PImage[22];
+  for (int i = 1; i < 23; i++) {
+    PImage tempAniImage = loadImage("Ghost" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("ghost", 22);
+  move_animations.put("ghost", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
