@@ -559,24 +559,24 @@ void draw_battle() {
       } else {
         draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
       }
-    //} else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
+    } else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
-    //  draw_image(img_flag_bite, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_ballistics")) { // --------------------------------------------------------- ballistics
+      draw_image(img_flag_bite, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_ballistics")) { // --------------------------------------------------------- ballistics
 
-    //  draw_image(img_flag_ballistics, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_dance")) { // --------------------------------------------------------- dance
+      draw_image(img_flag_ballistics, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_dance")) { // --------------------------------------------------------- dance
 
-    //  draw_image(img_flag_dance, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_powder")) { // --------------------------------------------------------- powder
+      draw_image(img_flag_dance, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_powder")) { // --------------------------------------------------------- powder
 
-    //  draw_image(img_flag_powder, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_pulse")) { // --------------------------------------------------------- pulse
+      draw_image(img_flag_powder, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_pulse")) { // --------------------------------------------------------- pulse
 
-    //  draw_image(img_flag_pulse, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_punch")) { // --------------------------------------------------------- punch
+      draw_image(img_flag_pulse, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_punch")) { // --------------------------------------------------------- punch
 
-    //  draw_image(img_flag_punch, 0, 0);
+      draw_image(img_flag_punch, 0, 0);
     } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
       draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], 0, 0);
       //draw_image(img_flag_sound, 0, 0);
@@ -732,9 +732,9 @@ void draw_battle() {
           printable = printable + chatRn.charAt(0);
           //println(printable);
           chatRn = chatRn.substring(1);
-          if (textWidth(printable) > width-TEXT_CHAT_DIVIDE - 15) {
+          if (textWidth(printable) > width-TEXT_CHAT_DIVIDE) {
             printable_list.add(printable);
-            //text_offset++;
+            text_offset++;
             printable = "";
           }
         }
@@ -742,10 +742,10 @@ void draw_battle() {
         for (int k=0; k<printable_list.size(); k++) {
           if (printable_list.get(printable_list.size()-k-1).length()>0) {
             draw_text(printable_list.get(printable_list.size()-k-1), TEXT_CHAT_DIVIDE+(height/90), height - i*(height/30) - text_offset*(height/30) - height*2/30);
-            text_offset++;
+            //text_offset++;
           }
         }
-        text_offset-=1;
+        //text_offset-=2;
       }
       emptyTrigger = false;
     }

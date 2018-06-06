@@ -246,18 +246,18 @@ class Client(object):
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "pokewrite":
-            file_in = open('pokeSave.txt', 'r')
+            file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()
             loaded_pokes = json.loads(sentPokes)
             loaded_pokes[dic_data['username']] = dic_data["pokes"]
             sentPokes = json.dumps(loaded_pokes)
-            file_in = open('pokeSave.txt', 'w')
+            file_in = open(dir_path+'/pokeSave.txt', 'w')
             file_in.write(sentPokes)
             file_in.close()
             
         elif dic_data["battlestate"] == "pokeread":
-            file_in = open('pokeSave.txt', 'r')
+            file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()
 
