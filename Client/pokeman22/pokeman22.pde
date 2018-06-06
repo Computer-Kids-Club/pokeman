@@ -112,6 +112,8 @@ PImage back;
 PImage confirm;
 PImage loginBack;
 PImage loginbutton;
+PImage loadbutton;
+PImage savebutton;
 
 int i_battle_state = 0;
 
@@ -356,9 +358,10 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-
-  draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
-  draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
+draw_image(savebutton, SAVE_BUTTON.i_x, SAVE_BUTTON.i_y);
+draw_image(loadbutton, PRESET_BUTTON.i_x, PRESET_BUTTON.i_y);
+  //draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
+  //draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
@@ -1387,6 +1390,8 @@ void better_setup() {
   confirm = loadImage("Confirm.png");
   loginBack = loadImage("loginBackground.png");
   loginbutton = loadImage("login_register_button.png");
+  loadbutton = loadImage("Load.png");
+  savebutton = loadImage("Save.png");
 
   settingsButton.resize(width/28, height/18);
   pokeBall.resize(height/30, height/30);
@@ -1398,6 +1403,8 @@ void better_setup() {
   confirm.resize(width*23/350, height/18);
   loginBack.resize(width, height);
   loginbutton.resize(width/3, height/7);
+  loadbutton.resize(width*5/32, height*5/36);
+  savebutton.resize(width*5/32, height*5/36);
 
   for (int i = 0; i < types.length; i++) {
     tempImage = loadImage(types[i] + ".png");
