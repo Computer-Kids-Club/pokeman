@@ -101,8 +101,8 @@ void init_constants() {
   START_BUTTON = new Rect(width/2, height/2, width*2/7, height*2/9);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
   
-  SAVE_BUTTON = new Rect(width/4 - 100,height/2 - 50,200,100);
-  PRESET_BUTTON = new Rect(width*3/4 + 100,height/2 - 50,200,100);
+  SAVE_BUTTON = new Rect(width/4 - 200,height/2 - 50,200,100);
+  PRESET_BUTTON = new Rect(width*3/4,height/2 - 50,200,100);
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);

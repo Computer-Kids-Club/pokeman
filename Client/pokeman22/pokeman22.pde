@@ -165,6 +165,8 @@ int selectedNature = 0;
 
 String tempFileName;
 
+String[] friendList = {};
+
 //int[] settingsButton = {width - 60, 60, 100, 100};
 
 PImage[][] loadPokemon(JSONObject file, boolean shiny) {
@@ -1312,6 +1314,10 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_image(pokedex, 0, 0);
 }
 
+void drawFriendsList(){
+  draw_rect(20,20,100,200);
+}
+
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
   if (pAnimation.length>0) {
     pushMatrix();
@@ -1612,6 +1618,7 @@ void draw() {
     register();
   } else {
     drawStartScreen();
+    drawFriendsList();
     if (moveSelectScreen == true) {
       drawPokemonInformationScreen(pokemonSlotNumber, pokemonNumber, gridSize);
     } else if (pokemonSelectScreen == true) {
