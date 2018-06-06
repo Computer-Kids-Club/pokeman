@@ -5,6 +5,7 @@
 
 from Log import *
 import os
+import json
 
 dir_path = str(os.path.dirname(os.path.realpath(__file__)))
 print(dir_path)
@@ -70,3 +71,13 @@ NOT_READY = 0
 SEARCHING = 1
 BATTLING = 2
 READY = 3
+
+def join_with_none(l):
+    if len(l) == 0:
+        return "none"
+    return " ".join(l)
+
+dic_name_to_num = {}
+for i in range(1,808):
+    dic_poke = json.load(open(dir_path + '/pokeinfo/pokemon/' + str(i) + '.txt'))
+    dic_name_to_num[dic_poke["name"]] = i

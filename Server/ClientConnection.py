@@ -12,6 +12,7 @@ from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
+from TypeClass import get_atk_types_with_eff_rate, get_def_types_with_eff_rate
 random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
 mixed_letters='qwertyuiopasdfghjklzxcvbnm'
 
@@ -308,7 +309,13 @@ class Client(object):
             if l_words[0] == "weakness":
                 try:
                     str_poke_name = l_words[1]
-                    self.send_data(DISPLAY_TEXT+"weak")
+                    tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
+                    self.send_data(DISPLAY_TEXT+"Very Weak: " + join_with_none(get_def_types_with_eff_rate(4,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Weak: " + join_with_none(get_def_types_with_eff_rate(2,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Resist: " + join_with_none(get_def_types_with_eff_rate(0.5,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Very Resist: " + join_with_none(get_def_types_with_eff_rate(0.25,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Immune: " + join_with_none(get_def_types_with_eff_rate(0,tmp_poke.type_1,tmp_poke.type_2)))
+
                 except:
                     self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
             elif l_words[0] == "strongness":
