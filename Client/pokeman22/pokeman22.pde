@@ -327,7 +327,7 @@ void drawStartScreen() {
   draw_rectMode(CENTER);
   draw_imageMode(CENTER);
   textAlign(CENTER);
-  draw_rect(START_BUTTON.i_x, START_BUTTON.i_y, START_BUTTON.i_w, START_BUTTON.i_h);
+  //draw_rect(START_BUTTON.i_x, START_BUTTON.i_y, START_BUTTON.i_w, START_BUTTON.i_h);
   for (int i = 0; i < 6; i++) {
 
     fill(0, 0, 100, 100);
@@ -1315,7 +1315,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 }
 
 void drawFriendsList(){
-  draw_rect(20,20,100,200);
+  draw_rect(15,15,200,300);
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -1381,7 +1381,7 @@ void better_setup() {
   pokeBall = loadImage("Pokeball.png");
   settingsButton = loadImage("Settings.png");
   backgroundImg = loadImage("Background.jpg");
-  startButton = loadImage("Button.jpg");
+  startButton = loadImage("Button.png");
   pokedex = loadImage("pokedex2.png");
   back = loadImage("back.png");
   confirm = loadImage("Confirm.png");
