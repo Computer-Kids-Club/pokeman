@@ -156,6 +156,8 @@ class Client(object):
 
         self.str_username = ""
 
+        self.friends = []
+
     def send_data(self, str_data):
 
         if self.b_tmp:
@@ -263,6 +265,38 @@ class Client(object):
             loaded_pokes = json.loads(sentPokes)
             if dic_data['username'] in loaded_pokes:
                 self.send_data("z" + json.dumps({"pokes":loaded_pokes[dic_data['username']]}))
+            else:
+                self.send_data("badUserDic")
+        elif dic_data["battlestate"] == "addfriend":
+            file_in = open('friendList.txt', 'r')
+            friendList = file_in.read()
+            file_in.close()
+            self.friends += dic_data["newfriend"]
+            loaded_friends = json.loads(friendList)
+            loaded_friends[dic_data['username']] = self.friends
+            friendList = json.dumps(loaded_friends)
+            file_in = open('friendList.txt', 'w')
+            file_in.write(friendList)
+            file_in.close()
+        elif dic_data["battlestate"] == "removefriend":
+            file_in = open('friendList.txt', 'r')
+            friendList = file_in.read()
+            file_in.close()
+            self.friends.remove(dic_data["newfriend"])
+            loaded_friends = json.loads(friendList)
+            loaded_friends[dic_data['username']] = self.friends
+            friendList = json.dumps(loaded_friends)
+            file_in = open('friendList.txt', 'w')
+            file_in.write(friendList)
+            file_in.close()
+        elif dic_data["battlestate"] == "friendread":
+            file_in = open('friendList.txt', 'r')
+            friendList = file_in.read()
+            file_in.close()
+            loaded_friends = json.loads(friendList)
+            if dic_data['username'] in loaded_friends:
+                self.friends = loaded_friends[dic_data['username']]
+                self.send_data(self.friends)
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":
