@@ -278,6 +278,46 @@ class Client(object):
                 self.send_data('ltrue')
             else:
                 self.send_data('lfalse')
+<<<<<<< HEAD
+=======
+        elif dic_data["battlestate"] == "command":
+            l_words = dic_data["command"].split()
+            if l_words[0] == "weakness":
+                try:
+                    str_poke_name = l_words[1]
+                    tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
+                    self.send_data(DISPLAY_TEXT+str_poke_name+":")
+                    self.send_data(DISPLAY_TEXT+"Very Weak: " + join_with_none(get_def_types_with_eff_rate(4,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Weak: " + join_with_none(get_def_types_with_eff_rate(2,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Resist: " + join_with_none(get_def_types_with_eff_rate(0.5,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Very Resist: " + join_with_none(get_def_types_with_eff_rate(0.25,tmp_poke.type_1,tmp_poke.type_2)))
+                    self.send_data(DISPLAY_TEXT+"Immune: " + join_with_none(get_def_types_with_eff_rate(0,tmp_poke.type_1,tmp_poke.type_2)))
+
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
+            elif l_words[0] == "data":
+                try:
+                    str_poke_name = l_words[1]
+                    tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
+                    self.send_data(DISPLAY_TEXT+str_poke_name+":")
+                    self.send_data(DISPLAY_TEXT+"HP: " + str(tmp_poke.base_stats.get_hp()))
+                    self.send_data(DISPLAY_TEXT+"ATK: " + str(tmp_poke.base_stats.get_atk()))
+                    self.send_data(DISPLAY_TEXT+"DEF: " + str(tmp_poke.base_stats.get_def()))
+                    self.send_data(DISPLAY_TEXT+"SPA: " + str(tmp_poke.base_stats.get_spa()))
+                    self.send_data(DISPLAY_TEXT+"SPD: " + str(tmp_poke.base_stats.get_spd()))
+                    self.send_data(DISPLAY_TEXT+"SPE: " + str(tmp_poke.base_stats.get_spe()))
+
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
+            elif l_words[0] == "strongness":
+                try:
+                    str_poke_name = l_words[1]
+                    self.send_data(DISPLAY_TEXT+"strong")
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3007. Please contact support with the error code at ethanzohar9@gmail.com.")
+            else:
+                self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
+>>>>>>> e691e0c8b95f1599e5746a7742467e2fa521e19c
                 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
