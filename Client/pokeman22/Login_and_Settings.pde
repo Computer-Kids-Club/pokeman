@@ -4,8 +4,8 @@ void login() {
   draw_rect(width/2, height/2, width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
-  imageMode(CENTER);
-  draw_image(loginbutton, width/2, height/5*4);
+  draw_image(loginbutton, width/5, height/6*4);
+  draw_image(registerbutton, width/5*3, height/6*4);
   textSize(100);
   textAlign(CENTER, CENTER);
   fill(0);
@@ -34,16 +34,16 @@ void login() {
         current="";
       }
     }
-    if (mouseX>=width/2-width/6 &&mouseX<=width/2) {
-      if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
+    if (mouseX>=width/5 && mouseX<=width/5*2) {
+      if (mouseY>=height/6*4&&mouseY<=height/6*5) {
         JSONObject json = new JSONObject();
         json.setString("username", username);
         json.setString("password", password);
         json.setString("battlestate", "login");
         myClient.write(json.toString());
       }
-    } else if (mouseX>=width/2 &&mouseX<=width/2+width/6) { 
-      if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
+    } else if (mouseX>=width/5*3 && mouseX<=width/5*4) {
+      if (mouseY>=height/6*4&&mouseY<=height/6*5) {
         password="";
         username="";
         current="";
@@ -75,8 +75,8 @@ void register() {
   draw_rect(width/2, height/2, width, height);
   imageMode(CORNER);
   draw_image(loginBack, 0, 0);
-  //imageMode(CENTER);
-  //draw_image(loginbutton, width/2, height/5*4);
+  draw_image(registerconfirm, width/2-width/10, height/6*4);
+  draw_image(back, width/10, height/10);
   textSize(100);
   textAlign(CENTER, CENTER);
   fill(0);
@@ -107,19 +107,27 @@ void register() {
     } else {
       current="";
     }
-    //if (mouseX>=width/2-width/6 &&mouseX<=width/2+width/6) {
-    //  if (mouseY>=height/5*4-height/14&&mouseY<=height/5*4+height/14) {
-    //    JSONObject json = new JSONObject();
-    //    json.setString("username", username);
-    //    json.setString("password", password);
-    //    json.setString("battlestate", "register");
-    //    myClient.write(json.toString());
-    //    textFont(font_plain);
-    //    //register=false;
-    //  }
-    //}
+    if (mouseX>=width/2-width/10 &&mouseX<=width/2+width/10) {
+      if (mouseY>=height/6*4&&mouseY<=height/6*5) {
+        JSONObject json = new JSONObject();
+        json.setString("username", username);
+        json.setString("password", password);
+        json.setString("battlestate", "register");
+        myClient.write(json.toString());
+        textFont(font_plain);
+      }
+    }
+    if (mouseX>=width/10&&mouseX<=width/10+width*23/350) {
+      if (mouseY>=height/10&&mouseY<=height/10+height/18) {
+        password="";
+        username="";
+        current="";
+        login=true;
+        register=false;
+        
+      }
+    }
   }
-
   fill(0);
   draw_text(username, width/2, height/5*2-10);
   String coded="";
@@ -133,8 +141,7 @@ void register() {
     json.setString("password", password);
     json.setString("battlestate", "register");
     myClient.write(json.toString());
-
-    register = false;
+    textFont(font_plain);
   }
 }
 
