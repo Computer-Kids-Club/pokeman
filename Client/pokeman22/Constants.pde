@@ -9,6 +9,7 @@ int[] statSliderStartX = new int[6];
 int sliderStartY;
 int moveSliderStartY;
 int natureSliderStartY;
+int friendSliderStartY;
 
 Rect INFO_BUTTON;
 Rect POKEBALL;
@@ -24,6 +25,10 @@ Rect PRESET_BUTTON;
 
 Rect POKE_ME_RECT;
 Rect POKE_OTHER_RECT;
+
+Rect FRIEND_SLIDER;
+Rect FRIEND_SEARCH;
+Rect FRIEND_ADD;
 
 int HEALTH_BAR_WIDTH;
 
@@ -109,6 +114,11 @@ void init_constants() {
 
   SEARCH_BUTTON = new Rect(width*3/20 + SELECTSCREENSHIFT_X, height/90 + SELECTSCREENSHIFT_Y, width/7, height/30);
   MOVE_SEARCH_BUTTON = new Rect(width*47/70, SELECTSCREENSHIFT_Y + height*479/900, width/7, height/30);
+
+  FRIEND_SLIDER = new Rect(15 + 200 - width/140, 35, width/140, height/45);
+  friendSliderStartY = 35;
+  FRIEND_SEARCH = new Rect(17, 17, 178, 16);
+  FRIEND_ADD = new Rect(197, 17, 16, 16);
 
   //POKE_ME_RECT = new Rect(300, 400+3*40);
   POKE_ME_RECT = new Rect(width*43/280, height*17/30);

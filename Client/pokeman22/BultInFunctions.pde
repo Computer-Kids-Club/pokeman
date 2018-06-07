@@ -200,6 +200,38 @@ void keyPressed() {
         }
       }
     }
+  } else if (friendSearchBool) {
+    for (int i = 0; i < 26; i++) {
+      if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
+        if (friendSearch == "") {
+          friendSearch = str(key);
+          break;
+        } else {
+          friendSearch += key;
+          break;
+        }
+      }
+    }
+    if (key == BACKSPACE) {
+      if (friendSearch.length() > 1) {
+        friendSearch = friendSearch.substring(0, friendSearch.length()-1);
+      } else if (friendSearch.length() > 0) {
+        friendSearch = friendSearch.substring(0, friendSearch.length()-1);
+        friendSearch = "";
+      } else {
+        friendSearch = "";
+      }
+    }
+
+    FRIEND_SLIDER.i_y = friendSliderStartY;
+    validFriendSearch = new StringList();
+    for (int i = 1; i <= friendList.length; i++) {
+      if (friendSearch.length() <= friendList[i].length()) {
+        if (friendSearch.equals(friendList[i].substring(0, friendSearch.length()))) {
+          validFriendSearch.append(friendList[i]);
+        }
+      }
+    }
   } else if (login||register) {
     for (int i = 0; i < 26; i++) {
       if (key == alphabet_lower.charAt(i) || key == alphabet_upper.charAt(i) || key == punctuation.charAt(i%punctuation.length())) {
