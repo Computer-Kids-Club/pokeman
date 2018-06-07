@@ -166,6 +166,7 @@ class Pokeman(object):
             return self.l_last_move[-1]
         return Move("tackle")
 
+
     def get_moves(self):
         l_possible_moves = []
 
