@@ -115,6 +115,8 @@ PImage back;
 PImage confirm;
 PImage loginBack;
 PImage loginbutton;
+PImage registerbutton;
+PImage registerconfirm;
 PImage loadbutton;
 PImage savebutton;
 
@@ -1410,7 +1412,9 @@ void better_setup() {
   back = loadImage("back.png");
   confirm = loadImage("Confirm.png");
   loginBack = loadImage("loginBackground.png");
-  loginbutton = loadImage("login_register_button.png");
+  loginbutton = loadImage("Login.png");
+  registerbutton = loadImage("Register.png");
+  registerconfirm = loadImage("Confirm.png");
   loadbutton = loadImage("Load.png");
   savebutton = loadImage("Save.png");
 
@@ -1423,7 +1427,9 @@ void better_setup() {
   back.resize(width*23/350, height/18);
   confirm.resize(width*23/350, height/18);
   loginBack.resize(width, height);
-  loginbutton.resize(width/3, height/7);
+  loginbutton.resize(width/5, height/6);
+  registerbutton.resize(width/5, height/6);
+  registerconfirm.resize(width/5, height/6);
   loadbutton.resize(width*5/32, height*5/36);
   savebutton.resize(width*5/32, height*5/36);
 

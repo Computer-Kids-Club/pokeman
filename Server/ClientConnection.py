@@ -12,7 +12,6 @@ from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
-from TypeClass import get_atk_types_with_eff_rate, get_def_types_with_eff_rate
 random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
 mixed_letters='qwertyuiopasdfghjklzxcvbnm'
 
@@ -154,10 +153,6 @@ class Client(object):
 
         self.baton_pass_stats = Stats()
 
-        self.str_username = ""
-
-        self.friends = []
-
     def send_data(self, str_data):
 
         if self.b_tmp:
@@ -246,6 +241,7 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
+<<<<<<< HEAD
         elif dic_data["battlestate"] == "pokewrite":
             file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
@@ -300,12 +296,14 @@ class Client(object):
                 self.send_data(self.friends)
             else:
                 self.send_data("badUserDic")
+=======
+>>>>>>> 11d0b9fa3d268537c40c6b2f627c2f1b2b9386df
         elif dic_data["battlestate"] == "login":
-            file_in = open(dir_path+'/usernames.txt','r')
+            file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
-            file_in = open(dir_path+'/passwords.txt','r')
+            file_in = open('passwords.txt','r')     
             passwordlst = file_in.read()   
             passwordlst=passwordlst.split('*')
             file_in.close()
@@ -313,7 +311,6 @@ class Client(object):
             if dic_data['username'] in usernamelst and encrypt(dic_data['password']) in passwordlst:
                 if len(dic_data['username'])>0 and len(dic_data['password'])>0:                    
                     if usernamelst.index(dic_data['username'])==passwordlst.index(encrypt(dic_data['password'])):
-                        self.str_username = dic_data['username']
                         self.send_data('ltrue')
                     else:
                         self.send_data('lfalse')
@@ -322,34 +319,50 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
-            file_in = open(dir_path+'/usernames.txt','r')
+            file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
-            if dic_data['username'] not in usernamelst and len(dic_data['username'])>0:
-                file_out = open(dir_path+'/usernames.txt', "a")
+            if dic_data['username'] not in usernamelst and len(dic_data['username'])>0 and len(dic_data['password'])>0:
+                file_out = open('usernames.txt', "a")
                 file_out.write('*') 
                 file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
-                self.str_username = dic_data['username']
                 file_out.close()
-                file_out = open(dir_path+'/passwords.txt', "a")
+                file_out = open('passwords.txt', "a")
                 file_out.write('*') 
                 file_out.write(encrypt(dic_data['password']))# 2. Convert the info to string and write in the file
                 file_out.close()
                 self.send_data('ltrue')
             else:
                 self.send_data('lfalse')
+<<<<<<< HEAD
+=======
         elif dic_data["battlestate"] == "command":
             l_words = dic_data["command"].split()
             if l_words[0] == "weakness":
                 try:
                     str_poke_name = l_words[1]
                     tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
+                    self.send_data(DISPLAY_TEXT+str_poke_name+":")
                     self.send_data(DISPLAY_TEXT+"Very Weak: " + join_with_none(get_def_types_with_eff_rate(4,tmp_poke.type_1,tmp_poke.type_2)))
                     self.send_data(DISPLAY_TEXT+"Weak: " + join_with_none(get_def_types_with_eff_rate(2,tmp_poke.type_1,tmp_poke.type_2)))
                     self.send_data(DISPLAY_TEXT+"Resist: " + join_with_none(get_def_types_with_eff_rate(0.5,tmp_poke.type_1,tmp_poke.type_2)))
                     self.send_data(DISPLAY_TEXT+"Very Resist: " + join_with_none(get_def_types_with_eff_rate(0.25,tmp_poke.type_1,tmp_poke.type_2)))
                     self.send_data(DISPLAY_TEXT+"Immune: " + join_with_none(get_def_types_with_eff_rate(0,tmp_poke.type_1,tmp_poke.type_2)))
+
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
+            elif l_words[0] == "data":
+                try:
+                    str_poke_name = l_words[1]
+                    tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
+                    self.send_data(DISPLAY_TEXT+str_poke_name+":")
+                    self.send_data(DISPLAY_TEXT+"HP: " + str(tmp_poke.base_stats.get_hp()))
+                    self.send_data(DISPLAY_TEXT+"ATK: " + str(tmp_poke.base_stats.get_atk()))
+                    self.send_data(DISPLAY_TEXT+"DEF: " + str(tmp_poke.base_stats.get_def()))
+                    self.send_data(DISPLAY_TEXT+"SPA: " + str(tmp_poke.base_stats.get_spa()))
+                    self.send_data(DISPLAY_TEXT+"SPD: " + str(tmp_poke.base_stats.get_spd()))
+                    self.send_data(DISPLAY_TEXT+"SPE: " + str(tmp_poke.base_stats.get_spe()))
 
                 except:
                     self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
@@ -361,6 +374,7 @@ class Client(object):
                     self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3007. Please contact support with the error code at ethanzohar9@gmail.com.")
             else:
                 self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
+>>>>>>> e691e0c8b95f1599e5746a7742467e2fa521e19c
                 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
