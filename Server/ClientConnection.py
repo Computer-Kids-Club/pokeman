@@ -268,16 +268,17 @@ class Client(object):
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "addfriend":
-            file_in = open('friendList.txt', 'r')
-            friendList = file_in.read()
-            file_in.close()
-            self.friends += dic_data["newfriend"]
-            loaded_friends = json.loads(friendList)
-            loaded_friends[dic_data['username']] = self.friends
-            friendList = json.dumps(loaded_friends)
-            file_in = open('friendList.txt', 'w')
-            file_in.write(friendList)
-            file_in.close()
+            if dic_data["newfriend"] not in self.friends:
+                file_in = open('friendList.txt', 'r')
+                friendList = file_in.read()
+                file_in.close()
+                self.friends += dic_data["newfriend"]
+                loaded_friends = json.loads(friendList)
+                loaded_friends[dic_data['username']] = self.friends
+                friendList = json.dumps(loaded_friends)
+                file_in = open('friendList.txt', 'w')
+                file_in.write(friendList)
+                file_in.close()
         elif dic_data["battlestate"] == "removefriend":
             file_in = open('friendList.txt', 'r')
             friendList = file_in.read()

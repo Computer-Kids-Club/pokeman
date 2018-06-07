@@ -77,6 +77,7 @@ PImage[] pokemonImages = new PImage[807];
 int offset = 0;
 int offsetMoves = 0;
 int offsetNature = 0;
+int offsetFriend = 0;
 
 boolean transitionStart = false; 
 
@@ -91,6 +92,7 @@ float mouseWheelChange = 0;
 
 String pokemonSearch = "";
 String moveSearch = "";
+String friendSearch = "";
 String alphabet_lower = "abcdefghijklmnopqrstuvwxyz";
 String alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 String punctuation = " -:";
@@ -99,6 +101,7 @@ boolean pokemonSearchBool = false;
 boolean moveSearchBool = false;
 
 StringList validPokemonSearch;
+StringList validFriendSearch;
 StringList allPokeMoves;
 StringList validMoveSearch;
 
@@ -358,8 +361,8 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-draw_image(savebutton, SAVE_BUTTON.i_x, SAVE_BUTTON.i_y);
-draw_image(loadbutton, PRESET_BUTTON.i_x, PRESET_BUTTON.i_y);
+  draw_image(savebutton, SAVE_BUTTON.i_x, SAVE_BUTTON.i_y);
+  draw_image(loadbutton, PRESET_BUTTON.i_x, PRESET_BUTTON.i_y);
   //draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
   //draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
 
@@ -1317,8 +1320,25 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_image(pokedex, 0, 0);
 }
 
-void drawFriendsList(){
-  draw_rect(15,15,200,300);
+void drawFriendsList() {
+  draw_rect(15, 15, 200, 20);
+  draw_rect(15, 35, 200, 280);
+  draw_rect(FRIEND_SEARCH.i_x, FRIEND_SEARCH.i_y, FRIEND_SEARCH.i_w, FRIEND_SEARCH.i_h);
+  draw_rect(FRIEND_ADD.i_x, FRIEND_ADD.i_y, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+  for (int i = 0; i*gridSize < 280; i++) {
+    draw_line(15, 35 + int(i*gridSize), 215, 35 + int(i*gridSize));
+  }
+  
+  if (friendSearch == "" && validFriendSearch.size()!=friendList.length) {
+    for (int i = 1; i <= friendList.length; i++) {
+      validPokemonSearch.append(friendList[i]);
+    }
+  }
+
+  for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
+    break;
+  }
+  draw_rect(FRIEND_SLIDER.i_x, FRIEND_SLIDER.i_y, FRIEND_SLIDER.i_w, FRIEND_SLIDER.i_h);
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -1378,6 +1398,7 @@ void better_setup() {
   Gif.tmpPath = dataPath("");
 
   validPokemonSearch = new StringList();
+  validFriendSearch = new StringList();
   validMoveSearch = new StringList();
 
   infoButton = loadImage("infoButton.png");
