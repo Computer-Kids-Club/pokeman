@@ -151,6 +151,7 @@ class Pokeman(object):
 
         self.b_spiky_shield = False
 
+
     def pre_turn(self):
         if self.b_magnet_rise > 0:
             self.b_magnet_rise -= 1
@@ -165,6 +166,7 @@ class Pokeman(object):
             return self.l_last_move[-1]
         return Move("tackle")
 
+
     def get_moves(self):
         l_possible_moves = []
 
@@ -178,6 +180,12 @@ class Pokeman(object):
 
         if self.i_encore_idx > 0:
             l_possible_moves = [self.get_last_move()]
+
+        if len(l_possible_moves)==0:
+            tmp_move = Move("struggle")
+            tmp_move.i_max_pp = 1337
+            tmp_move.i_pp = 1337
+            l_possible_moves.append(tmp_move)
 
         return l_possible_moves
 

@@ -655,7 +655,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")) > moveScreenNamePos) {
           moveScreenNamePos = int(textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")));
         }
-        moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
+        //moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
       }
     }
 
@@ -717,7 +717,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")) > moveScreenNamePos) {
           moveScreenNamePos = int(textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")));
         }
-        moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
+        //moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
       }
     }
 
@@ -1327,6 +1327,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 }
 
 void drawFriendsList() {
+<<<<<<< HEAD
+  draw_rect(15, 15, 200, 300);
+=======
   draw_rect(15, 15, 200, 20);
   draw_rect(15, 35, 200, 280);
   draw_rect(FRIEND_SEARCH.i_x, FRIEND_SEARCH.i_y, FRIEND_SEARCH.i_w, FRIEND_SEARCH.i_h);
@@ -1345,6 +1348,7 @@ void drawFriendsList() {
     break;
   }
   draw_rect(FRIEND_SLIDER.i_x, FRIEND_SLIDER.i_y, FRIEND_SLIDER.i_w, FRIEND_SLIDER.i_h);
+>>>>>>> 1c4527f62992e6f6cf4c066d06a346ab1981dbe4
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -1612,8 +1616,16 @@ void better_setup() {
     int[] sliderStartingPosition = {width*169/280, width*169/280, width*169/280, width*169/280, width*169/280, width*169/280};
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke, "Male", 0, new int[5], new int[6], sliderStartingPosition));
 
-    for (int j = 0; j < movelistPoke.length; j++) {
-      moves_data.put(movelistPoke[j], getMoveData(movelistPoke[j]));
+    /*for (int j = 0; j < movelistPoke.length; j++) {
+     moves_data.put(movelistPoke[j], getMoveData(movelistPoke[j]));
+     }*/
+
+    String[] filenames = listFileNames(sketchPath()+"/pokeinfo/move");
+    for (int j = 0; j < filenames.length; j++) {
+      String fn = filenames[j].substring(0, filenames[j].length()-4);
+      if (!fn.equals("_DS_S")) {
+        moves_data.put(fn, getMoveData(fn));
+      }
     }
   }
   for (int i = 0; i < male.length; i++) {

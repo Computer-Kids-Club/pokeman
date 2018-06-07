@@ -811,6 +811,7 @@ void draw_battle() {
 void drawPokeMove(int val, JSONObject move, int y) {
   int lineCount = 0;
   int subIndex = 0;
+  //println(move);
   String description = moves_data.get(move.getString("name"))[6];
   String[] descList = split(description, ' ');
   String tempString = "";
