@@ -241,7 +241,6 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
-<<<<<<< HEAD
         elif dic_data["battlestate"] == "pokewrite":
             file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
@@ -296,8 +295,6 @@ class Client(object):
                 self.send_data(self.friends)
             else:
                 self.send_data("badUserDic")
-=======
->>>>>>> 11d0b9fa3d268537c40c6b2f627c2f1b2b9386df
         elif dic_data["battlestate"] == "login":
             file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
@@ -335,8 +332,6 @@ class Client(object):
                 self.send_data('ltrue')
             else:
                 self.send_data('lfalse')
-<<<<<<< HEAD
-=======
         elif dic_data["battlestate"] == "command":
             l_words = dic_data["command"].split()
             if l_words[0] == "weakness":
@@ -374,7 +369,6 @@ class Client(object):
                     self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3007. Please contact support with the error code at ethanzohar9@gmail.com.")
             else:
                 self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
->>>>>>> e691e0c8b95f1599e5746a7742467e2fa521e19c
                 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)
