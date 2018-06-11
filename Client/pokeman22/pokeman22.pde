@@ -99,6 +99,7 @@ String punctuation = " -:";
 
 boolean pokemonSearchBool = false;
 boolean moveSearchBool = false;
+boolean friendSearchBool = false;
 
 StringList validPokemonSearch;
 StringList validFriendSearch;
@@ -660,6 +661,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
     moveScreenReset = false;
   } else if (moveScreenReload == true) {
+    for(int i = 0; i < 6; i++){
+      println(pokemons.get(i).EV);
+    }
     maxEV = 508;
     EVRemaining = maxEV;
     level = pokemons.get(slotNumber).level;
@@ -1552,14 +1556,23 @@ void better_setup() {
   move_animations_num.put("flying", 28);
   move_animations.put("flying", tempMoveAni);
 
-  tempMoveAni = new PImage[22];
-  for (int i = 1; i < 23; i++) {
+  tempMoveAni = new PImage[44];
+  for (int i = 1; i < 45; i++) {
     PImage tempAniImage = loadImage("Ghost" + i + ".png");
     tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
     tempMoveAni[i-1] = tempAniImage;
   }
-  move_animations_num.put("ghost", 22);
+  move_animations_num.put("ghost", 44);
   move_animations.put("ghost", tempMoveAni);
+  
+  //tempMoveAni = new PImage[18];
+  //for (int i = 1; i < 19; i++) {
+  //  PImage tempAniImage = loadImage("Water" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("water", 18);
+  //move_animations.put("water", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
