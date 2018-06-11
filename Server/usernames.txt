@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 *Spork*123*test*test1*test2*test3*matt*get*ethan*pop*k
+=======
+*test
+>>>>>>> 052c8fd246230e6fc2d956ed88593e6f01b47631
