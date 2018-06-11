@@ -77,6 +77,7 @@ PImage[] pokemonImages = new PImage[807];
 int offset = 0;
 int offsetMoves = 0;
 int offsetNature = 0;
+int offsetFriend = 0;
 
 boolean transitionStart = false; 
 
@@ -91,14 +92,17 @@ float mouseWheelChange = 0;
 
 String pokemonSearch = "";
 String moveSearch = "";
+String friendSearch = "";
 String alphabet_lower = "abcdefghijklmnopqrstuvwxyz";
 String alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 String punctuation = " -:";
 
 boolean pokemonSearchBool = false;
 boolean moveSearchBool = false;
+boolean friendSearchBool = false;
 
 StringList validPokemonSearch;
+StringList validFriendSearch;
 StringList allPokeMoves;
 StringList validMoveSearch;
 
@@ -360,8 +364,8 @@ void drawStartScreen() {
   fill(255);
   textAlign(CORNER);
 
-draw_image(savebutton, SAVE_BUTTON.i_x, SAVE_BUTTON.i_y);
-draw_image(loadbutton, PRESET_BUTTON.i_x, PRESET_BUTTON.i_y);
+  draw_image(savebutton, SAVE_BUTTON.i_x, SAVE_BUTTON.i_y);
+  draw_image(loadbutton, PRESET_BUTTON.i_x, PRESET_BUTTON.i_y);
   //draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
   //draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
 
@@ -651,12 +655,15 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")) > moveScreenNamePos) {
           moveScreenNamePos = int(textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")));
         }
-        moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
+        //moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
       }
     }
 
     moveScreenReset = false;
   } else if (moveScreenReload == true) {
+    for(int i = 0; i < 6; i++){
+      println(pokemons.get(i).EV);
+    }
     maxEV = 508;
     EVRemaining = maxEV;
     level = pokemons.get(slotNumber).level;
@@ -710,7 +717,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         if (textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")) > moveScreenNamePos) {
           moveScreenNamePos = int(textWidth(names_moves.get(num_names.get(pokeNum))[i][j].replaceAll("-", " ")));
         }
-        moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
+        //moves_data.put(names_moves.get(num_names.get(pokeNum))[i][j], getMoveData(names_moves.get(num_names.get(pokeNum))[i][j]));
       }
     }
 
@@ -1319,8 +1326,29 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
   draw_image(pokedex, 0, 0);
 }
 
-void drawFriendsList(){
-  draw_rect(15,15,200,300);
+void drawFriendsList() {
+<<<<<<< HEAD
+  draw_rect(15, 15, 200, 300);
+=======
+  draw_rect(15, 15, 200, 20);
+  draw_rect(15, 35, 200, 280);
+  draw_rect(FRIEND_SEARCH.i_x, FRIEND_SEARCH.i_y, FRIEND_SEARCH.i_w, FRIEND_SEARCH.i_h);
+  draw_rect(FRIEND_ADD.i_x, FRIEND_ADD.i_y, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+  for (int i = 0; i*gridSize < 280; i++) {
+    draw_line(15, 35 + int(i*gridSize), 215, 35 + int(i*gridSize));
+  }
+  
+  if (friendSearch == "" && validFriendSearch.size()!=friendList.length) {
+    for (int i = 1; i <= friendList.length; i++) {
+      validPokemonSearch.append(friendList[i]);
+    }
+  }
+
+  for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
+    break;
+  }
+  draw_rect(FRIEND_SLIDER.i_x, FRIEND_SLIDER.i_y, FRIEND_SLIDER.i_w, FRIEND_SLIDER.i_h);
+>>>>>>> 1c4527f62992e6f6cf4c066d06a346ab1981dbe4
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -1380,6 +1408,7 @@ void better_setup() {
   Gif.tmpPath = dataPath("");
 
   validPokemonSearch = new StringList();
+  validFriendSearch = new StringList();
   validMoveSearch = new StringList();
 
   infoButton = loadImage("infoButton.png");
@@ -1527,14 +1556,86 @@ void better_setup() {
   move_animations_num.put("flying", 28);
   move_animations.put("flying", tempMoveAni);
 
-  tempMoveAni = new PImage[22];
-  for (int i = 1; i < 23; i++) {
+  tempMoveAni = new PImage[44];
+  for (int i = 1; i < 45; i++) {
     PImage tempAniImage = loadImage("Ghost" + i + ".png");
     tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
     tempMoveAni[i-1] = tempAniImage;
   }
-  move_animations_num.put("ghost", 22);
+  move_animations_num.put("ghost", 44);
   move_animations.put("ghost", tempMoveAni);
+  
+  tempMoveAni = new PImage[18];
+  for (int i = 1; i < 19; i++) {
+    PImage tempAniImage = loadImage("Water" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("water", 18);
+  move_animations.put("water", tempMoveAni);
+
+  tempMoveAni = new PImage[39];
+  for (int i = 1; i < 40; i++) {
+    PImage tempAniImage = loadImage("Fighting" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("fighting", 39);
+  move_animations.put("fighting", tempMoveAni);
+
+  tempMoveAni = new PImage[28];
+  for (int i = 1; i < 27; i++) {
+    PImage tempAniImage = loadImage("Grass" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("grass", 28);
+  move_animations.put("grass", tempMoveAni);
+
+  tempMoveAni = new PImage[40];
+  for (int i = 1; i < 41; i++) {
+    PImage tempAniImage = loadImage("Ice" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("ice", 40);
+  move_animations.put("ice", tempMoveAni);
+
+  tempMoveAni = new PImage[48];
+  for (int i = 1; i < 49; i++) {
+    PImage tempAniImage = loadImage("Psychic" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("psychic", 48);
+  move_animations.put("psychic", tempMoveAni);
+
+  tempMoveAni = new PImage[12];
+  for (int i = 1; i < 13; i++) {
+    PImage tempAniImage = loadImage("Punch" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("punch", 12);
+  move_animations.put("punch", tempMoveAni);
+
+  tempMoveAni = new PImage[41];
+  for (int i = 1; i < 42; i++) {
+    PImage tempAniImage = loadImage("Rock" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("rock", 41);
+  move_animations.put("rock", tempMoveAni);
+
+  tempMoveAni = new PImage[24];
+  for (int i = 1; i < 25; i++) {
+    PImage tempAniImage = loadImage("Steel" + i + ".png");
+    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+    tempMoveAni[i-1] = tempAniImage;
+  }
+  move_animations_num.put("steel", 24);
+  move_animations.put("steel", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
@@ -1578,8 +1679,16 @@ void better_setup() {
     int[] sliderStartingPosition = {width*169/280, width*169/280, width*169/280, width*169/280, width*169/280, width*169/280};
     pokemons.add(new Pokemon(pokemonNumber, boolean(int(random(0, 2))), 100, names_abilities.get(num_names.get(pokemonNumber))[0], statListPoke, movelistPoke, "Male", 0, new int[5], new int[6], sliderStartingPosition));
 
-    for (int j = 0; j < movelistPoke.length; j++) {
-      moves_data.put(movelistPoke[j], getMoveData(movelistPoke[j]));
+    /*for (int j = 0; j < movelistPoke.length; j++) {
+     moves_data.put(movelistPoke[j], getMoveData(movelistPoke[j]));
+     }*/
+
+    String[] filenames = listFileNames(sketchPath()+"/pokeinfo/move");
+    for (int j = 0; j < filenames.length; j++) {
+      String fn = filenames[j].substring(0, filenames[j].length()-4);
+      if (!fn.equals("_DS_S")) {
+        moves_data.put(fn, getMoveData(fn));
+      }
     }
   }
   for (int i = 0; i < male.length; i++) {

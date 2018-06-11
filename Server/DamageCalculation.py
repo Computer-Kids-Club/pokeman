@@ -11,6 +11,7 @@ from Constants import *
 from random import randint
 str_prv_mov = ''
 i_disguise_cnt = 1
+b_flash_fire = False
 
 def confusion_attack(def_poke):
 
@@ -28,6 +29,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     #-------------------------#
     global str_prv_mov
     global i_disguise_cnt
+    global b_flash_fire
     i_lvl = atk_poke.i_lv
     i_pow = move.i_pow
     i_crit = 1
@@ -64,6 +66,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     str_def_ability = def_poke.str_ability
     str_weather = field.get_weather()
     str_terrain = field.get_terrain()
+    l_status = ['sleep','poisoned', 'paralyzed']
     l_atk_low_mov = ['aurora-beam', 'baby-doll-eyes', 'charm', 'feather-dance', 'growl', 'lunge', 'memento', 'nobal-roar', 'parting-shot', 'play-nice', 'play-rough', 'secret-power', 'strength-sap', 'tearful-look', 'tickle', 'trop-kick', 'venom-drench']
     l_def_low_mov = ['acid', 'crunch', 'crush-claw', 'fire-lash', 'iron-tail', 'leer', 'liquidation', 'razor-shell', 'rock-smash', 'screech', 'secret-power', 'shadow-bone', 'shadow-down', 'tail-whip', 'tickle']
     l_spa_low_mov = ['captive', 'confide', 'eerie-impulse', 'memento', 'mist-ball', 'moonblast', 'mystical-fire', 'parting-shoot', 'snarl', 'struggle-bug']
@@ -191,7 +194,13 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_atk_ability == 'dark-aura' or str_def_ability == 'dark-aura':
         i_pow *= 1.33
 
+    if str_status == 'sleep':
+        if str_atk_ability == 'early-bird':
+            atk_poke.i_sleep_counter = 1
 
+    if def_poke.str_status == 'sleep':
+        if str_def_ability == 'early-bird':
+            def_poke.i_sleep_counter = 1
 
     #--------------------#
     # ATTACKING ABILITIES #
@@ -254,6 +263,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_status == 'poisoned':
         if move.str_cat == 'physical':
             i_atk_buff = 1.5
+
+    if str_atk_ability == 'electric-surge':
+        i_terrain = 1.5
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -344,6 +356,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_atk_ability == 'aura-break' or str_def_ability == 'aura-break':
         if str_mov_type == 'fairy' or str_mov_type == 'dark':
             i_pow //= 1.33
+    elif str_atk_ability == 'fairy-aura' and str_def_ability == 'aura-break':
+        if str_mov_type == 'fairy':
+            i_pow //= 1.25
 
     if str_def_ability == 'battle-armor':
         i_crit = 1
@@ -374,6 +389,23 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if i_disguise_cnt == 1:
             i_pow = 0
             i_disguise_cnt = 0
+
+    if str_def_ability == 'effect-spore':
+        if b_contact:
+            if randint(1, 10) == (1 or 2 or 3):
+                str_status = l_status[randint(1, 3)]
+
+    if str_def_ability == 'filter':
+        if i_type == 2 or i_type == 4:
+            i_type //= 1.25
+
+    if str_def_ability == 'flame-body':
+        if randint(1, 10) == (1 or 2 or 3):
+            str_status = 'burned'
+
+    if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
+        b_flash_fire = True
+
 
 
 

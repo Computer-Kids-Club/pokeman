@@ -241,6 +241,60 @@ class Client(object):
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
+        elif dic_data["battlestate"] == "pokewrite":
+            file_in = open(dir_path+'/pokeSave.txt', 'r')
+            sentPokes = file_in.read()
+            file_in.close()
+            loaded_pokes = json.loads(sentPokes)
+            loaded_pokes[dic_data['username']] = dic_data["pokes"]
+            sentPokes = json.dumps(loaded_pokes)
+            file_in = open(dir_path+'/pokeSave.txt', 'w')
+            file_in.write(sentPokes)
+            file_in.close()
+            
+        elif dic_data["battlestate"] == "pokeread":
+            file_in = open(dir_path+'/pokeSave.txt', 'r')
+            sentPokes = file_in.read()
+            file_in.close()
+
+            loaded_pokes = json.loads(sentPokes)
+            if dic_data['username'] in loaded_pokes:
+                self.send_data("z" + json.dumps({"pokes":loaded_pokes[dic_data['username']]}))
+            else:
+                self.send_data("badUserDic")
+        elif dic_data["battlestate"] == "addfriend":
+            if dic_data["newfriend"] not in self.friends:
+                file_in = open('friendList.txt', 'r')
+                friendList = file_in.read()
+                file_in.close()
+                self.friends += dic_data["newfriend"]
+                loaded_friends = json.loads(friendList)
+                loaded_friends[dic_data['username']] = self.friends
+                friendList = json.dumps(loaded_friends)
+                file_in = open('friendList.txt', 'w')
+                file_in.write(friendList)
+                file_in.close()
+        elif dic_data["battlestate"] == "removefriend":
+            file_in = open('friendList.txt', 'r')
+            friendList = file_in.read()
+            file_in.close()
+            self.friends.remove(dic_data["newfriend"])
+            loaded_friends = json.loads(friendList)
+            loaded_friends[dic_data['username']] = self.friends
+            friendList = json.dumps(loaded_friends)
+            file_in = open('friendList.txt', 'w')
+            file_in.write(friendList)
+            file_in.close()
+        elif dic_data["battlestate"] == "friendread":
+            file_in = open('friendList.txt', 'r')
+            friendList = file_in.read()
+            file_in.close()
+            loaded_friends = json.loads(friendList)
+            if dic_data['username'] in loaded_friends:
+                self.friends = loaded_friends[dic_data['username']]
+                self.send_data(self.friends)
+            else:
+                self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":
             file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
@@ -278,8 +332,6 @@ class Client(object):
                 self.send_data('ltrue')
             else:
                 self.send_data('lfalse')
-<<<<<<< HEAD
-=======
         elif dic_data["battlestate"] == "command":
             l_words = dic_data["command"].split()
             if l_words[0] == "weakness":
@@ -317,7 +369,6 @@ class Client(object):
                     self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3007. Please contact support with the error code at ethanzohar9@gmail.com.")
             else:
                 self.send_data(DISPLAY_TEXT+"Error: Invalid Command 3009. Please contact support with the error code at ethanzohar9@gmail.com.")
->>>>>>> e691e0c8b95f1599e5746a7742467e2fa521e19c
                 
         if self.battle != None:
             self.battle.recieved_data(self, dic_data)

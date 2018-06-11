@@ -94,16 +94,8 @@ class Move(object):
             self.str_anime_style = "flag_punch"
         if self.flag_sound:
             self.str_anime_style = "flag_sound"
-        if self.flag_powder:
-            self.str_anime_style = "flag_powder"
         if self.flag_bite:
             self.str_anime_style = "flag_bite"
-        if self.flag_pulse:
-            self.str_anime_style = "flag_pulse"
-        if self.flag_ballistics:
-            self.str_anime_style = "flag_ballistics"
-        if self.flag_dance:
-            self.str_anime_style = "flag_dance"
         if self.str_name in ["spikes", "stealth-rock", "toxic-spikes", "sticky-web"]:
             self.str_anime_style = self.str_name
 

@@ -78,9 +78,9 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
 
 
 
-    #--------------------#
-    # ATACKING ABILITIES #
-    #--------------------#
+    #-----------#
+    # ABILITIES #
+    #-----------#
     if str_atk_ability == 'beast-boost':
         if i_damage >= i_def_hp:
             if i_count < 6:
@@ -101,4 +101,3 @@ def abilities(atk_poke, def_poke, move, field, i_damage):
             i_a_atk_stat += 1
         elif i_d_spd_stat < i_d_def_stat:
             i_a_spa_stat += 1
-

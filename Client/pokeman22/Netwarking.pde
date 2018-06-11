@@ -213,12 +213,14 @@ void process_data(String dataIn) {
       current="";
     }
   } else if (dataIn.charAt(0) == 'z') {
+    println(dataIn);
     JSONObject json = parseJSONObject(dataIn.substring(1));
     JSONArray json_pokes_array = json.getJSONArray("pokes");
     pokemons = new ArrayList<Pokemon>();
     for (int j = 0; j < json_pokes_array.size(); j++) {
       pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
       pokemons.add(new Pokemon(pokemon_jsons[j]));
+      println(pokemon_jsons[j].getJSONArray("moves"));
     }
   }
 }
@@ -297,6 +299,24 @@ void send_pokes(String whatthisis) {
     json_poke.setInt("hap", poke.happiness);
     json_poke.setInt("lv", poke.level);
     json_poke.setBoolean("shiny", poke.shiny);
+    
+    JSONArray json_EV_array = new JSONArray();
+    for (int j=0; j<poke.EV.length; j++) {
+      json_EV_array.setInt(j, poke.EV[j]);
+    }
+    json_poke.setJSONArray("EV", json_EV_array);
+    
+    //JSONArray json_IV_array = new JSONArray();
+    //for (int j=0; j<poke.IV.length; j++) {
+    //  json_IV_array.setInt(j, poke.IV[j]);
+    //}
+    //json_poke.setJSONArray("IV", json_IV_array);
+    
+    JSONArray json_sliders_array = new JSONArray();
+    for (int j=0; j<poke.sliderPos.length; j++) {
+      json_sliders_array.setInt(j, poke.sliderPos[j]);
+    }
+    json_poke.setJSONArray("sliderPos", json_sliders_array);
 
     JSONArray json_move_array = new JSONArray();
     for (int j=0; j<poke.moves.length; j++) {
