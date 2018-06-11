@@ -86,13 +86,13 @@ void init_battle_screen() {
   img_flag_punch = loadImage("MoveAnimations/punch.png");
   img_flag_sound = loadImage("MoveAnimations/sound.png");
 
-  img_flag_bite.resize(150, 0);
-  img_flag_ballistics.resize(150, 0);
-  img_flag_dance.resize(150, 0);
-  img_flag_powder.resize(150, 0);
-  img_flag_pulse.resize(150, 0);
-  img_flag_punch.resize(150, 0);
-  img_flag_sound.resize(150, 0);
+  //img_flag_bite.resize(150, 0);
+  //img_flag_ballistics.resize(150, 0);
+  //img_flag_dance.resize(150, 0);
+  //img_flag_powder.resize(150, 0);
+  //img_flag_pulse.resize(150, 0);
+  //img_flag_punch.resize(150, 0);
+  //img_flag_sound.resize(150, 0);
 
   for (int i = 0; i < 5; i++) {
     tempImage = loadImage(weatherPictureNames[i] + ".png");
@@ -103,7 +103,7 @@ void init_battle_screen() {
   for (String str_type : TYPE_COLOURS.keySet()) {
     // ...
     PImage new_img = loadImage("MoveAnimations/"+str_type+".png");
-    new_img.resize(150, 0);
+    //new_img.resize(150, 0);
     TYPE_MOVE_IMG.put(str_type, new_img);
   }
 

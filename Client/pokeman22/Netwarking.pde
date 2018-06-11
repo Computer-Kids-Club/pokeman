@@ -219,8 +219,21 @@ void process_data(String dataIn) {
     pokemons = new ArrayList<Pokemon>();
     for (int j = 0; j < json_pokes_array.size(); j++) {
       pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
-      pokemons.add(new Pokemon(pokemon_jsons[j]));
+      pokemons.add(new Pokemon(pokemon_jsons[j].getInt("num"), pokemon_jsons[j].getBoolean("shiny"));
+      for (int k = 0; k < 4; k++){
+        pokemons.get(j).moves[k] = pokemon_jsons[j].getJSONArray("moves").getString(k);
+      }
+      for (int k = 0; k < 6; k++){
+        println(pokemons.get(j).EV[k]);
+        println(pokemon_jsons[j].getJSONArray("EV").getInt(k));
+        pokemons.get(j).EV[k] = pokemon_jsons[j].getJSONArray("EV").getInt(k);
+      }
+      for (int k = 0; k < 6; k++){
+        pokemons.get(j).sliderPos[k] = pokemon_jsons[j].getJSONArray("sliderPos").getInt(k);
+      }
       println(pokemon_jsons[j].getJSONArray("moves"));
+      print(pokemon_jsons[j].getJSONArray("EV"));
+      print(pokemons.get(j).EV);
     }
   }
 }
