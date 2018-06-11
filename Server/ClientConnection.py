@@ -12,8 +12,8 @@ from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
-random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
-mixed_letters='qwertyuiopasdfghjklzxcvbnm'
+random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',','9','8','7','6','5','4','3','2','1','0']
+mixed_letters='qwertyuiopasdfghjklzxcvbnm0123456789'
 
 # from random import randint
 
