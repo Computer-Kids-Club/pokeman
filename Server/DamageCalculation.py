@@ -405,7 +405,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
         b_flash_fire = True
-        
+
 
 
 
