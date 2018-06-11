@@ -356,7 +356,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_atk_ability == 'aura-break' or str_def_ability == 'aura-break':
         if str_mov_type == 'fairy' or str_mov_type == 'dark':
             i_pow //= 1.33
-    elif str_atk_ability == 'fairy-aura' and str_def_ability == 'aura-break'
+    elif str_atk_ability == 'fairy-aura' and str_def_ability == 'aura-break':
         if str_mov_type == 'fairy':
             i_pow //= 1.25
 
