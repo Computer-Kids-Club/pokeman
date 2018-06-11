@@ -60,6 +60,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
     i_atk_spa = atk_poke.get_usable_stats().get_spa()
     i_def_spa = def_poke.get_usable_stats().get_spa()
+    i_def_spd = def_poke.get_usable_stats().get_spd()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -139,6 +140,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_def_hp -= (1/8)*def_poke.base_stats.i_hp
         elif str_atk_ability == 'dry-skin':
             i_atk_hp -= (1/8)*atk_poke.base_stats.i_hp
+
+    if str_weather == Weather.HARSH_SUNLIGHT:
+        if str_def_ability == 'flower-gift':
+            i_def_atk *= 1.5
+            i_def_spd *= 1.5
     # --------------#
     # TERRAIN BUFFS #
     # --------------#
@@ -405,6 +411,36 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
         b_flash_fire = True
+
+    if b_flash_fire:
+        if str_atk_ability == 'flash-fire':
+            if str_mov_type == 'fire':
+                i_pow *= 1.5
+
+    if str_def_ability == 'flower-veil':
+        if str_pok_type_2 == 'grass':
+            if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_def < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 or def_poke.modifier_stats.i_hp < 0:
+                def_poke.modifier_stats.i_atk *= -1
+                def_poke.modifier_stats.i_def *= -1
+                def_poke.modifier_stats.i_spe *= -1
+                def_poke.modifier_stats.i_spa *= -1
+                def_poke.modifier_stats.i_spd *= -1
+                def_poke.modifier_stats.i_hp *= -1
+
+    if str_def_ability == 'full-metal-body':
+            if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_def < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 or def_poke.modifier_stats.i_hp < 0:
+                def_poke.modifier_stats.i_atk *= -1
+                def_poke.modifier_stats.i_def *= -1
+                def_poke.modifier_stats.i_spe *= -1
+                def_poke.modifier_stats.i_spa *= -1
+                def_poke.modifier_stats.i_spd *= -1
+                def_poke.modifier_stats.i_hp *= -1
+
+
+
+
+
+
 
 
 
