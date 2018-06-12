@@ -55,17 +55,16 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_status = move.b_status_effect
     b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
-    i_atk_hp = atk_poke.i_hp
-    i_def_atk = def_poke.i_atk
-    i_def_hp = def_poke.i_hp
-    i_atk_hp = atk_poke.i_hp
-    i_atk_spa = atk_poke.i_spa
-    i_def_spa = def_poke.i_spa
-    i_def_spd = def_poke.i_spd
-    i_atk_spe = atk_poke.i_spe
-    i_atk_def = atk_poke.i_def
-    i_atk_atk = atk_poke.i_atk
-    i_def_def = def_poke.i_def
+    i_atk_hp = atk_poke.get_usable_stats().get_hp()
+    i_def_atk = def_poke.get_usable_stats().get_atk()
+    i_def_hp = def_poke.get_usable_stats().get_hp()
+    i_atk_spa = atk_poke.get_usable_stats().get_spa()
+    i_def_spa = def_poke.get_usable_stats().get_spa()
+    i_def_spd = def_poke.get_usable_stats().get_spd()
+    i_atk_spe = atk_poke.get_usable_stats().get_spe()
+    i_atk_def = atk_poke.get_usable_stats().get_def()
+    i_atk_atk = atk_poke.get_usable_stats().get_atk()
+    i_def_def = def_poke.get_usable_stats().get_def()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -160,8 +159,6 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             elif str_def_status == 'toxic':
                 i_def_hp += int(def_poke.get_usable_stats().get_hp() / 8 * atk_poke.i_toxic_idx)
 
-    if str_def_ability == 'ice-body':
-        i_def_hp = int(def_poke.get_usable_stats().get_hp() / 8)
     # --------------#
     # TERRAIN BUFFS #
     # --------------#
@@ -500,17 +497,6 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     #--------------------#
     # CALCULATING DAMAGE #
     #--------------------#
@@ -519,6 +505,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
     str_prv_mov = str_mov_name
+
+    if str_def_ability == 'ice-body':
+        if str_weather == Weather.HAIL
+            i_def_hp = int(def_poke.get_usable_stats().get_hp() / 16)
+
     return i_damage
 
 poke1 = Pokeman()
