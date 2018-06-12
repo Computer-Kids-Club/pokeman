@@ -41,6 +41,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_terrain = 1
     str_mov_name = move.str_name
     str_status = atk_poke.str_status
+    str_def_status = def_poke.str_status
     i_other = 1
     i_move_buff = 1
     i_burn = 1
@@ -54,13 +55,17 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     b_status = move.b_status_effect
     b_stat_change = move.b_stat_change
     i_recoil = move.get_recoil_ratio()
-    i_atk_hp = atk_poke.get_usable_stats().get_hp()
-    i_def_atk = def_poke.get_usable_stats().get_atk()
-    i_def_hp = def_poke.get_usable_stats().get_hp()
-    i_atk_hp = atk_poke.get_usable_stats().get_hp()
-    i_atk_spa = atk_poke.get_usable_stats().get_spa()
-    i_def_spa = def_poke.get_usable_stats().get_spa()
-    i_def_spd = def_poke.get_usable_stats().get_spd()
+    i_atk_hp = atk_poke.i_hp
+    i_def_atk = def_poke.i_atk
+    i_def_hp = def_poke.i_hp
+    i_atk_hp = atk_poke.i_hp
+    i_atk_spa = atk_poke.i_spa
+    i_def_spa = def_poke.i_spa
+    i_def_spd = def_poke.i_spd
+    i_atk_spe = atk_poke.i_spe
+    i_atk_def = atk_poke.i_def
+    i_atk_atk = atk_poke.i_atk
+    i_def_def = def_poke.i_def
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -145,6 +150,18 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_def_ability == 'flower-gift':
             i_def_atk *= 1.5
             i_def_spd *= 1.5
+
+    if str_def_ability == 'hydration':
+        if str_weather == Weather.RAIN:
+            if str_def_status == 'burn':
+                i_def_hp += int(def_poke.get_usable_stats().get_hp() / 16)
+            elif str_def_status == 'poison':
+                i_def_hp += int(def_poke.get_usable_stats().get_hp() / 8)
+            elif str_def_status == 'toxic':
+                i_def_hp += int(def_poke.get_usable_stats().get_hp() / 8 * atk_poke.i_toxic_idx)
+
+    if str_def_ability == 'ice-body':
+        i_def_hp = int(def_poke.get_usable_stats().get_hp() / 8)
     # --------------#
     # TERRAIN BUFFS #
     # --------------#
@@ -159,6 +176,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if (str_mov_name == 'Bulldoze' or str_mov_name == 'Earthquake' or str_mov_name == 'Magnitude') and str_terrain == 'grassy':
         i_terrain = 0.5
+
 
     #---------------#
     # MOVE CATEGORY #
@@ -208,9 +226,15 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_def_ability == 'early-bird':
             def_poke.i_sleep_counter = 1
 
-    #--------------------#
+    if str_terrain == Terrain.GRASSY:
+        if str_def_ability == 'grass-pelt':
+            i_def *= 1.5
+        if str_atk_ability == 'grass-pelt':
+            i_atk_def *= 1.5
+
+    #---------------------#
     # ATTACKING ABILITIES #
-    #--------------------#
+    #---------------------#
     if str_atk_ability == 'water-bubble':
         if str_mov_type == 'water':
             i_atk_buff = 2
@@ -272,6 +296,25 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_atk_ability == 'electric-surge':
         i_terrain = 1.5
+
+    if str_atk_ability == 'full-metal-body':
+            if atk_poke.modifier_stats.i_atk < 0 or atk_poke.modifier_stats.i_def < 0 or atk_poke.modifier_stats.i_spe < 0 or atk_poke.modifier_stats.i_spa < 0 or atk_poke.modifier_stats.i_spd < 0 or atk_poke.modifier_stats.i_hp < 0:
+                atk_poke.modifier_stats.i_atk = 0
+                atk_poke.modifier_stats.i_def = 0
+                atk_poke.modifier_stats.i_spe = 0
+                atk_poke.modifier_stats.i_spa = 0
+                atk_poke.modifier_stats.i_spd = 0
+                atk_poke.modifier_stats.i_hp = 0
+
+    if str_atk_ability == 'gale-wings':
+        if str_mov_type == 'flying':
+            move.i_priority += 1
+
+    if str_atk_ability == 'huge-power':
+        i_atk *= 2
+
+    if str_atk_ability == 'hustle':
+        i_atk *= 1.5
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -407,9 +450,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'flame-body':
         if randint(1, 10) == (1 or 2 or 3):
-            str_status = 'burned'
+            str_status = 'burn'
 
     if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
+        i_pow = 0
         b_flash_fire = True
 
     if b_flash_fire:
@@ -429,12 +473,31 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_def_ability == 'full-metal-body':
             if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_def < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 or def_poke.modifier_stats.i_hp < 0:
-                def_poke.modifier_stats.i_atk *= -1
-                def_poke.modifier_stats.i_def *= -1
-                def_poke.modifier_stats.i_spe *= -1
-                def_poke.modifier_stats.i_spa *= -1
-                def_poke.modifier_stats.i_spd *= -1
-                def_poke.modifier_stats.i_hp *= -1
+                def_poke.modifier_stats.i_atk = 0
+                def_poke.modifier_stats.i_def = 0
+                def_poke.modifier_stats.i_spe = 0
+                def_poke.modifier_stats.i_spa = 0
+                def_poke.modifier_stats.i_spd = 0
+                def_poke.modifier_stats.i_hp = 0
+
+    if str_def_ability == 'fur-coat':
+        i_def *= 2
+
+    if str_def_ability == 'gooey':
+        if b_contact:
+            i_atk_spe -= 1
+
+    if str_def_ability == 'heat-proof':
+        if str_mov_type == 'fire':
+            i_pow = 0
+        if str_status == 'burn':
+            i_burn = i_burn // 2
+
+    if str_def_ability == 'hyper-cutter':
+        if atk_poke.modifier_stats.i_atk < 0:
+            atk_poke.modifier_stats.i_atk = 0
+
+
 
 
 
