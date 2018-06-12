@@ -229,6 +229,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_atk_ability == 'grass-pelt':
             i_atk_def *= 1.5
 
+    if str_atk_ability == 'intimidate':
+        i_def_atk -= 2
+
+    if str_def_ability == 'intimidate':
+        i_atk += 2
+
     #---------------------#
     # ATTACKING ABILITIES #
     #---------------------#
@@ -413,9 +419,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         i_burn = 1
 
     if str_def_ability == 'competitive':
-        if move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability != 'contrary':
+        if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_hp < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability != 'contrary':
             i_atk_spa += 2
-        elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
+        elif def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_hp < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability == 'contrary':
             i_atk_spa -= 2
 
     if str_def_ability == 'dazzling':
@@ -494,7 +500,13 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if atk_poke.modifier_stats.i_atk < 0:
             atk_poke.modifier_stats.i_atk = 0
 
+    if str_def_ability == 'immunity':
+        if str_status == 'poison':
+            str_status = 'none'
 
+    if str_def_ability == 'insomnia':
+        if str_def_status == 'sleep':
+            def_poke.i_sleep_counter = 0
 
 
     #--------------------#
@@ -507,8 +519,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     str_prv_mov = str_mov_name
 
     if str_def_ability == 'ice-body':
-        if str_weather == Weather.HAIL
-            i_def_hp = int(def_poke.get_usable_stats().get_hp() / 16)
+        if str_weather == Weather.HAIL:
+            i_def_hp += int(def_poke.get_usable_stats().get_hp() / 16)
+
+    if str_def_ability == 'innards-out':
+        if i_def_hp < i_damage:
+            i_atk_hp -= i_def_hp
 
     return i_damage
 
