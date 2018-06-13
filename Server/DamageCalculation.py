@@ -209,9 +209,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_mov_name == 'surf' or str_mov_name == 'whirlpool':
             i_move_buff = 2
 
-    # -------------------#
+    #-------------------#
     # GENERAL ABILITIES #
-    # -------------------#
+    #-------------------#
     if str_atk_ability == 'dark-aura' or str_def_ability == 'dark-aura':
         i_pow *= 1.33
 
@@ -279,7 +279,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_atk_buff = 1.3
 
     if str_atk_ability == 'tough-claws':
-        if b_contact:
+        if b_contact and str_def_ability != 'long-reach':
             i_atk_buff = 1.3
 
     if str_atk_ability == 'steelworker':
@@ -318,6 +318,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_atk_ability == 'hustle':
         i_atk *= 1.5
+
+    if str_atk_ability == 'liquid-voice':
+        if b_sound:
+            str_mov_type = 'water'
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -330,7 +334,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             if str_mov_name == 'taunt' or str_mov_name == 'torment' or str_mov_name == 'encore' or str_mov_name == 'disable' or str_mov_name == 'cursed-body' or str_mov_name == 'heal-block' or str_mov_name == 'infatuation':
                 i_def_buff == 0
 
-    if str_def_ability == 'fluffy' and b_contact:
+    if str_def_ability == 'fluffy' and b_contact and str_atk_ability != 'long-reach':
         if str_mov_type == 'fire':
             i_def_buff = 1
         else:
@@ -443,7 +447,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_disguise_cnt = 0
 
     if str_def_ability == 'effect-spore':
-        if b_contact:
+        if b_contact and str_atk_ability != 'long-reach':
             if randint(1, 10) == (1 or 2 or 3):
                 str_status = l_status[randint(1, 3)]
 
@@ -458,6 +462,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
         i_pow = 0
         b_flash_fire = True
+
+    if str_def_ability == 'wonder-guard':
+        atk_poke.i_accuracy /= 2
 
     if b_flash_fire:
         if str_atk_ability == 'flash-fire':
@@ -483,11 +490,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
                 def_poke.modifier_stats.i_spd = 0
                 def_poke.modifier_stats.i_hp = 0
 
+
     if str_def_ability == 'fur-coat':
         i_def *= 2
 
     if str_def_ability == 'gooey':
-        if b_contact:
+        if b_contact and str_atk_ability != 'long-reach':
             i_atk_spe -= 1
 
     if str_def_ability == 'heat-proof':
@@ -500,13 +508,11 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if atk_poke.modifier_stats.i_atk < 0:
             atk_poke.modifier_stats.i_atk = 0
 
-    if str_def_ability == 'immunity':
-        if str_status == 'poison':
-            str_status = 'none'
+    if str_def_ability == 'iron-barbs':
+        if b_contact and str_atk_ability != 'long-reach':
+            i_atk_hp -= int(atk_poke.base_stats.i_hp / 8)
 
-    if str_def_ability == 'insomnia':
-        if str_def_status == 'sleep':
-            def_poke.i_sleep_counter = 0
+
 
 
     #--------------------#
@@ -525,6 +531,10 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_def_ability == 'innards-out':
         if i_def_hp < i_damage:
             i_atk_hp -= i_def_hp
+
+    if i_damage > 0:
+        if str_mov_type == 'dark':
+            i_def_atk += 1
 
     return i_damage
 

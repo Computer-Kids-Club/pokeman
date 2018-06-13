@@ -231,8 +231,12 @@ void process_data(String dataIn) {
         tempStats, tempMoves, pokemon_jsons[j].getString("gender"), pokemon_jsons[j].getInt("nature"), tempNature, 
         tempEV, tempSlider));
       println(pokemon_jsons[j].getJSONArray("moves"));
+<<<<<<< HEAD
+      //print(pokemons_json[j].getJSONArray("EV"));
+=======
       print(pokemon_jsons[j].getJSONArray("EV"));
       print(pokemons.get(j).EV);
+>>>>>>> faa356a02b257f3e09d77c138bef89acfcae69fe
     }
   } else if (dataIn.charAt(0) == 'x'){
     println("RECIEVED FRIENDS");

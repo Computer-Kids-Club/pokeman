@@ -404,7 +404,7 @@ class Battle(object):
 
                     # implement status effect
 
-                    str_eff = status_effect(atk_poke, def_poke, cur_move)
+                    str_eff = status_effect(atk_poke, def_poke, cur_move, Field)
 
                     if str_eff != 'none':
                         self.send_broadcast(def_poke.str_name.capitalize() + " is " + str_eff + ".")
