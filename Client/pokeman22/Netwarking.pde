@@ -219,9 +219,24 @@ void process_data(String dataIn) {
     pokemons = new ArrayList<Pokemon>();
     for (int j = 0; j < json_pokes_array.size(); j++) {
       pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
-      pokemons.add(new Pokemon(pokemon_jsons[j]));
+      int[] tempStats = {pokemon_jsons[j].getInt("hp"), pokemon_jsons[j].getInt("atk"), pokemon_jsons[j].getInt("def"), pokemon_jsons[j].getInt("spa"), pokemon_jsons[j].getInt("spd"), pokemon_jsons[j].getInt("spe")};
+      String[] tempMoves = {pokemon_jsons[j].getJSONArray("moves").getString(0), pokemon_jsons[j].getJSONArray("moves").getString(1), pokemon_jsons[j].getJSONArray("moves").getString(2), pokemon_jsons[j].getJSONArray("moves").getString(3)};
+      int[] tempNature = {pokemon_jsons[j].getJSONArray("natureList").getInt(0), pokemon_jsons[j].getJSONArray("natureList").getInt(1), pokemon_jsons[j].getJSONArray("natureList").getInt(2), 
+        pokemon_jsons[j].getJSONArray("natureList").getInt(3), pokemon_jsons[j].getJSONArray("natureList").getInt(4)};
+      int[] tempEV = {pokemon_jsons[j].getJSONArray("EV").getInt(0), pokemon_jsons[j].getJSONArray("EV").getInt(1), pokemon_jsons[j].getJSONArray("EV").getInt(2), 
+        pokemon_jsons[j].getJSONArray("EV").getInt(3), pokemon_jsons[j].getJSONArray("EV").getInt(4), pokemon_jsons[j].getJSONArray("EV").getInt(5)};
+      int[] tempSlider = {pokemon_jsons[j].getJSONArray("sliderPos").getInt(0), pokemon_jsons[j].getJSONArray("sliderPos").getInt(1), pokemon_jsons[j].getJSONArray("sliderPos").getInt(2), 
+        pokemon_jsons[j].getJSONArray("sliderPos").getInt(3), pokemon_jsons[j].getJSONArray("sliderPos").getInt(4), pokemon_jsons[j].getJSONArray("sliderPos").getInt(5)};
+      pokemons.add(new Pokemon(pokemon_jsons[j].getInt("num"), pokemon_jsons[j].getBoolean("shiny"), pokemon_jsons[j].getInt("lv"), pokemon_jsons[j].getString("ability"), 
+        tempStats, tempMoves, pokemon_jsons[j].getString("gender"), pokemon_jsons[j].getInt("nature"), tempNature, 
+        tempEV, tempSlider));
       println(pokemon_jsons[j].getJSONArray("moves"));
+<<<<<<< HEAD
       //print(pokemons_json[j].getJSONArray("EV"));
+=======
+      print(pokemon_jsons[j].getJSONArray("EV"));
+      print(pokemons.get(j).EV);
+>>>>>>> faa356a02b257f3e09d77c138bef89acfcae69fe
     }
   }
 }
@@ -289,6 +304,7 @@ void send_pokes(String whatthisis) {
 
     json_poke.setString("name", poke.name);
     json_poke.setString("ability", poke.ability);
+    json_poke.setString("gender", poke.gender);
 
     json_poke.setInt("num", poke.number);
     json_poke.setInt("hp", poke.HP);
@@ -299,20 +315,28 @@ void send_pokes(String whatthisis) {
     json_poke.setInt("spe", poke.SPE);
     json_poke.setInt("hap", poke.happiness);
     json_poke.setInt("lv", poke.level);
+    json_poke.setInt("nature", poke.natureNum);
+
     json_poke.setBoolean("shiny", poke.shiny);
-    
+
     JSONArray json_EV_array = new JSONArray();
     for (int j=0; j<poke.EV.length; j++) {
       json_EV_array.setInt(j, poke.EV[j]);
     }
     json_poke.setJSONArray("EV", json_EV_array);
-    
+
+    JSONArray json_nature_array = new JSONArray();
+    for (int j = 0; j < poke.nature.length; j++) {
+      json_nature_array.setInt(j, poke.nature[j]);
+    }
+    json_poke.setJSONArray("natureList", json_nature_array);
+
     //JSONArray json_IV_array = new JSONArray();
     //for (int j=0; j<poke.IV.length; j++) {
     //  json_IV_array.setInt(j, poke.IV[j]);
     //}
     //json_poke.setJSONArray("IV", json_IV_array);
-    
+
     JSONArray json_sliders_array = new JSONArray();
     for (int j=0; j<poke.sliderPos.length; j++) {
       json_sliders_array.setInt(j, poke.sliderPos[j]);
@@ -326,11 +350,14 @@ void send_pokes(String whatthisis) {
     json_poke.setJSONArray("moves", json_move_array);
 
     json_poke_array.setJSONObject(i, json_poke);
+    if (i == 1) {
+      println(json_poke);
+    }
   }
 
   json.setJSONArray("pokes", json_poke_array);
 
-  println(json.toString());
+  //println(json.toString());
 
   if (!myClient.active()) {
     return;

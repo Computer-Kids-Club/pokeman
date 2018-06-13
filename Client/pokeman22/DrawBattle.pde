@@ -553,30 +553,25 @@ void draw_battle() {
       //draw_rect(0, 0, 50, 50);
 
       println(str_cur_move_type);
-      if (str_cur_move_type.equals("normal") || str_cur_move_type.equals("fire") || str_cur_move_type.equals("electric")
-        || str_cur_move_type.equals("dragon") || str_cur_move_type.equals("ground") || str_cur_move_type.equals("flying") || str_cur_move_type.equals("ghost")) {
-        draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
-      } else {
-        draw_image(TYPE_MOVE_IMG.get(str_cur_move_type), 0, 0);
-      }
-    //} else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
-    //  draw_image(img_flag_bite, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_ballistics")) { // --------------------------------------------------------- ballistics
+      draw_image(move_animations.get(str_cur_move_type)[(30-i_moving)*move_animations_num.get(str_cur_move_type)/31], 0, 0);
+      //} else if (str_cur_move_anime_style.equals("flag_bite")) { // --------------------------------------------------------- bite
 
-    //  draw_image(img_flag_ballistics, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_dance")) { // --------------------------------------------------------- dance
+      //  draw_image(img_flag_bite, 0, 0);
+      //} else if (str_cur_move_anime_style.equals("flag_ballistics")) { // --------------------------------------------------------- ballistics
 
-    //  draw_image(img_flag_dance, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_powder")) { // --------------------------------------------------------- powder
+      //  draw_image(img_flag_ballistics, 0, 0);
+      //} else if (str_cur_move_anime_style.equals("flag_dance")) { // --------------------------------------------------------- dance
 
-    //  draw_image(img_flag_powder, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_pulse")) { // --------------------------------------------------------- pulse
+      //  draw_image(img_flag_dance, 0, 0);
+      //} else if (str_cur_move_anime_style.equals("flag_powder")) { // --------------------------------------------------------- powder
 
-    //  draw_image(img_flag_pulse, 0, 0);
-    //} else if (str_cur_move_anime_style.equals("flag_punch")) { // --------------------------------------------------------- punch
+      //  draw_image(img_flag_powder, 0, 0);
+      //} else if (str_cur_move_anime_style.equals("flag_pulse")) { // --------------------------------------------------------- pulse
 
-    //  draw_image(img_flag_punch, 0, 0);
+      //  draw_image(img_flag_pulse, 0, 0);
+    } else if (str_cur_move_anime_style.equals("flag_punch")) { // --------------------------------------------------------- punch
+      draw_image(move_animations.get("punch")[(30-i_moving)*move_animations_num.get("punch")/31], 0, 0);
     } else if (str_cur_move_anime_style.equals("flag_sound")) { // --------------------------------------------------------- sound
       draw_image(move_animations.get("sound")[(30-i_moving)*move_animations_num.get("sound")/31], 0, 0);
       //draw_image(img_flag_sound, 0, 0);

@@ -12,8 +12,8 @@ from MoveClass import Move
 from random import randint
 from BattleClass import *
 import select
-random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',','9','8','7','6','5','4','3','2','1','0']
-mixed_letters='qwertyuiopasdfghjklzxcvbnm0123456789'
+random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
+mixed_letters='qwertyuiopasdfghjklzxcvbnm'
 
 # from random import randint
 
@@ -242,6 +242,7 @@ class Client(object):
         elif dic_data["battlestate"] == "selectpass":
             self.i_turn_readiness = READY
         elif dic_data["battlestate"] == "pokewrite":
+            print("RECIEVED")
             file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()
@@ -253,6 +254,7 @@ class Client(object):
             file_in.close()
             
         elif dic_data["battlestate"] == "pokeread":
+            print("BAD")
             file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()

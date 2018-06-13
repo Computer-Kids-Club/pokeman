@@ -284,7 +284,7 @@ String[] getMoveData(String move_name) {
   String[] data = {move_json.getString("type"), move_json.getString("cat"), move_json.getString("power"), move_json.getString("acc"), move_json.getString("pp"), move_json.getString("prob"), move_json.getString("effect")};
   return data;
 }
-String username="", password="", current="", player_name="Spork__";
+String username="", password="", current="", player_name="";
 Boolean login=true;
 Boolean register=false;
 void drawMove(String move_name) {
@@ -371,10 +371,12 @@ void drawStartScreen() {
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
+      println("SAVING");
       send_saving();
       mousePressValid = false;
     }
     if (mouseX >= PRESET_BUTTON.i_x && mouseX <= PRESET_BUTTON.i_x + PRESET_BUTTON.i_w && mouseY >= PRESET_BUTTON.i_y && mouseY <= PRESET_BUTTON.i_y + PRESET_BUTTON.i_h) {
+      println("LOADING PRESET");
       JSONObject json = new JSONObject();
       json.setString("username", player_name);
       json.setString("battlestate", "pokeread");
@@ -1195,6 +1197,8 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
         moveSearch = "";
         moveSelect = false;
         moveSelectScreen = false;
+        pokemonSearchBool = true;
+        moveSearchBool = false;
         mousePressValid = false;
       }
       if (mouseX <= width*53/140 && mouseX >= width*31/140 && mouseY <= height*103/180 + height/30 && mouseY >= height*103/180) {
@@ -1490,14 +1494,14 @@ void better_setup() {
     names_moves.put(file.getString("name"), allMoves);
   }
 
-  PImage[] tempMoveAni = new PImage[8];
-  for (int i = 1; i < 9; i++) {
-    PImage tempAniImage = loadImage("Normal" + i + ".png");
-    tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
-    tempMoveAni[i-1] = tempAniImage;
-  }
-  move_animations_num.put("normal", 8);
-  move_animations.put("normal", tempMoveAni);
+  //PImage[] tempMoveAni = new PImage[8];
+  //for (int i = 1; i < 9; i++) {
+  //  PImage tempAniImage = loadImage("Normal" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("normal", 8);
+  //move_animations.put("normal", tempMoveAni);
 
   //tempMoveAni = new PImage[10];
   //for (int i = 1; i < 11; i++) {
@@ -1633,6 +1637,60 @@ void better_setup() {
   //}
   //move_animations_num.put("steel", 24);
   //move_animations.put("steel", tempMoveAni);
+
+  //tempMoveAni = new PImage[16];
+  //for (int i = 1; i < 17; i++) {
+  //  PImage tempAniImage = loadImage("Bite" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("bite", 16);
+  //move_animations.put("bite", tempMoveAni);
+
+  //tempMoveAni = new PImage[24];
+  //for (int i = 1; i < 25; i++) {
+  //  PImage tempAniImage = loadImage("Bug" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("bug", 24);
+  //move_animations.put("bug", tempMoveAni);
+
+  //tempMoveAni = new PImage[24];
+  //for (int i = 1; i < 25; i++) {
+  //  PImage tempAniImage = loadImage("Dark" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("dark", 24);
+  //move_animations.put("dark", tempMoveAni);
+
+  //tempMoveAni = new PImage[34];
+  //for (int i = 1; i < 35; i++) {
+  //  PImage tempAniImage = loadImage("Fairy" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("fairy", 34);
+  //move_animations.put("fairy", tempMoveAni);
+
+  //tempMoveAni = new PImage[36];
+  //for (int i = 1; i < 37; i++) {
+  //  PImage tempAniImage = loadImage("Poison" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("poison", 36);
+  //move_animations.put("poison", tempMoveAni);
+
+  //tempMoveAni = new PImage[12];
+  //for (int i = 1; i < 13; i++) {
+  //  PImage tempAniImage = loadImage("Punch" + i + ".png");
+  //  tempAniImage.resize(TEXT_CHAT_DIVIDE, height*13/18);
+  //  tempMoveAni[i-1] = tempAniImage;
+  //}
+  //move_animations_num.put("punch", 12);
+  //move_animations.put("punch", tempMoveAni);
 
   pokemons = new ArrayList<Pokemon>();
   for (int i = 0; i < 6; i ++) {
