@@ -65,7 +65,7 @@ def multi_hit(move):
 
     return i_hits
 
-def status_effect(atk_poke, def_poke, move):
+def status_effect(atk_poke, def_poke, move, field):
     str_eff = "none"
 
     if def_poke.str_status == 'poison' and move.b_status_effect == 'poison':
@@ -78,6 +78,22 @@ def status_effect(atk_poke, def_poke, move):
 
     str_eff = move.str_status_effect
     def_poke.str_status = str_eff
+
+    if def_poke.str_ability == 'leaf-guard':
+        if field.get_weather() == Weather.HARSH_SUNLIGHT:
+            def_poke.str_status = 'none'
+
+    if def_poke.str_ability == 'limber':
+        if def_poke.str_status == 'paralyze':
+            def_poke.str_status = 'none'
+
+    if def_poke.str_ability == 'immunity':
+        if def_poke.str_status == 'poison':
+            def_poke.str_status = 'none'
+
+    if def_poke.str_ability == 'insomnia':
+        if def_poke.str_status == 'sleep':
+            def_poke.str_status = 'none'
 
     if str_eff == 'toxic':
         def_poke.i_toxic_idx = 1
