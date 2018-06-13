@@ -221,7 +221,7 @@ void process_data(String dataIn) {
       pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
       pokemons.add(new Pokemon(pokemon_jsons[j]));
       println(pokemon_jsons[j].getJSONArray("moves"));
-      print(pokemons_json[j].getJSONArray("EV"));
+      //print(pokemons_json[j].getJSONArray("EV"));
     }
   }
 }
