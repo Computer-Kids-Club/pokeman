@@ -222,7 +222,7 @@ void process_data(String dataIn) {
       int[] tempStats = {pokemon_jsons[j].getInt("hp"), pokemon_jsons[j].getInt("atk"), pokemon_jsons[j].getInt("def"), pokemon_jsons[j].getInt("spa"), pokemon_jsons[j].getInt("spd"), pokemon_jsons[j].getInt("spe")};
       String[] tempMoves = {pokemon_jsons[j].getJSONArray("moves").getString(0), pokemon_jsons[j].getJSONArray("moves").getString(1), pokemon_jsons[j].getJSONArray("moves").getString(2), pokemon_jsons[j].getJSONArray("moves").getString(3)};
       int[] tempNature = {pokemon_jsons[j].getJSONArray("natureList").getInt(0), pokemon_jsons[j].getJSONArray("natureList").getInt(1), pokemon_jsons[j].getJSONArray("natureList").getInt(2), 
-        pokemon_jsons[j].getJSONArray("natureList").getInt(3), pokemon_jsons[j].getJSONArray("natureList").getInt(4), pokemon_jsons[j].getJSONArray("natureList").getInt(5)};
+        pokemon_jsons[j].getJSONArray("natureList").getInt(3), pokemon_jsons[j].getJSONArray("natureList").getInt(4)};
       int[] tempEV = {pokemon_jsons[j].getJSONArray("EV").getInt(0), pokemon_jsons[j].getJSONArray("EV").getInt(1), pokemon_jsons[j].getJSONArray("EV").getInt(2), 
         pokemon_jsons[j].getJSONArray("EV").getInt(3), pokemon_jsons[j].getJSONArray("EV").getInt(4), pokemon_jsons[j].getJSONArray("EV").getInt(5)};
       int[] tempSlider = {pokemon_jsons[j].getJSONArray("sliderPos").getInt(0), pokemon_jsons[j].getJSONArray("sliderPos").getInt(1), pokemon_jsons[j].getJSONArray("sliderPos").getInt(2), 

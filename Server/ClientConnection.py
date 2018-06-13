@@ -10,7 +10,6 @@ from PokemanClass import Pokeman
 from StatClass import Stats
 from MoveClass import Move
 from random import randint
-from TypeClass import get_def_types_with_eff_rate, get_atk_types_with_eff_rate
 from BattleClass import *
 import select
 random_symbols=['`','!','@','#','$','%','^','&','(',')','-','_','+','=','|','}','{',']','[','~','>','<','.','?','/',',']
@@ -255,6 +254,7 @@ class Client(object):
             file_in.close()
             
         elif dic_data["battlestate"] == "pokeread":
+            print("BAD")
             file_in = open(dir_path+'/pokeSave.txt', 'r')
             sentPokes = file_in.read()
             file_in.close()
@@ -266,29 +266,29 @@ class Client(object):
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "addfriend":
             if dic_data["newfriend"] not in self.friends:
-                file_in = open(dir_path + '/friendList.txt', 'r')
+                file_in = open('friendList.txt', 'r')
                 friendList = file_in.read()
                 file_in.close()
                 self.friends += dic_data["newfriend"]
                 loaded_friends = json.loads(friendList)
                 loaded_friends[dic_data['username']] = self.friends
                 friendList = json.dumps(loaded_friends)
-                file_in = open(dir_path + '/friendList.txt', 'w')
+                file_in = open('friendList.txt', 'w')
                 file_in.write(friendList)
                 file_in.close()
         elif dic_data["battlestate"] == "removefriend":
-            file_in = open(dir_path + '/friendList.txt', 'r')
+            file_in = open('friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             self.friends.remove(dic_data["newfriend"])
             loaded_friends = json.loads(friendList)
             loaded_friends[dic_data['username']] = self.friends
             friendList = json.dumps(loaded_friends)
-            file_in = open(dir_path + '/friendList.txt', 'w')
+            file_in = open('friendList.txt', 'w')
             file_in.write(friendList)
             file_in.close()
         elif dic_data["battlestate"] == "friendread":
-            file_in = open(dir_path + '/friendList.txt', 'r')
+            file_in = open('friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
@@ -298,11 +298,11 @@ class Client(object):
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":
-            file_in = open(dir_path + '/usernames.txt','r')    
+            file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
-            file_in = open(dir_path + '/passwords.txt','r')     
+            file_in = open('passwords.txt','r')     
             passwordlst = file_in.read()   
             passwordlst=passwordlst.split('*')
             file_in.close()
@@ -318,16 +318,16 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
-            file_in = open(dir_path + '/usernames.txt','r')    
+            file_in = open('usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
             if dic_data['username'] not in usernamelst and len(dic_data['username'])>0 and len(dic_data['password'])>0:
-                file_out = open(dir_path + '/usernames.txt', "a")
+                file_out = open('usernames.txt', "a")
                 file_out.write('*') 
                 file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
                 file_out.close()
-                file_out = open(dir_path + '/passwords.txt', "a")
+                file_out = open('passwords.txt', "a")
                 file_out.write('*') 
                 file_out.write(encrypt(dic_data['password']))# 2. Convert the info to string and write in the file
                 file_out.close()
@@ -337,7 +337,7 @@ class Client(object):
         elif dic_data["battlestate"] == "command":
             l_words = dic_data["command"].split()
             if l_words[0] == "weakness":
-                if True:
+                try:
                     str_poke_name = l_words[1]
                     tmp_poke = Pokeman(dic_name_to_num[str_poke_name])
                     self.send_data(DISPLAY_TEXT+str_poke_name+":")
@@ -347,8 +347,8 @@ class Client(object):
                     self.send_data(DISPLAY_TEXT+"Very Resist: " + join_with_none(get_def_types_with_eff_rate(0.25,tmp_poke.type_1,tmp_poke.type_2)))
                     self.send_data(DISPLAY_TEXT+"Immune: " + join_with_none(get_def_types_with_eff_rate(0,tmp_poke.type_1,tmp_poke.type_2)))
 
-                #except:
-                    #self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
+                except:
+                    self.send_data(DISPLAY_TEXT + "Error: Invalid Arguments 3006. Please contact support with the error code at ethanzohar9@gmail.com.")
             elif l_words[0] == "data":
                 try:
                     str_poke_name = l_words[1]
