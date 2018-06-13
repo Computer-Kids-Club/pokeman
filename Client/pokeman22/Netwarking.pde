@@ -234,6 +234,15 @@ void process_data(String dataIn) {
       print(pokemon_jsons[j].getJSONArray("EV"));
       print(pokemons.get(j).EV);
     }
+  } else if (dataIn.charAt(0) == 'x'){
+    println("RECIEVED FRIENDS");
+    JSONArray json_friends_array = parseJSONArray(dataIn.substring(1));
+    String[] tempList = {};
+    for (int j = 0; j < json_friends_array.size();j++){
+      tempList = append(tempList, json_friends_array.getString(j));
+    }
+    friendList = tempList;
+    println(friendList);
   }
 }
 

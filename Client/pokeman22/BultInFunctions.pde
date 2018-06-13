@@ -225,7 +225,7 @@ void keyPressed() {
 
     FRIEND_SLIDER.i_y = friendSliderStartY;
     validFriendSearch = new StringList();
-    for (int i = 1; i <= friendList.length; i++) {
+    for (int i = 0; i < friendList.length; i++) {
       if (friendSearch.length() <= friendList[i].length()) {
         if (friendSearch.equals(friendList[i].substring(0, friendSearch.length()))) {
           validFriendSearch.append(friendList[i]);
