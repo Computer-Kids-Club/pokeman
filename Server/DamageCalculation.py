@@ -463,6 +463,12 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         i_pow = 0
         b_flash_fire = True
 
+<<<<<<< HEAD
+    if str_def_ablity == 'wonder-guard':
+        atk_poke.i_accuracy/=2
+        
+
+=======
     if b_flash_fire:
         if str_atk_ability == 'flash-fire':
             if str_mov_type == 'fire':
@@ -486,6 +492,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
                 def_poke.modifier_stats.i_spa = 0
                 def_poke.modifier_stats.i_spd = 0
                 def_poke.modifier_stats.i_hp = 0
+>>>>>>> faa356a02b257f3e09d77c138bef89acfcae69fe
 
     if str_def_ability == 'fur-coat':
         i_def *= 2
