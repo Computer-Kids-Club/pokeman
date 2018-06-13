@@ -84,6 +84,7 @@ boolean transitionStart = false;
 boolean sliderFollow = false;
 boolean moveSliderFollow = false;
 boolean natureSliderFollow = false;
+boolean friendSliderFollow = false;
 
 int pokemonChangeNumber;
 boolean pokemonSelectScreen = false;
@@ -369,7 +370,7 @@ void drawStartScreen() {
   //draw_rect(SAVE_BUTTON.i_x, SAVE_BUTTON.i_y, SAVE_BUTTON.i_w, SAVE_BUTTON.i_h);
   //draw_rect(PRESET_BUTTON.i_x, PRESET_BUTTON.i_y, PRESET_BUTTON.i_w, PRESET_BUTTON.i_h);
 
-  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false) {
+  if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false && friendSliderFollow == false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
       println("SAVING");
       send_saving();
@@ -663,7 +664,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
     moveScreenReset = false;
   } else if (moveScreenReload == true) {
-    for(int i = 0; i < 6; i++){
+    for (int i = 0; i < 6; i++) {
       println(pokemons.get(i).EV);
     }
     maxEV = 508;
@@ -1339,17 +1340,78 @@ void drawFriendsList() {
   for (int i = 0; i*gridSize < 280; i++) {
     draw_line(15, 35 + int(i*gridSize), 215, 35 + int(i*gridSize));
   }
-  
+
   if (friendSearch == "" && validFriendSearch.size()!=friendList.length) {
-    for (int i = 1; i <= friendList.length; i++) {
+    for (int i = 0; i < friendList.length; i++) {
       validPokemonSearch.append(friendList[i]);
     }
   }
 
-  for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
-    break;
-  }
   draw_rect(FRIEND_SLIDER.i_x, FRIEND_SLIDER.i_y, FRIEND_SLIDER.i_w, FRIEND_SLIDER.i_h);
+
+  textAlign(CENTER, CENTER);
+  fill(0);
+
+  if (validFriendSearch.size() > 0) {
+    for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
+      draw_text(validFriendSearch.get(i), 115, 35 + int(i*gridSize)/2);
+      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + 2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + 2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+    }
+  } else {
+    draw_text("Add a friend", 115, 35 + int(gridSize/2));
+  }
+
+  textAlign(LEFT, CENTER);
+  if (friendSearch == "") {
+    draw_text("Search by Friend", FRIEND_SEARCH.i_x + 2, FRIEND_SEARCH.i_y + (FRIEND_SEARCH.i_h/2));
+  } else {
+    draw_text(friendSearch, FRIEND_SEARCH.i_x + 2, FRIEND_SEARCH.i_y + (FRIEND_SEARCH.i_h/2));
+  }
+
+  if (mousePressed && mousePressValid == true) {
+    if (mouseX >= FRIEND_SEARCH.i_x && mouseX <= FRIEND_SEARCH.i_x + FRIEND_SEARCH.i_w && mouseY >= FRIEND_SEARCH.i_y && mouseY <= FRIEND_SEARCH.i_y + FRIEND_SEARCH.i_h) {
+      friendSearchBool = true;
+      mousePressValid = false;
+    } else {
+      friendSearchBool = false;
+    }
+    if (mouseX >= FRIEND_SLIDER.i_x && mouseX <= FRIEND_SLIDER.i_x + FRIEND_SLIDER.i_w && mouseY >= FRIEND_SLIDER.i_y && mouseY <= FRIEND_SLIDER.i_y + FRIEND_SLIDER.i_h) {
+      friendSliderFollow = true;
+    }    
+    if (mouseX >= FRIEND_ADD.i_x && mouseX <= FRIEND_ADD.i_x + FRIEND_ADD.i_w && mouseY >= FRIEND_ADD.i_y && mouseY <= FRIEND_ADD.i_y + FRIEND_ADD.i_h) {
+      JSONObject json = new JSONObject();
+      json.setString("username", player_name);
+      json.setString("newfriend", friendSearch);
+      json.setString("battlestate", "addfriend");
+      myClient.write(json.toString());
+      
+      json = new JSONObject();
+      json.setString("username", player_name);
+      json.setString("battlestate", "friendread");
+      myClient.write(json.toString());
+      
+      friendSearch = "";
+      
+      mousePressValid = false;
+    }
+  } else {
+    friendSliderFollow = false;
+  }
+  if (friendSliderFollow == true) {
+    if (mouseY >= 35 && mouseY <= 315 - FRIEND_SLIDER.i_h/2) {
+      FRIEND_SLIDER.i_y = mouseY - FRIEND_SLIDER.i_h/2;
+    } else if (mouseY <= 35) {
+      FRIEND_SLIDER.i_y = 35;
+    } else if (mouseY >= 315 - FRIEND_SLIDER.i_h) {
+      FRIEND_SLIDER.i_y = 315 - FRIEND_SLIDER.i_h;
+    }
+  }
+  if (FRIEND_SLIDER.i_y + FRIEND_SLIDER.i_h > 315) {
+    FRIEND_SLIDER.i_y = 315 - FRIEND_SLIDER.i_h;
+  } else if (FRIEND_SLIDER.i_y < 35) {
+    FRIEND_SLIDER.i_y = 35;
+  }
 }
 
 void drawPokemon(PImage[] pAnimation, int x, int y, float s) {
@@ -1565,7 +1627,7 @@ void better_setup() {
   //}
   //move_animations_num.put("ghost", 44);
   //move_animations.put("ghost", tempMoveAni);
-  
+
   //tempMoveAni = new PImage[17];
   //for (int i = 1; i < 18; i++) {
   //  PImage tempAniImage = loadImage("Water" + i + ".png");

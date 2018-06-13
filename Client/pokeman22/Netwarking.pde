@@ -238,6 +238,15 @@ void process_data(String dataIn) {
       print(pokemons.get(j).EV);
 >>>>>>> faa356a02b257f3e09d77c138bef89acfcae69fe
     }
+  } else if (dataIn.charAt(0) == 'x'){
+    println("RECIEVED FRIENDS");
+    JSONArray json_friends_array = parseJSONArray(dataIn.substring(1));
+    String[] tempList = {};
+    for (int j = 0; j < json_friends_array.size();j++){
+      tempList = append(tempList, json_friends_array.getString(j));
+    }
+    friendList = tempList;
+    println(friendList);
   }
 }
 

@@ -153,6 +153,8 @@ class Client(object):
 
         self.baton_pass_stats = Stats()
 
+        self.friends = []
+
     def send_data(self, str_data):
 
         if self.b_tmp:
@@ -269,7 +271,11 @@ class Client(object):
                 file_in = open('friendList.txt', 'r')
                 friendList = file_in.read()
                 file_in.close()
+<<<<<<< HEAD
                 self.friends.add(dic_data["newfriend"])
+=======
+                self.friends += [dic_data["newfriend"]]
+>>>>>>> 87346a9e47331566766158f8e0421ab55be31c2f
                 loaded_friends = json.loads(friendList)
                 loaded_friends[dic_data['username']] = self.friends
                 friendList = json.dumps(loaded_friends)
@@ -288,13 +294,15 @@ class Client(object):
             file_in.write(friendList)
             file_in.close()
         elif dic_data["battlestate"] == "friendread":
+            print("SENDING FRIENDS")
             file_in = open('friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
             if dic_data['username'] in loaded_friends:
                 self.friends = loaded_friends[dic_data['username']]
-                self.send_data(self.friends)
+                sendingFriends = json.dumps(self.friends)
+                self.send_data("x" + sendingFriends)
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "login":
