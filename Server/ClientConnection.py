@@ -269,7 +269,7 @@ class Client(object):
                 file_in = open('friendList.txt', 'r')
                 friendList = file_in.read()
                 file_in.close()
-                self.friends += dic_data["newfriend"]
+                self.friends.add(dic_data["newfriend"])
                 loaded_friends = json.loads(friendList)
                 loaded_friends[dic_data['username']] = self.friends
                 friendList = json.dumps(loaded_friends)
