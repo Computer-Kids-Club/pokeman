@@ -230,21 +230,11 @@ void process_data(String dataIn) {
       pokemons.add(new Pokemon(pokemon_jsons[j].getInt("num"), pokemon_jsons[j].getBoolean("shiny"), pokemon_jsons[j].getInt("lv"), pokemon_jsons[j].getString("ability"), 
         tempStats, tempMoves, pokemon_jsons[j].getString("gender"), pokemon_jsons[j].getInt("nature"), tempNature, 
         tempEV, tempSlider));
-      //println(pokemon_jsons[j].getJSONArray("moves"));
-      ////print(pokemons_json[j].getJSONArray("EV"));
-      //print(pokemon_jsons[j].getJSONArray("EV"));
-      //print(pokemons.get(j).EV);
+      println(pokemon_jsons[j].getJSONArray("moves"));
+      //print(pokemons_json[j].getJSONArray("EV"));
+      print(pokemon_jsons[j].getJSONArray("EV"));
+      print(pokemons.get(j).EV);
     }
-  } else if (dataIn.charAt(0) == 'x'){
-    println("RECIEVED FRIENDS");
-    println(friendList);
-    JSONArray json_friends_array = parseJSONArray(dataIn.substring(1));
-    String[] tempList = {};
-    for (int j = 0; j < json_friends_array.size();j++){
-      tempList = append(tempList, json_friends_array.getString(j));
-    }
-    friendList = tempList;
-    println(friendList);
   }
 }
 

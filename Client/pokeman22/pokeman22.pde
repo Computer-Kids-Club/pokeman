@@ -1332,6 +1332,7 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 }
 
 void drawFriendsList() {
+  print(gridSize);
   draw_rect(15, 15, 200, 300);
   draw_rect(15, 15, 200, 20);
   draw_rect(15, 35, 200, 280);
@@ -1341,9 +1342,9 @@ void drawFriendsList() {
     draw_line(15, 35 + int(i*gridSize), 215, 35 + int(i*gridSize));
   }
 
-  if (friendSearch == "" && validFriendSearch.size()!=friendList.length) {
+  if (friendSearch == "" && validFriendSearch.size() != friendList.length) {
     for (int i = 0; i < friendList.length; i++) {
-      validPokemonSearch.append(friendList[i]);
+      validFriendSearch.append(friendList[i]);
     }
   }
 
@@ -1354,9 +1355,9 @@ void drawFriendsList() {
 
   if (validFriendSearch.size() > 0) {
     for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
-      draw_text(validFriendSearch.get(i), 115, 35 + int(i*gridSize)/2);
-      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + 2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
-      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + 2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+      draw_text(validFriendSearch.get(i), 115, 35 + int(i*gridSize) + int(gridSize/2));
+      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+      draw_rect(FRIEND_SEARCH.i_x + FRIEND_ADD.i_w + 2, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
     }
   } else {
     draw_text("Add a friend", 115, 35 + int(gridSize/2));
