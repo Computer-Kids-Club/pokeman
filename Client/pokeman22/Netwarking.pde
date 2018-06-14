@@ -235,27 +235,38 @@ void process_data(String dataIn) {
       //print(pokemon_jsons[j].getJSONArray("EV"));
       //print(pokemons.get(j).EV);
     }
-  } else if (dataIn.charAt(0) == 'x'){
+  } else if (dataIn.charAt(0) == 'x') {
     JSONArray json_friends_array = parseJSONArray(dataIn.substring(1));
     String[] tempList = {};
-    for (int j = 0; j < json_friends_array.size();j++){
+    for (int j = 0; j < json_friends_array.size(); j++) {
       tempList = append(tempList, json_friends_array.getString(j));
     }
     friendList = tempList;
     FRIEND_SLIDER.i_y = friendSliderStartY;
-  } else if (dataIn.charAt(0) == 'y'){
+    
+    validFriendSearch = new StringList();
+    for (int i = 0; i < friendList.length; i++) {
+      validFriendSearch.append(friendList[i]);
+    }
+  } else if (dataIn.charAt(0) == 'y') {
     println("HGEY");
     JSONObject json = parseJSONObject(dataIn.substring(1));
     JSONObject json_pokes = json.getJSONObject("pokemon");
     JSONArray json_pokes_array = json_pokes.getJSONArray("pokes");
     JSONArray json_friends_array = json.getJSONArray("friends");
-    
+
     String[] tempList = {};
-    for (int j = 0; j < json_friends_array.size();j++){
+    for (int j = 0; j < json_friends_array.size(); j++) {
       tempList = append(tempList, json_friends_array.getString(j));
     }
     friendList = tempList;
+    FRIEND_SLIDER.i_y = friendSliderStartY;
     
+    validFriendSearch = new StringList();
+    for (int i = 0; i < friendList.length; i++) {
+      validFriendSearch.append(friendList[i]);
+    }
+
     pokemons = new ArrayList<Pokemon>();
     for (int j = 0; j < json_pokes_array.size(); j++) {
       pokemon_jsons[j] = json_pokes_array.getJSONObject(j);

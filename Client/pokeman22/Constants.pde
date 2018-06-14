@@ -106,8 +106,8 @@ void init_constants() {
   START_BUTTON = new Rect(width/2, height/2, width*2/7, height*2/9);
   POKEMON_BUTTON = new Rect(width/7, height*5/6, width/7, height*2/9);
   
-  SAVE_BUTTON = new Rect(width/4 - 200,height/2,200,100);
-  PRESET_BUTTON = new Rect(width*3/4,height/2,200,100);
+  SAVE_BUTTON = new Rect(width/4 - width*5/32,height/2,width*5/32,height*5/36);
+  PRESET_BUTTON = new Rect(width*3/4,height/2,width*5/32,height*5/36);
 
   INFO_BUTTON = new Rect(POKEMON_BUTTON.i_x - POKEMON_BUTTON.i_w/2 + width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
   POKEBALL = new Rect(POKEMON_BUTTON.i_x + POKEMON_BUTTON.i_w/2 - width*9/700, POKEMON_BUTTON.i_y + POKEMON_BUTTON.i_h/2 - height/50);
@@ -115,10 +115,10 @@ void init_constants() {
   SEARCH_BUTTON = new Rect(width*3/20 + SELECTSCREENSHIFT_X, height/90 + SELECTSCREENSHIFT_Y, width/7, height/30);
   MOVE_SEARCH_BUTTON = new Rect(width*47/70, SELECTSCREENSHIFT_Y + height*479/900, width/7, height/30);
 
-  FRIEND_SLIDER = new Rect(15 + 200 - width/140, 35, width/140, height/45);
-  friendSliderStartY = 35;
-  FRIEND_SEARCH = new Rect(17, 17, 178, 16);
-  FRIEND_ADD = new Rect(197, 17, 16, 16);
+  FRIEND_SLIDER = new Rect(width*43/256 - width/140, height*7/144, width/140, height/45);
+  friendSliderStartY = height*7/144;
+  FRIEND_SEARCH = new Rect(width*17/1280, height*17/720, width*89/640, height/45);
+  FRIEND_ADD = new Rect(width*197/1280, height*17/720, width/80, height/45);
 
   //POKE_ME_RECT = new Rect(300, 400+3*40);
   POKE_ME_RECT = new Rect(width*43/280, height*17/30);
