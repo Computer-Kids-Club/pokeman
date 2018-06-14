@@ -1332,17 +1332,16 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 }
 
 void drawFriendsList() {
-  print(gridSize);
-  draw_rect(15, 15, 200, 300);
+  draw_rect(15, 15, 200, 300 - int(gridSize));
   draw_rect(15, 15, 200, 20);
-  draw_rect(15, 35, 200, 280);
+  draw_rect(15, 35, 200, 280 - int(gridSize));
   draw_rect(FRIEND_SEARCH.i_x, FRIEND_SEARCH.i_y, FRIEND_SEARCH.i_w, FRIEND_SEARCH.i_h);
   draw_rect(FRIEND_ADD.i_x, FRIEND_ADD.i_y, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
-  for (int i = 0; i*gridSize < 280; i++) {
+  for (int i = 0; i*gridSize < 280 - int(gridSize); i++) {
     draw_line(15, 35 + int(i*gridSize), 215, 35 + int(i*gridSize));
   }
 
-  if (friendSearch == "" && validFriendSearch.size() != friendList.length) {
+  if (friendSearch == "" && validFriendSearch.size() <= friendList.length) {
     for (int i = 0; i < friendList.length; i++) {
       validFriendSearch.append(friendList[i]);
     }
@@ -1352,16 +1351,49 @@ void drawFriendsList() {
 
   textAlign(CENTER, CENTER);
   fill(0);
-
+  offsetFriend = int((FRIEND_SLIDER.i_y - friendSliderStartY)*(friendList.length-10)/((315 - int(gridSize) - friendSliderStartY)-FRIEND_SLIDER.i_h));
   if (validFriendSearch.size() > 0) {
-    for (int i = 0; i < 11 && i + 1 + offsetFriend <= friendList.length; i++) {
-      draw_text(validFriendSearch.get(i), 115, 35 + int(i*gridSize) + int(gridSize/2));
-      draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
-      draw_rect(FRIEND_SEARCH.i_x + FRIEND_ADD.i_w + 2, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+    for (int i = 0; i < 10 && i + 1 + offsetFriend <= friendList.length; i++) {  
+      if (i < validFriendSearch.size()) {
+        if (validFriendSearch.size() > 10) {
+          println("MORE");
+          offsetFriend = int((FRIEND_SLIDER.i_y - friendSliderStartY)*(validFriendSearch.size()-10)/((315 - int(gridSize) - friendSliderStartY)-FRIEND_SLIDER.i_h));
+        } else {
+          println("zero");
+          offsetFriend = 0;
+        }
+        if (offsetFriend < 0) {
+          offsetFriend = 0;
+        }
+        draw_text(validFriendSearch.get(i + offsetFriend), 115, 35 + int(i*gridSize) + int(gridSize/2));
+        draw_rect(FRIEND_SEARCH.i_x, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+        draw_rect(FRIEND_SEARCH.i_x + FRIEND_ADD.i_w + 2, 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2, FRIEND_ADD.i_w, FRIEND_ADD.i_h);
+
+        if (mousePressed && mousePressValid == true) {
+          if (mouseX >= FRIEND_SEARCH.i_x && mouseX <= FRIEND_SEARCH.i_x + FRIEND_ADD.i_w && 
+            mouseY >= 35 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2 && mouseY <= 35 + int(i*gridSize) + int(gridSize/2) + FRIEND_ADD.i_h/2) {
+            println("REMOVING");
+            JSONObject json = new JSONObject();
+            json.setString("username", player_name);
+            json.setString("newfriend", validFriendSearch.get(i + offsetFriend));
+            json.setString("battlestate", "removefriend");
+            myClient.write(json.toString());
+
+            //validFriendSearch = new StringList();
+            //json = new JSONObject();
+            //json.setString("username", player_name);
+            //json.setString("battlestate", "friendread");
+            //myClient.write(json.toString());
+          }
+        }
+      }
     }
   } else {
     draw_text("Add a friend", 115, 35 + int(gridSize/2));
   }
+
+            validFriendSearch = new StringList();
+  println(offsetFriend, friendList.length, validFriendSearch.size());
 
   textAlign(LEFT, CENTER);
   if (friendSearch == "") {
@@ -1370,7 +1402,7 @@ void drawFriendsList() {
     draw_text(friendSearch, FRIEND_SEARCH.i_x + 2, FRIEND_SEARCH.i_y + (FRIEND_SEARCH.i_h/2));
   }
 
-  if (mousePressed && mousePressValid == true) {
+  if (mousePressed && mousePressValid == true && friendSliderFollow == false) {
     if (mouseX >= FRIEND_SEARCH.i_x && mouseX <= FRIEND_SEARCH.i_x + FRIEND_SEARCH.i_w && mouseY >= FRIEND_SEARCH.i_y && mouseY <= FRIEND_SEARCH.i_y + FRIEND_SEARCH.i_h) {
       friendSearchBool = true;
       mousePressValid = false;
@@ -1386,30 +1418,30 @@ void drawFriendsList() {
       json.setString("newfriend", friendSearch);
       json.setString("battlestate", "addfriend");
       myClient.write(json.toString());
-      
+
       json = new JSONObject();
       json.setString("username", player_name);
       json.setString("battlestate", "friendread");
       myClient.write(json.toString());
-      
+
       friendSearch = "";
-      
+
       mousePressValid = false;
     }
   } else {
     friendSliderFollow = false;
   }
   if (friendSliderFollow == true) {
-    if (mouseY >= 35 && mouseY <= 315 - FRIEND_SLIDER.i_h/2) {
+    if (mouseY >= 35 && mouseY <= 315 - int(gridSize) - FRIEND_SLIDER.i_h/2) {
       FRIEND_SLIDER.i_y = mouseY - FRIEND_SLIDER.i_h/2;
     } else if (mouseY <= 35) {
       FRIEND_SLIDER.i_y = 35;
-    } else if (mouseY >= 315 - FRIEND_SLIDER.i_h) {
-      FRIEND_SLIDER.i_y = 315 - FRIEND_SLIDER.i_h;
+    } else if (mouseY >= 315 - int(gridSize) - FRIEND_SLIDER.i_h) {
+      FRIEND_SLIDER.i_y = 315 - int(gridSize) - FRIEND_SLIDER.i_h;
     }
   }
-  if (FRIEND_SLIDER.i_y + FRIEND_SLIDER.i_h > 315) {
-    FRIEND_SLIDER.i_y = 315 - FRIEND_SLIDER.i_h;
+  if (FRIEND_SLIDER.i_y + FRIEND_SLIDER.i_h > 315 - int(gridSize)) {
+    FRIEND_SLIDER.i_y = 315 - int(gridSize) - FRIEND_SLIDER.i_h;
   } else if (FRIEND_SLIDER.i_y < 35) {
     FRIEND_SLIDER.i_y = 35;
   }
