@@ -65,6 +65,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_atk_def = atk_poke.get_usable_stats().get_def()
     i_atk_atk = atk_poke.get_usable_stats().get_atk()
     i_def_def = def_poke.get_usable_stats().get_def()
+    i_atk_spd = atk_poke.get_usable_stats().get_spd()
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -423,9 +424,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         i_burn = 1
 
     if str_def_ability == 'competitive':
-        if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_hp < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability != 'contrary':
+        if def_poke.modifier_stats.i_atk < 0  or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability != 'contrary':
             i_atk_spa += 2
-        elif def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_hp < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability == 'contrary':
+        elif def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability == 'contrary':
             i_atk_spa -= 2
 
     if str_def_ability == 'dazzling':
@@ -490,7 +491,6 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
                 def_poke.modifier_stats.i_spd = 0
                 def_poke.modifier_stats.i_hp = 0
 
-
     if str_def_ability == 'fur-coat':
         i_def *= 2
 
@@ -512,8 +512,13 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if b_contact and str_atk_ability != 'long-reach':
             i_atk_hp -= int(atk_poke.base_stats.i_hp / 8)
 
-
-
+    if str_def_ability == 'magic-bounce':
+        if str_mov_name == 'shell-smash':
+            if move.users_stat_changes.i_def < 0:
+                i_atk_def -= move.users_stat_changes.i_def
+                move.users_stat_changes.i_def = 0
+            if move.users_stat_changes.i_spd < 0:
+                i_atk_spd -= move.users_stat_changes.i_spd
 
     #--------------------#
     # CALCULATING DAMAGE #
