@@ -14,7 +14,7 @@ void mousePressed() {
     START_BUTTON.i_y-START_BUTTON.i_h/2<=mouseY && mouseY<=START_BUTTON.i_y+START_BUTTON.i_h/2 && i_battle_state == NOT_READY && !pokemonSelectScreen && !moveSelectScreen && !login && !register) {
     send_pokes();
     i_battle_state = SEARCHING;
-    println("pressed");
+    //println("pressed");
   }
 }
 

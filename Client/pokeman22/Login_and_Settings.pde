@@ -193,7 +193,7 @@ void drawSettingScreen() {
       sound=false;
 
 
-      print("lol");
+      //print("lol");
       buttonLst[0]=0;
       buttonLst[3]=255;
     } else if (dist(mouseX, mouseY, width/4, height/4*2)<=width/16) {

@@ -376,12 +376,12 @@ void drawStartScreen() {
 
   if (mousePressed && mousePressValid == true && pokemonSelectScreen == false && i_battle_state==NOT_READY && moveSelectScreen == false && drawSettingScreen==false && friendSliderFollow == false) {
     if (mouseX >= SAVE_BUTTON.i_x && mouseX <= SAVE_BUTTON.i_x + SAVE_BUTTON.i_w && mouseY >= SAVE_BUTTON.i_y && mouseY <= SAVE_BUTTON.i_y + SAVE_BUTTON.i_h) {
-      println("SAVING");
+      //println("SAVING");
       send_saving();
       mousePressValid = false;
     }
     if (mouseX >= PRESET_BUTTON.i_x && mouseX <= PRESET_BUTTON.i_x + PRESET_BUTTON.i_w && mouseY >= PRESET_BUTTON.i_y && mouseY <= PRESET_BUTTON.i_y + PRESET_BUTTON.i_h) {
-      println("LOADING PRESET");
+      //println("LOADING PRESET");
       JSONObject json = new JSONObject();
       json.setString("username", player_name);
       json.setString("battlestate", "pokeread");
@@ -668,9 +668,9 @@ void drawPokemonInformationScreen(int slotNumber, int pokeNum, float gridsize) {
 
     moveScreenReset = false;
   } else if (moveScreenReload == true) {
-    for (int i = 0; i < 6; i++) {
-      println(pokemons.get(i).EV);
-    }
+    //for (int i = 0; i < 6; i++) {
+    //  println(pokemons.get(i).EV);
+    //}
     maxEV = 508;
     EVRemaining = maxEV;
     level = pokemons.get(slotNumber).level;
@@ -1367,10 +1367,10 @@ void drawFriendsList() {
     for (int i = 0; i < 10 && i + 1 + offsetFriend <= friendList.length; i++) {  
       if (i < validFriendSearch.size()) {
         if (validFriendSearch.size() > 10) {
-          println("MORE");
+          //println("MORE");
           offsetFriend = int((FRIEND_SLIDER.i_y - friendSliderStartY)*(validFriendSearch.size()-10)/((height*7/16 - int(gridSize) - friendSliderStartY)-FRIEND_SLIDER.i_h));
         } else {
-          println("zero");
+          //println("zero");
           offsetFriend = 0;
         }
         if (offsetFriend < 0) {
@@ -1389,7 +1389,7 @@ void drawFriendsList() {
         if (mousePressed && mousePressValid == true) {
           if (mouseX >= FRIEND_SEARCH.i_x && mouseX <= FRIEND_SEARCH.i_x + FRIEND_ADD.i_w && 
             mouseY >= height*7/144 + int(i*gridSize) + int(gridSize/2) - FRIEND_ADD.i_h/2 && mouseY <= height*7/144 + int(i*gridSize) + int(gridSize/2) + FRIEND_ADD.i_h/2 && friendSliderFollow == false) {
-            println("REMOVING");
+            //println("REMOVING");
             JSONObject json = new JSONObject();
             json.setString("username", player_name);
             json.setString("newfriend", validFriendSearch.get(i + offsetFriend));
@@ -1411,7 +1411,7 @@ void drawFriendsList() {
   }
 
   // validFriendSearch = new StringList();
-  println(offsetFriend, friendList.length, validFriendSearch.size());
+  //println(offsetFriend, friendList.length, validFriendSearch.size());
 
   textAlign(LEFT, CENTER);
   fill(255);

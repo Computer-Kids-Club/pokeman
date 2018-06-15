@@ -213,7 +213,7 @@ void process_data(String dataIn) {
       current="";
     }
   } else if (dataIn.charAt(0) == 'z') {
-    println(dataIn);
+    //println(dataIn);
     JSONObject json = parseJSONObject(dataIn.substring(1));
     JSONArray json_pokes_array = json.getJSONArray("pokes");
     pokemons = new ArrayList<Pokemon>();
@@ -249,7 +249,7 @@ void process_data(String dataIn) {
       validFriendSearch.append(friendList[i]);
     }
   } else if (dataIn.charAt(0) == 'y') {
-    println("HGEY");
+    //println("HGEY");
     JSONObject json = parseJSONObject(dataIn.substring(1));
     JSONObject json_pokes = json.getJSONObject("pokemon");
     JSONArray json_pokes_array = json_pokes.getJSONArray("pokes");
