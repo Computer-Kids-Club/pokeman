@@ -146,9 +146,9 @@ void register() {
     json.setString("username", username);
     json.setString("password", password);
     json.setString("battlestate", "register");
-    println(json.toString());
+    //println(json.toString());
     thingngng = false;
-    //myClient.write(json.toString());
+    myClient.write(json.toString());
     textFont(font_plain);
   }
 }
