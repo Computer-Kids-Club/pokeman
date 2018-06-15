@@ -198,7 +198,7 @@ void process_data(String dataIn) {
     if (dataIn.substring(1).equals("true")) {
       JSONObject json = new JSONObject();
       json.setString("username", username);
-      json.setString("battlestate", "loadall");
+      json.setString("battlestate", "pokeread");
       myClient.write(json.toString());
 
       print("data received");
@@ -230,61 +230,10 @@ void process_data(String dataIn) {
       pokemons.add(new Pokemon(pokemon_jsons[j].getInt("num"), pokemon_jsons[j].getBoolean("shiny"), pokemon_jsons[j].getInt("lv"), pokemon_jsons[j].getString("ability"), 
         tempStats, tempMoves, pokemon_jsons[j].getString("gender"), pokemon_jsons[j].getInt("nature"), tempNature, 
         tempEV, tempSlider));
-      //println(pokemon_jsons[j].getJSONArray("moves"));
-      ////print(pokemons_json[j].getJSONArray("EV"));
-      //print(pokemon_jsons[j].getJSONArray("EV"));
-      //print(pokemons.get(j).EV);
-    }
-  } else if (dataIn.charAt(0) == 'x') {
-    JSONArray json_friends_array = parseJSONArray(dataIn.substring(1));
-    String[] tempList = {};
-    for (int j = 0; j < json_friends_array.size(); j++) {
-      tempList = append(tempList, json_friends_array.getString(j));
-    }
-    friendList = tempList;
-    FRIEND_SLIDER.i_y = friendSliderStartY;
-    
-    validFriendSearch = new StringList();
-    for (int i = 0; i < friendList.length; i++) {
-      validFriendSearch.append(friendList[i]);
-    }
-  } else if (dataIn.charAt(0) == 'y') {
-    println("HGEY");
-    JSONObject json = parseJSONObject(dataIn.substring(1));
-    JSONObject json_pokes = json.getJSONObject("pokemon");
-    JSONArray json_pokes_array = json_pokes.getJSONArray("pokes");
-    JSONArray json_friends_array = json.getJSONArray("friends");
-
-    String[] tempList = {};
-    for (int j = 0; j < json_friends_array.size(); j++) {
-      tempList = append(tempList, json_friends_array.getString(j));
-    }
-    friendList = tempList;
-    FRIEND_SLIDER.i_y = friendSliderStartY;
-    
-    validFriendSearch = new StringList();
-    for (int i = 0; i < friendList.length; i++) {
-      validFriendSearch.append(friendList[i]);
-    }
-
-    pokemons = new ArrayList<Pokemon>();
-    for (int j = 0; j < json_pokes_array.size(); j++) {
-      pokemon_jsons[j] = json_pokes_array.getJSONObject(j);
-      int[] tempStats = {pokemon_jsons[j].getInt("hp"), pokemon_jsons[j].getInt("atk"), pokemon_jsons[j].getInt("def"), pokemon_jsons[j].getInt("spa"), pokemon_jsons[j].getInt("spd"), pokemon_jsons[j].getInt("spe")};
-      String[] tempMoves = {pokemon_jsons[j].getJSONArray("moves").getString(0), pokemon_jsons[j].getJSONArray("moves").getString(1), pokemon_jsons[j].getJSONArray("moves").getString(2), pokemon_jsons[j].getJSONArray("moves").getString(3)};
-      int[] tempNature = {pokemon_jsons[j].getJSONArray("natureList").getInt(0), pokemon_jsons[j].getJSONArray("natureList").getInt(1), pokemon_jsons[j].getJSONArray("natureList").getInt(2), 
-        pokemon_jsons[j].getJSONArray("natureList").getInt(3), pokemon_jsons[j].getJSONArray("natureList").getInt(4)};
-      int[] tempEV = {pokemon_jsons[j].getJSONArray("EV").getInt(0), pokemon_jsons[j].getJSONArray("EV").getInt(1), pokemon_jsons[j].getJSONArray("EV").getInt(2), 
-        pokemon_jsons[j].getJSONArray("EV").getInt(3), pokemon_jsons[j].getJSONArray("EV").getInt(4), pokemon_jsons[j].getJSONArray("EV").getInt(5)};
-      int[] tempSlider = {pokemon_jsons[j].getJSONArray("sliderPos").getInt(0), pokemon_jsons[j].getJSONArray("sliderPos").getInt(1), pokemon_jsons[j].getJSONArray("sliderPos").getInt(2), 
-        pokemon_jsons[j].getJSONArray("sliderPos").getInt(3), pokemon_jsons[j].getJSONArray("sliderPos").getInt(4), pokemon_jsons[j].getJSONArray("sliderPos").getInt(5)};
-      pokemons.add(new Pokemon(pokemon_jsons[j].getInt("num"), pokemon_jsons[j].getBoolean("shiny"), pokemon_jsons[j].getInt("lv"), pokemon_jsons[j].getString("ability"), 
-        tempStats, tempMoves, pokemon_jsons[j].getString("gender"), pokemon_jsons[j].getInt("nature"), tempNature, 
-        tempEV, tempSlider));
-      //println(pokemon_jsons[j].getJSONArray("moves"));
-      ////print(pokemons_json[j].getJSONArray("EV"));
-      //print(pokemon_jsons[j].getJSONArray("EV"));
-      //print(pokemons.get(j).EV);
+      println(pokemon_jsons[j].getJSONArray("moves"));
+      //print(pokemons_json[j].getJSONArray("EV"));
+      print(pokemon_jsons[j].getJSONArray("EV"));
+      print(pokemons.get(j).EV);
     }
   }
 }

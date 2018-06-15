@@ -60,6 +60,15 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_atk_hp = atk_poke.get_usable_stats().get_hp()
     i_atk_spa = atk_poke.get_usable_stats().get_spa()
     i_def_spa = def_poke.get_usable_stats().get_spa()
+<<<<<<< HEAD
+=======
+    i_def_spd = def_poke.get_usable_stats().get_spd()
+    i_atk_spe = atk_poke.get_usable_stats().get_spe()
+    i_atk_def = atk_poke.get_usable_stats().get_def()
+    i_atk_atk = atk_poke.get_usable_stats().get_atk()
+    i_def_def = def_poke.get_usable_stats().get_def()
+    i_atk_spd = atk_poke.get_usable_stats().get_spd()
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
     str_atk_gen = poke1.str_gender
     str_def_gen = poke2.str_gender
     str_atk_ability = atk_poke.str_ability
@@ -188,9 +197,9 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         if str_mov_name == 'surf' or str_mov_name == 'whirlpool':
             i_move_buff = 2
 
-    # -------------------#
+    #-------------------#
     # GENERAL ABILITIES #
-    # -------------------#
+    #-------------------#
     if str_atk_ability == 'dark-aura' or str_def_ability == 'dark-aura':
         i_pow *= 1.33
 
@@ -246,7 +255,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_atk_buff = 1.3
 
     if str_atk_ability == 'tough-claws':
-        if b_contact:
+        if b_contact and str_def_ability != 'long-reach':
             i_atk_buff = 1.3
 
     if str_atk_ability == 'steelworker':
@@ -266,6 +275,32 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
 
     if str_atk_ability == 'electric-surge':
         i_terrain = 1.5
+<<<<<<< HEAD
+=======
+
+    if str_atk_ability == 'full-metal-body':
+            if atk_poke.modifier_stats.i_atk < 0 or atk_poke.modifier_stats.i_def < 0 or atk_poke.modifier_stats.i_spe < 0 or atk_poke.modifier_stats.i_spa < 0 or atk_poke.modifier_stats.i_spd < 0 or atk_poke.modifier_stats.i_hp < 0:
+                atk_poke.modifier_stats.i_atk = 0
+                atk_poke.modifier_stats.i_def = 0
+                atk_poke.modifier_stats.i_spe = 0
+                atk_poke.modifier_stats.i_spa = 0
+                atk_poke.modifier_stats.i_spd = 0
+                atk_poke.modifier_stats.i_hp = 0
+
+    if str_atk_ability == 'gale-wings':
+        if str_mov_type == 'flying':
+            move.i_priority += 1
+
+    if str_atk_ability == 'huge-power':
+        i_atk *= 2
+
+    if str_atk_ability == 'hustle':
+        i_atk *= 1.5
+
+    if str_atk_ability == 'liquid-voice':
+        if b_sound:
+            str_mov_type = 'water'
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
     #---------------------#
     # DEFENDING ABILITIES #
     #---------------------#
@@ -278,7 +313,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             if str_mov_name == 'taunt' or str_mov_name == 'torment' or str_mov_name == 'encore' or str_mov_name == 'disable' or str_mov_name == 'cursed-body' or str_mov_name == 'heal-block' or str_mov_name == 'infatuation':
                 i_def_buff == 0
 
-    if str_def_ability == 'fluffy' and b_contact:
+    if str_def_ability == 'fluffy' and b_contact and str_atk_ability != 'long-reach':
         if str_mov_type == 'fire':
             i_def_buff = 1
         else:
@@ -367,9 +402,15 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
         i_burn = 1
 
     if str_def_ability == 'competitive':
+<<<<<<< HEAD
         if move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability != 'contrary':
             i_atk_spa += 2
         elif move.users_stat_changes.i_atk < 0 or move.users_stat_changes.i_hp < 0 or move.users_stat_changes.i_spe < 0 or move.users_stat_changes.i_spa < 0 or move.users_stat_changes.i_spd < 0 and str_atk_ability == 'contrary':
+=======
+        if def_poke.modifier_stats.i_atk < 0  or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability != 'contrary':
+            i_atk_spa += 2
+        elif def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 and str_atk_ability == 'contrary':
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
             i_atk_spa -= 2
 
     if str_def_ability == 'dazzling':
@@ -391,7 +432,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
             i_disguise_cnt = 0
 
     if str_def_ability == 'effect-spore':
-        if b_contact:
+        if b_contact and str_atk_ability != 'long-reach':
             if randint(1, 10) == (1 or 2 or 3):
                 str_status = l_status[randint(1, 3)]
 
@@ -406,6 +447,7 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     if str_def_ability == 'flash-fire' and not b_flash_fire and str_mov_type == 'fire':
         b_flash_fire = True
 
+<<<<<<< HEAD
     if str_def_ablity == 'wimp-out':
         def_poke.base_stats.i_hp 
     if str_def_ability == 'white-smoke':
@@ -435,11 +477,59 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     
         
 
+=======
+    if str_def_ability == 'wonder-guard':
+        atk_poke.i_accuracy /= 2
+
+    if b_flash_fire:
+        if str_atk_ability == 'flash-fire':
+            if str_mov_type == 'fire':
+                i_pow *= 1.5
+
+    if str_def_ability == 'flower-veil':
+        if str_pok_type_2 == 'grass':
+            if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_def < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 or def_poke.modifier_stats.i_hp < 0:
+                def_poke.modifier_stats.i_atk *= -1
+                def_poke.modifier_stats.i_def *= -1
+                def_poke.modifier_stats.i_spe *= -1
+                def_poke.modifier_stats.i_spa *= -1
+                def_poke.modifier_stats.i_spd *= -1
+                def_poke.modifier_stats.i_hp *= -1
+
+    if str_def_ability == 'full-metal-body':
+            if def_poke.modifier_stats.i_atk < 0 or def_poke.modifier_stats.i_def < 0 or def_poke.modifier_stats.i_spe < 0 or def_poke.modifier_stats.i_spa < 0 or def_poke.modifier_stats.i_spd < 0 or def_poke.modifier_stats.i_hp < 0:
+                def_poke.modifier_stats.i_atk = 0
+                def_poke.modifier_stats.i_def = 0
+                def_poke.modifier_stats.i_spe = 0
+                def_poke.modifier_stats.i_spa = 0
+                def_poke.modifier_stats.i_spd = 0
+                def_poke.modifier_stats.i_hp = 0
+
+    if str_def_ability == 'fur-coat':
+        i_def *= 2
+
+    if str_def_ability == 'gooey':
+        if b_contact and str_atk_ability != 'long-reach':
+            i_atk_spe -= 1
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
 
 
 
+<<<<<<< HEAD
 
+=======
+    if str_def_ability == 'iron-barbs':
+        if b_contact and str_atk_ability != 'long-reach':
+            i_atk_hp -= int(atk_poke.base_stats.i_hp / 8)
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
 
+    if str_def_ability == 'magic-bounce':
+        if str_mov_name == 'shell-smash':
+            if move.users_stat_changes.i_def < 0:
+                i_atk_def -= move.users_stat_changes.i_def
+                move.users_stat_changes.i_def = 0
+            if move.users_stat_changes.i_spd < 0:
+                i_atk_spd -= move.users_stat_changes.i_spd
 
     #--------------------#
     # CALCULATING DAMAGE #
@@ -449,6 +539,22 @@ def attack(atk_poke, def_poke, move, field, b_last = False, atk_player = None, d
     i_mod = i_crit * i_stab * i_type * i_rand * i_weather * i_terrain * i_other * i_burn
     i_damage = int(int(int(int(int(int(int(2 * i_lvl) / 5) + 2) * i_pow * (i_atk / i_def)) / 50) + 2) * i_mod)
     str_prv_mov = str_mov_name
+<<<<<<< HEAD
+=======
+
+    if str_def_ability == 'ice-body':
+        if str_weather == Weather.HAIL:
+            i_def_hp += int(def_poke.get_usable_stats().get_hp() / 16)
+
+    if str_def_ability == 'innards-out':
+        if i_def_hp < i_damage:
+            i_atk_hp -= i_def_hp
+
+    if i_damage > 0:
+        if str_mov_type == 'dark':
+            i_def_atk += 1
+
+>>>>>>> 67a58398c8bf30ffb3433e5db1b756c153c450af
     return i_damage
 
 poke1 = Pokeman()
