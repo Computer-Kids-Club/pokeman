@@ -1,3 +1,5 @@
+boolean thingng = true;
+
 void login() {
   textFont(font_plain_big);
   fill(255);
@@ -35,11 +37,12 @@ void login() {
       }
     }
     if (mouseX>=width/5 && mouseX<=width/5*2) {
-      if (mouseY>=height/6*4&&mouseY<=height/6*5) {
+      if (mouseY>=height/6*4&&mouseY<=height/6*5 && thingng) {
         JSONObject json = new JSONObject();
         json.setString("username", username);
         json.setString("password", password);
         json.setString("battlestate", "login");
+        thingng = false;
         myClient.write(json.toString());
       }
     } else if (mouseX>=width/5*3 && mouseX<=width/5*4) {
@@ -60,11 +63,12 @@ void login() {
     coded+="*";
   }
   draw_text(coded, width/2, height/5*3);
-  if (keyPressed && (key == RETURN||key==ENTER)) {
+  if (keyPressed && (key == RETURN||key==ENTER) && thingng) {
     JSONObject json = new JSONObject();
     json.setString("username", username);
     json.setString("password", password);
     json.setString("battlestate", "login");
+    thingng = false;
     myClient.write(json.toString());
   }
 }
@@ -124,7 +128,6 @@ void register() {
         current="";
         login=true;
         register=false;
-        
       }
     }
   }
