@@ -265,7 +265,7 @@ class Client(object):
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "addfriend":
-            file_in = open('friendList.txt', 'r')
+            file_in = open(dir_path+'/friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
@@ -275,11 +275,11 @@ class Client(object):
                     self.friends.append(dic_data["newfriend"])
                     loaded_friends[dic_data['username']] = self.friends
                     friendList = json.dumps(loaded_friends)
-                    file_in = open('friendList.txt', 'w')
+                    file_in = open(dir_path+'/friendList.txt', 'w')
                     file_in.write(friendList)
                     file_in.close()
         elif dic_data["battlestate"] == "removefriend":
-            file_in = open('friendList.txt', 'r')
+            file_in = open(dir_path+'/friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
@@ -293,7 +293,7 @@ class Client(object):
                     self.friends.remove(dic_data["newfriend"])
                     loaded_friends[dic_data['username']] = self.friends
                     friendList = json.dumps(loaded_friends)
-                    file_in = open('friendList.txt', 'w')
+                    file_in = open(dir_path+'/friendList.txt', 'w')
                     file_in.write(friendList)
                     file_in.close()
                     sendingFriends = json.dumps(self.friends)
@@ -303,7 +303,7 @@ class Client(object):
             print()
             print(self.friends)
         elif dic_data["battlestate"] == "friendread":
-            file_in = open('friendList.txt', 'r')
+            file_in = open(dir_path+'/friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
@@ -314,7 +314,7 @@ class Client(object):
             else:
                 self.send_data("badUserDic")
         elif dic_data["battlestate"] == "loadall":
-            file_in = open('friendList.txt', 'r')
+            file_in = open(dir_path+'/friendList.txt', 'r')
             friendList = file_in.read()
             file_in.close()
             loaded_friends = json.loads(friendList)
@@ -340,11 +340,11 @@ class Client(object):
 
             self.send_data("y" + sendingAll)
         elif dic_data["battlestate"] == "login":
-            file_in = open('usernames.txt','r')    
+            file_in = open(dir_path+'/usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
-            file_in = open('passwords.txt','r')     
+            file_in = open(dir_path+'/passwords.txt','r')     
             passwordlst = file_in.read()   
             passwordlst=passwordlst.split('*')
             file_in.close()
@@ -360,16 +360,16 @@ class Client(object):
             else:
                 self.send_data('lfalse')
         elif dic_data["battlestate"] == "register":
-            file_in = open('usernames.txt','r')    
+            file_in = open(dir_path+'/usernames.txt','r')    
             usernamelst = file_in.read()  
             usernamelst=usernamelst.split('*')
             file_in.close()
             if dic_data['username'] not in usernamelst and len(dic_data['username'])>0 and len(dic_data['password'])>0:
-                file_out = open('usernames.txt', "a")
+                file_out = open(dir_path+'/usernames.txt', "a")
                 file_out.write('*') 
                 file_out.write(dic_data['username'])  # 2. Convert the info to string and write in the file
                 file_out.close()
-                file_out = open('passwords.txt', "a")
+                file_out = open(dir_path+'/passwords.txt', "a")
                 file_out.write('*') 
                 file_out.write(encrypt(dic_data['password']))# 2. Convert the info to string and write in the file
                 file_out.close()
