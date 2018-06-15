@@ -78,13 +78,13 @@ int turn = 0;
 
 void init_battle_screen() {
   chatting = true;
-  img_flag_bite = loadImage("MoveAnimations/bite.png");
-  img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
-  img_flag_dance = loadImage("MoveAnimations/dance.png");
-  img_flag_powder = loadImage("MoveAnimations/powder.png");
-  img_flag_pulse = loadImage("MoveAnimations/pulse.png");
-  img_flag_punch = loadImage("MoveAnimations/punch.png");
-  img_flag_sound = loadImage("MoveAnimations/sound.png");
+  //img_flag_bite = loadImage("MoveAnimations/bite.png");
+  //img_flag_ballistics = loadImage("MoveAnimations/bullistics.png");
+  //img_flag_dance = loadImage("MoveAnimations/dance.png");
+  //img_flag_powder = loadImage("MoveAnimations/powder.png");
+  //img_flag_pulse = loadImage("MoveAnimations/pulse.png");
+  //img_flag_punch = loadImage("MoveAnimations/punch.png");
+  //img_flag_sound = loadImage("MoveAnimations/sound.png");
 
   //img_flag_bite.resize(150, 0);
   //img_flag_ballistics.resize(150, 0);
@@ -100,12 +100,13 @@ void init_battle_screen() {
     weather_image.put(weatherNames[i], tempImage);
   }
 
-  for (String str_type : TYPE_COLOURS.keySet()) {
-    // ...
-    PImage new_img = loadImage("MoveAnimations/"+str_type+".png");
-    //new_img.resize(150, 0);
-    TYPE_MOVE_IMG.put(str_type, new_img);
-  }
+  //for (String str_type : TYPE_COLOURS.keySet()) {
+  //  // ...
+  //  PImage new_img = loadImage("MoveAnimations/"+str_type+".png");
+  //  //new_img.resize(150, 0);
+  //  TYPE_MOVE_IMG.put(str_type, new_img);
+  //  println("HERE");
+  //}
 
   for (int i=0; i<str_entry_hazards.length; i++) {
     PImage new_img = loadImage(str_entry_hazards[i]+".png");
