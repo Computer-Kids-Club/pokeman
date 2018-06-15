@@ -48,8 +48,8 @@ int SELECTSCREENSHIFT_X;
 int ME = 0;
 int OTHER = 1;
 
-//String IPv4 = "10.243.194.211";
-String IPv4 = "127.0.0.1";
+String IPv4 = "10.243.203.94";
+//String IPv4 = "127.0.0.1";
 int PORT = 4004;
 
 char TERMINATING_CHAR = '`';
