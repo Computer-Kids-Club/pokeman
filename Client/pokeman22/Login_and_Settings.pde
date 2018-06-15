@@ -1,4 +1,6 @@
 boolean thingng = true;
+boolean thingngng = true;
+
 
 void login() {
   textFont(font_plain_big);
@@ -112,11 +114,12 @@ void register() {
       current="";
     }
     if (mouseX>=width/2-width/10 &&mouseX<=width/2+width/10) {
-      if (mouseY>=height/6*4&&mouseY<=height/6*5) {
+      if (mouseY>=height/6*4&&mouseY<=height/6*5 && thingngng) {
         JSONObject json = new JSONObject();
         json.setString("username", username);
         json.setString("password", password);
         json.setString("battlestate", "register");
+        thingngng = false;
         myClient.write(json.toString());
         textFont(font_plain);
       }
@@ -138,12 +141,14 @@ void register() {
     coded+="*";
   }
   draw_text(coded, width/2, height/5*3);
-  if (keyPressed && (key == RETURN||key==ENTER)) {
+  if (keyPressed && (key == RETURN||key==ENTER) && thingngng) {
     JSONObject json = new JSONObject();
     json.setString("username", username);
     json.setString("password", password);
     json.setString("battlestate", "register");
-    myClient.write(json.toString());
+    println(json.toString());
+    thingngng = false;
+    //myClient.write(json.toString());
     textFont(font_plain);
   }
 }
