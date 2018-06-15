@@ -391,12 +391,13 @@ void send_pokes(String whatthisis) {
     //}
     //json_poke.setJSONArray("IV", json_IV_array);
 
-    JSONArray json_sliders_array = new JSONArray();
-    for (int j=0; j<poke.sliderPos.length; j++) {
-      json_sliders_array.setInt(j, poke.sliderPos[j]);
+    if (whatthisis.equals("pokewrite")) {
+      JSONArray json_sliders_array = new JSONArray();
+      for (int j=0; j<poke.sliderPos.length; j++) {
+        json_sliders_array.setInt(j, poke.sliderPos[j]);
+      }
+      json_poke.setJSONArray("sliderPos", json_sliders_array);
     }
-    json_poke.setJSONArray("sliderPos", json_sliders_array);
-
     JSONArray json_move_array = new JSONArray();
     for (int j=0; j<poke.moves.length; j++) {
       json_move_array.setString(j, poke.moves[j]);
